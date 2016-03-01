@@ -22,8 +22,8 @@
 * 缓存 [Redis](http://redis.io/)
 * 日志 [winston](https://github.com/winstonjs/winston/)
 
-## 页面预览
-[http://eshengsky.github.io/iBlog2/](http://eshengsky.github.io/iBlog2/)
+## 实例预览
+个人博客 [http://www.skysun.name/](http://www.skysun.name/)
 
 ## 快速开始
 #### 准备条件
