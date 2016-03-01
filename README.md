@@ -27,7 +27,7 @@
 
 ## 快速开始
 #### 准备条件
-安装最新版[Node.js](https://nodejs.org/en/download/)、[bower](http://bower.io/)、[MongoDB](https://www.mongodb.org/)、[Redis](https://github.com/MSOpenTech/redis/releases)。  
+安装最新版[Node.js](https://nodejs.org/en/download/)、[bower](http://bower.io/)、[MongoDB](https://www.mongodb.org/downloads/)、[Redis](http://redis.io/download/)。  
 （注：如果使用Windows平台，可以去[https://github.com/MSOpenTech/redis/releases](https://github.com/MSOpenTech/redis/releases)下载安装Redis）
 #### 安装依赖
 * 服务端依赖  
