@@ -62,10 +62,10 @@ $ bower install
 $ node --harmony-proxies ./bin/www 
 ```
 打开浏览器，访问 [http://localhost:3000/](http://localhost:3000)
-#### Enjoy it :smile:
+#### Enjoy it! :smile:
  
 
-### 许可协议
+## 许可协议
 The MIT License (MIT)
 
 Copyright (c) 2016 Sky
