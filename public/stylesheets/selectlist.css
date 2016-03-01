@@ -1,0 +1,22 @@
+﻿.fuelux .selectlist.disabled {
+  cursor: not-allowed;
+}
+.fuelux .selectlist .selected-label {
+  overflow: hidden;
+  min-width: 2em;
+}
+.fuelux .selectlist .dropdown-menu {
+  min-width: inherit;
+  overflow-y: auto;
+}
+.fuelux .selectlist .btn.dropdown-toggle {
+  text-align: left;
+  padding-right: 28px;
+}
+.fuelux .selectlist .btn.dropdown-toggle .caret {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 12px;
+}

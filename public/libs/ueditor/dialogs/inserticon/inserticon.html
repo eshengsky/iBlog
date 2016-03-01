@@ -1,0 +1,483 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="../internal.js"></script>
+    <link href="/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="/libs/jquery/dist/jquery.min.js"></script>
+    <style>
+        body {
+            font-size: 14px;
+        }
+
+        select {
+            font-family: 微软雅黑;
+            color: #444;
+        }
+
+        ul {
+            overflow: hidden;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+
+        li {
+            float: left;
+            margin: 10px;
+            width: 30px;
+            height: 20px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .iconTool {
+            margin-left: 15px;
+            margin-bottom: 15px;
+        }
+
+        .show-lg {
+            font-size: 1.3333em !important;
+        }
+    </style>
+</head>
+<body>
+    <div style="margin:20px;">
+        <div class="iconTool">
+            <span>大小</span>
+            <select id="selectSize" onchange="changeSize(this);">
+                <option value="1" selected="selected">普通</option>
+                <option value="1.3">1.3倍字号</option>
+                <option value="2">2倍字号</option>
+            </select>
+            <span style="margin-left:10px;">颜色</span>
+            <select id="selectColor" onchange="changeColor(this);">
+                <option value="#444" selected="selected">黑色(或当前段落颜色)</option>
+                <option value="#f79646">橙色</option>
+                <option value="#72c02c">绿色</option>
+                <option value="#428bca">蓝色</option>
+                <option value="#c0504d">红色</option>
+                <option value="#8064a2">紫色</option>
+                <option value="#eeee00">黄色</option>
+                <option value="#ddd">灰色</option>
+            </select>
+        </div>
+        <ul>
+            <li title="glass"><span class="fa fa-glass"></span></li>
+            <li title="music"><span class="fa fa-music"></span></li>
+            <li title="search"><span class="fa fa-search"></span></li>
+            <li title="envelope-o"><span class="fa fa-envelope-o"></span></li>
+            <li title="heart"><span class="fa fa-heart"></span></li>
+            <li title="star"><span class="fa fa-star"></span></li>
+            <li title="star-o"><span class="fa fa-star-o"></span></li>
+            <li title="user"><span class="fa fa-user"></span></li>
+            <li title="film"><span class="fa fa-film"></span></li>
+            <li title="check"><span class="fa fa-check"></span></li>
+            <li title="times"><span class="fa fa-times"></span></li>
+            <li title="search-plus"><span class="fa fa-search-plus"></span></li>
+            <li title="search-minus"><span class="fa fa-search-minus"></span></li>
+            <li title="power-off"><span class="fa fa-power-off"></span></li>
+            <li title="signal"><span class="fa fa-signal"></span></li>
+            <li title="cog"><span class="fa fa-cog"></span></li>
+            <li title="trash-o"><span class="fa fa-trash-o"></span></li>
+            <li title="home"><span class="fa fa-home"></span></li>
+            <li title="file-o"><span class="fa fa-file-o"></span></li>
+            <li title="clock-o"><span class="fa fa-clock-o"></span></li>
+            <li title="road"><span class="fa fa-road"></span></li>
+            <li title="download"><span class="fa fa-download"></span></li>
+            <li title="arrow-circle-o-down"><span class="fa fa-arrow-circle-o-down"></span></li>
+            <li title="arrow-circle-o-up"><span class="fa fa-arrow-circle-o-up"></span></li>
+            <li title="inbox"><span class="fa fa-inbox"></span></li>
+            <li title="play-circle-o"><span class="fa fa-play-circle-o"></span></li>
+            <li title="repeat"><span class="fa fa-repeat"></span></li>
+            <li title="refresh"><span class="fa fa-refresh"></span></li>
+            <li title="list-alt"><span class="fa fa-list-alt"></span></li>
+            <li title="lock"><span class="fa fa-lock"></span></li>
+            <li title="flag"><span class="fa fa-flag"></span></li>
+            <li title="headphones"><span class="fa fa-headphones"></span></li>
+            <li title="volume-off"><span class="fa fa-volume-off"></span></li>
+            <li title="volume-down"><span class="fa fa-volume-down"></span></li>
+            <li title="volume-up"><span class="fa fa-volume-up"></span></li>
+            <li title="qrcode"><span class="fa fa-qrcode"></span></li>
+            <li title="barcode"><span class="fa fa-barcode"></span></li>
+            <li title="tag"><span class="fa fa-tag"></span></li>
+            <li title="tags"><span class="fa fa-tags"></span></li>
+            <li title="book"><span class="fa fa-book"></span></li>
+            <li title="bookmark"><span class="fa fa-bookmark"></span></li>
+            <li title="print"><span class="fa fa-print"></span></li>
+            <li title="camera"><span class="fa fa-camera"></span></li>
+            <li title="video-camera"><span class="fa fa-video-camera"></span></li>
+            <li title="picture-o"><span class="fa fa-picture-o"></span></li>
+            <li title="pencil"><span class="fa fa-pencil"></span></li>
+            <li title="map-marker"><span class="fa fa-map-marker"></span></li>
+            <li title="adjust"><span class="fa fa-adjust"></span></li>
+            <li title="tint"><span class="fa fa-tint"></span></li>
+            <li title="pencil-square-o"><span class="fa fa-pencil-square-o"></span></li>
+            <li title="share-square-o"><span class="fa fa-share-square-o"></span></li>
+            <li title="check-square-o"><span class="fa fa-check-square-o"></span></li>
+            <li title="arrows"><span class="fa fa-arrows"></span></li>
+            <li title="stop"><span class="fa fa-stop"></span></li>
+            <li title="eject"><span class="fa fa-eject"></span></li>
+            <li title="chevron-left"><span class="fa fa-chevron-left"></span></li>
+            <li title="chevron-right"><span class="fa fa-chevron-right"></span></li>
+            <li title="plus-circle"><span class="fa fa-plus-circle"></span></li>
+            <li title="minus-circle"><span class="fa fa-minus-circle"></span></li>
+            <li title="times-circle"><span class="fa fa-times-circle"></span></li>
+            <li title="check-circle"><span class="fa fa-check-circle"></span></li>
+            <li title="question-circle"><span class="fa fa-question-circle"></span></li>
+            <li title="info-circle"><span class="fa fa-info-circle"></span></li>
+            <li title="crosshairs"><span class="fa fa-crosshairs"></span></li>
+            <li title="times-circle-o"><span class="fa fa-times-circle-o"></span></li>
+            <li title="check-circle-o"><span class="fa fa-check-circle-o"></span></li>
+            <li title="ban"><span class="fa fa-ban"></span></li>
+            <li title="arrow-left"><span class="fa fa-arrow-left"></span></li>
+            <li title="arrow-right"><span class="fa fa-arrow-right"></span></li>
+            <li title="arrow-up"><span class="fa fa-arrow-up"></span></li>
+            <li title="arrow-down"><span class="fa fa-arrow-down"></span></li>
+            <li title="share"><span class="fa fa-share"></span></li>
+            <li title="plus"><span class="fa fa-plus"></span></li>
+            <li title="minus"><span class="fa fa-minus"></span></li>
+            <li title="asterisk"><span class="fa fa-asterisk"></span></li>
+            <li title="exclamation-circle"><span class="fa fa-exclamation-circle"></span></li>
+            <li title="gift"><span class="fa fa-gift"></span></li>
+            <li title="leaf"><span class="fa fa-leaf"></span></li>
+            <li title="fire"><span class="fa fa-fire"></span></li>
+            <li title="eye"><span class="fa fa-eye"></span></li>
+            <li title="eye-slash"><span class="fa fa-eye-slash"></span></li>
+            <li title="exclamation-triangle"><span class="fa fa-exclamation-triangle"></span></li>
+            <li title="plane"><span class="fa fa-plane"></span></li>
+            <li title="calendar"><span class="fa fa-calendar"></span></li>
+            <li title="random"><span class="fa fa-random"></span></li>
+            <li title="comment"><span class="fa fa-comment"></span></li>
+            <li title="magnet"><span class="fa fa-magnet"></span></li>
+            <li title="chevron-up"><span class="fa fa-chevron-up"></span></li>
+            <li title="chevron-down"><span class="fa fa-chevron-down"></span></li>
+            <li title="retweet"><span class="fa fa-retweet"></span></li>
+            <li title="folder"><span class="fa fa-folder"></span></li>
+            <li title="folder-open"><span class="fa fa-folder-open"></span></li>
+            <li title="arrows-v"><span class="fa fa-arrows-v"></span></li>
+            <li title="arrows-h"><span class="fa fa-arrows-h"></span></li>
+            <li title="bar-chart"><span class="fa fa-bar-chart"></span></li>
+            <li title="twitter-square"><span class="fa fa-twitter-square"></span></li>
+            <li title="facebook-square"><span class="fa fa-facebook-square"></span></li>
+            <li title="camera-retro"><span class="fa fa-camera-retro"></span></li>
+            <li title="key"><span class="fa fa-key"></span></li>
+            <li title="cogs"><span class="fa fa-cogs"></span></li>
+            <li title="comments"><span class="fa fa-comments"></span></li>
+            <li title="thumbs-o-up"><span class="fa fa-thumbs-o-up"></span></li>
+            <li title="thumbs-o-down"><span class="fa fa-thumbs-o-down"></span></li>
+            <li title="star-half"><span class="fa fa-star-half"></span></li>
+            <li title="heart-o"><span class="fa fa-heart-o"></span></li>
+            <li title="sign-out"><span class="fa fa-sign-out"></span></li>
+            <li title="linkedin-square"><span class="fa fa-linkedin-square"></span></li>
+            <li title="thumb-tack"><span class="fa fa-thumb-tack"></span></li>
+            <li title="external-link"><span class="fa fa-external-link"></span></li>
+            <li title="sign-in"><span class="fa fa-sign-in"></span></li>
+            <li title="trophy"><span class="fa fa-trophy"></span></li>
+            <li title="github-square"><span class="fa fa-github-square"></span></li>
+            <li title="upload"><span class="fa fa-upload"></span></li>
+            <li title="lemon-o"><span class="fa fa-lemon-o"></span></li>
+            <li title="phone"><span class="fa fa-phone"></span></li>
+            <li title="square-o"><span class="fa fa-square-o"></span></li>
+            <li title="bookmark-o"><span class="fa fa-bookmark-o"></span></li>
+            <li title="phone-square"><span class="fa fa-phone-square"></span></li>
+            <li title="twitter"><span class="fa fa-twitter"></span></li>
+            <li title="facebook"><span class="fa fa-facebook"></span></li>
+            <li title="github"><span class="fa fa-github"></span></li>
+            <li title="unlock"><span class="fa fa-unlock"></span></li>
+            <li title="credit-card"><span class="fa fa-credit-card"></span></li>
+            <li title="rss"><span class="fa fa-rss"></span></li>
+            <li title="hdd-o"><span class="fa fa-hdd-o"></span></li>
+            <li title="bullhorn"><span class="fa fa-bullhorn"></span></li>
+            <li title="bell"><span class="fa fa-bell"></span></li>
+            <li title="certificate"><span class="fa fa-certificate"></span></li>
+            <li title="hand-o-right"><span class="fa fa-hand-o-right"></span></li>
+            <li title="hand-o-left"><span class="fa fa-hand-o-left"></span></li>
+            <li title="hand-o-up"><span class="fa fa-hand-o-up"></span></li>
+            <li title="hand-o-down"><span class="fa fa-hand-o-down"></span></li>
+            <li title="arrow-circle-left"><span class="fa fa-arrow-circle-left"></span></li>
+            <li title="arrow-circle-right"><span class="fa fa-arrow-circle-right"></span></li>
+            <li title="arrow-circle-up"><span class="fa fa-arrow-circle-up"></span></li>
+            <li title="arrow-circle-down"><span class="fa fa-arrow-circle-down"></span></li>
+            <li title="globe"><span class="fa fa-globe"></span></li>
+            <li title="wrench"><span class="fa fa-wrench"></span></li>
+            <li title="tasks"><span class="fa fa-tasks"></span></li>
+            <li title="filter"><span class="fa fa-filter"></span></li>
+            <li title="briefcase"><span class="fa fa-briefcase"></span></li>
+            <li title="arrows-alt"><span class="fa fa-arrows-alt"></span></li>
+            <li title="users"><span class="fa fa-users"></span></li>
+            <li title="link"><span class="fa fa-link"></span></li>
+            <li title="cloud"><span class="fa fa-cloud"></span></li>
+            <li title="flask"><span class="fa fa-flask"></span></li>
+            <li title="scissors"><span class="fa fa-scissors"></span></li>
+            <li title="paperclip"><span class="fa fa-paperclip"></span></li>
+            <li title="floppy-o"><span class="fa fa-floppy-o"></span></li>
+            <li title="square"><span class="fa fa-square"></span></li>
+            <li title="bars"><span class="fa fa-bars"></span></li>
+            <li title="list-ul"><span class="fa fa-list-ul"></span></li>
+            <li title="table"><span class="fa fa-table"></span></li>
+            <li title="magic"><span class="fa fa-magic"></span></li>
+            <li title="truck"><span class="fa fa-truck"></span></li>
+            <li title="google-plus-square"><span class="fa fa-google-plus-square"></span></li>
+            <li title="google-plus"><span class="fa fa-google-plus"></span></li>
+            <li title="money"><span class="fa fa-money"></span></li>
+            <li title="caret-down"><span class="fa fa-caret-down"></span></li>
+            <li title="caret-up"><span class="fa fa-caret-up"></span></li>
+            <li title="caret-left"><span class="fa fa-caret-left"></span></li>
+            <li title="caret-right"><span class="fa fa-caret-right"></span></li>
+            <li title="columns"><span class="fa fa-columns"></span></li>
+            <li title="sort"><span class="fa fa-sort"></span></li>
+            <li title="sort-desc"><span class="fa fa-sort-desc"></span></li>
+            <li title="sort-asc"><span class="fa fa-sort-asc"></span></li>
+            <li title="envelope"><span class="fa fa-envelope"></span></li>
+            <li title="linkedin"><span class="fa fa-linkedin"></span></li>
+            <li title="undo"><span class="fa fa-undo"></span></li>
+            <li title="gavel"><span class="fa fa-gavel"></span></li>
+            <li title="tachometer"><span class="fa fa-tachometer"></span></li>
+            <li title="comment-o"><span class="fa fa-comment-o"></span></li>
+            <li title="comments-o"><span class="fa fa-comments-o"></span></li>
+            <li title="bolt"><span class="fa fa-bolt"></span></li>
+            <li title="sitemap"><span class="fa fa-sitemap"></span></li>
+            <li title="umbrella"><span class="fa fa-umbrella"></span></li>
+            <li title="lightbulb-o"><span class="fa fa-lightbulb-o"></span></li>
+            <li title="exchange"><span class="fa fa-exchange"></span></li>
+            <li title="cloud-download"><span class="fa fa-cloud-download"></span></li>
+            <li title="cloud-upload"><span class="fa fa-cloud-upload"></span></li>
+            <li title="user-md"><span class="fa fa-user-md"></span></li>
+            <li title="stethoscope"><span class="fa fa-stethoscope"></span></li>
+            <li title="suitcase"><span class="fa fa-suitcase"></span></li>
+            <li title="bell-o"><span class="fa fa-bell-o"></span></li>
+            <li title="coffee"><span class="fa fa-coffee"></span></li>
+            <li title="cutlery"><span class="fa fa-cutlery"></span></li>
+            <li title="file-text-o"><span class="fa fa-file-text-o"></span></li>
+            <li title="building-o"><span class="fa fa-building-o"></span></li>
+            <li title="hospital-o"><span class="fa fa-hospital-o"></span></li>
+            <li title="ambulance"><span class="fa fa-ambulance"></span></li>
+            <li title="medkit"><span class="fa fa-medkit"></span></li>
+            <li title="fighter-jet"><span class="fa fa-fighter-jet"></span></li>
+            <li title="beer"><span class="fa fa-beer"></span></li>
+            <li title="h-square"><span class="fa fa-h-square"></span></li>
+            <li title="plus-square"><span class="fa fa-plus-square"></span></li>
+            <li title="angle-double-left"><span class="fa fa-angle-double-left"></span></li>
+            <li title="angle-double-right"><span class="fa fa-angle-double-right"></span></li>
+            <li title="angle-double-up"><span class="fa fa-angle-double-up"></span></li>
+            <li title="angle-double-down"><span class="fa fa-angle-double-down"></span></li>
+            <li title="angle-left"><span class="fa fa-angle-left"></span></li>
+            <li title="angle-right"><span class="fa fa-angle-right"></span></li>
+            <li title="angle-up"><span class="fa fa-angle-up"></span></li>
+            <li title="angle-down"><span class="fa fa-angle-down"></span></li>
+            <li title="desktop"><span class="fa fa-desktop"></span></li>
+            <li title="laptop"><span class="fa fa-laptop"></span></li>
+            <li title="tablet"><span class="fa fa-tablet"></span></li>
+            <li title="mobile"><span class="fa fa-mobile"></span></li>
+            <li title="circle-o"><span class="fa fa-circle-o"></span></li>
+            <li title="quote-left"><span class="fa fa-quote-left"></span></li>
+            <li title="quote-right"><span class="fa fa-quote-right"></span></li>
+            <li title="circle"><span class="fa fa-circle"></span></li>
+            <li title="reply"><span class="fa fa-reply"></span></li>
+            <li title="github-alt"><span class="fa fa-github-alt"></span></li>
+            <li title="folder-o"><span class="fa fa-folder-o"></span></li>
+            <li title="folder-open-o"><span class="fa fa-folder-open-o"></span></li>
+            <li title="smile-o"><span class="fa fa-smile-o"></span></li>
+            <li title="frown-o"><span class="fa fa-frown-o"></span></li>
+            <li title="meh-o"><span class="fa fa-meh-o"></span></li>
+            <li title="gamepad"><span class="fa fa-gamepad"></span></li>
+            <li title="keyboard-o"><span class="fa fa-keyboard-o"></span></li>
+            <li title="flag-o"><span class="fa fa-flag-o"></span></li>
+            <li title="flag-checkered"><span class="fa fa-flag-checkered"></span></li>
+            <li title="terminal"><span class="fa fa-terminal"></span></li>
+            <li title="code"><span class="fa fa-code"></span></li>
+            <li title="reply-all"><span class="fa fa-reply-all"></span></li>
+            <li title="star-half-o"><span class="fa fa-star-half-o"></span></li>
+            <li title="location-arrow"><span class="fa fa-location-arrow"></span></li>
+            <li title="crop"><span class="fa fa-crop"></span></li>
+            <li title="code-fork"><span class="fa fa-code-fork"></span></li>
+            <li title="chain-broken"><span class="fa fa-chain-broken"></span></li>
+            <li title="question"><span class="fa fa-question"></span></li>
+            <li title="info"><span class="fa fa-info"></span></li>
+            <li title="exclamation"><span class="fa fa-exclamation"></span></li>
+            <li title="puzzle-piece"><span class="fa fa-puzzle-piece"></span></li>
+            <li title="microphone"><span class="fa fa-microphone"></span></li>
+            <li title="microphone-slash"><span class="fa fa-microphone-slash"></span></li>
+            <li title="shield"><span class="fa fa-shield"></span></li>
+            <li title="calendar-o"><span class="fa fa-calendar-o"></span></li>
+            <li title="fire-extinguisher"><span class="fa fa-fire-extinguisher"></span></li>
+            <li title="rocket"><span class="fa fa-rocket"></span></li>
+            <li title="chevron-circle-left"><span class="fa fa-chevron-circle-left"></span></li>
+            <li title="chevron-circle-right"><span class="fa fa-chevron-circle-right"></span></li>
+            <li title="chevron-circle-up"><span class="fa fa-chevron-circle-up"></span></li>
+            <li title="chevron-circle-down"><span class="fa fa-chevron-circle-down"></span></li>
+            <li title="html5"><span class="fa fa-html5"></span></li>
+            <li title="css3"><span class="fa fa-css3"></span></li>
+            <li title="anchor"><span class="fa fa-anchor"></span></li>
+            <li title="unlock-alt"><span class="fa fa-unlock-alt"></span></li>
+            <li title="bullseye"><span class="fa fa-bullseye"></span></li>
+            <li title="ellipsis-h"><span class="fa fa-ellipsis-h"></span></li>
+            <li title="ellipsis-v"><span class="fa fa-ellipsis-v"></span></li>
+            <li title="rss-square"><span class="fa fa-rss-square"></span></li>
+            <li title="play-circle"><span class="fa fa-play-circle"></span></li>
+            <li title="ticket"><span class="fa fa-ticket"></span></li>
+            <li title="minus-square"><span class="fa fa-minus-square"></span></li>
+            <li title="minus-square-o"><span class="fa fa-minus-square-o"></span></li>
+            <li title="level-up"><span class="fa fa-level-up"></span></li>
+            <li title="level-down"><span class="fa fa-level-down"></span></li>
+            <li title="check-square"><span class="fa fa-check-square"></span></li>
+            <li title="pencil-square"><span class="fa fa-pencil-square"></span></li>
+            <li title="external-link-square"><span class="fa fa-external-link-square"></span></li>
+            <li title="share-square"><span class="fa fa-share-square"></span></li>
+            <li title="compass"><span class="fa fa-compass"></span></li>
+            <li title="caret-square-o-down"><span class="fa fa-caret-square-o-down"></span></li>
+            <li title="caret-square-o-up"><span class="fa fa-caret-square-o-up"></span></li>
+            <li title="caret-square-o-right"><span class="fa fa-caret-square-o-right"></span></li>
+            <li title="usd"><span class="fa fa-usd"></span></li>
+            <li title="jpy"><span class="fa fa-jpy"></span></li>
+            <li title="file"><span class="fa fa-file"></span></li>
+            <li title="file-text"><span class="fa fa-file-text"></span></li>
+            <li title="thumbs-up"><span class="fa fa-thumbs-up"></span></li>
+            <li title="thumbs-down"><span class="fa fa-thumbs-down"></span></li>
+            <li title="dropbox"><span class="fa fa-dropbox"></span></li>
+            <li title="stack-overflow"><span class="fa fa-stack-overflow"></span></li>
+            <li title="long-arrow-down"><span class="fa fa-long-arrow-down"></span></li>
+            <li title="long-arrow-up"><span class="fa fa-long-arrow-up"></span></li>
+            <li title="long-arrow-left"><span class="fa fa-long-arrow-left"></span></li>
+            <li title="long-arrow-right"><span class="fa fa-long-arrow-right"></span></li>
+            <li title="apple"><span class="fa fa-apple"></span></li>
+            <li title="windows"><span class="fa fa-windows"></span></li>
+            <li title="android"><span class="fa fa-android"></span></li>
+            <li title="linux"><span class="fa fa-linux"></span></li>
+            <li title="dribbble"><span class="fa fa-dribbble"></span></li>
+            <li title="skype"><span class="fa fa-skype"></span></li>
+            <li title="female"><span class="fa fa-female"></span></li>
+            <li title="male"><span class="fa fa-male"></span></li>
+            <li title="gratipay"><span class="fa fa-gratipay"></span></li>
+            <li title="sun-o"><span class="fa fa-sun-o"></span></li>
+            <li title="moon-o"><span class="fa fa-moon-o"></span></li>
+            <li title="archive"><span class="fa fa-archive"></span></li>
+            <li title="bug"><span class="fa fa-bug"></span></li>
+            <li title="weibo"><span class="fa fa-weibo"></span></li>
+            <li title="renren"><span class="fa fa-renren"></span></li>
+            <li title="arrow-circle-o-right"><span class="fa fa-arrow-circle-o-right"></span></li>
+            <li title="arrow-circle-o-left"><span class="fa fa-arrow-circle-o-left"></span></li>
+            <li title="dot-circle-o"><span class="fa fa-dot-circle-o"></span></li>
+            <li title="wheelchair"><span class="fa fa-wheelchair"></span></li>
+            <li title="plus-square-o"><span class="fa fa-plus-square-o"></span></li>
+            <li title="space-shuttle"><span class="fa fa-space-shuttle"></span></li>
+            <li title="envelope-square"><span class="fa fa-envelope-square"></span></li>
+            <li title="wordpress"><span class="fa fa-wordpress"></span></li>
+            <li title="university"><span class="fa fa-university"></span></li>
+            <li title="graduation-cap"><span class="fa fa-graduation-cap"></span></li>
+            <li title="yahoo"><span class="fa fa-yahoo"></span></li>
+            <li title="google"><span class="fa fa-google"></span></li>
+            <li title="delicious"><span class="fa fa-delicious"></span></li>
+            <li title="language"><span class="fa fa-language"></span></li>
+            <li title="fax"><span class="fa fa-fax"></span></li>
+            <li title="building"><span class="fa fa-building"></span></li>
+            <li title="child"><span class="fa fa-child"></span></li>
+            <li title="paw"><span class="fa fa-paw"></span></li>
+            <li title="spoon"><span class="fa fa-spoon"></span></li>
+            <li title="cube"><span class="fa fa-cube"></span></li>
+            <li title="cubes"><span class="fa fa-cubes"></span></li>
+            <li title="recycle"><span class="fa fa-recycle"></span></li>
+            <li title="car"><span class="fa fa-car"></span></li>
+            <li title="taxi"><span class="fa fa-taxi"></span></li>
+            <li title="tree"><span class="fa fa-tree"></span></li>
+            <li title="database"><span class="fa fa-database"></span></li>
+            <li title="file-pdf-o"><span class="fa fa-file-pdf-o"></span></li>
+            <li title="file-word-o"><span class="fa fa-file-word-o"></span></li>
+            <li title="file-excel-o"><span class="fa fa-file-excel-o"></span></li>
+            <li title="file-powerpoint-o"><span class="fa fa-file-powerpoint-o"></span></li>
+            <li title="file-image-o"><span class="fa fa-file-image-o"></span></li>
+            <li title="file-archive-o"><span class="fa fa-file-archive-o"></span></li>
+            <li title="file-audio-o"><span class="fa fa-file-audio-o"></span></li>
+            <li title="file-video-o"><span class="fa fa-file-video-o"></span></li>
+            <li title="file-code-o"><span class="fa fa-file-code-o"></span></li>
+            <li title="life-ring"><span class="fa fa-life-ring"></span></li>
+            <li title="circle-o-notch"><span class="fa fa-circle-o-notch"></span></li>
+            <li title="git-square"><span class="fa fa-git-square"></span></li>
+            <li title="git"><span class="fa fa-git"></span></li>
+            <li title="tencent-weibo"><span class="fa fa-tencent-weibo"></span></li>
+            <li title="qq"><span class="fa fa-qq"></span></li>
+            <li title="weixin"><span class="fa fa-weixin"></span></li>
+            <li title="paper-plane"><span class="fa fa-paper-plane"></span></li>
+            <li title="paper-plane-o"><span class="fa fa-paper-plane-o"></span></li>
+            <li title="history"><span class="fa fa-history"></span></li>
+            <li title="circle-thin"><span class="fa fa-circle-thin"></span></li>
+            <li title="share-alt"><span class="fa fa-share-alt"></span></li>
+            <li title="share-alt-square"><span class="fa fa-share-alt-square"></span></li>
+            <li title="bomb"><span class="fa fa-bomb"></span></li>
+            <li title="futbol-o"><span class="fa fa-futbol-o"></span></li>
+            <li title="tty"><span class="fa fa-tty"></span></li>
+            <li title="binoculars"><span class="fa fa-binoculars"></span></li>
+            <li title="plug"><span class="fa fa-plug"></span></li>
+            <li title="newspaper-o"><span class="fa fa-newspaper-o"></span></li>
+            <li title="wifi"><span class="fa fa-wifi"></span></li>
+            <li title="calculator"><span class="fa fa-calculator"></span></li>
+            <li title="paypal"><span class="fa fa-paypal"></span></li>
+            <li title="bell-slash"><span class="fa fa-bell-slash"></span></li>
+            <li title="bell-slash-o"><span class="fa fa-bell-slash-o"></span></li>
+            <li title="trash"><span class="fa fa-trash"></span></li>
+            <li title="copyright"><span class="fa fa-copyright"></span></li>
+            <li title="at"><span class="fa fa-at"></span></li>
+            <li title="eyedropper"><span class="fa fa-eyedropper"></span></li>
+            <li title="paint-brush"><span class="fa fa-paint-brush"></span></li>
+            <li title="birthday-cake"><span class="fa fa-birthday-cake"></span></li>
+            <li title="area-chart"><span class="fa fa-area-chart"></span></li>
+            <li title="pie-chart"><span class="fa fa-pie-chart"></span></li>
+            <li title="line-chart"><span class="fa fa-line-chart"></span></li>
+            <li title="bicycle"><span class="fa fa-bicycle"></span></li>
+            <li title="bus"><span class="fa fa-bus"></span></li>
+            <li title="angellist"><span class="fa fa-angellist"></span></li>
+            <li title="skyatlas"><span class="fa fa-skyatlas"></span></li>
+            <li title="diamond"><span class="fa fa-diamond"></span></li>
+            <li title="ship"><span class="fa fa-ship"></span></li>
+            <li title="user-secret"><span class="fa fa-user-secret"></span></li>
+            <li title="motorcycle"><span class="fa fa-motorcycle"></span></li>
+            <li title="street-view"><span class="fa fa-street-view"></span></li>
+            <li title="heartbeat"><span class="fa fa-heartbeat"></span></li>
+            <li title="venus"><span class="fa fa-venus"></span></li>
+            <li title="mars"><span class="fa fa-mars"></span></li>
+            <li title="facebook-official"><span class="fa fa-facebook-official"></span></li>
+            <li title="whatsapp"><span class="fa fa-whatsapp"></span></li>
+            <li title="server"><span class="fa fa-server"></span></li>
+            <li title="bed"><span class="fa fa-bed"></span></li>
+            <li title="train"><span class="fa fa-train"></span></li>
+            <li title="subway"><span class="fa fa-subway"></span></li>
+        </ul>
+    </div>
+    <script>
+        $(document).on({
+            mouseenter: function () {
+                if ($("#selectSize").val() == "1") {
+                    $(this).find("span").addClass("show-lg");
+                }
+            },
+            mouseleave: function () {
+                $(this).find("span").removeClass("show-lg");
+            }
+        }, "li");
+
+        var icons = document.getElementsByTagName("li");
+        for (var i = 0; i < icons.length; i++) {
+            domUtils.on(icons[i], "click", function () {
+                $(this).find("span").removeClass("show-lg");
+                editor.execCommand("insertHTML", $(this).html() + "&nbsp;");
+                dialog.close();
+            });
+        }
+
+        function changeSize(obj) {
+            if ($(obj).val() == "1.3") {
+                $("li span").removeClass("fa-2x").addClass("fa-lg");
+            } else if ($(obj).val() == "2") {
+                $("li span").removeClass("fa-lg").addClass("fa-2x");
+            } else {
+                $("li span").removeClass("fa-lg").removeClass("fa-2x");
+            }
+        }
+
+        function changeColor(obj) {
+            $("li span").css("color", $(obj).val());
+        }
+    </script>
+</body>
+</html>

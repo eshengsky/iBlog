@@ -1,0 +1,27 @@
+ul.fixed-tool.list-unstyled
+    if(settings.EnableShare === 'true')
+        li.share-li(style='display: none;')
+            #share-menu.jiathis_style_32x32
+                a.jiathis_button_weixin
+                    i.fa.fa-weixin
+                a.jiathis_button_qzone
+                    i.fa.fa-qq
+                a.jiathis_button_tsina
+                    i.fa.fa-weibo
+                a.jiathis_button_renren
+                    i.fa.fa-renren
+                a.menu(title='分享到')
+                    #ss_toggle.share(data-rot='180')
+                        .circle
+                        .bar
+    li.qr-li.hidden-sm.hidden-xs(style='display: none;')
+        a#qrBtn(title='二维码')
+            i.fa.fa-qrcode
+        .qrcontain.popover.left.animated.fadeInLeft
+            .arrow
+            .popover-content.text-center
+                #qrcode
+                span 手机访问该页面
+    li#scrollTop.top-li(style='display: none;')
+        a(title='回顶部')
+            i.fa.fa-arrow-up

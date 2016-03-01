@@ -1,0 +1,337 @@
+@-webkit-keyframes badbounce {
+    0%,100% {
+        -webkit-transform: translateY(0px);
+    }
+
+    10% {
+        -webkit-transform: translateY(6px);
+    }
+
+    30% {
+        -webkit-transform: translateY(-4px);
+    }
+
+    70% {
+        -webkit-transform: translateY(3px);
+    }
+
+    90% {
+        -webkit-transform: translateY(-2px);
+    }
+}
+
+@-moz-keyframes badbounce {
+    0%,100% {
+        -moz-transform: translateY(0px);
+    }
+
+    10% {
+        -moz-transform: translateY(6px);
+    }
+
+    30% {
+        -moz-transform: translateY(-4px);
+    }
+
+    70% {
+        -moz-transform: translateY(3px);
+    }
+
+    90% {
+        -moz-transform: translateY(-2px);
+    }
+}
+
+@keyframes badbounce {
+    0%,100% {
+        -webkit-transform: translateY(0px);
+        -moz-transform: translateY(0px);
+        -ms-transform: translateY(0px);
+        -o-transform: translateY(0px);
+        transform: translateY(0px);
+    }
+
+    10% {
+        -webkit-transform: translateY(6px);
+        -moz-transform: translateY(6px);
+        -ms-transform: translateY(6px);
+        -o-transform: translateY(6px);
+        transform: translateY(6px);
+    }
+
+    30% {
+        -webkit-transform: translateY(-4px);
+        -moz-transform: translateY(-4px);
+        -ms-transform: translateY(-4px);
+        -o-transform: translateY(-4px);
+        transform: translateY(-4px);
+    }
+
+    70% {
+        -webkit-transform: translateY(3px);
+        -moz-transform: translateY(3px);
+        -ms-transform: translateY(3px);
+        -o-transform: translateY(3px);
+        transform: translateY(3px);
+    }
+
+    90% {
+        -webkit-transform: translateY(-2px);
+        -moz-transform: translateY(-2px);
+        -ms-transform: translateY(-2px);
+        -o-transform: translateY(-2px);
+        transform: translateY(-2px);
+    }
+}
+
+.ss_animate {
+    -webkit-animation: badbounce 1s linear;
+    -moz-animation: badbounce 1s linear;
+    animation: badbounce 1s linear;
+}
+
+#share-menu {
+    width: 40px;
+    height: 40px;
+    color: #fff;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    transition: all 1s ease;
+    right: 15px;
+    -webkit-transform: rotate(150deg);
+    -moz-transform: rotate(150deg);
+    -ms-transform: rotate(150deg);
+    -o-transform: rotate(150deg);
+    transform: rotate(150deg);
+}
+
+#share-menu.jiathis_style_32x32 .jtico {
+    width: 50px !important;
+    height: 50px !important;
+    padding-left: 0 !important;
+    text-align: center;
+    background-image: none;
+    font-size: 28px;
+}
+
+#share-menu.jiathis_style_32x32 .jiathis_separator {
+    line-height: 46px !important;
+    margin: 0;
+}
+
+    #share-menu > .menu {
+        display: block;
+        position: absolute;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        color: #fff;
+    }
+
+    #share-menu > .menu:hover {
+        background: #1ab394;
+    }
+
+        #share-menu > .menu .share {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            -webkit-transform: rotate(210deg);
+            -moz-transform: rotate(210deg);
+            -ms-transform: rotate(210deg);
+            -o-transform: rotate(210deg);
+            transform: rotate(210deg);
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            transition: all 1s ease;
+        }
+
+            #share-menu > .menu .share .circle {
+                -webkit-transition: all 1s ease;
+                -moz-transition: all 1s ease;
+                transition: all 1s ease;
+                position: absolute;
+                width: 9px;
+                height: 9px;
+                border-radius: 50%;
+                background: #fff;
+                top: 52%;
+                margin-top: -6px;
+                left: 4px;
+                opacity: 1;
+            }
+
+                #share-menu > .menu .share .circle:after, #share-menu > .menu .share .circle:before {
+                    -webkit-transition: all 1s ease;
+                    -moz-transition: all 1s ease;
+                    transition: all 1s ease;
+                    content: '';
+                    opacity: 1;
+                    display: block;
+                    position: absolute;
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    background: #fff;
+                }
+
+                #share-menu > .menu .share .circle:after {
+                    left: 18.7846px;
+                    top: 11px;
+                }
+
+                #share-menu > .menu .share .circle:before {
+                    left: 16.7846px;
+                    top: -9px;
+                }
+
+            #share-menu > .menu .share .bar {
+                -webkit-transition: all 1s ease;
+                -moz-transition: all 1s ease;
+                transition: all 1s ease;
+                width: 24px;
+                height: 3px;
+                background: #fff;
+                position: absolute;
+                top: 50%;
+                margin-top: -1.5px;
+                left: 9px;
+                -webkit-transform-origin: 0% 50%;
+                -moz-transform-origin: 0% 50%;
+                -ms-transform-origin: 0% 50%;
+                -o-transform-origin: 0% 50%;
+                transform-origin: 0% 50%;
+                -webkit-transform: rotate(30deg);
+                -moz-transform: rotate(30deg);
+                -ms-transform: rotate(30deg);
+                -o-transform: rotate(30deg);
+                transform: rotate(30deg);
+            }
+
+                #share-menu > .menu .share .bar:before {
+                    -webkit-transition: all 1s ease;
+                    -moz-transition: all 1s ease;
+                    transition: all 1s ease;
+                    content: '';
+                    width: 24px;
+                    height: 3px;
+                    background: #fff;
+                    position: absolute;
+                    left: 0px;
+                    -webkit-transform-origin: 0% 100%;
+                    -moz-transform-origin: 0% 100%;
+                    -ms-transform-origin: 0% 100%;
+                    -o-transform-origin: 0% 100%;
+                    transform-origin: 0% 100%;
+                    -webkit-transform: rotate(-60deg);
+                    -moz-transform: rotate(-60deg);
+                    -ms-transform: rotate(-60deg);
+                    -o-transform: rotate(-60deg);
+                    transform: rotate(-60deg);
+                }
+
+            #share-menu > .menu .share.close .circle {
+                opacity: 0;
+            }
+
+            #share-menu > .menu .share.close .bar {
+                top: 50%;
+                margin-top: -1.5px;
+                left: 50%;
+                margin-left: -12px;
+                -webkit-transform-origin: 50% 50%;
+                -moz-transform-origin: 50% 50%;
+                -ms-transform-origin: 50% 50%;
+                -o-transform-origin: 50% 50%;
+                transform-origin: 50% 50%;
+                -webkit-transform: rotate(375deg);
+                -moz-transform: rotate(375deg);
+                -ms-transform: rotate(375deg);
+                -o-transform: rotate(375deg);
+                transform: rotate(375deg);
+            }
+
+                #share-menu > .menu .share.close .bar:before {
+                    -webkit-transform-origin: 50% 50%;
+                    -moz-transform-origin: 50% 50%;
+                    -ms-transform-origin: 50% 50%;
+                    -o-transform-origin: 50% 50%;
+                    transform-origin: 50% 50%;
+                    -webkit-transform: rotate(-450deg);
+                    -moz-transform: rotate(-450deg);
+                    -ms-transform: rotate(-450deg);
+                    -o-transform: rotate(-450deg);
+                    transform: rotate(-450deg);
+                }
+
+        #share-menu > .menu.ss_active {
+            background: #1ab394;
+        }
+
+    #share-menu > a {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        margin: 0;
+    }
+
+    #share-menu > a.jiathis_button_weixin {
+        background: #3b9841;
+    }
+
+        #share-menu > a.jiathis_button_weixin:hover {
+        background: #5db662;
+    }
+
+            #share-menu > a.jiathis_button_qzone {
+        background: #5eb8f8;
+    }
+
+        #share-menu > a.jiathis_button_qzone:hover {
+        background: #9bd2f8;
+    }
+
+
+            #share-menu > a.jiathis_button_tsina {
+        background: #e2585b;
+    }
+
+        #share-menu > a.jiathis_button_tsina:hover {
+        background: #fd8184;
+    }
+
+                    #share-menu > a.jiathis_button_renren {
+        background: #2c76bd;
+    }
+
+        #share-menu > a.jiathis_button_renren:hover {
+        background: #5d99d4;
+    }
+
+        #share-menu > a:hover {
+            cursor: pointer;
+        }
+
+    #share-menu a:nth-child(1) {
+        top: -10px;
+        left: -120px;
+    }
+
+    #share-menu a:nth-child(2) {
+        top: -67px;
+        left: -108.56406px;
+    }
+
+    #share-menu a:nth-child(3) {
+        top: -108.56406px;
+        left: -67px;
+    }
+
+    #share-menu a:nth-child(4) {
+        top: -120px;
+        left: -10px;
+    }

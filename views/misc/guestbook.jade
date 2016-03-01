@@ -1,0 +1,15 @@
+extends ../shared/layout
+block content
+    .container-fluid.detail-container
+        .row
+            .col-md-8.col-md-offset-2.detail-wrap(style='min-height: 800px;')
+                #uyan_frame
+                script(type='text/javascript', src='http://v2.uyan.cc/code/uyan.js?uid=#{settings.YouyanId}')
+        include ../shared/footer
+    include ../shared/top
+    script(type='text/javascript', src='/libs/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/javascripts/guestbook.js', charset='utf-8')
+    script.
+        var tools = [2];
+    script(type = 'text/javascript', src = '/javascripts/top.js', charset = 'utf-8')

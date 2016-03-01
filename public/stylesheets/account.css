@@ -1,0 +1,73 @@
+﻿.login-block {
+    margin-top: 130px;
+}
+
+    .login-block .login-wrap {
+        margin-top: 0;
+    }
+
+#btnLogin {
+    margin-top: 25px;
+}
+
+.load-item {
+    -ms-opacity: 0.5;
+    opacity: 0.5;
+}
+
+.form-group-lg .form-control {
+    border-radius: 4px;
+}
+
+.login-title {
+    color: #ffffff;
+    margin-top: 100px;
+    -ms-text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.login-wrap {
+    padding: 20px 40px;
+}
+
+.form-control {
+    -ms-opacity: 0.5;
+    opacity: 0.5;
+}
+
+#progress-back {
+    top: 70px;
+}
+
+@-webkit-keyframes fadeInDownSmall {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -30px, 0);
+    transform: translate3d(0, -30px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInDownSmall {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -30px, 0);
+    transform: translate3d(0, -30px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.fadeInDownSmall {
+  -webkit-animation-name: fadeInDownSmall;
+  animation-name: fadeInDownSmall;
+}

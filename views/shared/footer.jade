@@ -1,0 +1,8 @@
+.row.footer
+    .col-md-12
+        footer
+            p
+                | #{new Date().getFullYear()} © All Rights Reserved#{settings.RecordNo ? ' | ' + settings.RecordNo : ''}
+                span.hidden-xs
+                    =' | '
+                    a(href='/admin', target='_blank') 后台管理

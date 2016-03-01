@@ -1,0 +1,32 @@
+.btn-white {
+    background-color: #fff;
+    border-color: #ccc;
+    color: #333;
+}
+
+.btn-white:hover, .btn-white:focus, .btn-white.focus, .btn-white:active, .btn-white.active, .open > .dropdown-toggle.btn-white {
+    background-color: #fff;
+    border-color: #adadad;
+}
+
+.btn-white.disabled, .btn-white[disabled], fieldset[disabled] .btn-white, .btn-white.disabled:hover, .btn-white[disabled]:hover, fieldset[disabled] .btn-white:hover, .btn-white.disabled:focus, .btn-white[disabled]:focus, fieldset[disabled] .btn-white:focus, .btn-white.disabled.focus, .btn-white.focus[disabled], fieldset[disabled] .btn-white.focus, .btn-white.disabled:active, .btn-white[disabled]:active, fieldset[disabled] .btn-white:active, .btn-white.disabled.active, .btn-white.active[disabled], fieldset[disabled] .btn-white.active {
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+.btn-green {
+    background-color: #1ab394;
+    border-color: #1ab394;
+    color: #fff;
+}
+
+.btn-green:hover, .btn-green:focus, .btn-green.focus, .btn-green:active, .btn-green.active, .open > .dropdown-toggle.btn-green {
+    background-color: #18a689;
+    border-color: #18a689;
+    color: #fff;
+}
+
+.btn-green.disabled, .btn-green.disabled:hover, .btn-green.disabled:focus, .btn-green.disabled:active, .btn-green.disabled.active, .btn-green[disabled], .btn-green[disabled]:hover, .btn-green[disabled]:focus, .btn-green[disabled]:active, .btn-green.active[disabled], fieldset[disabled] .btn-green, fieldset[disabled] .btn-green:hover, fieldset[disabled] .btn-green:focus, fieldset[disabled] .btn-green:active, fieldset[disabled] .btn-green.active {
+    background-color: #1dc5a3;
+    border-color: #1dc5a3;
+}

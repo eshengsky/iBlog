@@ -1,0 +1,10 @@
+{
+  "FirstLine": "第一行文本",
+  "SecondLine": "第二行文本",
+  "PhotoPath": "/images/zhr.jpg",
+  "ThirdLine": "第三行文本",
+  "Profile": "个人简介",
+  "Wechat": "微信号",
+  "QrcodePath": "",
+  "Email": "Email地址"
+}

@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="../internal.js"></script>
+    <link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: "微软雅黑";
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+            .content table {
+                width: 100%;
+            }
+
+        .tdAlert {
+            padding-right: 30px;
+        }
+
+        .tdBtn {
+            vertical-align: top;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <h4>提示框（成功/活力）</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdAlert">
+                        <div class="alert alert-success" role="alert"><strong class="ue_t">标题！</strong><span class="ue_t">文字内容，文字内容，文字内容，文字内容，文字内容，文字内容，文字内容，文字内容，文字内容，文字内容</span></div>
+                    </td>
+                    <td class="tdBtn">
+                        <input type="button" class="btn btn-default" id="btnSuccess" value="插入"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr />
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <h4>提示框（信息/科技）</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdAlert">
+                        <div class="alert alert-info" role="alert"><strong class="ue_t">标题！</strong><span class="ue_t">文字内容，文字内容，文字内容，文字内容，文字内容，文字内容，文字内容，文字内容，文字内容，文字内容</span></div>
+                    </td>
+                    <td class="tdBtn">
+                        <input type="button" class="btn btn-default" id="btnInfo" value="插入" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr />
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <h4>提示框（警告/醒目）</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdAlert">
+                        <div class="alert alert-warning" role="alert"><strong class="ue_t">标题！</strong><span class="ue_t">文字内容，文字内容，文字内容，文字内容，文字内容，文字内容，文字内容，文字内容，文字内容，文字内容</span></div>
+                    </td>
+                    <td class="tdBtn">
+                        <input type="button" class="btn btn-default" id="btnWarning" value="插入" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr />
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <h4>提示框（危险/重要）</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdAlert">
+                        <div class="alert alert-danger" role="alert"><strong class="ue_t">标题！</strong><span class="ue_t">文字内容，文字内容，文字内容，文字内容，文字内容，文字内容，文字内容，文字内容，文字内容，文字内容</span></div>
+                    </td>
+                    <td class="tdBtn">
+                        <input type="button" class="btn btn-default" id="btnDanger" value="插入" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        domUtils.on(document.getElementById("btnSuccess"), "click", function () {
+            editor.execCommand("insertHTML", this.parentNode.previousElementSibling.innerHTML);
+            dialog.close();
+        });
+        domUtils.on(document.getElementById("btnInfo"), "click", function () {
+            editor.execCommand("insertHTML", this.parentNode.previousElementSibling.innerHTML);
+            dialog.close();
+        });
+        domUtils.on(document.getElementById("btnWarning"), "click", function () {
+            editor.execCommand("insertHTML", this.parentNode.previousElementSibling.innerHTML);
+            dialog.close();
+        });
+        domUtils.on(document.getElementById("btnDanger"), "click", function () {
+            editor.execCommand("insertHTML", this.parentNode.previousElementSibling.innerHTML);
+            dialog.close();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="../internal.js"></script>
+    <link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: "微软雅黑";
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+            .content table {
+                width: 80%;
+            }
+
+        .label, .badge {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <table>
+            <tbody>
+                <tr>
+                    <td colspan="6" style="padding-bottom: 10px">
+                        <strong>插入标签</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="label label-default ue_t">默认/普通</span>
+                    </td>
+                    <td>
+                        <span class="label label-primary ue_t">首要/基本</span>
+                    </td>
+                    <td>
+                        <span class="label label-success ue_t">成功/活力</span>
+                    </td>
+                    <td>
+                        <span class="label label-info ue_t">信息/科技</span>
+                    </td>
+                    <td>
+                        <span class="label label-warning ue_t">警告/醒目</span>
+                    </td>
+                    <td>
+                        <span class="label label-danger ue_t">危险/重要</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr />
+        <table>
+            <tbody>
+                <tr>
+                    <td colspan="6" style="padding-bottom: 10px">
+                        <strong>插入徽章</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        <span class="badge ue_t">1</span>
+                    </td>
+                    <td class="text-center">
+                        <span class="badge ue_t">2</span>
+                    </td>
+                    <td class="text-center">
+                        <span class="badge ue_t">3</span>
+                    </td>
+                    <td class="text-center">
+                        <span class="badge ue_t">4</span>
+                    </td>
+                    <td class="text-center">
+                        <span class="badge ue_t">5</span>
+                    </td>
+                    <td class="text-center">
+                        <span class="badge ue_t">6</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        var labels = document.getElementsByTagName("span");
+        for (var i = 0; i < labels.length; i++) {
+            domUtils.on(labels[i], "click", function () {
+                editor.execCommand("insertHTML", "&nbsp;" + this.outerHTML + "&nbsp;");
+                dialog.close();
+            });
+        }
+    </script>
+</body>
+</html>

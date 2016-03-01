@@ -1,0 +1,19 @@
+{
+  "SiteName": "iBlog",
+  "SiteDomain": "www.example.com",
+  "RecordNo": "浙ICP备XXX号",
+  "LogoPath": "/images/zhr.jpg",
+  "PageSize": "10",
+  "ExpandMenu": "false",
+  "CacheExpired": "1800",
+  "TranslateKey": "",
+  "EnableStatistics": "true",
+  "StatisticsId": "",
+  "EnableShare": "true",
+  "JiaThisId": "",
+  "ShowComments": "true",
+  "ChangyanId": "",
+  "ChangyanConf": "",
+  "ShowGuestbook": "true",
+  "YouyanId": ""
+}
