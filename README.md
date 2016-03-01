@@ -2,8 +2,7 @@
 基于 Node.js 的个人开源博客系统。  
 （基于 ASP.NET 的 iBlog 点击[这里](https://github.com/eshengsky/iBlog/)）
 
-### 功能模块
-***
+## 功能模块
 * **博客**  
 展示已发布的文章，支持本地文章和外部链接。  
 * **留言**  
@@ -13,8 +12,7 @@
 * **后台管理**  
 包含网站统计、博客管理（新的文章、分类管理、文章管理）、评论管理、留言管理、关于管理、缓存管理、异常管理、系统设置。
 
-### 技术构成
-***
+## 技术构成
 * 服务端 [Node.js](https://nodejs.org/)
 * web框架 [Express 4](http://expressjs.com/)
 * 模板引擎 [Jade](http://jade-lang.com/)
@@ -24,12 +22,10 @@
 * 缓存 [Redis](http://redis.io/)
 * 日志 [winston](https://github.com/winstonjs/winston/)
 
-### 页面预览
-***
+## 页面预览
 [http://eshengsky.github.io/iBlog2/](http://eshengsky.github.io/iBlog2/)
 
-### 快速开始
-***
+## 快速开始
 #### 准备条件
 安装最新版[Node.js](https://nodejs.org/en/download/)、[bower](http://bower.io/)、[MongoDB](https://www.mongodb.org/)、[Redis](https://github.com/MSOpenTech/redis/releases)。  
 （注：如果使用Windows平台，可以去[https://github.com/MSOpenTech/redis/releases](https://github.com/MSOpenTech/redis/releases)下载安装Redis）
@@ -65,8 +61,8 @@ $ bower install
 ```Shell
 $ node --harmony-proxies ./bin/www 
 ```
-打开浏览器，访问[http://localhost:3000/](http://localhost:3000)
-#### Enjoy it:smile:
+打开浏览器，访问 [http://localhost:3000/](http://localhost:3000)
+#### Enjoy it :smile:
  
 
 ### 许可协议
