@@ -57,7 +57,7 @@ $ bower install
   "RedisPort": 6379
 }
 ```
-后台管理员账号信息在 config/account.json 中配置，默认管理员账号 admin ，密码 123456 ，密码需md5加密存储。
+后台管理员账号信息在 config/account.json 中配置，默认管理员账号 admin ，密码 123456 ，密码需[md5加密](http://md5jiami.51240.com/)存储。
 ```JSON
 {
   "Id": "1",
