@@ -67,10 +67,11 @@ exports.getPosts = function (params, callback) {
             return callback(null, posts);
         }
         var page = parseInt(params.pageIndex) || 1;
+        var size = parseInt(params.pageSize) || 10;
         page = page > 0 ? page : 1;
         var options = {};
-        options.skip = (page - 1) * params.pageSize;
-        options.limit = params.pageSize;
+        options.skip = (page - 1) * size;
+        options.limit = size;
         options.sort = params.sortBy === 'title' ? 'Title -CreateTime' : '-CreateTime';
         var query = getPostsQuery(params);
         postModel.find(query, {}, options, function (err, posts) {
@@ -211,10 +212,11 @@ function getArticlesQuery(params) {
  */
 exports.getArticles = function (params, callback) {
     var page = parseInt(params.pageIndex) || 1;
+    var size = parseInt(params.pageSize) || 10;
     page = page > 0 ? page : 1;
     var options = {};
-    options.skip = (page - 1) * params.pageSize;
-    options.limit = params.pageSize;
+    options.skip = (page - 1) * size;
+    options.limit = size;
     switch (params.sortName) {
         case 'ModifyTime':
             options.sort = params.sortOrder === 'desc' ? '-ModifyTime -CreateTime' : 'ModifyTime CreateTime';

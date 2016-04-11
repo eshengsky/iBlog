@@ -7,10 +7,11 @@ var logModel = require('../models/log').LogModel;
  */
 exports.getAll = function (params, callback) {
     var page = parseInt(params.pageIndex) || 1;
+    var size = parseInt(params.pageSize) || 10;
     page = page > 0 ? page : 1;
     var options = {};
-    options.skip = (page - 1) * params.pageSize;
-    options.limit = params.pageSize;
+    options.skip = (page - 1) * size;
+    options.limit = size;
     switch (params.sortName) {
         case 'level':
             options.sort = params.sortOrder === 'desc' ? '-level -timestamp' : 'level timestamp';
