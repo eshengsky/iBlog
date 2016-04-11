@@ -5,7 +5,7 @@
   "LogoPath": "/images/zhr.jpg",
   "PageSize": "10",
   "ExpandMenu": "false",
-  "CacheExpired": "1800",
+  "CacheExpired": "300",
   "TranslateKey": "",
   "EnableStatistics": "true",
   "StatisticsId": "",
