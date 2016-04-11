@@ -16,8 +16,11 @@
         url: "/admin/uploadimg",
         dataType: "text",
         done: function (e, data) {
-            $(this).prev("img").attr("src", data.result);
-            $(this).next(":hidden").val(data.result);
+            if(data.result){
+                var path = '/images/' + JSON.parse(data.result).files[0].name;
+                $(this).prev("img").attr("src", path);
+                $(this).next(":hidden").val(path);
+            }
         }
     });
 
