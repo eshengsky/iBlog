@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-var eventproxy = require('eventproxy');
+var async = require('async');
 var tool = require('../utility/tool');
 
+//留言页面
 router.get('/guestbook', function (req, res, next) {
     tool.getConfig(path.join(__dirname, '../config/settings.json'), function (err, settings) {
         if (err) {
@@ -17,29 +18,42 @@ router.get('/guestbook', function (req, res, next) {
     });
 });
 
+//关于页面
 router.get('/about', function (req, res, next) {
-    var ep = new eventproxy();
-    ep.all('settings', 'about', function (settings, about) {
-        res.render('misc/about', {
-            title: settings['SiteName'] + ' - 关于',
-            about: about,
-            settings: settings
-        });
-    });
-
-    tool.getConfig(path.join(__dirname, '../config/about.json'), function (err, about) {
-        if (err) {
-            next(err);
-        } else {
-            ep.emit('about', about);
+    async.parallel([
+        //获取关于数据
+        function (cb) {
+            tool.getConfig(path.join(__dirname, '../config/about.json'), function (err, about) {
+                if (err) {
+                    cb(err);
+                } else {
+                    cb(null, about);
+                }
+            });
+        },
+        //获取配置
+        function (cb) {
+            tool.getConfig(path.join(__dirname, '../config/settings.json'), function (err, settings) {
+                if (err) {
+                    cb(err);
+                } else {
+                    cb(null, settings);
+                }
+            });
         }
-    });
-
-    tool.getConfig(path.join(__dirname, '../config/settings.json'), function (err, settings) {
+    ], function (err, results) {
+        var about,
+            settings;
         if (err) {
             next(err);
         } else {
-            ep.emit('settings', settings);
+            about = results[0];
+            settings = results[1];
+            res.render('misc/about', {
+                title: settings['SiteName'] + ' - 关于',
+                about: about,
+                settings: settings
+            });
         }
     });
 });

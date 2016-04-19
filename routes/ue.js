@@ -5,6 +5,8 @@ var path = require('path');
 var tool = require('../utility/tool');
 var multer = require('multer');
 var shortid = require('shortid');
+
+//图片上传配置
 var storageImg = multer.diskStorage({
     destination: function (req, file, cb) {
         if (req.query.uniqueId) {
@@ -34,6 +36,8 @@ var storageImg = multer.diskStorage({
         cb(null, fullName)
     }
 });
+
+//附件上传配置
 var storageFile = multer.diskStorage({
     destination: function (req, file, cb) {
         if (req.query.uniqueId) {
@@ -73,6 +77,7 @@ router.get('/', function (req, res, next) {
         files,
         stat;
     switch (req.query.action) {
+        //获取配置
         case 'config':
             tool.getConfig(path.join(__dirname, '../config/ue.json'), function (err, settings) {
                 if (err) {
@@ -82,6 +87,7 @@ router.get('/', function (req, res, next) {
                 }
             });
             break;
+        //图片管理
         case 'listimage':
             rootFiles = fs.readdirSync(rootPath);
             rootFiles.forEach(function (rootFile) {
@@ -109,6 +115,7 @@ router.get('/', function (req, res, next) {
                 size: parseInt(req.query.size)
             });
             break;
+        //附件管理
         case 'listfile':
             rootFiles = fs.readdirSync(rootPath);
             rootFiles.forEach(function (rootFile) {
@@ -142,6 +149,7 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
     var uploadFile;
     switch (req.query.action) {
+        //上传图片
         case 'uploadimage':
             uploadFile = multer({storage: storageImg}).single('upfile');
             uploadFile(req, res, function (err) {
@@ -158,6 +166,7 @@ router.post('/', function (req, res, next) {
                 }
             });
             break;
+        //上传涂鸦
         case 'uploadscrawl':
             var dataBuffer = new Buffer(req.body.upfile, 'base64'),
                 fileName = shortid.generate() + '.png';
@@ -193,6 +202,7 @@ router.post('/', function (req, res, next) {
                 next(new Error('参数uniqueId不存在！'));
             }
             break;
+        //上传附件
         case 'uploadfile':
             uploadFile = multer({storage: storageFile}).single('upfile');
             uploadFile(req, res, function (err) {

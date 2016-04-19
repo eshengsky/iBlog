@@ -91,11 +91,11 @@ exports.getPosts = function (params, callback) {
 };
 
 /**
- * 获取首页的文章数
+ * 获取首页文章的页数
  * @param params 参数对象
  * @param callback 回调函数
  */
-exports.getPostsCount = function (params, callback) {
+exports.getPageCount = function (params, callback) {
     var cache_key = tool.generateKey('posts_count', params);
     redisClient.getItem(cache_key, function (err, pageCount) {
         if (err) {
