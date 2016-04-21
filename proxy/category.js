@@ -34,16 +34,22 @@ exports.getAll = function (isAll, cached, callback) {
         isAll = true;
         cached = true;
     }
+    //缓存的key名称
     var cache_key = isAll ? 'categories_all' : 'categories';
     if (cached) {
+        //尝试读取缓存
         redisClient.getItem(cache_key, function (err, categories) {
+            //读取缓存出错
             if (err) {
                 return callback(err);
             }
+            //缓存中有数据
             if (categories) {
                 return callback(null, categories);
             }
+            //缓存中没有数据，则从数据库中读取
             categoryModel.find(function (err, categories) {
+                //读取数据库出错
                 if (err) {
                     return callback(err);
                 }
@@ -51,7 +57,9 @@ exports.getAll = function (isAll, cached, callback) {
                     categories.unshift(cateAll);
                     categories.push(cateOther);
                 }
+                //从数据库中读到数据
                 if (categories) {
+                    //将数据塞入缓存
                     redisClient.setItem(cache_key, categories, redisClient.defaultExpired, function (err) {
                         if (err) {
                             return callback(err);
