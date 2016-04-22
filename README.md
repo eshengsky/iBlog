@@ -6,11 +6,7 @@
 个人博客 [http://www.skysun.name/](http://www.skysun.name/)
 
 ## [Wiki](https://github.com/eshengsky/iBlog2/wiki)
-该 Wiki 汇总了 iBlog2 中涉及 Node.js 及部分前端技术的基本功能与知识点，适合新手学习、备查。  
-下载 Wiki 到本地：
-```Shell
-git clone https://github.com/eshengsky/iBlog2.wiki.git
-```
+整理了 iBlog2 中涉及 Node.js 及部分前端技术的基本功能与知识点，适合新手学习、备查。  
 
 ## 功能模块
 #### 博客
