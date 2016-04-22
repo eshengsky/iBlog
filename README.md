@@ -1,9 +1,12 @@
 # iBlog2
-基于 Node.js 的个人开源博客系统，采用响应式布局，支持电脑、手机等直接访问，简单实用，美观大方。  
-（基于 ASP.NET 的 iBlog 点击[这里](https://github.com/eshengsky/iBlog/)）
+基于 Node.js 的个人开源博客系统，采用响应式布局，支持移动设备直接访问，功能全面，美观大方。  
+（基于 ASP.NET 的版本请点击[这里](https://github.com/eshengsky/iBlog/)）
 
 ## 在线实例
 个人博客 [http://www.skysun.name/](http://www.skysun.name/)
+
+## [Wiki](https://github.com/eshengsky/iBlog2/wiki)
+该 Wiki 汇总了 iBlog2 中涉及 Node.js 及部分前端技术的基本功能与知识点，适合新手学习、备查。
 
 ## 功能模块
 #### 博客
@@ -67,8 +70,18 @@ $ bower install
 ```
 在 "后台管理-系统设置" 页面中，支持以可视化方式配置其余参数。
 #### 启动站点  
+* 方式1：普通模式启动
 ```Shell
 $ node --harmony-proxies ./bin/www 
+```
+* 方式2：快速启动
+```Shell
+$ npm start
+```
+* 方式3：守护进程启动  
+_守护进程能够发挥多核CPU性能，并在出现异常退出后延迟30秒自动重启工作进程。_
+```Shell
+$ node --harmony-proxies daemon.js
 ```
 打开浏览器，访问 [http://localhost:3000/](http://localhost:3000)
 #### Enjoy it! :smile:
@@ -77,7 +90,7 @@ $ node --harmony-proxies ./bin/www
 文章分类、文章列表、文章详细等都作了缓存处理，若想使修改立即可见，需要在"后台管理-缓存管理"页面手动清除缓存。
 
 ## 线上部署
-推荐使用[pm2](https://github.com/Unitech/pm2)进行线上Node.js的进程管理和持久运行。
+推荐使用 [pm2](https://github.com/Unitech/pm2) 进行线上Node.js的进程管理和持久运行。
 #### 安装
 ```Shell
 $ npm install -g pm2
