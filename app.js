@@ -43,7 +43,7 @@ app.use('/', route);
 app.use('/blog', blog);
 app.use('/', misc);
 app.use('/', auth);
-app.use('/admin', require('connect-ensure-login').ensureLoggedIn(), admin);
+app.use('/admin', require('connect-ensure-login').ensureLoggedIn('/login'), admin);
 app.use('/ue/controller', ue);
 
 // catch 404 and forward to error handler
