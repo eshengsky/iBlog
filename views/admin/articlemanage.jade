@@ -4,7 +4,7 @@ block content
     link(href='/libs/sweetalert/dist/sweetalert.css', rel='stylesheet')
     .row.wrapper.border-bottom.white-bg.page-heading
         .col-lg-8
-            h2 文章管理
+            h2 #{__("admin.articlemanage.post")}
     .wrapper.wrapper-content.animated.fadeIn
         .row
             .col-lg-12
@@ -18,7 +18,7 @@ block content
                             =' '
                             a.btn.btn-white(href='/admin/newarticle')
                                 i.fa.fa-plus
-                                |  新的文章
+                                |  #{__("admin.articlemanage.new_article")}
                         table#articles
     script(type='text/javascript', src='/libs/jquery/dist/jquery.min.js', charset='utf-8')
     script(type='text/javascript', src='/libs/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')

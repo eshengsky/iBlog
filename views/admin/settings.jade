@@ -6,7 +6,7 @@ block content
     link(href='/libs/sweetalert/dist/sweetalert.css', rel='stylesheet')
     .row.wrapper.border-bottom.white-bg.page-heading
         .col-lg-8
-            h2 系统设置
+            h2 #{__("admin.settings.setting")}
     .wrapper.wrapper-content.animated.fadeIn
         .row
             .col-lg-12
@@ -20,27 +20,27 @@ block content
                                             #headingSite.panel-heading(role='tab')
                                                 h4.panel-title
                                                     a(role='button', data-toggle='collapse', href='#tabSite', aria-expanded='true', aria-controls='tabSite')
-                                                        | 站点设置
+                                                        | #{__("admin.settings.site")}
                                             #tabSite.panel-collapse.collapse.in(role='tabpanel', aria-labelledby='headingSite')
                                                 ul.list-group
                                                     li.list-group-item.clearfix
                                                         .pull-left
-                                                            | 网站名称
+                                                            | #{__("admin.settings.site_name")}
                                                         .pull-right
-                                                            input#SiteName.form-control(type='text', name='SiteName', placeholder='该网站的名称', value=settings.SiteName)
+                                                            input#SiteName.form-control(type='text', name='SiteName', placeholder='#{__("admin.settings.site_name_placeholder")}', value=settings.SiteName)
                                                     li.list-group-item.clearfix
                                                         .pull-left
-                                                            | 网站域名
+                                                            | #{__("admin.settings.domain_name")}
                                                         .pull-right
-                                                            input#SiteDomain.form-control(type='text', name='SiteDomain', placeholder='该网站的域名', value=settings.SiteDomain)
+                                                            input#SiteDomain.form-control(type='text', name='SiteDomain', placeholder='#{__("admin.settings.domain_name_placeholder")}', value=settings.SiteDomain)
                                                     li.list-group-item.clearfix
                                                         .pull-left
-                                                            | 备案号（用于底部显示）
+                                                            | #{__("admin.settings.ICP")}
                                                         .pull-right
-                                                            input#RecordNo.form-control(type='text', name='RecordNo', placeholder='网站域名的备案号', value=settings.RecordNo)
+                                                            input#RecordNo.form-control(type='text', name='RecordNo', placeholder='#{__("admin.settings.ICP_placeholder")}', value=settings.RecordNo)
                                                     li.list-group-item.clearfix
                                                         .pull-left
-                                                            | 网站logo
+                                                            | #{__("admin.settings.logo")}
                                                         .pull-right
                                                             span.fileinput-button
                                                                 img.img-circle.profile-img(alt='profile', src=settings.LogoPath, style='width:146px;height:146px;')
@@ -48,10 +48,10 @@ block content
                                                                 input#LogoPath(type='hidden', name='LogoPath',value=settings.LogoPath)
                                                     li.list-group-item.clearfix
                                                         .pull-left
-                                                            | 每页显示文章数
+                                                            | #{__("admin.settings.posts_per_page")}
                                                         .pull-right
                                                             .spinbox(data-initialize='spinbox', data-step='5')
-                                                                input#PageSize.form-control.input-mini.spinbox-input(type='text', name='PageSize', placeholder='每页的条数', value=settings.PageSize)
+                                                                input#PageSize.form-control.input-mini.spinbox-input(type='text', name='PageSize', placeholder='#{__("admin.settings.posts_per_page_placeholder")}', value=settings.PageSize)
                                                                 .spinbox-buttons.btn-group.btn-group-vertical
                                                                     button.btn.btn-white.spinbox-up.btn-xs(type='button')
                                                                         span.fa.fa-chevron-up
@@ -61,16 +61,16 @@ block content
                                                                         span.sr-only Decrease
                                                     li.list-group-item.clearfix
                                                         .pull-left
-                                                            | 默认展开文章目录
+                                                            | #{__("admin.settings.show_summary")}
                                                         .pull-right
                                                             input#ExpandMenu(type='hidden', name='ExpandMenu', value=settings.ExpandMenu)
                                                             input.js-switch(type='checkbox', checked=settings.ExpandMenu === 'true')
                                                     li.list-group-item.clearfix
                                                         .pull-left
-                                                            | 缓存过期时间（秒）
+                                                            | #{__("admin.settings.cache_expire_time")}
                                                         .pull-right
                                                             .spinbox(data-initialize='spinbox',data-max='9999999')
-                                                                input#CacheExpired.form-control.input-mini.spinbox-input(type='text', name='CacheExpired', placeholder='缓存过期时间', value=settings.CacheExpired)
+                                                                input#CacheExpired.form-control.input-mini.spinbox-input(type='text', name='CacheExpired', placeholder='#{__("admin.settings.cache_expire_time_placeholder")}', value=settings.CacheExpired)
                                                                 .spinbox-buttons.btn-group.btn-group-vertical
                                                                     button.btn.btn-white.spinbox-up.btn-xs(type='button')
                                                                         span.fa.fa-chevron-up
@@ -83,78 +83,78 @@ block content
                                             #headingComponent.panel-heading(role='tab')
                                                 h4.panel-title
                                                     a(role='button', data-toggle='collapse', href='#tabComponent', aria-expanded='true', aria-controls='tabComponent')
-                                                        | 组件设置
+                                                        | #{__("admin.settings.utility")}
                                             #tabComponent.panel-collapse.collapse.in(role='tabpanel', aria-labelledby='headingComponent')
                                                 ul.list-group
                                                     li.list-group-item.clearfix
                                                         .pull-left
-                                                            a(href='http://api.fanyi.baidu.com', target='_blank') 百度翻译
-                                                            | key（用于文章Url显示）
+                                                            a(href='http://api.fanyi.baidu.com', target='_blank') #{__("admin.settings.trans")}
+                                                            | #{__("admin.settings.key")}
                                                         .pull-right
-                                                            input#TranslateKey.form-control(type='text', name='TranslateKey', placeholder='申请的翻译key', value=settings.TranslateKey)
+                                                            input#TranslateKey.form-control(type='text', name='TranslateKey', placeholder='#{__("admin.settings.key_placeholder")}', value=settings.TranslateKey)
                                                     li.list-group-item.clearfix
                                                         .pull-left
-                                                            | 启用统计功能（
-                                                            a(href='http://tongji.baidu.com', target='_blank') 百度统计
-                                                            | ）
+                                                            | #{__("admin.settings.analysis")}(
+                                                            a(href='http://tongji.baidu.com', target='_blank') #{__("admin.settings.analysis_service")}
+                                                            | )
                                                         .pull-right
                                                             input#EnableStatistics(type='hidden', name='EnableStatistics', value=settings.EnableStatistics)
                                                             input.js-switch(type='checkbox', checked=settings.EnableStatistics === 'true')
                                                     li.list-group-item.clearfix
                                                         .pull-left
-                                                            | 百度统计id
+                                                            | #{__("admin.settings.analysis_id")}
                                                         .pull-right
-                                                            input#StatisticsId.form-control(type='text', name='StatisticsId', placeholder='申请的统计id', value=settings.StatisticsId)
+                                                            input#StatisticsId.form-control(type='text', name='StatisticsId', placeholder='#{__("admin.settings.analysis_id_placeholder")}', value=settings.StatisticsId)
                                                     li.list-group-item.clearfix
                                                         .pull-left
-                                                            | 启用分享功能（
-                                                            a(href='http://www.jiathis.com/', target='_blank') JisThis
-                                                            | ）
+                                                            | #{__("admin.settings.share")}(
+                                                            a(href='http://www.jiathis.com/', target='_blank') #{__("admin.settings.share_service")}
+                                                            | )
                                                         .pull-right
                                                             input#EnableShare(type='hidden', name='EnableShare', value=settings.EnableShare)
                                                             input.js-switch(type='checkbox', checked=settings.EnableShare === 'true')
                                                     li.list-group-item.clearfix
                                                         .pull-left
-                                                            | JiaThis分享id
+                                                            | #{__("admin.settings.share_id")}
                                                         .pull-right
-                                                            input#JiaThisId.form-control(type='text', name='JiaThisId', placeholder='申请的分享id', value=settings.JiaThisId)
+                                                            input#JiaThisId.form-control(type='text', name='JiaThisId', placeholder='#{__("admin.settings.share_id_placeholder")}', value=settings.JiaThisId)
                                                     li.list-group-item.clearfix
                                                         .pull-left
-                                                            | 显示文章评论（
-                                                            a(href='http://changyan.kuaizhan.com', target='_blank') 畅言
-                                                            | ）
+                                                            | #{__("admin.settings.comments")} (
+                                                            a(href='http://changyan.kuaizhan.com', target='_blank') #{__("admin.settings.comments_service")}
+                                                            | )
                                                         .pull-right
                                                             input#ShowComments(type='hidden', name='ShowComments', value=settings.ShowComments)
                                                             input.js-switch(type='checkbox', checked=settings.ShowComments === 'true')
                                                     li.list-group-item.clearfix
                                                         .pull-left
-                                                            | 畅言appid
+                                                            | #{__("admin.settings.comments_id")}
                                                         .pull-right
-                                                            input#ChangyanId.form-control(type='text', name='ChangyanId', placeholder='申请的appid', value=settings.ChangyanId)
+                                                            input#ChangyanId.form-control(type='text', name='ChangyanId', placeholder='#{__("admin.settings.comments_id_placeholder")}', value=settings.ChangyanId)
                                                     li.list-group-item.clearfix
                                                         .pull-left
-                                                            | 畅言conf
+                                                            | #{__("admin.settings.comments_conf")}
                                                         .pull-right
-                                                            input#ChangyanConf.form-control(type='text', name='ChangyanConf', placeholder='申请的conf', value=settings.ChangyanConf)
+                                                            input#ChangyanConf.form-control(type='text', name='ChangyanConf', placeholder='#{__("admin.settings.comments_conf_placeholder")}', value=settings.ChangyanConf)
                                                     li.list-group-item.clearfix
                                                         .pull-left
-                                                            | 显示留言（
-                                                            a(href='http://www.uyan.cc/', target='_blank') 友言
-                                                            | ）
+                                                            | #{__("admin.settings.message")} (
+                                                            a(href='http://www.uyan.cc/', target='_blank') #{__("admin.settings.message_service")}
+                                                            | )
                                                         .pull-right
                                                             input#ShowGuestbook(type='hidden', name='ShowGuestbook', value=settings.ShowGuestbook)
                                                             input.js-switch(type='checkbox', checked=settings.ShowGuestbook === 'true')
                                                     li.list-group-item.clearfix
                                                         .pull-left
-                                                            | 友言uid
+                                                            | #{__("admin.settings.message_id")}
                                                         .pull-right
-                                                            input#YouyanId.form-control(type='text', name='YouyanId', placeholder='申请的uid', value=settings.YouyanId)
+                                                            input#YouyanId.form-control(type='text', name='YouyanId', placeholder='#{__("admin.settings.message_id_placeholder")}', value=settings.YouyanId)
 
                                 .row
                                     .col-lg-12
                                         button#btnSave(type='button', class='btn btn-primary', role='button')
                                             i.fa.fa-cloud-upload
-                                            |  保存修改
+                                            |  #{__("admin.settings.save")}
     script(type='text/javascript', src='/libs/jquery/dist/jquery.min.js', charset='utf-8')
     script(type='text/javascript', src='/libs/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
     script(type='text/javascript', src='/libs/metisMenu/dist/metisMenu.min.js', charset='utf-8')
@@ -165,4 +165,3 @@ block content
     script(type='text/javascript', src='/libs/sweetalert/dist/sweetalert.min.js', charset='utf-8')
     script(type='text/javascript', src='/libs/switchery/dist/switchery.min.js', charset='utf-8')
     script(type='text/javascript', src='/javascripts/settings.js', charset='utf-8')
-

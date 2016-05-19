@@ -4,7 +4,7 @@ block content
     link(href='/libs/blueimp-file-upload/css/jquery.fileupload.css', rel='stylesheet')
     .row.wrapper.border-bottom.white-bg.page-heading
         .col-lg-8
-            h2 关于管理
+            h2 #{__("admin.aboutmanage.about")}
     .wrapper.wrapper-content.animated.fadeIn
         .row
             .col-lg-12
@@ -16,8 +16,8 @@ block content
                                     form#formAbout(action='/admin/saveAbout', method='Post')
                                         .widget-head-color-box.navy-bg.p-lg.text-center
                                             .m-b-md
-                                                input#FirstLine.form-group.form-control.text-center(type='text', name='FirstLine', placeholder='第一行文本', value=about.FirstLine)
-                                                input#SecondLine.form-control.text-center(type='text', name='SecondLine', placeholder='第一行文本', value=about.SecondLine)
+                                                input#FirstLine.form-group.form-control.text-center(type='text', name='FirstLine', placeholder='#{__("admin.aboutmanage.line_1")}', value=about.FirstLine)
+                                                input#SecondLine.form-control.text-center(type='text', name='SecondLine', placeholder='#{__("admin.aboutmanage.line_2")}', value=about.SecondLine)
                                             span.fileinput-button
                                                 img.img-circle.profile-img.m-b-md(alt='profile', src=about.PhotoPath)
                                                 input.fileupload(type='file', name='file')
@@ -28,25 +28,25 @@ block content
                                                 input#QrcodePath(type='hidden', name='QrcodePath',value=about.QrcodePath)
                                             h4
                                                 span#job-title
-                                                    textarea#ThirdLine.form-control(name='ThirdLine', placeholder='第三行文本，支持用 | 分割切换显示')
+                                                    textarea#ThirdLine.form-control(name='ThirdLine', placeholder='#{__("admin.aboutmanage.line_3")}')
                                                         !=about.ThirdLine
                                         .widget-text-box
                                             p
-                                                textarea#Profile.form-control(name='Profile', cols='3', placeholder='个人简介')
+                                                textarea#Profile.form-control(name='Profile', cols='3', placeholder='#{__("admin.aboutmanage.self_intro")}')
                                                     !=about.Profile
                                             .row.form-inline
                                                 .col-md-6
                                                     i.fa.fa-wechat
                                                     =' '
-                                                    input#Wechat.form-control(type='text', name='Wechat', placeholder='微信号', value=about.Wechat)
+                                                    input#Wechat.form-control(type='text', name='Wechat', placeholder='#{__("admin.aboutmanage.wechat")}', value=about.Wechat)
                                                     =' '
                                                 .col-md-6
                                                     i.fa.fa-envelope
                                                     =' '
-                                                    input#Email.form-control(type='text', name='Email', placeholder='Email地址', value=about.Email)
+                                                    input#Email.form-control(type='text', name='Email', placeholder='#{__("admin.aboutmanage.email")}', value=about.Email)
                                         button#btnSave.btn.btn-primary.pull-right.m-t-sm(type='button')
                                             i.fa.fa-cloud-upload
-                                            |  保存修改
+                                            |  #{__("admin.aboutmanage.save")}
     script(type='text/javascript', src='/libs/jquery/dist/jquery.min.js', charset='utf-8')
     script(type='text/javascript', src='/libs/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
     script(type='text/javascript', src='/libs/metisMenu/dist/metisMenu.min.js', charset='utf-8')
@@ -55,4 +55,3 @@ block content
     script(type='text/javascript', src='/libs/blueimp-file-upload/js/jquery.fileupload.js', charset='utf-8')
     script(type='text/javascript', src='/libs/sweetalert/dist/sweetalert.min.js', charset='utf-8')
     script(type='text/javascript', src='/javascripts/aboutmanage.js', charset='utf-8')
-

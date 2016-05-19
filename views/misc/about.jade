@@ -16,13 +16,13 @@ block content
                         p!=about.Profile
                         .row
                             .col-md-6
-                                i.fa.fa-wechat(title='微信')
+                                i.fa.fa-wechat(title='#{__("about.wechat")}')
                                 = ' '
                                 !=about.Wechat
                                 = ' '
-                                i.fa.fa-lg.fa-qrcode(title='二维码')
+                                i.fa.fa-lg.fa-qrcode(title='#{__("about.qr_code")}')
                             .col-md-6
-                                i.fa.fa-envelope(title='邮箱')
+                                i.fa.fa-envelope(title='#{__("about.email")}')
                                 = ' '
                                 !=about.Email
         include ../shared/footer

@@ -7,15 +7,15 @@ block content
     link(href='/stylesheets/account.css', rel='stylesheet')
     .container.animated.fadeInDownSmall
         .row.login-block
-            h3.col-md-4.col-md-offset-4.login-title.text-center 后台登录
+            h3.col-md-4.col-md-offset-4.login-title.text-center #{__("auth.title")}
             .col-md-4.col-md-offset-4.login-wrap
                 .form-group.form-group-lg
-                    input#txtUserName.form-control(type='text', placeholder='用户名')
+                    input#txtUserName.form-control(type='text', placeholder='#{__("auth.username")}')
                 .form-group.form-group-lg
-                    input#txtPwd.form-control(type='password', placeholder='密码')
+                    input#txtPwd.form-control(type='password', placeholder='#{__("auth.password")}')
                 button#btnLogin.btn.btn-green.btn-lg.btn-block(type='button', autocomplete='off')
                     i.fa.fa-sign-in.fa-fw
-                    |  登 录
+                    |  #{__("auth.login")}
     // Time Bar
     #progress-back.load-item
         #progress-bar

@@ -1,6 +1,7 @@
 var redis = require('redis');
 var config = require('../config');
-var client = redis.createClient(config.RedisPort, config.RedisHost);
+// use custom redis url or localhost
+var client = redis.createClient(config.RedisHost + ":" + config.RedisPort || "localhost:6379");
 client.on('error', function (err) {
     console.error('Redis连接错误: ' + err);
     process.exit(1);
