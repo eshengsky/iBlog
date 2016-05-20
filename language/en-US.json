@@ -1,0 +1,210 @@
+{
+	"lang-code": "zh-CN",
+	"language": "中文",
+	"error": {
+		"404_1": "Cannot get your page, our server has record this error",
+		"404_2": "Server error, our server has record this error",
+		"db_1": "MongoDB connection error",
+		"back_to_home": "Back To Home"
+	},
+	"Category": {
+		"all": "All Category",
+		"uncate": "Uncategorized"
+	},
+	"layoutAdmin": {
+		"title": "Dashboard",
+		"blog_management": "Blogs",
+		"web_statistic": "Analysis",
+		"classified_management": "Category",
+		"article_management": "Posts",
+		"new_article": "New Post",
+		"edit_article": "Edit Post",
+		"comment_management": "Comments",
+		"msg_management": "Message",
+		"about_management": "About",
+		"cache_management": "Cache",
+		"exception_management": "Site Log",
+		"settings": "Settings",
+		"btn_logout": "Logout"
+	},
+	"auth": {
+		"title": "Admin Login",
+		"login_failed": "Admin login failed",
+		"wrong_info": "Wrong username or password",
+		"login": "Login",
+		"username": "Username",
+		"password": "Password"
+	},
+	"misc": {
+		"msg": "Message",
+		"about": "About"
+	},
+	"layout": {
+		"blog": "Blog",
+		"message": "Message",
+		"about": "About"
+	},
+	"footer": {
+		"admin_system": "Admin System"
+	},
+	"top": {
+		"share": "Share",
+		"qr_code": "QR Code",
+		"back_to_top": "Back To Top",
+		"small_screen": "Small Screen Mode"
+	},
+	"about": {
+		"wechat": "WeChat",
+		"qr_code": "QR Code",
+		"email": "Email"
+	},
+	"blog": {
+		"index": {
+			"category": "Category",
+			"date": "Date",
+			"sort_title": "Sort By Title",
+			"sort_date": "Sort By Date",
+			"title": "Title",
+			"full": "Full Article",
+			"tag": "Tag",
+			"keyword": "Keyword",
+			"search": "Search",
+			"reach_end": "Reach the end",
+			"close": "Close",
+			"full_mode": "Full Mode"
+		},
+		"article": {
+			"table_of_content": "Table Of Content",
+			"category": "Category",
+			"post_date": "Post Date",
+			"brief": "Brief",
+			"hide": "Hide"
+		}
+	},
+	"admin": {
+		"aboutmanage": {
+			"about": "About",
+			"line_1": "Line 1",
+			"line_2": "Line 2",
+			"line_3": "Line 3, use '|' to change line. Using Jade Engine",
+			"self_intro": "Self Intro",
+			"wechat": "WeChat",
+			"email": "Email",
+			"save": "Save"
+		},
+		"articlemanage": {
+			"post": "Posts",
+			"new_article": "New Post"
+		},
+		"cachemanage": {
+			"cache": "Cache Manage",
+			"cache_key": "Cache Key",
+			"li_1": "categories",
+			"li_2": "categories_all",
+			"li_3": "category_alias",
+			"li_4": "posts_cateid_id_pageindex_pagesize_sortby_keyword_filtertype",
+			"li_5": "posts_count_cateid_id_pageindex_pagesize_sortby_keyword_filtertype",
+			"li_6": "article_alias",
+			"search_cache": "Search Cache",
+			"clear_cache": "Clear Cache"
+		},
+		"categorymanage": {
+			"category": "Category",
+			"new_category": "New Category",
+			"save": "Save"
+		},
+		"comments": {
+			"comments": "Comments"
+		},
+		"editarticle": {
+			"edit": "Edit",
+			"title": "Title",
+			"enter_title": "Enter Title",
+			"category": "Category",
+			"enter_alias": "Enter Alias",
+			"auto_generate": "Auto Generate Summary",
+			"summary": "Summary",
+			"enter_summary": "Enter Summary",
+			"source": "Source",
+			"local": "Local",
+			"url": "Url",
+			"tag": "Tags",
+			"enter_to_add": "Enter To Add",
+			"article": "Article",
+			"enter_url": "Enter Url",
+			"update": "Update",
+			"back": "Back",
+			"publish": "Publish",
+			"save_draft": "Save Draft"
+		},
+		"exception": {
+			"exception_manage": "Exception Manage"
+		},
+		"guestbook": {
+			"message_manage": "Message Manage"
+		},
+		"index": {
+			"analysis": "Analysis"
+		},
+		"newarticle": {
+			"new": "New Post",
+			"title": "Title",
+			"enter_title": "Enter Title",
+			"category": "Category",
+			"enter_alias": "Enter Alias",
+			"auto_generate": "Auto Generate Summary",
+			"summary": "Summary",
+			"enter_summary": "Enter Summary",
+			"source": "Source",
+			"local": "Local",
+			"url": "Url",
+			"tag": "Tags",
+			"enter_to_add": "Enter To Add",
+			"article": "Article",
+			"enter_url": "Enter Url",
+			"update": "Update",
+			"back": "Back",
+			"publish": "Publish",
+			"save_draft": "Save Draft"
+		},
+		"settings": {
+			"setting": "Settings",
+			"site": "Site ",
+			"site_name": "Site Name",
+			"site_name_placeholder": "Site Name",
+			"domain_name": "Site Domain Name",
+			"domain_name_placeholder": "Site Domain Name",
+			"ICP": "ICP（shows on footer）",
+			"ICP_placeholder": "ICP Code",
+			"logo": "Site Logo",
+			"posts_per_page": "Posts Per Page",
+			"posts_per_page_placeholder": "Posts Per Page",
+			"show_summary": "Show Detailed Summary",
+			"cache_expire_time": "Cache Expire Time(s)",
+			"cache_expire_time_placeholder": "Cache Expire Time",
+			"utility": "Utility",
+			"trans": "Baidu Translate",
+			"key": "Key（shows on posts url）",
+			"key_placeholder": "Apply Translate Key",
+			"analysis": "Site Analysis",
+			"analysis_service": "Baidu Analysis",
+			"analysis_id": "Baidu Analysis ID",
+			"analysis_id_placeholder": "Apply Baidu Analysis ID",
+			"share": "Use Share Fucntions",
+			"share_service": "JisThis",
+			"share_id": "JiaThis id",
+			"share_id_placeholder": "Apply JiaThis ID",
+			"comments": "Show Comments To All",
+			"comments_service": "畅言",
+			"comments_id": "畅言appid",
+			"comments_id_placeholder": "申请的appid",
+			"comments_conf": "畅言conf",
+			"comments_conf_placeholder": "申请的conf",
+			"message": "Show Message",
+			"message_service": "友言",
+			"message_id": "友言uid",
+			"message_id_placeholder": "apply uid",
+			"save": "Save"
+		}
+	}
+}

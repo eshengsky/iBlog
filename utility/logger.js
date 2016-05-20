@@ -1,5 +1,6 @@
 var winston = require('winston');
 var dbPath = require('../config').DbPath;
+// var dbPath =  process.env.MONGOLAB_URI;
 var os = require('os');
 require('winston-mongodb').MongoDB;
 var logger = new (winston.Logger)({

@@ -3,19 +3,20 @@ var post = require('../models/post').PostModel;
 var shortid = require('shortid');
 var tool = require('../utility/tool');
 var redisClient = require('../utility/redisClient');
+var i18n = require('../models/i18n')
 
 //全部分类
 var cateAll = {
     "_id": "",
     "Alias": "",
-    "CateName": "全部分类",
+    "CateName": i18n.__("Category.all"),
     "Img": "/images/全部分类.svg"
 };
 //未分类
 var cateOther = {
     "_id": "other",
     "Alias": "other",
-    "CateName": "未分类",
+    "CateName": i18n.__("Category.uncate"),
     "Img": "/images/未分类.svg"
 };
 

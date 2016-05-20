@@ -7,11 +7,11 @@ block content
         .container
             .row
                 article.col-sm-12.col-xs-12.detail-wrap.post-content.animated.fadeIn(class='#{settings.ExpandMenu === "true" ? "col-md-9" : "col-md-12"}')
-                    button.btn.btn-white.btn-menu(title='显示目录')
+                    button.btn.btn-white.btn-menu(title='#{__("blog.article.table_of_content")}')
                         i.fa.fa-align-justify
                     .hidden-sm.hidden-xs
                         .text-muted.pull-left
-                            span(title='文章分类')
+                            span(title='#{__("blog.article.category")}')
                                 i.fa.fa-map-signs
                                 =' '
                                 a.black-link(href='/blog/' + post.CategoryAlias,target='_blank')=post.CateName
@@ -21,13 +21,13 @@ block content
                                 =' '
                         .clearfix
                     header.text-center.post-title
-                        span.text-muted(title='发布时间')
+                        span.text-muted(title='#{__("blog.article.post_date")}')
                             i.fa.fa-clock-o
                             =' ' + post.CreateTimeStr
                         h1=post.Title
                     #main-context
                         blockquote
-                            h2 摘要
+                            h2 #{__("blog.article.brief")}
                             span='：' + post.Summary
                         !=post.Content
                     if(settings.ShowComments === 'true')
@@ -70,7 +70,7 @@ block content
                                 }
                             })();
                 #control-wrap.col-md-3.hidden-sm.hidden-xs(style='#{settings.ExpandMenu === "true" ? "display: block;" : "display: none;"}')
-                    a.close-menu(title='隐藏目录')
+                    a.close-menu(title='#{__("blog.article.hide")}')
                         i.fa.fa-times
             include ../shared/footer
     include ../shared/top

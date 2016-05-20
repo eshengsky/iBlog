@@ -44,7 +44,7 @@ router.get('/login', function (req, res, next) {
         } else {
             res.render('auth/login', {
                 settings: settings,
-                title: settings['SiteName'] + ' - 后台登录'
+                title: settings['SiteName'] + ' - ' + res.__("auth.title")
             });
         }
     });
@@ -56,10 +56,9 @@ router.post('/login', function (req, res, next) {
         if (err) {
             next(err);
         } else if (!user) {
-            logger.errLogger(req, new Error('管理员登录失败。'));
+            logger.errLogger(req, new Error(res.__("auth.wrong_info")));
             res.json({
-                valid: false,
-                message: '用户名或密码错误！'
+                valid: false
             });
         } else {
             //登录操作

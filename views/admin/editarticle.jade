@@ -5,7 +5,7 @@ block content
     link(href='/libs/form.validation/dist/css/formValidation.min.css', rel='stylesheet')
     .row.wrapper.border-bottom.white-bg.page-heading
         .col-lg-8
-            h2 编辑文章
+            h2 #{__("admin.editarticle.edit")}
     .wrapper.wrapper-content.animated.fadeIn
         .row
             .col-lg-12
@@ -15,11 +15,11 @@ block content
                             .row
                                 .col-md-9
                                     .form-group
-                                        label(for='Title') 标题
-                                        input#Title.form-control(type='text', name='Title', placeholder='请输入标题',value=post.Title)
+                                        label(for='Title') #{__("admin.editarticle.title")}
+                                        input#Title.form-control(type='text', name='Title', placeholder='#{__("admin.editarticle.enter_title")}',value=post.Title)
                                 .col-md-3
                                     .form-group
-                                        label(for='CategoryId', style='display:block;') 分类
+                                        label(for='CategoryId', style='display:block;') #{__("admin.editarticle.category")}
                                         #Categorylist.btn-group.selectlist(data-resize='auto', data-initialize='selectlist')
                                             button.btn.btn-white.dropdown-toggle(data-toggle='dropdown', type='button')
                                                 span.selected-label
@@ -31,27 +31,27 @@ block content
                                 .col-md-9
                                     .form-group
                                         label(for='Alias') Alias
-                                        input#Alias.form-control(type='text', name='Alias', placeholder='请输入Alias',value=post.Alias)
+                                        input#Alias.form-control(type='text', name='Alias', placeholder='#{__("admin.editarticle.enter_alias")}',value=post.Alias)
                                 .col-md-3
                                     .form-group
                                         button.btn.btn-sm.btn-white.btn-alias(type='button')
                                             i.fa.fa-flash
-                                            |  根据标题自动生成
+                                            |  #{__("admin.editarticle.auto_generate")}
                             .form-group
-                                label(for='Summary') 摘要
-                                textarea#Summary.form-control(name='Summary', style='min-width: 100%;max-width: 100%;', placeholder='请输入摘要')
+                                label(for='Summary') #{__("admin.editarticle.summary")}
+                                textarea#Summary.form-control(name='Summary', style='min-width: 100%;max-width: 100%;', placeholder='#{__("admin.editarticle.enter_summary")}')
                                     !=post.Summary
                             .form-group
-                                label(style='display:block;') 来源
+                                label(style='display:block;') #{__("admin.editarticle.source")}
                                 label#soruceLocal.radio-custom.radio-inline(data-initialize='radio')
                                     input.sr-only(data-toggle='#block-local', name='Source', type='radio', value='0', checked='checked')
-                                    |  本地
+                                    |  #{__("admin.editarticle.local")}
                                 label#soruceLink.radio-custom.radio-inline(data-initialize='radio')
                                     input.sr-only(data-toggle='#block-link', name='Source', type='radio', value='1')
-                                    |                                 外链
+                                    |                                 #{__("admin.editarticle.url")}
                             #block-local
                                 .form-group
-                                    label(for='pillbox-input') 标签
+                                    label(for='pillbox-input') #{__("admin.editarticle.tag")}
                                     #myPillbox.pillbox(data-initialize='pillbox')
                                         ul.clearfix.pill-group
                                             li.pillbox-input-wrap.btn-group
@@ -59,41 +59,41 @@ block content
                                                     | and
                                                     span.pillbox-more-count
                                                     |  more...
-                                                input#pillbox-input.form-control.dropdown-toggle.pillbox-add-item(type='text', placeholder='回车新增')
+                                                input#pillbox-input.form-control.dropdown-toggle.pillbox-add-item(type='text', placeholder='#{__("admin.editarticle.enter_to_add")}')
                                                 button.dropdown-toggle.sr-only(type='button')
                                                     span.caret
                                                     span.sr-only Toggle Dropdown
                                                 ul.suggest.dropdown-menu(role='menu', data-toggle='dropdown', data-flip='auto')
                                     input#Labels(type='hidden', name='Labels',value=post.Labels)
                                 .form-group
-                                    label 正文
+                                    label #{__("admin.editarticle.article")}
                                     script#editor(type='text/plain')
                                         !=post.Content
                             #block-link
                                 .form-group
                                     label(for='Url') Url
-                                    input#Url.form-control(type='text', name='Url', placeholder='请输入链接地址',value=post.Url)
+                                    input#Url.form-control(type='text', name='Url', placeholder='#{__("admin.editarticle.enter_url")}',value=post.Url)
                             div
                                 if(!post.IsDraft)
                                     button#btnUpdate.btn.btn-primary(type='submit')
                                         i.fa.fa-cloud-upload
-                                        |  更新
+                                        |  #{__("admin.editarticle.update")}
                                     =' '
                                     a.btn.btn-white(href='/admin/articlemanage')
                                         i.fa.fa-reply
-                                        |  返回
+                                        |  #{__("admin.editarticle.back")}
                                 else
                                     button#btnPublish.btn.btn-danger(type='submit')
                                         i.fa.fa-send
-                                        |  发布
+                                        |  #{__("admin.editarticle.publish")}
                                     =' '
                                     button#btnSave.btn.btn-primary(type='button')
                                         i.fa.fa-save
-                                        |  保存草稿
+                                        |  #{__("admin.editarticle.save_draft")}
                                     =' '
                                     a.btn.btn-white(href='/admin/articlemanage')
                                         i.fa.fa-reply
-                                        |  返回
+                                        |  #{__("admin.editarticle.back")}
                                 input#UniqueId(type='hidden',name='UniqueId',value=post._id)
                                 input#IsDraft(type='hidden',name='IsDraft',value='#{post.IsDraft ? "True" : "False"}')
     script(type='text/javascript', src='/libs/jquery/dist/jquery.min.js', charset='utf-8')

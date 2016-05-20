@@ -17,7 +17,7 @@
     "tests"
   ],
   "dependencies": {
-	"jquery": "2.2.1",
+	  "jquery": "2.2.1",
     "bootstrap": "~3.3.6",
     "font-awesome": "~4.5.0",
     "fuelux": "~3.14.1",
@@ -41,5 +41,8 @@
     "codemirror": "^5.11.0",
     "switchery": "^0.8.1",
     "supersized": "*"
+  },
+  "resolutions": {
+    "jquery": "2.2.1"
   }
 }

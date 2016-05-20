@@ -11,7 +11,7 @@ router.get('/guestbook', function (req, res, next) {
             next(err);
         } else {
             res.render('misc/guestbook', {
-                title: settings['SiteName'] + ' - 留言',
+                title: settings['SiteName'] + ' - ' + res.__("misc.msg"),
                 settings: settings
             });
         }
@@ -50,7 +50,7 @@ router.get('/about', function (req, res, next) {
             about = results[0];
             settings = results[1];
             res.render('misc/about', {
-                title: settings['SiteName'] + ' - 关于',
+                title: settings['SiteName'] + ' - ' + res.__('misc.about'),
                 about: about,
                 settings: settings
             });

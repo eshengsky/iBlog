@@ -5,7 +5,7 @@ block content
     link(href='/libs/blueimp-file-upload/css/jquery.fileupload.css', rel='stylesheet')
     .row.wrapper.border-bottom.white-bg.page-heading
         .col-lg-8
-            h2 分类管理
+            h2 #{__("admin.categorymanage.category")}
     .wrapper.wrapper-content.animated.fadeIn
         .row
             .col-md-10.col-md-offset-1
@@ -14,10 +14,10 @@ block content
                         ul#cate-list.list-group.list-unstyled
                         button#btnNew.btn.btn-white
                             i.fa.fa-plus
-                            |  新的分类
+                            |  #{__("admin.categorymanage.new_category")}
                         button#btnSave.btn.btn-primary.pull-right
                             i.fa.fa-cloud-upload
-                            |  保存修改
+                            |  #{__("admin.categorymanage.save")}
     script(type='text/javascript', src='/libs/jquery/dist/jquery.min.js', charset='utf-8')
     script(type='text/javascript', src='/libs/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
     script(type='text/javascript', src='/libs/metisMenu/dist/metisMenu.min.js', charset='utf-8')

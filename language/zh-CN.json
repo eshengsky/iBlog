@@ -1,0 +1,210 @@
+{
+	"language": "English",
+	"lang-code": "en-US",
+	"error": {
+		"404_1": "请求的页面已失联~系统已自动记录该错误。",
+		"404_2": "服务器出错了~系统已自动记录该错误。",
+		"db_1": "MongoDB连接错误: ",
+		"back_to_home": "跳转首页"
+	},
+	"Category": {
+		"all": "全部分类",
+		"uncate": "未分类"
+	},
+	"layoutAdmin": {
+		"title": "后台管理",
+		"blog_management": "博客管理",
+		"web_statistic": "网站统计",
+		"classified_management": "分类管理",
+		"article_management": "文章管理",
+		"new_article": "新的文章",
+		"edit_article": "编辑文章",
+		"comment_management": "评论管理",
+		"msg_management": "留言管理",
+		"about_management": "关于管理",
+		"cache_management": "缓存管理",
+		"exception_management": "异常管理",
+		"settings": "系统设置",
+		"btn_logout": "退出登录"
+	},
+	"auth": {
+		"title": "后台登录",
+		"login_failed": "管理员登录失败。",
+		"wrong_info": "用户名或密码错误！",
+		"login": "登 录",
+		"username": "用户名",
+		"password": "密码"
+	},
+	"misc": {
+		"msg": "留言",
+		"about": "关于"
+	},
+	"layout": {
+		"blog": "博客",
+		"message": "留言",
+		"about": "关于"
+	},
+	"footer": {
+		"admin_system": "后台管理"
+	},
+	"top":{
+		"share": "分享到",
+		"qr_code": "二维码",
+		"back_to_top": "回顶部",
+		"small_screen": "手机访问该页面"
+	},
+	"about": {
+		"wechat": "微信",
+		"qr_code": "二维码",
+		"email": "邮箱"
+	},
+	"blog": {
+		"index": {
+			"category": "文章分类",
+			"date": "日期",
+			"sort_title": "按标题排序",
+			"sort_date": "按日期排序",
+			"title": "标题",
+			"full": "全文",
+			"tag": "标签",
+			"keyword": "关键字",
+			"search": "搜索",
+			"reach_end": "没有更多数据",
+			"close": "关闭",
+			"full_mode": "完整模式"
+		},
+		"article": {
+			"table_of_content": "显示目录",
+			"category": "文章分类",
+			"post_date": "发布时间",
+			"brief": "摘要",
+			"hide": "隐藏目录"
+		}
+	},
+	"admin": {
+		"aboutmanage": {
+			"about": "关于管理",
+			"line_1": "第一行文本",
+			"line_2": "第二行文本",
+			"line_3": "第三行文本，支持用 | 分割切换显示",
+			"self_intro": "个人简介",
+			"wechat": "微信号",
+			"email": "Email地址",
+			"save": "保存修改"
+		},
+		"articlemanage": {
+			"post": "文章管理",
+			"new_article": "新的文章"
+		},
+		"cachemanage": {
+			"cache": "缓存管理",
+			"cache_key": "缓存key",
+			"li_1": "【文章分类】",
+			"li_2": "【文章分类（含全部分类和未分类）】",
+			"li_3": "【由alias获取分类】",
+			"li_4": "【文章列表数据】_分类id_页码_每页条数_排序类型_关键字_查询类型",
+			"li_5": "【文章列表条数】_分类_页码_每页条数_排序类型_关键字_查询类型",
+			"li_6": "【由alias获取文章】",
+			"search_cache": "检索缓存",
+			"clear_cache": "清除缓存"
+		},
+		"categorymanage": {
+			"category": "分类管理",
+			"new_category": "新的分类",
+			"save": "保存修改"
+		},
+		"comments": {
+			"comments": "评论管理"
+		},
+		"editarticle": {
+			"edit": "编辑文章",
+			"title": "标题",
+			"enter_title": "请输入标题",
+			"category": "分类",
+			"enter_alias": "请输入Alias",
+			"auto_generate": "根据标题自动生成",
+			"summary": "摘要",
+			"enter_summary": "请输入摘要",
+			"source": "来源",
+			"local": "本地",
+			"url": "外链",
+			"tag": "标签",
+			"enter_to_add": "回车新增",
+			"article": "正文",
+			"enter_url": "请输入链接地址",
+			"update": "更新",
+			"back": "返回",
+			"publish": "发布",
+			"save_draft": "保存草稿"
+		},
+		"exception": {
+			"exception_manage": "异常管理"
+		},
+		"guestbook": {
+			"message_manage": "留言管理"
+		},
+		"index": {
+			"analysis": "网站统计"
+		},
+		"newarticle": {
+			"new": "新的文章",
+			"title": "标题",
+			"enter_title": "请输入标题",
+			"category": "分类",
+			"enter_alias": "请输入Alias",
+			"auto_generate": "根据标题自动生成",
+			"summary": "摘要",
+			"enter_summary": "请输入摘要",
+			"source": "来源",
+			"local": "本地",
+			"url": "外链",
+			"tag": "标签",
+			"enter_to_add": "回车新增",
+			"article": "正文",
+			"enter_url": "请输入链接地址",
+			"update": "更新",
+			"back": "返回",
+			"publish": "发布",
+			"save_draft": "保存草稿"
+		},
+		"settings": {
+			"setting": "系统设置",
+			"site": "站点设置",
+			"site_name": "网站名称",
+			"site_name_placeholder": "该网站的名称",
+			"domain_name": "网站域名",
+			"domain_name_placeholder": "该网站的域名",
+			"ICP": "备案号（用于底部显示）",
+			"ICP_placeholder": "网站域名的备案号",
+			"logo": "网站logo",
+			"posts_per_page": "每页显示文章数",
+			"posts_per_page_placeholder": "每页的条数",
+			"show_summary": "默认展开文章目录",
+			"cache_expire_time": "缓存过期时间（秒）",
+			"cache_expire_time_placeholder": "缓存过期时间",
+			"utility": "组件设置",
+			"trans": "百度翻译",
+			"key": "key（用于文章Url显示）",
+			"key_placeholder": "申请的翻译key",
+			"analysis": "启用统计功能",
+			"analysis_service": "百度统计",
+			"analysis_id": "百度统计id",
+			"analysis_id_placeholder": "申请的统计id",
+			"share": "启用分享功能",
+			"share_service": "JisThis",
+			"share_id": "JiaThis分享id",
+			"share_id_placeholder": "申请的分享id",
+			"comments": "显示文章评论",
+			"comments_service": "畅言",
+			"comments_id": "畅言appid",
+			"comments_id_placeholder": "申请的appid",
+			"comments_conf": "畅言conf",
+			"comments_conf_placeholder": "申请的conf",
+			"message": "显示留言",
+			"message_service": "友言",
+			"message_id": "友言uid",
+			"message_id_placeholder": "申请的uid",
+			"save": "保存修改"
+		}
+	}
+}

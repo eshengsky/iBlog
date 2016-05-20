@@ -43,16 +43,20 @@ html(lang='zh-CN')
                         li
                             a(href='/blog')
                                 i.fa.fa-file-text-o.fa-fw
-                                |  博客
+                                |  #{__("layout.blog")}
                         if(settings.ShowGuestbook === 'true')
                             li
                                 a(href='/guestbook')
                                     i.fa.fa-edit.fa-fw
-                                    |  留言
+                                    |  #{__("layout.message")}
                         li
                             a(href='/about')
                                 i.fa.fa-user.fa-fw
-                                |  关于
+                                |  #{__("layout.about")}
+                        li
+                            a(href='/locale/#{__("lang-code")}')
+                                i.fa.fa-language.fa-fw
+                                |  #{__("language")}
         block content
         if(settings.EnableStatistics === 'true')
             //百度统计代码

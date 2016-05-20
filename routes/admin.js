@@ -26,7 +26,7 @@ router.get('/', function (req, res, next) {
         } else {
             res.render('admin/index', {
                 settings: settings,
-                title: settings['SiteName'] + ' - 网站统计'
+                title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.web_statistic")
             });
         }
     });
@@ -40,7 +40,7 @@ router.get('/categorymanage', function (req, res, next) {
         } else {
             res.render('admin/categorymanage', {
                 settings: settings,
-                title: settings['SiteName'] + ' - 分类管理'
+                title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.classified_management")
             });
         }
     });
@@ -77,7 +77,7 @@ router.get('/articlemanage', function (req, res, next) {
         } else {
             res.render('admin/articlemanage', {
                 settings: settings,
-                title: settings['SiteName'] + ' - 文章管理'
+                title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.article_management")
             });
         }
     });
@@ -194,7 +194,7 @@ router.get('/newArticle', function (req, res, next) {
             res.render('admin/newarticle', {
                 uniqueId: shortid.generate(),
                 settings: settings,
-                title: settings['SiteName'] + ' - 新的文章'
+                title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.new_article")
             });
         }
     });
@@ -276,7 +276,7 @@ router.get('/editArticle/:id', function (req, res, next) {
             res.render('admin/editarticle', {
                 settings: settings,
                 post: article,
-                title: settings['SiteName'] + ' - 编辑文章'
+                title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.edit_article")
             });
         }
     });
@@ -312,7 +312,7 @@ router.get('/comments', function (req, res, next) {
         } else {
             res.render('admin/comments', {
                 settings: settings,
-                title: settings['SiteName'] + ' - 评论管理'
+                title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.comment_management")
             });
         }
     });
@@ -326,7 +326,7 @@ router.get('/guestbook', function (req, res, next) {
         } else {
             res.render('admin/guestbook', {
                 settings: settings,
-                title: settings['SiteName'] + ' - 留言管理'
+                title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.msg_management")
             });
         }
     });
@@ -364,7 +364,7 @@ router.get('/aboutmanage', function (req, res, next) {
             settings = results[0];
             about = results[1];
             res.render('admin/aboutmanage', {
-                title: settings['SiteName'] + ' - 关于管理',
+                title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.about_management"),
                 about: about,
                 settings: settings
             });
@@ -400,7 +400,7 @@ router.get('/cachemanage', function (req, res, next) {
         } else {
             res.render('admin/cachemanage', {
                 settings: settings,
-                title: settings['SiteName'] + ' - 缓存管理'
+                title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.cache_management")
             });
         }
     });
@@ -440,7 +440,7 @@ router.get('/exception', require('connect-ensure-login').ensureLoggedIn(), funct
         } else {
             res.render('admin/exception', {
                 settings: settings,
-                title: settings['SiteName'] + ' - 异常管理'
+                title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.exception_management")
             });
         }
     });
@@ -508,7 +508,7 @@ router.get('/settings', function (req, res, next) {
         } else {
             res.render('admin/settings', {
                 settings: settings,
-                title: settings['SiteName'] + ' - 系统设置'
+                title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.settings")
             });
         }
     });

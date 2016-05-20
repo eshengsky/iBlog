@@ -10,9 +10,11 @@ var blog = require('./routes/blog');
 var misc = require('./routes/misc');
 var auth = require('./routes/auth');
 var admin = require('./routes/admin');
+var locale = require('./routes/locale');
 var ue = require('./routes/ue');
 var logger = require('./utility/logger');
 var passport = require('passport');
+var i18n = require('./models/i18n');
 
 var app = express();
 
@@ -26,6 +28,9 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+// i18n init parses req for language headers, cookies, etc.
+app.use(i18n.init);
+
 app.use(session({
     secret: 'iblog-exp-session',
     cookie: {
@@ -40,11 +45,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', route);
-app.use('/blog', blog);
+app.use('/', locale);
 app.use('/', misc);
 app.use('/', auth);
+app.use('/blog', blog);
 app.use('/admin', require('connect-ensure-login').ensureLoggedIn('/login'), admin);
 app.use('/ue/controller', ue);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -56,7 +63,7 @@ app.use(function (req, res, next) {
 // error handlers
 app.use(function (err, req, res, next) {
     var code = err.status || 500,
-        message = code === 404 ? '请求的页面已失联~系统已自动记录该错误。' : '服务器出错了~系统已自动记录该错误。';
+        message = code === 404 ? res.__('error.404_1') : res.__('error.404_2');
     res.status(code);
     logger.errLogger(req, err);
     res.render('./shared/error', {

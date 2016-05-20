@@ -7,7 +7,7 @@ block content
         .row
             .col-md-2.category-block.hidden-sm.hidden-xs
                 .category-top
-                    | 文章分类
+                    | #{__("blog.index.category")}
                 .category-split
                 .category-list
                     ul.nav.nav-pills.nav-stacked
@@ -28,9 +28,9 @@ block content
                             .row.top-bar
                                 form#filterForm(action='/blog/getPosts', method='Post')
                                     .col-md-7.col-sm-4.hidden-xs.list-top-left
-                                        a.current(title='按日期排序',sort='date') 日期
+                                        a.current(title='#{__("blog.index.sort_date")}',sort='date') #{__("blog.index.date")}
                                         = ' '
-                                        a(title='按标题排序',sort='title') 标题
+                                        a(title='#{__("blog.index.sort_title")}',sort='title') #{__("blog.index.title")}
                                         input#CateAlias.hidden(type='text', value=currentCate, name='CateAlias')
                                         input#SortBy.hidden(type='text', value=0, name='SortBy')
                                         input#PageIndex.hidden(type='text', value=1, name='PageIndex')
@@ -45,27 +45,27 @@ block content
                                                         span.sr-only Toggle Dropdown
                                                     ul.dropdown-menu.animated-quick.fadeInDown(role='menu')
                                                         li.active(data-value='0', data-selected='true')
-                                                            a(href='#') 全文
+                                                            a(href='#') #{__("blog.index.full")}
                                                         li(data-value='1')
-                                                            a(href='#') 标题
+                                                            a(href='#') #{__("blog.index.title")}
                                                         li(data-value='2')
-                                                            a(href='#') 标签
+                                                            a(href='#') #{__("blog.index.tag")}
                                                         li(data-value='3')
-                                                            a(href='#') 日期
+                                                            a(href='#') #{__("blog.index.date")}
                                                     input#FilterType.hidden.hidden-field(type='text',readonly = "readonly", aria_hidden = "true",name='FilterType')
-                                            input#Keyword.form-control(type='text',placeholder = "关键字",name='Keyword')
+                                            input#Keyword.form-control(type='text',placeholder = '#{__("blog.index.category")}',name='Keyword')
                                             .input-group-btn
                                                 button#btnFilter.btn.btn-white(type='button')
                                                     i.fa.fa-search
                                                     =' '
-                                                    span.hidden-sm.hidden-xs 搜索
+                                                    span.hidden-sm.hidden-xs #{__("blog.index.search")}
                             ol.list-unstyled
                             #load-list.spinner(style='display: none;')
                                 .bounce1
                                 .bounce2
                                 .bounce3
                             #no-more.text-muted.text-center(style='display: none;')
-                                | 没有更多数据
+                                | #{__("blog.index.reach_end")}
                     #scrollSpy.col-md-1
                         ul#page-nav.list-unstyled.hidden-sm.hidden-xs.affix-top
                 include ../shared/footer
@@ -90,10 +90,10 @@ block content
         .modal-footer
             #label-foot.col-md-7.text-left.hidden-sm.hidden-xs(style='margin-top: 3px;')
             .col-md-5.text-right
-                button#btnCloseModal.btn.btn-white(type='button') 关闭
+                button#btnCloseModal.btn.btn-white(type='button') #{__("blog.index.close")}
                 a#btnFullMode.btn.btn-green(href='', target='_blank')
                     i.fa.fa-external-link
-                    |  完整模式
+                    |  #{__("blog.index.full_mode")}
     include ../shared/top
     script(type='text/javascript', src='/libs/jquery/dist/jquery.min.js', charset='utf-8')
     script(type='text/javascript', src='/libs/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
