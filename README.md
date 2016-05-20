@@ -101,6 +101,9 @@ $ npm install -g pm2
 $ pm2 start ./bin/www --node-args="--harmony-proxies"
 ```
 
+## 贡献者们
+感谢给 iBlog2 项目贡献代码的朋友，感谢他们的支持，详情[点击这里](https://github.com/eshengsky/iBlog2/graphs/contributors)。
+
 ## 许可协议
 The MIT License (MIT)
 
