@@ -351,7 +351,7 @@ router.get('/aboutmanage', function (req, res, next) {
                 if (err) {
                     cb(err);
                 } else {
-                    cb(null, about);
+                    cb(null, settings);
                 }
             });
         }
@@ -361,8 +361,8 @@ router.get('/aboutmanage', function (req, res, next) {
         if (err) {
             next(err);
         } else {
-            settings = results[0];
-            about = results[1];
+            about = results[0];
+            settings = results[1];
             res.render('admin/aboutmanage', {
                 title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.about_management"),
                 about: about,
