@@ -100,7 +100,7 @@ $ npm install -g pm2
 ```
 #### 使用
 ```Shell
-$ pm2 start ./bin/www --node-args="--harmony-proxies"
+$ pm2 start ./bin/www
 ```
 
 ## 贡献者们
