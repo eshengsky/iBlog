@@ -71,9 +71,11 @@ $ bower install
 ```
 在 "后台管理-系统设置" 页面中，支持以可视化方式配置其余参数。
 #### 启动站点  
+*注意：对于node v4及以下版本，需要添加 --harmony-proxies 参数。*  
+
 * 方式1：普通模式启动
 ```Shell
-$ node --harmony-proxies ./bin/www 
+$ node ./bin/www 
 ```
 * 方式2：快速启动
 ```Shell
@@ -82,7 +84,7 @@ $ npm start
 * 方式3：守护进程启动  
 _守护进程能够发挥多核CPU性能，并在出现异常退出后延迟30秒自动重启工作进程。_
 ```Shell
-$ node --harmony-proxies daemon.js
+$ node daemon.js
 ```
 打开浏览器，访问 [http://localhost:3000/](http://localhost:3000)
 #### Enjoy it! :smile:
