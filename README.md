@@ -31,7 +31,7 @@ _不仅仅是博客，更是 Demo_，适合新人入门学习的完整项目。
 ## 技术构成
 * 服务端 [Node.js](https://nodejs.org/)
 * web框架 [Express 4](http://expressjs.com/)
-* 模板引擎 [Pug(Jade)](https://pugjs.org/)
+* 模板引擎 [Jade](https://pugjs.org/)
 * JS库 [jQuery](http://jquery.com/)
 * UI库 [Bootstrap 3](http://getbootstrap.com/)
 * 持久化 [MongoDB](https://www.mongodb.org/)
