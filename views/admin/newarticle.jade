@@ -1,0 +1,101 @@
+extends ../shared/layoutAdmin
+block content
+    link(href='/libs/fuelux/dist/css/fuelux.min.css', rel='stylesheet')
+    link(href='/libs/sweetalert/dist/sweetalert.css', rel='stylesheet')
+    link(href='/libs/form.validation/dist/css/formValidation.min.css', rel='stylesheet')
+    .row.wrapper.border-bottom.white-bg.page-heading
+        .col-lg-8
+            h2 #{__("admin.newarticle.new")}
+    .wrapper.wrapper-content.animated.fadeIn
+        .row
+            .col-lg-12
+                .ibox
+                    .ibox-content
+                        form#postForm(action='/admin/saveArticle', method='post')
+                            .row
+                                .col-md-9
+                                    .form-group
+                                        label(for='Title') #{__("admin.newarticle.title")}
+                                        input#Title.form-control(type='text', name='Title', placeholder='#{__("admin.newarticle.enter_title")}')
+                                .col-md-3
+                                    .form-group
+                                        label(for='CategoryId', style='display:block;') #{__("admin.newarticle.category")}
+                                        #Categorylist.btn-group.selectlist(data-resize='auto', data-initialize='selectlist')
+                                            button.btn.btn-white.dropdown-toggle(data-toggle='dropdown', type='button')
+                                                span.selected-label
+                                                span.caret
+                                                span.sr-only Toggle Dropdown
+                                            ul.dropdown-menu(role='menu')
+                                            input#CategoryId.hidden.hidden-field(type='text', name='CategoryId', readonly='readonly', aria-hidden='true')
+                            .row
+                                .col-md-9
+                                    .form-group
+                                        label(for='Alias') Alias
+                                        input#Alias.form-control(type='text', name='Alias', placeholder='#{__("admin.newarticle.enter_alias")}')
+                                .col-md-3
+                                    .form-group
+                                        button.btn.btn-sm.btn-white.btn-alias(type='button')
+                                            i.fa.fa-flash
+                                            |  #{__("admin.newarticle.auto_generate")}
+                            .form-group
+                                label(for='Summary') #{__("admin.newarticle.summary")}
+                                textarea#Summary.form-control(name='Summary', style='min-width: 100%;max-width: 100%;', placeholder='#{__("admin.newarticle.enter")}')
+                            .form-group
+                                label(style='display:block;') #{__("admin.newarticle.source")}
+                                label#soruceLocal.radio-custom.radio-inline(data-initialize='radio')
+                                    input.sr-only(data-toggle='#block-local', name='Source', type='radio', value='0', checked='checked')
+                                    |  #{__("admin.newarticle.local")}
+                                label#soruceLink.radio-custom.radio-inline(data-initialize='radio')
+                                    input.sr-only(data-toggle='#block-link', name='Source', type='radio', value='1')
+                                    |                                 #{__("admin.newarticle.url")}
+                            #block-local
+                                .form-group
+                                    label(for='pillbox-input') #{__("admin.newarticle.tag")}
+                                    #myPillbox.pillbox(data-initialize='pillbox')
+                                        ul.clearfix.pill-group
+                                            li.pillbox-input-wrap.btn-group
+                                                a.pillbox-more
+                                                    | and
+                                                    span.pillbox-more-count
+                                                    |  more...
+                                                input#pillbox-input.form-control.dropdown-toggle.pillbox-add-item(type='text', placeholder='#{__("admin.newarticle.enter_to_add")}')
+                                                button.dropdown-toggle.sr-only(type='button')
+                                                    span.caret
+                                                    span.sr-only Toggle Dropdown
+                                                ul.suggest.dropdown-menu(role='menu', data-toggle='dropdown', data-flip='auto')
+                                    input#Labels(type='hidden', name='Labels')
+                                .form-group
+                                    label #{__("admin.newarticle.article")}
+                                    script#editor(type='text/plain')
+                            #block-link
+                                .form-group
+                                    label(for='Url') Url
+                                    input#Url.form-control(type='text', name='Url', placeholder='#{__("admin.newarticle.enter_url")}')
+                            div
+                                button#btnPublish.btn.btn-danger(type='submit')
+                                    i.fa.fa-send
+                                    |  #{__("admin.newarticle.publish")}
+                                =' '
+                                button#btnSave.btn.btn-primary(type='button')
+                                    i.fa.fa-save
+                                    |  #{__("admin.newarticle.save_draft")}
+                                input#UniqueId(type='hidden',name='UniqueId',value=uniqueId)
+                                input#IsDraft(type='hidden',name='IsDraft')
+    script(type='text/javascript', src='/libs/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/form.validation/dist/js/formValidation.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/form.validation/dist/js/framework/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/form.validation/dist/js/language/zh_CN.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/metisMenu/dist/metisMenu.min.js', charset='utf-8')
+    script(type='text/javascript', src='/javascripts/admin.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/ueditor/ueditor.config.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/ueditor/ueditor.all.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/ueditor/dialogs/insertalert/insertalert.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/ueditor/dialogs/inserticon/inserticon.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/ueditor/dialogs/insertlabel/insertlabel.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/fuelux/dist/js/fuelux.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/sweetalert/dist/sweetalert.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/js-md5/js/md5.min.js', charset='utf-8')
+    script.
+        var translateKey = '#{settings.TranslateKey}';
+    script(type='text/javascript', src='/javascripts/newarticle.js', charset='utf-8')

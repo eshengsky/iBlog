@@ -1,0 +1,94 @@
+extends ../shared/layout
+block content
+    link(href='/stylesheets/animate-custom.css', rel='stylesheet')
+    link(href='/stylesheets/railscasts.css', rel='stylesheet')
+    link(href='/libs/lightbox2/dist/css/lightbox.min.css', rel='stylesheet')
+    .detail-container
+        .container
+            .row
+                article.col-sm-12.col-xs-12.detail-wrap.post-content.animated.fadeIn(class='#{settings.ExpandMenu === "true" ? "col-md-9" : "col-md-12"}')
+                    button.btn.btn-white.btn-menu(title='#{__("blog.article.table_of_content")}')
+                        i.fa.fa-align-justify
+                    .hidden-sm.hidden-xs
+                        .text-muted.pull-left
+                            span(title='#{__("blog.article.category")}')
+                                i.fa.fa-map-signs
+                                =' '
+                                a.black-link(href='/blog/' + post.CategoryAlias,target='_blank')=post.CateName
+                        .text-muted.pull-right
+                            each label in post.LabelList
+                                span.post-label(title=label)=label
+                                =' '
+                        .clearfix
+                    header.text-center.post-title
+                        span.text-muted(title='#{__("blog.article.post_date")}')
+                            i.fa.fa-clock-o
+                            =' ' + post.CreateTimeStr
+                        h1=post.Title
+                    #main-context
+                        blockquote
+                            h2 #{__("blog.article.brief")}
+                            span='：' + post.Summary
+                        !=post.Content
+                    if(settings.ShowComments === 'true')
+                        hr.hr-article
+                        #SOHUCS(sid=post.UniqueId)
+                        script.
+                            (function () {
+                                var appid = '#{settings.ChangyanId}';
+                                var conf = '#{settings.ChangyanConf}';
+                                var width = window.innerWidth || document.documentElement.clientWidth;
+                                if (width < 960) {
+                                    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+                                } else {
+                                    var loadJs = function (d, a) {
+                                        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+                                        var b = document.createElement("script");
+                                        b.setAttribute("type", "text/javascript");
+                                        b.setAttribute("charset", "UTF-8");
+                                        b.setAttribute("src", d);
+                                        if (typeof a === "function") {
+                                            if (window.attachEvent) {
+                                                b.onreadystatechange = function () {
+                                                    var e = b.readyState;
+                                                    if (e === "loaded" || e === "complete") {
+                                                        b.onreadystatechange = null;
+                                                        a()
+                                                    }
+                                                }
+                                            } else {
+                                                b.onload = a
+                                            }
+                                        }
+                                        c.appendChild(b)
+                                    };
+                                    loadJs("http://changyan.sohu.com/upload/changyan.js", function () {
+                                        window.changyan.api.config({
+                                            appid: appid, conf: conf
+                                        })
+                                    });
+                                }
+                            })();
+                #control-wrap.col-md-3.hidden-sm.hidden-xs(style='#{settings.ExpandMenu === "true" ? "display: block;" : "display: none;"}')
+                    a.close-menu(title='#{__("blog.article.hide")}')
+                        i.fa.fa-times
+            include ../shared/footer
+    include ../shared/top
+    script(type='text/javascript', src='/libs/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/lightbox2/dist/js/lightbox.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/scrollNav/dist/jquery.scrollNav.min.js', charset='utf-8')
+    script(type='text/javascript', src='/javascripts/highlight.pack.js', charset='utf-8')
+    script(type='text/javascript', src='/javascripts/article.js', charset='utf-8')
+    script.
+        var expandMenu = '#{settings.ExpandMenu}';
+        var logoPath = "#{settings.LogoPath}";
+        var jiathis_config = {
+            data_track_clickback: true,
+            url: window.location.href,
+            summary: "#{post.Summary}",
+            title: "#{post.Title}"
+        };
+    script(type = 'text/javascript', src = 'http://v3.jiathis.com/code/jia.js?uid=#{settings.JiaThisId}', charset = 'utf-8')
+    script(type='text/javascript', src='/libs/jquery-qrcode/dist/jquery.qrcode.min.js', charset='utf-8')
+    script(type = 'text/javascript', src = '/javascripts/top.js', charset = 'utf-8')

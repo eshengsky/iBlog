@@ -1,0 +1,167 @@
+extends ../shared/layoutAdmin
+block content
+    link(href='/libs/fuelux/dist/css/fuelux.min.css', rel='stylesheet')
+    link(href='/libs/blueimp-file-upload/css/jquery.fileupload.css', rel='stylesheet')
+    link(href='/libs/switchery/dist/switchery.min.css', rel='stylesheet')
+    link(href='/libs/sweetalert/dist/sweetalert.css', rel='stylesheet')
+    .row.wrapper.border-bottom.white-bg.page-heading
+        .col-lg-8
+            h2 #{__("admin.settings.setting")}
+    .wrapper.wrapper-content.animated.fadeIn
+        .row
+            .col-lg-12
+                .ibox
+                    .ibox-content
+                        form#postForm(action='/admin/saveSettings', method='post')
+                            .panel-group(role='tablist', aria-multiselectable='false')
+                                .row
+                                    .col-md-6(style='margin-bottom:10px;')
+                                        .panel.panel-default
+                                            #headingSite.panel-heading(role='tab')
+                                                h4.panel-title
+                                                    a(role='button', data-toggle='collapse', href='#tabSite', aria-expanded='true', aria-controls='tabSite')
+                                                        | #{__("admin.settings.site")}
+                                            #tabSite.panel-collapse.collapse.in(role='tabpanel', aria-labelledby='headingSite')
+                                                ul.list-group
+                                                    li.list-group-item.clearfix
+                                                        .pull-left
+                                                            | #{__("admin.settings.site_name")}
+                                                        .pull-right
+                                                            input#SiteName.form-control(type='text', name='SiteName', placeholder='#{__("admin.settings.site_name_placeholder")}', value=settings.SiteName)
+                                                    li.list-group-item.clearfix
+                                                        .pull-left
+                                                            | #{__("admin.settings.domain_name")}
+                                                        .pull-right
+                                                            input#SiteDomain.form-control(type='text', name='SiteDomain', placeholder='#{__("admin.settings.domain_name_placeholder")}', value=settings.SiteDomain)
+                                                    li.list-group-item.clearfix
+                                                        .pull-left
+                                                            | #{__("admin.settings.ICP")}
+                                                        .pull-right
+                                                            input#RecordNo.form-control(type='text', name='RecordNo', placeholder='#{__("admin.settings.ICP_placeholder")}', value=settings.RecordNo)
+                                                    li.list-group-item.clearfix
+                                                        .pull-left
+                                                            | #{__("admin.settings.logo")}
+                                                        .pull-right
+                                                            span.fileinput-button
+                                                                img.img-circle.profile-img(alt='profile', src=settings.LogoPath, style='width:146px;height:146px;')
+                                                                input.fileupload(type='file', name='file')
+                                                                input#LogoPath(type='hidden', name='LogoPath',value=settings.LogoPath)
+                                                    li.list-group-item.clearfix
+                                                        .pull-left
+                                                            | #{__("admin.settings.posts_per_page")}
+                                                        .pull-right
+                                                            .spinbox(data-initialize='spinbox', data-step='5')
+                                                                input#PageSize.form-control.input-mini.spinbox-input(type='text', name='PageSize', placeholder='#{__("admin.settings.posts_per_page_placeholder")}', value=settings.PageSize)
+                                                                .spinbox-buttons.btn-group.btn-group-vertical
+                                                                    button.btn.btn-white.spinbox-up.btn-xs(type='button')
+                                                                        span.fa.fa-chevron-up
+                                                                        span.sr-only Increase
+                                                                    button.btn.btn-white.spinbox-down.btn-xs(type='button')
+                                                                        span.fa.fa-chevron-down
+                                                                        span.sr-only Decrease
+                                                    li.list-group-item.clearfix
+                                                        .pull-left
+                                                            | #{__("admin.settings.show_summary")}
+                                                        .pull-right
+                                                            input#ExpandMenu(type='hidden', name='ExpandMenu', value=settings.ExpandMenu)
+                                                            input.js-switch(type='checkbox', checked=settings.ExpandMenu === 'true')
+                                                    li.list-group-item.clearfix
+                                                        .pull-left
+                                                            | #{__("admin.settings.cache_expire_time")}
+                                                        .pull-right
+                                                            .spinbox(data-initialize='spinbox',data-max='9999999')
+                                                                input#CacheExpired.form-control.input-mini.spinbox-input(type='text', name='CacheExpired', placeholder='#{__("admin.settings.cache_expire_time_placeholder")}', value=settings.CacheExpired)
+                                                                .spinbox-buttons.btn-group.btn-group-vertical
+                                                                    button.btn.btn-white.spinbox-up.btn-xs(type='button')
+                                                                        span.fa.fa-chevron-up
+                                                                        span.sr-only Increase
+                                                                    button.btn.btn-white.spinbox-down.btn-xs(type='button')
+                                                                        span.fa.fa-chevron-down
+                                                                        span.sr-only Decrease
+                                    .col-md-6(style='margin-bottom:10px;')
+                                        .panel.panel-default
+                                            #headingComponent.panel-heading(role='tab')
+                                                h4.panel-title
+                                                    a(role='button', data-toggle='collapse', href='#tabComponent', aria-expanded='true', aria-controls='tabComponent')
+                                                        | #{__("admin.settings.utility")}
+                                            #tabComponent.panel-collapse.collapse.in(role='tabpanel', aria-labelledby='headingComponent')
+                                                ul.list-group
+                                                    li.list-group-item.clearfix
+                                                        .pull-left
+                                                            a(href='http://api.fanyi.baidu.com', target='_blank') #{__("admin.settings.trans")}
+                                                            | #{__("admin.settings.key")}
+                                                        .pull-right
+                                                            input#TranslateKey.form-control(type='text', name='TranslateKey', placeholder='#{__("admin.settings.key_placeholder")}', value=settings.TranslateKey)
+                                                    li.list-group-item.clearfix
+                                                        .pull-left
+                                                            | #{__("admin.settings.analysis")}(
+                                                            a(href='http://tongji.baidu.com', target='_blank') #{__("admin.settings.analysis_service")}
+                                                            | )
+                                                        .pull-right
+                                                            input#EnableStatistics(type='hidden', name='EnableStatistics', value=settings.EnableStatistics)
+                                                            input.js-switch(type='checkbox', checked=settings.EnableStatistics === 'true')
+                                                    li.list-group-item.clearfix
+                                                        .pull-left
+                                                            | #{__("admin.settings.analysis_id")}
+                                                        .pull-right
+                                                            input#StatisticsId.form-control(type='text', name='StatisticsId', placeholder='#{__("admin.settings.analysis_id_placeholder")}', value=settings.StatisticsId)
+                                                    li.list-group-item.clearfix
+                                                        .pull-left
+                                                            | #{__("admin.settings.share")}(
+                                                            a(href='http://www.jiathis.com/', target='_blank') #{__("admin.settings.share_service")}
+                                                            | )
+                                                        .pull-right
+                                                            input#EnableShare(type='hidden', name='EnableShare', value=settings.EnableShare)
+                                                            input.js-switch(type='checkbox', checked=settings.EnableShare === 'true')
+                                                    li.list-group-item.clearfix
+                                                        .pull-left
+                                                            | #{__("admin.settings.share_id")}
+                                                        .pull-right
+                                                            input#JiaThisId.form-control(type='text', name='JiaThisId', placeholder='#{__("admin.settings.share_id_placeholder")}', value=settings.JiaThisId)
+                                                    li.list-group-item.clearfix
+                                                        .pull-left
+                                                            | #{__("admin.settings.comments")} (
+                                                            a(href='http://changyan.kuaizhan.com', target='_blank') #{__("admin.settings.comments_service")}
+                                                            | )
+                                                        .pull-right
+                                                            input#ShowComments(type='hidden', name='ShowComments', value=settings.ShowComments)
+                                                            input.js-switch(type='checkbox', checked=settings.ShowComments === 'true')
+                                                    li.list-group-item.clearfix
+                                                        .pull-left
+                                                            | #{__("admin.settings.comments_id")}
+                                                        .pull-right
+                                                            input#ChangyanId.form-control(type='text', name='ChangyanId', placeholder='#{__("admin.settings.comments_id_placeholder")}', value=settings.ChangyanId)
+                                                    li.list-group-item.clearfix
+                                                        .pull-left
+                                                            | #{__("admin.settings.comments_conf")}
+                                                        .pull-right
+                                                            input#ChangyanConf.form-control(type='text', name='ChangyanConf', placeholder='#{__("admin.settings.comments_conf_placeholder")}', value=settings.ChangyanConf)
+                                                    li.list-group-item.clearfix
+                                                        .pull-left
+                                                            | #{__("admin.settings.message")} (
+                                                            a(href='http://www.uyan.cc/', target='_blank') #{__("admin.settings.message_service")}
+                                                            | )
+                                                        .pull-right
+                                                            input#ShowGuestbook(type='hidden', name='ShowGuestbook', value=settings.ShowGuestbook)
+                                                            input.js-switch(type='checkbox', checked=settings.ShowGuestbook === 'true')
+                                                    li.list-group-item.clearfix
+                                                        .pull-left
+                                                            | #{__("admin.settings.message_id")}
+                                                        .pull-right
+                                                            input#YouyanId.form-control(type='text', name='YouyanId', placeholder='#{__("admin.settings.message_id_placeholder")}', value=settings.YouyanId)
+
+                                .row
+                                    .col-lg-12
+                                        button#btnSave(type='button', class='btn btn-primary', role='button')
+                                            i.fa.fa-cloud-upload
+                                            |  #{__("admin.settings.save")}
+    script(type='text/javascript', src='/libs/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/metisMenu/dist/metisMenu.min.js', charset='utf-8')
+    script(type='text/javascript', src='/javascripts/admin.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/blueimp-file-upload/js/vendor/jquery.ui.widget.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/blueimp-file-upload/js/jquery.fileupload.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/fuelux/dist/js/fuelux.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/sweetalert/dist/sweetalert.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/switchery/dist/switchery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/javascripts/settings.js', charset='utf-8')

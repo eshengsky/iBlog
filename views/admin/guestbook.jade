@@ -1,0 +1,15 @@
+extends ../shared/layoutAdmin
+block content
+    .row.wrapper.border-bottom.white-bg.page-heading
+        .col-lg-8
+            h2 #{__("admin.guestbook.message_manage")}
+    .wrapper.wrapper-content.animated.fadeIn
+        .row
+            .col-lg-12
+                .ibox
+                    .ibox-content
+                        iframe(src='http://www.uyan.cc/comment/content/?domain=#{settings.SiteDomain}&ufrom=&stat=0', style='width: 100%; min-height: 2000px; border: none;')
+    script(type='text/javascript', src='/libs/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/metisMenu/dist/metisMenu.min.js', charset='utf-8')
+    script(type='text/javascript', src='/javascripts/admin.js', charset='utf-8')

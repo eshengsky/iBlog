@@ -1,0 +1,32 @@
+extends ../shared/layoutAdmin
+block content
+    link(href='/libs/bootstrap-table/dist/bootstrap-table.min.css', rel='stylesheet')
+    link(href='/libs/sweetalert/dist/sweetalert.css', rel='stylesheet')
+    .row.wrapper.border-bottom.white-bg.page-heading
+        .col-lg-8
+            h2 #{__("admin.articlemanage.post")}
+    .wrapper.wrapper-content.animated.fadeIn
+        .row
+            .col-lg-12
+                .ibox
+                    .ibox-content
+                        #toolbar
+                            button#remove.btn.btn-white(disabled='')
+                                i.fa.fa-trash-o
+                                =' '
+                                span.badge
+                            =' '
+                            a.btn.btn-white(href='/admin/newarticle')
+                                i.fa.fa-plus
+                                |  #{__("admin.articlemanage.new_article")}
+                        table#articles
+    script(type='text/javascript', src='/libs/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/metisMenu/dist/metisMenu.min.js', charset='utf-8')
+    script(type='text/javascript', src='/javascripts/admin.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/bootstrap-table/dist/bootstrap-table.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/bootstrap-table/dist/extensions/filter-control/bootstrap-table-filter-control.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/bootstrap-table/dist/locale/bootstrap-table-zh-CN.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/lodash/dist/lodash.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/sweetalert/dist/sweetalert.min.js', charset='utf-8')
+    script(type='text/javascript', src='/javascripts/articlemanage.js', charset='utf-8')

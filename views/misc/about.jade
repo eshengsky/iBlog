@@ -1,0 +1,44 @@
+extends ../shared/layout
+block content
+    .container-fluid.detail-container
+        .row
+            .col-lg-4.col-lg-offset-4
+                .about-block.animated.fadeInDown
+                    .widget-head-color-box.navy-bg.p-lg.text-center
+                        .m-b-md
+                            h2.font-bold.no-margins!=about.FirstLine
+                            h4!=about.SecondLine
+                        img.img-circle.profile-img.m-b-md.animated.zoomIn(alt='profile', src='#{about.PhotoPath}')
+                        img.wechat-img.m-b-md.animated.zoomIn(alt='wechat', src='#{about.QrcodePath}', style='display:none;')
+                        h4
+                            span#job-title!=about.ThirdLine
+                    .widget-text-box
+                        p!=about.Profile
+                        .row
+                            .col-md-6
+                                i.fa.fa-wechat(title='#{__("about.wechat")}')
+                                = ' '
+                                !=about.Wechat
+                                = ' '
+                                i.fa.fa-lg.fa-qrcode(title='#{__("about.qr_code")}')
+                            .col-md-6
+                                i.fa.fa-envelope(title='#{__("about.email")}')
+                                = ' '
+                                !=about.Email
+        include ../shared/footer
+    include ../shared/top
+    script(type='text/javascript', src='/libs/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/libs/jQuery-cycleText/dist/js/jquery.cycleText.min.js', charset='utf-8')
+    script(type='text/javascript', src='/javascripts/about.js', charset='utf-8')
+    script.
+        var logoPath = "#{settings.LogoPath}";
+        var jiathis_config = {
+            data_track_clickback: true,
+            url: window.location.href,
+            summary: "",
+            title: "#{settings.SiteName + ' - 关于'}"
+        };
+    script(type='text/javascript', src='http://v3.jiathis.com/code/jia.js?uid=#{settings.JiaThisId}', charset='utf-8')
+    script(type='text/javascript', src='/libs/jquery-qrcode/dist/jquery.qrcode.min.js', charset='utf-8')
+    script(type='text/javascript', src='/javascripts/top.js', charset='utf-8')
