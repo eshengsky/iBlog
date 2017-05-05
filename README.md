@@ -3,9 +3,6 @@
 _不仅仅是博客，更是 Demo_，适合新人入门学习的完整项目。  
 （基于 ASP.NET 的版本请点击[这里](https://github.com/eshengsky/iBlog/)）
 
-## 在线实例
-个人博客 [http://www.skysun.name/](http://www.skysun.name/)
-
 ## [Wiki](https://github.com/eshengsky/iBlog2/wiki)
 整理了 iBlog2 中涉及 Node.js 及部分前端技术的基本功能与知识点，适合新手学习、备查。  
 

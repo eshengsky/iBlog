@@ -1,5 +1,5 @@
 var redis = require('redis');
-var config = require('../config');
+var config = require('../config/database');
 // use custom redis url or localhost
 var client = redis.createClient(config.RedisPort || 6379, config.RedisHost || 'localhost');
 client.on('error', function (err) {

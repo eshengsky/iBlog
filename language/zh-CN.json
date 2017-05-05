@@ -47,7 +47,7 @@
 	"footer": {
 		"admin_system": "后台管理"
 	},
-	"top":{
+	"top": {
 		"share": "分享到",
 		"qr_code": "二维码",
 		"back_to_top": "回顶部",
@@ -165,7 +165,8 @@
 			"update": "更新",
 			"back": "返回",
 			"publish": "发布",
-			"save_draft": "保存草稿"
+			"save_draft": "保存草稿",
+			"enter": "admin.newarticle.enter"
 		},
 		"settings": {
 			"setting": "系统设置",
