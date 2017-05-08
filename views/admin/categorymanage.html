@@ -1,0 +1,37 @@
+@{this.layout = './shared/layoutAdmin'}
+
+<link href="/libs/fuelux/dist/css/fuelux.min.css" rel="stylesheet"/>
+<link href="/libs/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
+<link href="/libs/blueimp-file-upload/css/jquery.fileupload.css" rel="stylesheet"/>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>@__("admin.categorymanage.category")</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeIn">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="ibox">
+                <div>
+                    <ul id="cate-list" class="list-group list-unstyled"></ul>
+                    <button id="btnNew" class="btn btn-white">
+                        <i class="fa fa-plus"></i> @__("admin.categorymanage.new_category")
+                    </button>
+                    <button id="btnSave" class="btn btn-primary pull-right">
+                        <i class="fa fa-cloud-upload"></i> @__("admin.categorymanage.save")
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/libs/jquery/dist/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/metisMenu/dist/metisMenu.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/javascripts/admin.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/fuelux/dist/js/fuelux.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/jquery-sortable/source/js/jquery-sortable-min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/blueimp-file-upload/js/vendor/jquery.ui.widget.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/blueimp-file-upload/js/jquery.fileupload.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/sweetalert/dist/sweetalert.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/javascripts/categorymanage.js" charset="utf-8"></script>

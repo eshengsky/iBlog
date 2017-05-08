@@ -37,7 +37,7 @@ router.get('/', function (req, res, next) {
             categories = results[1];
             res.render('blog/index', {
                 cateData: categories,
-                settings: settings,
+                config: settings,
                 title: settings['SiteName'],
                 currentCate: '',
                 isRoot: true

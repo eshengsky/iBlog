@@ -43,7 +43,7 @@ router.get('/login', function (req, res, next) {
             next(err);
         } else {
             res.render('auth/login', {
-                settings: settings,
+                config: settings,
                 title: settings['SiteName'] + ' - ' + res.__("auth.title")
             });
         }

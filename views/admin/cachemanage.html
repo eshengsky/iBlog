@@ -1,0 +1,71 @@
+@{this.layout = './shared/layoutAdmin'}
+
+<link href="/libs/fuelux/dist/css/fuelux.min.css" rel="stylesheet"/>
+<link href="/libs/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>@__("admin.cachemanage.cache")</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeIn">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="ibox m-t-xl">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div id="keyinput" data-initialize="combobox" class="input-group input-append dropdown combobox">
+                            <input id="cacheKey" type="text" placeholder='@__("admin.cachemanage.cache_key")' class="form-control"/>
+                            <div class="input-group-btn">
+                                <button type="button" data-toggle="dropdown" class="btn btn-white dropdown-toggle"><span class="caret"></span></button>
+                                <ul style="left:auto;" class="dropdown-menu dropdown-menu-right">
+                                    <li data-value="categories">
+                                        <a href="#">@__("admin.cachemanage.li_1")</a>
+                                    </li>
+                                    <li data-value="categories_all">
+                                        <a href="#">@__("admin.cachemanage.li_2")</a>
+                                    </li>
+                                    <li data-value="category_分类alias">
+                                        <a href="#">@__("admin.cachemanage.li_3")</a>
+                                    </li>
+                                    <li data-value="posts_cateid_分类id_pageindex_页码_pagesize_每页条数_sortby_排序类型_keyword_关键字_filtertype_查询类型">
+                                        <a href="#">@__("admin.cachemanage.li_4")</a>
+                                    </li>
+                                    <li data-value="posts_count_cateid_分类id_pageindex_页码_pagesize_每页条数_sortby_排序类型_keyword_关键字_filtertype_查询类型">
+                                        <a href="#">@__("admin.cachemanage.li_5")</a>
+                                    </li>
+                                    <li data-value="article_文章alias">
+                                        <a href="#">@__("admin.cachemanage.li_6")</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <button id="btnQuery" type="button" class="btn btn-white">
+                            <i class="fa fa-search"></i> @__("admin.cachemanage.search_cache")
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <textarea id="cacheContent" rows="20" style="max-width:100%;min-width:100%;" class="form-control m-t-sm"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button id="btnClear" type="button" class="btn btn-primary m-t-sm">
+                            <i class="fa fa-times"></i> @__("admin.cachemanage.clear_cache")
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/libs/jquery/dist/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/metisMenu/dist/metisMenu.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/javascripts/admin.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/fuelux/dist/js/fuelux.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/sweetalert/dist/sweetalert.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/javascripts/cachemanage.js" charset="utf-8"></script>

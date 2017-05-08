@@ -1,0 +1,136 @@
+@{this.layout = './shared/layoutAdmin'}
+
+<link href="/libs/fuelux/dist/css/fuelux.min.css" rel="stylesheet"/>
+<link href="/libs/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
+<link href="/libs/form.validation/dist/css/formValidation.min.css" rel="stylesheet"/>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>@__("admin.editarticle.edit")</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeIn">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <form id="postForm" action="/admin/saveArticle" method="post">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label for="Title">@__("admin.editarticle.title")</label>
+                                    <input id="Title" type="text" name="Title" placeholder='@__("admin.editarticle.enter_title")' class="form-control" value="@post.Title"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="CategoryId" style="display:block;">@__("admin.editarticle.category")</label>
+                                    <div id="Categorylist" data-resize="auto" data-initialize="selectlist" class="btn-group selectlist">
+                                        <button data-toggle="dropdown" type="button" class="btn btn-white dropdown-toggle"><span class="selected-label"></span><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
+                                        <ul role="menu" class="dropdown-menu"></ul>
+                                        <input id="CategoryId" type="text" name="CategoryId" readonly="readonly" aria-hidden="true" class="hidden hidden-field" value="@post.CategoryId"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label for="Alias">Alias</label>
+                                    <input id="Alias" type="text" name="Alias" placeholder='@__("admin.editarticle.enter_alias")' class="form-control" value="@post.Alias"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-sm btn-white btn-alias">
+                                        <i class="fa fa-flash"></i> @__("admin.editarticle.auto_generate")
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Summary">@__("admin.editarticle.summary")</label>
+                            <textarea id="Summary" name="Summary" style="min-width: 100%;max-width: 100%;" placeholder='@__("admin.editarticle.enter_summary")' class="form-control">@this.raw(post.Summary)</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label style="display:block;">@__("admin.editarticle.source")</label>
+                            <label id="soruceLocal" data-initialize="radio" class="radio-custom radio-inline">
+                                <input data-toggle="#block-local" name="Source" type="radio" value="0" checked="checked" class="sr-only"/> @__("admin.editarticle.local")
+                            </label>
+                            <label id="soruceLink" data-initialize="radio" class="radio-custom radio-inline">
+                                <input data-toggle="#block-link" name="Source" type="radio" value="1" class="sr-only"/> @__("admin.editarticle.url")
+                            </label>
+                        </div>
+                        <div id="block-local">
+                            <div class="form-group">
+                                <label for="pillbox-input">@__("admin.editarticle.tag")</label>
+                                <div id="myPillbox" data-initialize="pillbox" class="pillbox">
+                                    <ul class="clearfix pill-group">
+                                        <li class="pillbox-input-wrap btn-group"><a class="pillbox-more">and<span class="pillbox-more-count"></span> more...</a>
+                                            <input id="pillbox-input" type="text" placeholder='@__("admin.editarticle.enter_to_add")' class="form-control dropdown-toggle pillbox-add-item"/>
+                                            <button type="button" class="dropdown-toggle sr-only"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
+                                            <ul role="menu" data-toggle="dropdown" data-flip="auto" class="suggest dropdown-menu"></ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <input id="Labels" type="hidden" name="Labels" value="@post.Labels"/>
+                            </div>
+                            <div class="form-group">
+                                <label>@__("admin.editarticle.article")</label>
+                                <script id="editor" type="text/plain">@this.raw(post.Content)</script>
+                            </div>
+                        </div>
+                        <div id="block-link">
+                            <div class="form-group">
+                                <label for="Url">Url</label>
+                                <input id="Url" type="text" name="Url" placeholder='@__("admin.editarticle.enter_url")' class="form-control" value="@post.Url"/>
+                            </div>
+                        </div>
+                        <div>
+                            @if(!post.IsDraft) {
+                                <button id="btnUpdate" type="submit" class="btn btn-primary">
+                                    <i class="fa fa-cloud-upload"></i> @__("admin.editarticle.update")
+                                </button>
+                                <a href="/admin/articlemanage" class="btn btn-white">
+                                    <i class="fa fa-reply"></i> @__("admin.editarticle.back")
+                                </a>
+                            } else {
+                                <button id="btnPublish" type="submit" class="btn btn-danger">
+                                    <i class="fa fa-send"></i> @__("admin.editarticle.publish")
+                                </button>
+                                <button id="btnSave" type="button" class="btn btn-primary">
+                                    <i class="fa fa-save"></i> @__("admin.editarticle.save_draft")
+                                </button>
+                                <a href="/admin/articlemanage" class="btn btn-white">
+                                    <i class="fa fa-reply"></i> @__("admin.editarticle.back")
+                                </a>
+                            }
+                            <input id="UniqueId" type="hidden" name="UniqueId" value="@post._id"/>
+                            <input id="IsDraft" type="hidden" name="IsDraft" value='@(post.IsDraft ? "True" : "False")'/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/libs/jquery/dist/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/form.validation/dist/js/formValidation.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/form.validation/dist/js/framework/bootstrap.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/form.validation/dist/js/language/zh_CN.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/metisMenu/dist/metisMenu.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/javascripts/admin.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/ueditor/ueditor.config.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/ueditor/ueditor.all.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/ueditor/dialogs/insertalert/insertalert.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/ueditor/dialogs/inserticon/inserticon.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/ueditor/dialogs/insertlabel/insertlabel.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/fuelux/dist/js/fuelux.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/sweetalert/dist/sweetalert.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/js-md5/js/md5.min.js" charset="utf-8"></script>
+<script>
+    var categoryId = '@post.CategoryId';
+    var source = '@post.Source';
+    var translateKey = '@config.TranslateKey';
+</script>
+<script type="text/javascript" src="/javascripts/editarticle.js" charset="utf-8"></script>

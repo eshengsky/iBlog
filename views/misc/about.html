@@ -1,0 +1,51 @@
+<div class="container-fluid detail-container">
+    <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+            <div class="about-block animated fadeInDown">
+                <div class="widget-head-color-box navy-bg p-lg text-center">
+                    <div class="m-b-md">
+                        <h2 class="font-bold no-margins">@this.raw(about.FirstLine)</h2>
+                        <h4>@this.raw(about.SecondLine)</h4>
+                    </div>
+                    <img alt="profile" src="@about.PhotoPath" class="img-circle profile-img m-b-md animated zoomIn"/>
+                    <img alt="wechat" src="@about.QrcodePath" style="display:none;" class="wechat-img m-b-md animated zoomIn"/>
+                    <h4>
+                        <span id="job-title">@this.raw(about.ThirdLine)</span>
+                    </h4>
+                </div>
+                <div class="widget-text-box">
+                    <p>@this.raw(about.Profile)</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <i title='__("about.wechat")' class="fa fa-wechat"></i>
+                            @this.raw(about.Wechat)
+                            <i title='__("about.qr_code")' class="fa fa-lg fa-qrcode"></i>
+                        </div>
+                        <div class="col-md-6">
+                            <i title='__("about.email")' class="fa fa-envelope"></i>
+                            @this.raw(about.Email)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @this.renderPartial('./footer')
+</div>
+@this.renderPartial('./top')
+<script type="text/javascript" src="/libs/jquery/dist/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/jQuery-cycleText/dist/js/jquery.cycleText.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/javascripts/about.js" charset="utf-8"></script>
+<script>
+    var logoPath = "@config.LogoPath";
+    var jiathis_config = {
+        data_track_clickback: true,
+        url: window.location.href,
+        summary: "",
+        title: "@(config.SiteName) - 关于"
+    };
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=@config.JiaThisId" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/jquery-qrcode/dist/jquery.qrcode.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/javascripts/top.js" charset="utf-8"></script>

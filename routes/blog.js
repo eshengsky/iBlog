@@ -46,7 +46,7 @@ router.get('/:category?', function (req, res, next) {
             if (cate) {
                 res.render('blog/index', {
                     cateData: categories,
-                    settings: settings,
+                    config: settings,
                     title: settings['SiteName'],
                     currentCate: currentCate,
                     isRoot: false
@@ -258,7 +258,7 @@ router.get('/:category/:article', function (req, res, next) {
             };
             res.render('blog/article', {
                 post: post,
-                settings: settings,
+                config: settings,
                 title: settings['SiteName'] + ' - ' + article.Title
             });
         }

@@ -1,0 +1,74 @@
+@{this.layout = './shared/layoutAdmin'}
+
+<link href="/libs/sweetalert/dist/sweetalert.css" rel="stylesheet"/>
+<link href="/libs/blueimp-file-upload/css/jquery.fileupload.css" rel="stylesheet"/>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>@__("admin.aboutmanage.about")</h2>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeIn">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-4 col-lg-offset-4">
+                            <div class="about-block">
+                                <form id="formAbout" action="/admin/saveAbout" method="Post">
+                                    <div class="widget-head-color-box navy-bg p-lg text-center">
+                                        <div class="m-b-md">
+                                            <input id="FirstLine" type="text" name="FirstLine" placeholder='__("admin.aboutmanage.line_1")' value="@about.FirstLine" class="form-group form-control text-center"/>
+                                            <input id="SecondLine" type="text" name="SecondLine" placeholder='@__("admin.aboutmanage.line_2")' value="@about.SecondLine" class="form-control text-center"/>
+                                        </div>
+                                        <span class="fileinput-button">
+                                            <img alt="profile" src="@about.PhotoPath" class="img-circle profile-img m-b-md"/>
+                                            <input type="file" name="file" class="fileupload"/>
+                                            <input id="PhotoPath" type="hidden" name="PhotoPath" value="@about.PhotoPath"/>
+                                        </span>
+                                        <span class="fileinput-button">
+                                            <img alt="wechat" src="@about.QrcodePath" style="width:100px;height:100px;" class="wechat-img m-b-md"/>
+                                            <input type="file" name="file" class="fileupload"/>
+                                            <input id="QrcodePath" type="hidden" name="QrcodePath" value="@about.QrcodePath"/>
+                                        </span>
+                                        <h4>
+                                            <span id="job-title">
+                                                <textarea id="ThirdLine" name="ThirdLine" placeholder='@__("admin.aboutmanage.line_3")' class="form-control">@this.raw(about.ThirdLine)</textarea>
+                                            </span>
+                                        </h4>
+                                    </div>
+                                    <div class="widget-text-box">
+                                        <p>
+                                            <textarea id="Profile" name="Profile" cols="3" placeholder='@__("admin.aboutmanage.self_intro")' class="form-control">@this.raw(about.Profile)</textarea>
+                                        </p>
+                                        <div class="row form-inline">
+                                            <div class="col-md-6">
+                                                <i class="fa fa-wechat"></i>
+                                                <input id="Wechat" type="text" name="Wechat" placeholder='@__("admin.aboutmanage.wechat")' value="@about.Wechat" class="form-control"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <i class="fa fa-envelope"></i>
+                                                <input id="Email" type="text" name="Email" placeholder='@__("admin.aboutmanage.email")' value="@about.Email" class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button id="btnSave" type="button" class="btn btn-primary pull-right m-t-sm">
+                                        <i class="fa fa-cloud-upload"></i> @__("admin.aboutmanage.save")
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/libs/jquery/dist/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/metisMenu/dist/metisMenu.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/javascripts/admin.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/blueimp-file-upload/js/vendor/jquery.ui.widget.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/blueimp-file-upload/js/jquery.fileupload.js" charset="utf-8"></script>
+<script type="text/javascript" src="/libs/sweetalert/dist/sweetalert.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/javascripts/aboutmanage.js" charset="utf-8"></script>

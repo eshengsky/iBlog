@@ -25,7 +25,7 @@ router.get('/', function (req, res, next) {
             next(err);
         } else {
             res.render('admin/index', {
-                settings: settings,
+                config: settings,
                 title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.web_statistic")
             });
         }
@@ -39,7 +39,7 @@ router.get('/categorymanage', function (req, res, next) {
             next(err);
         } else {
             res.render('admin/categorymanage', {
-                settings: settings,
+                config: settings,
                 title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.classified_management")
             });
         }
@@ -76,7 +76,7 @@ router.get('/articlemanage', function (req, res, next) {
             next(err);
         } else {
             res.render('admin/articlemanage', {
-                settings: settings,
+                config: settings,
                 title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.article_management")
             });
         }
@@ -193,7 +193,7 @@ router.get('/newArticle', function (req, res, next) {
         } else {
             res.render('admin/newarticle', {
                 uniqueId: shortid.generate(),
-                settings: settings,
+                config: settings,
                 title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.new_article")
             });
         }
@@ -274,7 +274,7 @@ router.get('/editArticle/:id', function (req, res, next) {
             settings = results[0];
             article = results[1];
             res.render('admin/editarticle', {
-                settings: settings,
+                config: settings,
                 post: article,
                 title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.edit_article")
             });
@@ -311,7 +311,7 @@ router.get('/comments', function (req, res, next) {
             next(err);
         } else {
             res.render('admin/comments', {
-                settings: settings,
+                config: settings,
                 title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.comment_management")
             });
         }
@@ -325,7 +325,7 @@ router.get('/guestbook', function (req, res, next) {
             next(err);
         } else {
             res.render('admin/guestbook', {
-                settings: settings,
+                config: settings,
                 title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.msg_management")
             });
         }
@@ -366,7 +366,7 @@ router.get('/aboutmanage', function (req, res, next) {
             res.render('admin/aboutmanage', {
                 title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.about_management"),
                 about: about,
-                settings: settings
+                config: settings
             });
         }
     });
@@ -399,7 +399,7 @@ router.get('/cachemanage', function (req, res, next) {
             next(err);
         } else {
             res.render('admin/cachemanage', {
-                settings: settings,
+                config: settings,
                 title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.cache_management")
             });
         }
@@ -439,7 +439,7 @@ router.get('/exception', require('connect-ensure-login').ensureLoggedIn(), funct
             next(err);
         } else {
             res.render('admin/exception', {
-                settings: settings,
+                config: settings,
                 title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.exception_management")
             });
         }
@@ -503,11 +503,12 @@ router.post('/getExceptions', function (req, res, next) {
 //系统设置页面
 router.get('/settings', function (req, res, next) {
     tool.getConfig(path.join(__dirname, '../config/settings.json'), function (err, settings) {
+        console.log(settings)
         if (err) {
             next(err);
         } else {
             res.render('admin/settings', {
-                settings: settings,
+                config: settings,
                 title: settings['SiteName'] + ' - ' + res.__("layoutAdmin.settings")
             });
         }

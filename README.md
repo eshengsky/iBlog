@@ -6,6 +6,9 @@ _不仅仅是博客，更是 Demo_，适合新人入门学习的完整项目。
 ## 在线实例
 个人博客 [http://www.skysun.name/](http://www.skysun.name/)
 
+## 分支说明
+当前项目分为 [master](https://github.com/eshengsky/iBlog2/tree/master) 分支和 [Jade-template](https://github.com/eshengsky/iBlog2/tree/Jade-template) 分支，唯一的区别在于 master 分支使用的是我自己写的 [Saker](https://github.com/eshengsky/saker) 模板引擎，Jade-template 分支使用的 [Jade](https://pugjs.org/) 模板引擎。
+
 ## [Wiki](https://github.com/eshengsky/iBlog2/wiki)
 整理了 iBlog2 中涉及 Node.js 及部分前端技术的基本功能与知识点，适合新手学习、备查。  
 
@@ -31,7 +34,7 @@ _不仅仅是博客，更是 Demo_，适合新人入门学习的完整项目。
 ## 技术构成
 * 服务端 [Node.js](https://nodejs.org/)
 * web框架 [Express 4](http://expressjs.com/)
-* 模板引擎 [Jade](https://pugjs.org/)
+* 模板引擎 [Saker](https://github.com/eshengsky/saker) (master分支) / [Jade](https://pugjs.org/) (Jade-template分支)
 * JS库 [jQuery](http://jquery.com/)
 * UI库 [Bootstrap 3](http://getbootstrap.com/)
 * 持久化 [MongoDB](https://www.mongodb.org/)
@@ -128,4 +131,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-

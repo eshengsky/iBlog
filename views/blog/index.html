@@ -1,0 +1,150 @@
+<link href="/stylesheets/selectlist.css" rel="stylesheet"/>
+<link href="/libs/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+<link href="/stylesheets/railscasts.css" rel="stylesheet"/>
+
+<div class="container-fluid render-body">
+    <div class="row">
+        <div class="col-md-2 category-block hidden-sm hidden-xs">
+            <div class="category-top">
+                @__("blog.index.category")
+            </div>
+            <div class="category-split"></div>
+            <div class="category-list">
+                <ul class="nav nav-pills nav-stacked">
+                    @{
+                        cateData.forEach(function(cate) {
+                            var link = cate.Link ? cate.Link : ("/blog" + (cate.Alias ? "/" + (cate.Alias) : ""));
+                            <li class='@(currentCate === cate.Alias ? "active" : "")'>
+                                <a href='@link'>
+                                    <img src="@cate.Img">
+                                    <span>@cate.CateName</span>
+                                </a>
+                            </li>
+                        });
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2 blog-list">
+            <div class="row data-block">
+                <div class="col-md-12">
+                    <div class="list-wrap">
+                        <div class="row top-bar">
+                            <form id="filterForm" action="/blog/getPosts" method="Post">
+                                <div class="col-md-7 col-sm-4 hidden-xs list-top-left">
+                                    <a class="current" title='@__("blog.index.sort_date")' sort="date">
+                                        @__("blog.index.date")
+                                    </a>
+                                    <a class="current" title='@__("blog.index.sort_title")' sort="title">
+                                        @__("blog.index.title")
+                                    </a>
+                                    <input id="CateAlias" type="text" value="@currentCate" name="CateAlias" class="hidden"/>
+                                    <input id="SortBy" type="text" value="0" name="SortBy" class="hidden"/>
+                                    <input id="PageIndex" type="text" value="1" name="PageIndex" class="hidden"/>
+                                    <input id="PageSize" type="text" value="@config.PageSize" name="PageSize" class="hidden"/>
+                                </div>
+                                <div class="col-md-5 list-top-right">
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <div data-resize="auto" data-initialize="selectlist" class="btn-group selectlist">
+                                                <button data-toggle="dropdown" type="button" class="btn btn-white dropdown-toggle">
+                                                    <span class="selected-label"></span>
+                                                    <span class="caret"></span>
+                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                <ul role="menu" class="dropdown-menu animated-quick fadeInDown">
+                                                    <li data-value="0" data-selected="true" class="active">
+                                                        <a href="#">@__("blog.index.full")</a>
+                                                    </li>
+                                                    <li data-value="1">
+                                                        <a href="#">@__("blog.index.title")</a>
+                                                    </li>
+                                                    <li data-value="2">
+                                                        <a href="#">@__("blog.index.tag")</a>
+                                                    </li>
+                                                    <li data-value="3">
+                                                        <a href="#">@__("blog.index.date")</a>
+                                                    </li>
+                                                </ul>
+                                                <input id="FilterType" type="text" readonly="readonly" aria_hidden="true" name="FilterType" class="hidden hidden-field"/>
+                                            </div>
+                                        </div>
+                                        <input type="text" placeholder='@__("blog.index.keyword")' name="Keyword" id="Keyword" class="form-control">
+                                        <div class="input-group-btn">
+                                            <button id="btnFilter" type="button" class="btn btn-white">
+                                                <i class="fa fa-search"></i>
+                                                <span class="hidden-sm hidden-xs">@__("blog.index.search")</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <ol class="list-unstyled"></ol>
+                        <div id="load-list" style="display: none;" class="spinner">
+                            <div class="bounce1"></div>
+                            <div class="bounce2"></div>
+                            <div class="bounce3"></div>
+                        </div>
+                        <div id="no-more" style="display: none;" class="text-muted text-center">@__("blog.index.reach_end")</div>
+                    </div>
+                </div>
+                <div id="scrollSpy" class="col-md-1">
+                    <ul id="page-nav" class="list-unstyled hidden-sm hidden-xs affix-top"></ul>
+                </div>
+            </div>
+            @this.renderPartial('./footer')
+        </div>
+        <div class="col-md-2 hidden-sm hidden-xs empty-block"></div>
+    </div>
+    <div class="post-cover"></div>
+    <div class="post-modal col-md-7 col-sm-12 col-xs-12">
+        <div class="modal-header">
+            <h4></h4>
+        </div>
+        <div class="modal-body">
+            <div style="display:none;" class="sk-cube-grid">
+                <div class="sk-cube sk-cube1"></div>
+                <div class="sk-cube sk-cube2"></div>
+                <div class="sk-cube sk-cube3"></div>
+                <div class="sk-cube sk-cube4"></div>
+                <div class="sk-cube sk-cube5"></div>
+                <div class="sk-cube sk-cube6"></div>
+                <div class="sk-cube sk-cube7"></div>
+                <div class="sk-cube sk-cube8"></div>
+                <div class="sk-cube sk-cube9"></div>
+            </div>
+            <div class="post-content">
+                <div></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div id="label-foot" style="margin-top: 3px;" class="col-md-7 text-left hidden-sm hidden-xs"></div>
+            <div class="col-md-5 text-right">
+                <button id="btnCloseModal" type="button" class="btn btn-white">@__("blog.index.close")</button>
+                <a id="btnFullMode" href="" target="_blank" class="btn btn-green">
+                    <i class="fa fa-external-link"></i> @__("blog.index.full_mode")
+                </a>
+            </div>
+        </div>
+    </div>
+    @this.renderPartial('./top')
+    <script type="text/javascript" src="/libs/jquery/dist/jquery.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/libs/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/javascripts/selectlist.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/libs/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/javascripts/highlight.pack.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/javascripts/index.js" charset="utf-8"></script>
+    <script>
+        var logoPath = "@config.LogoPath";
+        var jiathis_config = {
+            data_track_clickback: true,
+            url: "http://@config.SiteDomain",
+            summary: "",
+            title: "@config.SiteName"
+        };
+    </script>
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=@config.JiaThisId" charset="utf-8"></script>
+    <script type="text/javascript" src="/libs/jquery-qrcode/dist/jquery.qrcode.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/javascripts/top.js" charset="utf-8"></script>
+</div>

@@ -1,0 +1,29 @@
+@{this.layout = null}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/bootstrap-addon.css" rel="stylesheet">
+    <link href="/stylesheets/site.css" rel="stylesheet">
+    <link href="/stylesheets/error.css" rel="stylesheet">
+    <title></title>
+</head>
+<body>
+<div class="container-fluid back-img">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="error-block">
+                <h1>@code</h1>
+                <div class="desc">@message</div>
+                <a href="/" class="btn btn-green btn-lg">
+                    <i class="fa fa-home"></i> @__("error.back_to_home")
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

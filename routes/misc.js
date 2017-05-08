@@ -12,7 +12,7 @@ router.get('/guestbook', function (req, res, next) {
         } else {
             res.render('misc/guestbook', {
                 title: settings['SiteName'] + ' - ' + res.__("misc.msg"),
-                settings: settings
+                config: settings
             });
         }
     });
@@ -52,7 +52,7 @@ router.get('/about', function (req, res, next) {
             res.render('misc/about', {
                 title: settings['SiteName'] + ' - ' + res.__('misc.about'),
                 about: about,
-                settings: settings
+                config: settings
             });
         }
     });

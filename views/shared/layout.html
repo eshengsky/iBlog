@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="@(model.keywords ? model.keywords : 'blog,iBlog')">
+    <meta name="description" content="@(model.description ? model.description : 'iBlog')">
+    <link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/bootstrap-addon.css" rel="stylesheet">
+    <link href="/stylesheets/site.css" rel="stylesheet">
+    <link href="/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/stylesheets/share.css" rel="stylesheet">
+    <link href="/stylesheets/animate-custom.css" rel="stylesheet">
+    <title></title>
+</head>
+<body class="fuelux">
+@if(model.isRoot) {
+    <link href="/stylesheets/home-loading.css" rel="stylesheet"/>
+    <div id="home-loading" class="home-loading">
+        <div id="loading-con" style="display:none;" class="loading-con">
+            <div class="loading-circle"></div>
+            <script>
+                var home_loading_begin = new Date();
+                document.body.style.overflow = "hidden";
+                function imgLoad() {
+                    document.getElementById("home-loading").style.background = "#f3f3f4";
+                    document.getElementById("loading-con").style.display = "block";
+                }
+            </script>
+            <img id="loadingImg" alt="loading" src="@config.LogoPath" onload="imgLoad();"/>
+        </div>
+    </div>
+}
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+                <img src="@config.LogoPath"/>
+                <span>@config.SiteName</span>
+            </a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav my-nav-pills navbar-right">
+                <li>
+                    <a href="/blog">
+                        <i class="fa fa-file-text-o fa-fw"></i> @__("layout.blog")
+                    </a>
+                </li>
+                @if(config.ShowGuestbook === 'true') {
+                    <li>
+                        <a href="/guestbook">
+                            <i class="fa fa-edit fa-fw"></i> @__("layout.message")
+                        </a>
+                    </li>
+                }
+                <li>
+                    <a href="/about">
+                        <i class="fa fa-user fa-fw"></i> @__("layout.about")
+                    </a>
+                </li>
+                <li>
+                    <a href="/locale/@__('lang-code')">
+                        <i class="fa fa-language fa-fw"></i> @__("language")
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+@this.renderBody()
+@if(config.EnableStatistics === 'true') {
+    //百度统计代码
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?@config.StatisticsId";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+}
+</body>
+</html>
