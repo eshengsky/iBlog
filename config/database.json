@@ -1,7 +1,0 @@
-{
-  "DbPath": "mongodb://127.0.0.1:2000/blog",
-  "RedisHost": "127.0.0.1",
-  "RedisPort": 2001,
-  "RedisNoReadyCheck": true,
-  "RedisPassword": ""
-}
