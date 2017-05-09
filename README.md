@@ -38,12 +38,12 @@ _不仅仅是博客，更是 Demo_，适合新人入门学习的完整项目。
 * JS库 [jQuery](http://jquery.com/)
 * UI库 [Bootstrap 3](http://getbootstrap.com/)
 * 持久化 [MongoDB](https://www.mongodb.org/)
-* 缓存 [Redis](http://redis.io/)
+* 缓存（可选） [Redis](http://redis.io/)
 * 日志 [winston](https://github.com/winstonjs/winston/)
 
 ## 快速开始
 #### 准备条件
-安装最新版[Node.js](https://nodejs.org/en/download/)、[bower](http://bower.io/)、[MongoDB](https://www.mongodb.org/downloads/)、[Redis](http://redis.io/download/)。  
+安装最新版[Node.js](https://nodejs.org/en/download/)、[bower](http://bower.io/)、[MongoDB](https://www.mongodb.org/downloads/)、[Redis](http://redis.io/download/)（可选）。  
 （注：如果使用Windows平台，可以去[https://github.com/MSOpenTech/redis/releases](https://github.com/MSOpenTech/redis/releases)下载安装Redis）
 #### 安装依赖
 * 服务端依赖  
@@ -56,12 +56,15 @@ $ bower install
 ```
 
 #### 参数配置
-根据实际情况修改 config.json 配置文件，DbPath 是MongoDB路径，RedisHost 是Redis所在ip，RedisPort 是Redis端口号。  
+根据实际情况修改 config.json 配置文件，DbPath 是 MongoDB 路径，Redis 是缓存配置，Redis.Active 表示是否启用Redis缓存（默认不开启），Redis.Host 表示 Redis 服务器 ip 地址，Redis.Port 表示 Redis 端口号。  
 ```JSON
 {
   "DbPath": "mongodb://localhost/iBlog2",
-  "RedisHost": "127.0.0.1",
-  "RedisPort": 6379
+  "Redis": {
+      "Active": false,
+      "Host": "127.0.0.1",
+      "Port": 6379
+  }
 }
 ```
 后台管理员账号信息在 config/account.json 中配置，默认管理员账号 admin ，密码 123456 ，密码需[md5加密](http://md5jiami.51240.com/)存储。
