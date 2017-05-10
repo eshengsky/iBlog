@@ -29,6 +29,7 @@
     "serve-favicon": "~2.3.0",
     "shortid": "^2.2.4",
     "winston": "^2.1.1",
-    "winston-mongodb": "^2.0.8"
+    "winston-mongodb": "^2.0.8",
+    "kerberos": "^0.0.17"
   }
 }
