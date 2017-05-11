@@ -1,10 +1,10 @@
 {
   "SiteName": "Acexy-个人博客",
   "SiteDomain": "www.thankjava.com",
-  "RecordNo": "浙ICP备XXX号",
+  "RecordNo": "Thankjava",
   "LogoPath": "/images/zhr.jpg",
   "PageSize": "10",
-  "ExpandMenu": "false",
+  "ExpandMenu": "true",
   "CacheExpired": "300",
   "TranslateKey": "",
   "EnableStatistics": "false",
