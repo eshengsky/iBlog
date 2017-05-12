@@ -18,7 +18,7 @@
     "i18n": "0.8.2",
     "jquery-file-upload-middleware": "^0.1.7",
     "moment": "^2.11.1",
-    "mongoose": "^4.3.7",
+    "mongoose": "~4.3.7",
     "mongoose-schema-extend": "^0.2.0",
     "morgan": "~1.6.1",
     "multer": "^1.1.0",
