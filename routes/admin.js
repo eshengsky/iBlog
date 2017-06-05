@@ -531,10 +531,9 @@ router.post('/saveSettings', function (req, res, next) {
         EnableShare: req.body.EnableShare,
         JiaThisId: req.body.JiaThisId,
         ShowComments: req.body.ShowComments,
-        ChangyanId: req.body.ChangyanId,
-        ChangyanConf: req.body.ChangyanConf,
         ShowGuestbook: req.body.ShowGuestbook,
-        YouyanId: req.body.YouyanId
+        ChangyanId: req.body.ChangyanId,
+        ChangyanConf: req.body.ChangyanConf
     });
     res.end();
 });

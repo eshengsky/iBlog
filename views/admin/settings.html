@@ -154,6 +154,13 @@
                                                     </div>
                                                 </li>
                                                 <li class="list-group-item clearfix">
+                                                    <div class="pull-left">@(__("admin.settings.message"))（<a href="http://changyan.kuaizhan.com" target="_blank">@__("admin.settings.comments_service")</a>）</div>
+                                                    <div class="pull-right">
+                                                        <input id="ShowGuestbook" type="hidden" name="ShowGuestbook" value="@config.ShowGuestbook"/>
+                                                        <input type="checkbox" checked="@(config.ShowGuestbook === 'true')" class="js-switch"/>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item clearfix">
                                                     <div class="pull-left">@__("admin.settings.comments_id")</div>
                                                     <div class="pull-right">
                                                         <input id="ChangyanId" type="text" name="ChangyanId" placeholder='@__("admin.settings.comments_id_placeholder")' value="@config.ChangyanId" class="form-control"/>
@@ -163,19 +170,6 @@
                                                     <div class="pull-left">@__("admin.settings.comments_conf")</div>
                                                     <div class="pull-right">
                                                         <input id="ChangyanConf" type="text" name="ChangyanConf" placeholder='@__("admin.settings.comments_conf_placeholder")' value="@config.ChangyanConf" class="form-control"/>
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item clearfix">
-                                                    <div class="pull-left">@(__("admin.settings.message"))（<a href="http://www.uyan.cc/" target="_blank">@__("admin.settings.message_service")</a>）</div>
-                                                    <div class="pull-right">
-                                                        <input id="ShowGuestbook" type="hidden" name="ShowGuestbook" value="@config.ShowGuestbook"/>
-                                                        <input type="checkbox" checked="@(config.ShowGuestbook === 'true')" class="js-switch"/>
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item clearfix">
-                                                    <div class="pull-left">@__("admin.settings.message_id")</div>
-                                                    <div class="pull-right">
-                                                        <input id="YouyanId" type="text" name="YouyanId" placeholder='@__("admin.settings.message_id_placeholder")' value="@config.YouyanId" class="form-control"/>
                                                     </div>
                                                 </li>
                                             </ul>
