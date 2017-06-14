@@ -55,6 +55,51 @@
         });
     });
 
+    var fontSelectors = [
+        '.post-title h1',
+        '.post-content blockquote',
+        '.post-content blockquote h2',
+        '.post-content h2',
+        '.post-content h3',
+        '.post-content pre'
+    ];
+
+    //缩小字体
+    $(".btn-font-minus").on("click", function () {
+        if ($(this).hasClass('disabled')) {
+            return;
+        }
+        var bodyFontSize = parseInt($('body').css('fontSize')) - 2;
+        $('body').css('fontSize', bodyFontSize + 'px');
+        fontSelectors.forEach(function (selector) {
+            $(selector).css('fontSize', (parseInt($(selector).css('fontSize')) - 2) + 'px');
+        });
+        if (bodyFontSize <= 12) {
+            $(this).addClass('disabled');
+        }
+        if ($(".btn-font-plus").hasClass('disabled')) {
+            $(".btn-font-plus").removeClass('disabled');
+        }
+    });
+
+    //增大字体
+    $(".btn-font-plus").on("click", function () {
+        if ($(this).hasClass('disabled')) {
+            return;
+        }
+        var bodyFontSize = parseInt($('body').css('fontSize')) + 2;
+        $('body').css('fontSize', bodyFontSize + 'px');
+        fontSelectors.forEach(function (selector) {
+            $(selector).css('fontSize', (parseInt($(selector).css('fontSize')) + 2) + 'px');
+        });
+        if (bodyFontSize >= 36) {
+            $(this).addClass('disabled');
+        }
+        if ($(".btn-font-minus").hasClass('disabled')) {
+            $(".btn-font-minus").removeClass('disabled');
+        }
+    });
+
     //改变窗口大小后，重置目录，以修正各标题的定位
     $(window).on("resize", function () {
         $.fn.scrollNav("resetPos");
