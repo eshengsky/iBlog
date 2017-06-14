@@ -38,6 +38,7 @@
         $(".post-content").removeClass("col-md-9").addClass("col-md-12");
         //CSS动画完成后再执行
         $(".post-content").on('transitionend webkitTransitionEnd oTransitionEnd', function () {
+            $("#control-wrap").hide();  //TODO：需隐藏2次，否则显示不正常，待研究~
             $(".btn-menu").css("margin-left", $(".post-content").width() + 31 + "px");
             $(".btn-menu").show();
         });
