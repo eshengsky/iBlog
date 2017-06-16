@@ -572,11 +572,13 @@ body.dragging, body.dragging * {
 .list-wrap .spinner .bounce1 {
     -webkit-animation-delay: -0.32s;
     animation-delay: -0.32s;
+    margin-right: 5px;
 }
 
 .list-wrap .spinner .bounce2 {
     -webkit-animation-delay: -0.16s;
     animation-delay: -0.16s;
+    margin-right: 5px;
 }
 
 @-webkit-keyframes sk-bouncedelay {
