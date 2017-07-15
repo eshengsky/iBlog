@@ -250,7 +250,7 @@ router.get('/:category/:article', function (req, res, next) {
                 Title: article.Title,
                 CategoryAlias: cateAlias,
                 CateName: tool.jsonQuery(categories, {"_id": article.CategoryId}).CateName,
-                CreateTimeStr: moment(article.CreateTime).format('YYYY-MM-DD hh:mm'),
+                CreateTimeStr: moment(article.CreateTime).format('YYYY-MM-DD HH:mm'),
                 ViewCount: article.ViewCount,
                 LabelList: labelList,
                 Summary: article.Summary,
