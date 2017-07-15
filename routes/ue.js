@@ -9,6 +9,7 @@ var shortid = require('shortid');
 //图片上传配置
 var storageImg = multer.diskStorage({
     destination: function (req, file, cb) {
+        req.query.uniqueId = req.query.uniqueId?req.query.uniqueId:new Date().getTime()+'';
         if (req.query.uniqueId) {
             var dirPathParent = path.join(__dirname, '../public/uploads/', req.query.uniqueId),
                 dirPath = path.join(dirPathParent, 'img');//不能直接创建dirPath，因为父目录不存在会抛出异常
