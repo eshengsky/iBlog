@@ -88,7 +88,7 @@
         //给编辑器内部引入css文件
         ,
         iframeCssUrl: URL + '../../libs/bootstrap/dist/css/bootstrap.min.css'
-        + '#' + URL + '../../stylesheets/Site.css'
+        + '#' + URL + '../../stylesheets/site.css'
         + '#' + URL + '../../libs/font-awesome/css/font-awesome.min.css'
 
         //indentValue
