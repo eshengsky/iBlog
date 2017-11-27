@@ -58,7 +58,7 @@ exports.errLogger = function (req, err) {
         route: req.route
     };
     if (!message && obj.code === 404) {
-        message = 'not fount "' + req.originalUrl + '"';
+        message = 'not found "' + req.originalUrl + '"';
     }
     logger.error(message, obj);
 };
