@@ -254,6 +254,7 @@ router.get('/:category/:article', function (req, res, next) {
                 ViewCount: article.ViewCount,
                 LabelList: labelList,
                 Summary: article.Summary,
+                Summary_share:article.Summary.replace(/\r\n/g,"。"),
                 Content: article.Content
             };
             res.render('blog/article', {
