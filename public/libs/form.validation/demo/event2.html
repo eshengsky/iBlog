@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FormValidation demo</title>
+
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../dist/css/formValidation.css"/>
+
+    <script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/formValidation.js"></script>
+    <script type="text/javascript" src="../dist/js/framework/bootstrap.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="page-header">
+                    <h2>Using events</h2>
+                </div>
+
+                <form id="pickupForm" method="post" class="form-horizontal" action="target.php">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Postal Code<sup>*</sup></label>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <span class="input-group-addon">Singapore</span>
+                                <input type="text" class="form-control" name="postalCode" placeholder="Postal Code" />
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <button type="button" class="btn btn-default" id="lookupBtn">Lookup Address</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-9 col-lg-offset-3">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#pickupForm')
+        .formValidation({
+            message: 'This value is not valid',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                postalCode: {
+                    message: 'The postal code is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'Your postal code is required and cannot be empty'
+                        },
+                        regexp: {
+                            regexp: /^([0][1-9]|[1-6][0-9]|[7]([0-3]|[5-9])|[8][0-2])(\d{4})$/,
+                            message: 'The input is not a valid Singapore postal code'
+                        },
+                        numeric: {
+                          message: 'Only numbers are allowed'
+                        }
+                    }
+                }
+            }
+        })
+        .on('err.field.fv', function(e, data) {
+            if (data.field == 'postalCode') {
+                // The postal code is not valid
+                $('#lookupBtn').prop('disabled', true).removeClass('btn-success btn-warning').addClass('btn-warning');
+            }
+        })
+        .on('success.field.fv', function(e, data) {
+            if (data.field == 'postalCode') {
+                // The postal code is valid
+                $('#lookupBtn').prop('disabled', false).removeClass('btn-success btn-warning').addClass('btn-success');
+            }
+        });
+});
+</script>
+</body>
+</html>

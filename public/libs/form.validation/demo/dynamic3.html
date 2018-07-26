@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FormValidation demo</title>
+
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../dist/css/formValidation.css"/>
+
+    <script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/formValidation.js"></script>
+    <script type="text/javascript" src="../dist/js/framework/bootstrap.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <div class="page-header">
+                <h2>Dynamic fields</h2>
+            </div>
+
+            <p>Please enter the information of sender and receiver:</p>
+
+            <form id="shippingForm" method="post" class="form-horizontal" action="target.php">
+                <fieldset>
+                    <legend>Sender</legend>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Name</label>
+                        <div class="col-lg-5">
+                            <input class="form-control" type="text" name="senderName" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Phone</label>
+                        <div class="col-lg-5">
+                            <input class="form-control" type="text" name="senderPhone" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Address</label>
+                        <div class="col-lg-5">
+                            <input class="form-control" type="text" name="senderAddress" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">City</label>
+                        <div class="col-lg-5">
+                            <input class="form-control" type="text" name="senderCity" />
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Receiver</legend>
+                    <div class="form-group">
+                        <div class="col-lg-5 col-lg-offset-3">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="receiver" value="0" checked /> Same as sender
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="receiverInfo" style="display: none;">
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Name</label>
+                            <div class="col-lg-5">
+                                <input class="form-control" type="text" name="receiverName" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Phone</label>
+                            <div class="col-lg-5">
+                                <input class="form-control" type="text" name="receiverPhone" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Address</label>
+                            <div class="col-lg-5">
+                                <input class="form-control" type="text" name="receiverAddress"
+                                        required data-fv-notempty-message="The address is required" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">City</label>
+                            <div class="col-lg-5">
+                                <input class="form-control" type="text" name="receiverCity"
+                                        required data-fv-notempty-message="The city is required" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="form-group">
+                    <div class="col-lg-offset-3 col-lg-3">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#shippingForm')
+            .on('init.form.fv', function(e, data) {
+                //console.log(data);
+            })
+            .formValidation({
+                message: 'This value is not valid',
+                icon: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    senderName: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The name is required'
+                            }
+                        }
+                    },
+                    senderPhone: {
+                        message: 'The phone number is not valid',
+                        validators: {
+                            notEmpty: {
+                                message: 'The phone number is required'
+                            },
+                            digits: {
+                                message: 'The value can contain only digits'
+                            }
+                        }
+                    },
+                    senderAddress: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The address is required'
+                            }
+                        }
+                    },
+                    senderCity: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The city is required'
+                            }
+                        }
+                    }
+                }
+            })
+            .on('added.field.fv', function(e, data) {
+                console.log('Added element --> ', data.field, data.element, data.options);
+            })
+            .on('change', 'input[type="checkbox"][name="receiver"]', function() {
+                var sameAsSender   = $(this).is(':checked'),
+                    $receiverPhone = $('#shippingForm').find('input[name="receiverPhone"]').eq(0),
+                    $receiverCity  = $('#shippingForm').find('input[name="receiverCity"]').eq(0);
+
+                if (sameAsSender) {
+                    $('#receiverInfo').hide();
+
+                    $('#shippingForm')
+                        // Remove field
+                        .formValidation('removeField', 'receiverName')
+                        .formValidation('removeField', 'receiverAddress')
+                        .formValidation('removeField', $receiverPhone)
+                        .formValidation('removeField', $receiverCity);
+                } else {
+                    $('#receiverInfo').show();
+
+                    $('#shippingForm')
+                        // Add field
+                        .formValidation('addField', 'receiverName', {
+                            validators: {
+                                notEmpty: {
+                                    message: 'The name is required'
+                                }
+                            }
+                        })
+                        .formValidation('addField', 'receiverAddress')      // The options are automatically parsed from HTML attributes
+                        .formValidation('addField', $receiverPhone, {
+                            message: 'The phone number is not valid',
+                            validators: {
+                                notEmpty: {
+                                    message: 'The phone number is required'
+                                },
+                                digits: {
+                                    message: 'The value can contain only digits'
+                                }
+                            }
+                        })
+                        .formValidation('addField', $receiverCity);  // The options are automatically parsed from HTML attributes
+                }
+            });
+    });
+</script>
+</body>
+</html>

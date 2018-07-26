@@ -1,6 +1,7 @@
 ﻿UE.registerUI('inserticon', function (editor, uiName) {
+    return;
     var dialog = new UE.ui.Dialog({
-        iframeUrl: '/libs/ueditor/dialogs/inserticon/inserticon.html',
+        iframeUrl: '/static/libs/ueditor/dialogs/inserticon/inserticon.html',
         editor: editor,
         name: uiName,
         title: "字体图标"

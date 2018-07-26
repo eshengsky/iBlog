@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FormValidation &rarr; Pure demo</title>
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css"/>
+    <!--[if lte IE 8]><link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css"><![endif]-->
+    <!--[if gt IE 8]><!--><link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css"><!--<![endif]-->
+
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+    <link rel="stylesheet" href="../../dist/css/formValidation.css"/>
+
+    <script type="text/javascript" src="../../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../../dist/js/formValidation.js"></script>
+    <script type="text/javascript" src="../../dist/js/framework/pure.js"></script>
+
+    <style type="text/css">
+    body {
+        padding: 50px 0;
+    }
+    </style>
+</head>
+<body>
+<div class="pure-g">
+    <div class="pure-u-1 pure-u-md-6-24"></div>
+
+    <div class="pure-u-1 pure-u-md-12-24">
+        <form id="stackedForm" class="pure-form pure-form-stacked">
+            <fieldset>
+                <legend>Pure Form</legend>
+
+                <div class="pure-control-group">
+                    <label>Full name</label>
+                    <input name="firstName" type="text" placeholder="First name" />
+                </div>
+
+                <div class="pure-control-group">
+                    <label></label>
+                    <input name="lastName" type="text" placeholder="Last name" />
+                </div>
+
+                <div class="pure-control-group">
+                    <label>Username</label>
+                    <input name="username" type="text" placeholder="Username" />
+                </div>
+
+                <div class="pure-control-group">
+                    <label>Email address</label>
+                    <input name="email" type="text" placeholder="Email address" />
+                </div>
+
+                <div class="pure-control-group">
+                    <label>Password</label>
+                    <input name="password" type="password" placeholder="Password" />
+                </div>
+
+                <div class="pure-control-group">
+                    <label>Gender</label>
+                    <label class="pure-radio">
+                        <input name="gender" type="radio" value="male" /> Male
+                    </label>
+                    <label class="pure-radio">
+                        <input name="gender" type="radio" value="female" /> Female
+                    </label>
+                    <label class="pure-radio">
+                        <input name="gender" type="radio" value="other" /> Other
+                    </label>
+                </div>
+
+                <div class="pure-control-group">
+                    <label id="captchaOperation"></label>
+                    <input type="text" name="captcha" />
+                </div>
+
+                <div class="pure-control-group">
+                    <label class="pure-checkbox">
+                        <input name="agree" type="checkbox" /> Agree with the terms and conditions
+                    </label>
+                </div>
+
+                <button type="submit" class="pure-button pure-button-primary">Submit</button>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="pure-u-1 pure-u-md-6-24"></div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    // Generate a simple captcha
+    function randomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    };
+    $('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
+
+    $('#stackedForm').formValidation({
+        framework: 'pure',
+        icon: {
+            valid: 'fa fa-check',
+            invalid: 'fa fa-times',
+            validating: 'fa fa-refresh',
+            feedback: 'fv-control-feedback'
+        },
+        fields: {
+            firstName: {
+                validators: {
+                    notEmpty: {
+                        message: 'The first name is required'
+                    }
+                }
+            },
+            lastName: {
+                validators: {
+                    notEmpty: {
+                        message: 'The last name is required'
+                    }
+                }
+            },
+            username: {
+                message: 'The username is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_\.]+$/,
+                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required'
+                    },
+                    different: {
+                        field: 'username',
+                        message: 'The password cannot be the same as username'
+                    }
+                }
+            },
+            gender: {
+                validators: {
+                    notEmpty: {
+                        message: 'The gender is required'
+                    }
+                }
+            },
+            captcha: {
+                validators: {
+                    callback: {
+                        message: 'Wrong answer',
+                        callback: function(value, validator) {
+                            var items = $('#captchaOperation').html().split(' '), sum = parseInt(items[0]) + parseInt(items[2]);
+                            return value == sum;
+                        }
+                    }
+                }
+            },
+            agree: {
+                validators: {
+                    notEmpty: {
+                        message: 'You must agree with the terms and conditions'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>

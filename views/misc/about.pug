@@ -1,0 +1,41 @@
+extends ../shared/layout
+block content
+    .container-fluid.detail-container
+        .row
+            .col-lg-4.col-lg-offset-4
+                .about-block.animated.fadeInDown
+                    .widget-head-color-box.navy-bg.p-lg.text-center
+                        .m-b-md
+                            h2.font-bold.no-margins!=about.FirstLine
+                            h4!=about.SecondLine
+                        img.img-circle.profile-img.m-b-md.animated.zoomIn(alt='profile', src=about.PhotoPath)
+                        h4
+                            span#job-title!=about.ThirdLine
+                    .widget-text-box
+                        p!=about.Profile
+                        .row
+                            .col-md-6
+                                i.fab.fa-github(title=__("about.github"))
+                                = ' '
+                                a(href=about.Github, target='_blank')=about.Github
+                            .col-md-6
+                                i.fa.fa-envelope(title=__("about.email"))
+                                = ' '
+                                !=about.Email
+        include ../shared/footer
+    include ../shared/top
+    script(type='text/javascript', src='/static/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/jQuery-cycleText/dist/js/jquery.cycleText.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/js/about.js', charset='utf-8')
+    script.
+        var logoPath = "#{settings.LogoPath}";
+        var jiathis_config = {
+            data_track_clickback: true,
+            url: window.location.href,
+            summary: "",
+            title: "#{settings.SiteName + ' - 关于'}"
+        };
+    script(type='text/javascript', src='http://v3.jiathis.com/code/jia.js?uid=#{settings.JiaThisId}', charset='utf-8')
+    script(type='text/javascript', src='/static/jquery-qrcode/dist/jquery-qrcode.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/js/top.js', charset='utf-8')

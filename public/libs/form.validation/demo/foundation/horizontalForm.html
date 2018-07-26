@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FormValidation &rarr; Foundation demo</title>
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/css/normalize.min.css"/>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/css/foundation.min.css"/>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+    <link rel="stylesheet" href="../../dist/css/formValidation.css"/>
+
+    <script type="text/javascript" src="../../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/js/vendor/modernizr.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/js/foundation/foundation.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/js/foundation/foundation.tooltip.js"></script>
+
+    <script type="text/javascript" src="../../dist/js/formValidation.js"></script>
+    <script type="text/javascript" src="../../dist/js/framework/foundation.js"></script>
+
+    <style type="text/css">
+    body {
+        padding: 50px 0;
+    }
+    </style>
+</head>
+<body>
+    <div class="row">
+        <div class="small-8 small-centered columns">
+            <h2>Foundation Form</h2>
+            <hr/>
+
+            <form id="horizontalForm" method="post" action="../target.php">
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label class="right">Full name</label>
+                    </div>
+                    <div class="small-9 columns">
+                        <div class="row">
+                            <div class="small-6 columns">
+                                <input type="text" name="firstName" placeholder="First name" />
+                            </div>
+
+                            <div class="small-6 columns">
+                                <input type="text" name="lastName" placeholder="Last name" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label class="right">Username</label>
+                    </div>    
+                    <div class="small-6 small-pull-3 columns">
+                        <input type="text" name="username" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label class="right">Email address</label>
+                    </div>
+                    <div class="small-6 small-pull-3 columns">
+                        <input type="text" name="email" />
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label class="right">Password</label>
+                    </div>
+                    <div class="small-6 small-pull-3 columns">
+                        <input type="password" name="password" />
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label class="right">Gender</label>
+                    </div>
+                    <div class="small-9 columns">
+                        <input type="radio" name="gender" value="male" /><label>Male</label>
+                        <input type="radio" name="gender" value="female" /><label>Female</label>
+                        <input type="radio" name="gender" value="other" /><label>Other</label>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="small-3 columns">
+                        <label class="right" id="captchaOperation"></label>
+                    </div>
+                    <div class="small-3 small-pull-6 columns">
+                        <input type="text" name="captcha" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="small-9 small-push-3 columns">
+                        <input type="checkbox" name="agree" value="agree" /> <label>Agree with the terms and conditions</label>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="small-9 small-push-3 columns">
+                        <button type="submit" class="button small" name="signup" value="Sign up">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $(document).foundation();
+
+    // Generate a simple captcha
+    function randomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    };
+    $('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
+
+    $('#horizontalForm').formValidation({
+        framework: 'foundation',
+        icon: {
+            valid: 'fa fa-check',
+            invalid: 'fa fa-times',
+            validating: 'fa fa-refresh',
+            feedback: 'fv-control-feedback'
+        },
+        fields: {
+            firstName: {
+                row: '.small-6',
+                validators: {
+                    notEmpty: {
+                        message: 'The first name is required'
+                    }
+                }
+            },
+            lastName: {
+                row: '.small-6',
+                validators: {
+                    notEmpty: {
+                        message: 'The last name is required'
+                    }
+                }
+            },
+            username: {
+                message: 'The username is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_\.]+$/,
+                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required'
+                    },
+                    different: {
+                        field: 'username',
+                        message: 'The password cannot be the same as username'
+                    }
+                }
+            },
+            gender: {
+                validators: {
+                    notEmpty: {
+                        message: 'The gender is required'
+                    }
+                }
+            },
+            captcha: {
+                validators: {
+                    callback: {
+                        message: 'Wrong answer',
+                        callback: function(value, validator) {
+                            var items = $('#captchaOperation').html().split(' '), sum = parseInt(items[0]) + parseInt(items[2]);
+                            return value == sum;
+                        }
+                    }
+                }
+            },
+            agree: {
+                validators: {
+                    notEmpty: {
+                        message: 'You must agree with the terms and conditions'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>

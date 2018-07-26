@@ -1,4 +1,5 @@
-var logModel = require('../models/log').LogModel;
+const logModel = require('../models/log')
+    .LogModel;
 
 /**
  * 获取所有日志
@@ -6,10 +7,10 @@ var logModel = require('../models/log').LogModel;
  * @param callback 回调函数
  */
 exports.getAll = function (params, callback) {
-    var page = parseInt(params.pageIndex) || 1;
-    var size = parseInt(params.pageSize) || 10;
+    let page = parseInt(params.pageIndex) || 1;
+    const size = parseInt(params.pageSize) || 10;
     page = page > 0 ? page : 1;
-    var options = {};
+    const options = {};
     options.skip = (page - 1) * size;
     options.limit = size;
     switch (params.sortName) {
@@ -20,7 +21,7 @@ exports.getAll = function (params, callback) {
             options.sort = params.sortOrder === 'desc' ? '-timestamp' : 'timestamp';
             break;
     }
-    logModel.find({}, {}, options, function (err, logs) {
+    logModel.find({}, {}, options, (err, logs) => {
         if (err) {
             return callback(err);
         }
@@ -34,11 +35,10 @@ exports.getAll = function (params, callback) {
  * @param callback 回调函数
  */
 exports.getAllCount = function (params, callback) {
-    logModel.count(function (err, count) {
+    logModel.count((err, count) => {
         if (err) {
             return callback(err);
         }
         return callback(null, count);
     });
 };
-

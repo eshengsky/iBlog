@@ -1,10 +1,10 @@
 var redis = require('redis');
 var config = require('../config');
-var redisActive = config.Redis.Active;
+var redisEnable = config.redis.enable;
 
-if (redisActive) {
+if (redisEnable) {
     // use custom redis url or localhost
-    var client = redis.createClient(config.Redis.Port || 6379, config.Redis.Host || 'localhost');
+    var client = redis.createClient(config.redis.port || 6379, config.redis.host || 'localhost');
     client.on('error', function (err) {
         console.error('Redis连接错误: ' + err);
         process.exit(1);
@@ -19,9 +19,10 @@ if (redisActive) {
  * @param callback 回调函数
  */
 exports.setItem = function (key, value, expired, callback) {
-    if (!redisActive) {
+    if (!redisEnable) {
         return callback(null);
     }
+
     client.set(key, JSON.stringify(value), function (err) {
         if (err) {
             return callback(err);
@@ -39,9 +40,10 @@ exports.setItem = function (key, value, expired, callback) {
  * @param callback 回调函数
  */
 exports.getItem = function (key, callback) {
-    if (!redisActive) {
+    if (!redisEnable) {
         return callback(null, null);
     }
+
     client.get(key, function (err, reply) {
         if (err) {
             return callback(err);
@@ -56,9 +58,10 @@ exports.getItem = function (key, callback) {
  * @param callback 回调函数
  */
 exports.removeItem = function (key, callback) {
-    if (!redisActive) {
+    if (!redisEnable) {
         return callback(null);
     }
+
     client.del(key, function (err) {
         if (err) {
             return callback(err);

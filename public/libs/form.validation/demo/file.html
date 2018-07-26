@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FormValidation demo</title>
+
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../dist/css/formValidation.css"/>
+
+    <script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/formValidation.js"></script>
+    <script type="text/javascript" src="../dist/js/framework/bootstrap.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="page-header">
+                    <h2>File validator</h2>
+                </div>
+
+                <form id="defaultForm" method="post" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">File</label>
+                        <div class="col-lg-7">
+                            <input type="file" class="form-control" name="firstFile" />
+                            <span class="help-block">Choose a pdf file.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">File with min size</label>
+                        <div class="col-lg-7">
+                            <input type="file" class="form-control" name="secondFile" />
+                            <span class="help-block">Choose a pdf file with a size more than 1M.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">File with max size</label>
+                        <div class="col-lg-7">
+                            <input type="file" class="form-control" name="thirdFile" />
+                            <span class="help-block">Choose a pdf file with a size less than 10M.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label">File with min and max size</label>
+                        <div class="col-lg-7">
+                            <input type="file" class="form-control" name="fourthFile" />
+                            <span class="help-block">Choose a pdf file with a size between 1M and 10M.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-9 col-lg-offset-4">
+                            <button type="submit" class="btn btn-primary" name="filevalidate" value="Validate">Validate</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#defaultForm').formValidation({
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            firstFile: {
+                validators: {
+                    file: {
+                        extension: 'pdf',
+                        type: 'application/pdf',
+                        message: 'Please choose a pdf file.'
+                    }
+                }
+            },
+            secondFile: {
+                validators: {
+                    file: {
+                        extension: 'pdf',
+                        type: 'application/pdf',
+                        minSize: 1024*1024,
+                        message: 'Please choose a pdf file with a size more than 1M.'
+                    }
+                }
+            },
+            thirdFile: {
+                validators: {
+                    file: {
+                        extension: 'pdf',
+                        type: 'application/pdf',
+                        maxSize: 10*1024*1024,
+                        message: 'Please choose a pdf file with a size less than 10M.'
+                    }
+                }
+            },
+            fourthFile: {
+                validators: {
+                    file: {
+                        extension: 'pdf',
+                        type: 'application/pdf',
+                        minSize: 1024*1024,
+                        maxSize: 10*1024*1024,
+                        message: 'Please choose a pdf file with a size between 1M and 10M.'
+                    }
+                }
+            }
+        }
+    })
+    .on('success.form.fv', function(e) {
+        e.preventDefault();
+        $('#defaultForm').data('formValidation').disableSubmitButtons(true);
+    });
+});
+</script>
+</body>
+</html>

@@ -1,15 +1,15 @@
-var express = require('express');
-var router = express.Router();
-var path = require('path');
-var async = require('async');
-var category = require('../proxy/category');
-var tool = require('../utility/tool');
+const express = require('express');
+const router = express.Router();
+const path = require('path');
+const async = require('async');
+const category = require('../proxy/category');
+const tool = require('../utility/tool');
 
-router.get('/', function (req, res, next) {
+router.get('/', (req, res, next) => {
     async.parallel([
-        //获取配置
+        // 获取配置
         function (cb) {
-            tool.getConfig(path.join(__dirname, '../config/settings.json'), function (err, settings) {
+            tool.getConfig(path.join(__dirname, '../config/settings.json'), (err, settings) => {
                 if (err) {
                     cb(err);
                 } else {
@@ -17,9 +17,10 @@ router.get('/', function (req, res, next) {
                 }
             });
         },
-        //获取分类
+
+        // 获取分类
         function (cb) {
-            category.getAll(function (err, categories) {
+            category.getAll((err, categories) => {
                 if (err) {
                     cb(err);
                 } else {
@@ -27,8 +28,8 @@ router.get('/', function (req, res, next) {
                 }
             });
         }
-    ], function (err, results) {
-        var settings,
+    ], (err, results) => {
+        let settings,
             categories;
         if (err) {
             next(err);
@@ -37,8 +38,8 @@ router.get('/', function (req, res, next) {
             categories = results[1];
             res.render('blog/index', {
                 cateData: categories,
-                config: settings,
-                title: settings['SiteName'],
+                settings,
+                title: settings.SiteName,
                 currentCate: '',
                 isRoot: true
             });

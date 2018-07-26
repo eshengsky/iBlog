@@ -1,64 +1,50 @@
-var winston = require('winston');
-var dbPath = require('../config').DbPath;
-// var dbPath =  process.env.MONGOLAB_URI;
-var os = require('os');
-require('winston-mongodb').MongoDB;
-var logger = new (winston.Logger)({
+const winston = require('winston');
+const dbPath = require('../config.json')
+    .mongoUrl;
+const os = require('os');
+require('winston-mongodb')
+    .MongoDB;
+
+const logger = new winston.Logger({
     transports: [
         new (winston.transports.Console)({
-            json: true,
-            colorize: true,
-            level: 'error',
-            handleExceptions: true
+            colorize: true
         }),
         new (winston.transports.MongoDB)({
             db: dbPath,
-            level: 'info', //会记录info、warn、error3个级别的日志
-            handleExceptions: true
+            level: 'warn',
         })
     ],
     exitOnError: false
 });
 
-/**
- * 记录错误日志
- * @param req 请求对象
- * @param err 错误对象
- */
-exports.errLogger = function (req, err) {
-    var obj = {},
+logger.errLogger = function (err, req) {
+    let obj = {},
         message = err.message;
     obj.process = {
         pid: process.pid,
-        uid: process.getuid ? process.getuid() : null,
-        gid: process.getgid ? process.getgid() : null,
-        cwd: process.cwd(),
-        execPath: process.execPath,
-        version: process.version,
-        argv: process.argv,
-        memoryUsage: process.memoryUsage()
+        uid: process.getuid ? process.getuid() : null
     };
     obj.os = {
-        hostname: os.hostname(),
-        loadavg: os.loadavg(),
-        uptime: os.uptime()
+        hostname: os.hostname()
     };
     obj.stack = err.stack && err.stack.split('\n');
     obj.code = err.status || 500;
-    var query = {};
-    for (var q in req.query) {
-        query[q] = req.query[q];
-    }
-    obj.req = {
-        baseUrl: req.baseUrl,
-        originalUrl: req.originalUrl,
-        query: query,
-        body: req.body,
-        ip: req.ip,
-        route: req.route
-    };
-    if (!message && obj.code === 404) {
-        message = 'not found "' + req.originalUrl + '"';
+    if (req) {
+        const query = {};
+        for (const q in req.query) {
+            query[q] = req.query[q];
+        }
+        obj.req = {
+            baseUrl: req.baseUrl,
+            originalUrl: req.originalUrl,
+            query,
+            body: req.body,
+            ip: req.ip,
+            route: req.route
+        };
     }
     logger.error(message, obj);
 };
+
+module.exports = logger;

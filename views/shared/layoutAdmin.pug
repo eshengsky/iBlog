@@ -1,0 +1,81 @@
+doctype html
+html(lang='zh-CN')
+	head
+		meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		title=title
+		link(href='/static/bootstrap/dist/css/bootstrap.min.css', rel='stylesheet')
+		link(href='/static/css/admin.css', rel='stylesheet')
+		link(href='/static/@fortawesome/fontawesome-free/css/all.min.css', rel='stylesheet')
+		link(href='/static/animate.css/animate.min.css', rel='stylesheet')
+	body.fuelux
+		#wrapper
+			nav.navbar-default.navbar-static-side(role='navigation')
+				.sidebar-collapse
+					ul#side-menu.nav.metismenu
+						li.nav-header
+							.dropdown.profile-element
+								span
+									a(href='/', target='_blank')
+										img.img-circle.img-lg(alt='image', src=settings.LogoPath)
+								a(href='/admin')
+									h4=__("layoutAdmin.title")
+							.logo-element
+								img.img-circle.img-sm(alt='image', src=settings.LogoPath)
+						li
+							a(href='/admin')
+								i.fa.fa-chart-bar
+								span.nav-label=__("layoutAdmin.web_statistic")
+						li
+							a(href='#')
+								i.fa.fa-file-alt
+								span.nav-label=__("layoutAdmin.blog_management")
+								span.fa.arrow
+							ul.nav.nav-second-level.collapse
+								li
+									a(href='/admin/newarticle')=__("layoutAdmin.new_article")
+								li
+									a(href='/admin/categorymanage')=__("layoutAdmin.classified_management")
+								li
+									a(href='/admin/articlemanage')=__("layoutAdmin.article_management")
+						li
+							a(href='/admin/comments')
+								i.fa.fa-edit
+								span.nav-label=__("layoutAdmin.comment_management")
+						li
+							a(href='/admin/guestbook')
+								i.fa.fa-comment-dots
+								span.nav-label=__("layoutAdmin.msg_management")
+						li
+							a(href='/admin/aboutmanage')
+								i.fa.fa-user
+								span.nav-label=__("layoutAdmin.about_management")
+						li
+							a(href='/admin/cachemanage')
+								i.fa.fa-database
+								span.nav-label=__("layoutAdmin.cache_management")
+						li
+							a(href='/admin/exception')
+								i.fa.fa-bug
+								span.nav-label=__("layoutAdmin.exception_management")
+						li
+							a(href='/admin/settings')
+								i.fa.fa-cogs
+								span.nav-label=__("layoutAdmin.settings")
+			#page-wrapper.gray-bg
+				.row.border-bottom
+					nav.navbar.navbar-static-top(role='navigation', style='margin-bottom: 0')
+						.navbar-header
+							a.navbar-minimalize.minimalize-styl-2.btn.btn-primary(href='#')
+								i.fa.fa-bars
+						form#logoutForm(action='/logout', method='Post')
+							ul.nav.navbar-top-links.navbar-right
+								li
+									a(href="javascript:$('#logoutForm').submit()", title=__("layoutAdmin.btn_logout"))
+										i.fas.fa-sign-out-alt
+										|  #{__("layoutAdmin.btn_logout")}
+				block content
+				.footer
+					.text-center
+						| #{new Date().getFullYear()} © All Rights Reserved#{settings.RecordNo ? ' | ' + settings.RecordNo : ''}

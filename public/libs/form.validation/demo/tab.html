@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FormValidation demo</title>
+
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../dist/css/formValidation.css"/>
+
+    <script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/formValidation.js"></script>
+    <script type="text/javascript" src="../dist/js/framework/bootstrap.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <section>
+                <div class="col-xs-8 col-xs-offset-2">
+                    <div class="page-header">
+                        <h2>Tab example</h2>
+                    </div>
+
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#info-tab" data-toggle="tab">Information <i class="glyphicon"></i></a></li>
+                        <li><a href="#address-tab" data-toggle="tab">Address <i class="glyphicon"></i></a></li>
+                    </ul>
+
+                    <form id="accountForm" method="post" class="form-horizontal" action="target.php" style="margin-top: 20px;">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="info-tab">
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">Full name</label>
+                                    <div class="col-xs-5">
+                                        <input type="text" class="form-control" name="fullName" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">Company</label>
+                                    <div class="col-xs-5">
+                                        <input type="text" class="form-control" name="company" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">Job title</label>
+                                    <div class="col-xs-5">
+                                        <input type="text" class="form-control" name="jobTitle" />
+                                    </div>
+                                </div>
+                                <div class="form-group" id="emailRow">
+                                    <label class="col-xs-3 control-label">Email</label>
+                                    <div class="col-xs-5">
+                                        <input type="text" class="form-control" name="email[]" />
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <button type="button" class="btn btn-default btn-sm addButton">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="address-tab">
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">Address</label>
+                                    <div class="col-xs-5">
+                                        <input type="text" class="form-control" name="address" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">City</label>
+                                    <div class="col-xs-5">
+                                        <input type="text" class="form-control" name="city" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">Country</label>
+                                    <div class="col-xs-5">
+                                        <select class="form-control" name="country">
+                                            <option value="">Select a country</option>
+                                            <option value="FR">France</option>
+                                            <option value="DE">Germany</option>
+                                            <option value="IT">Italy</option>
+                                            <option value="JP">Japan</option>
+                                            <option value="RU">Russian</option>
+                                            <option value="US">United State</option>
+                                            <option value="GB">United Kingdom</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-5 col-xs-offset-3">
+                                <button type="submit" class="btn btn-primary">Validate</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="form-group hide" id="emailTemplate">
+        <div class="col-xs-offset-3 col-xs-5">
+            <input class="form-control" type="text" name="email[]" />
+        </div>
+        <div class="col-xs-4">
+            <button type="button" class="btn btn-default btn-sm removeButton">Remove</button>
+        </div>
+    </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#accountForm')
+        .formValidation({
+            excluded: [':disabled'],
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                fullName: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The full name is required'
+                        }
+                    }
+                },
+                company: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The company name is required'
+                        }
+                    }
+                },
+                jobTitle: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The company name is required'
+                        }
+                    }
+                },
+                'email[]': {
+                    validators: {
+                        notEmpty: {
+                            message: 'The email address is required'
+                        },
+                        emailAddress: {
+                            message: 'The email address is not valid'
+                        }
+                    }
+                },
+                address: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The address is required'
+                        }
+                    }
+                },
+                city: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The city is required'
+                        }
+                    }
+                },
+                country: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The city is required'
+                        }
+                    }
+                }
+            }
+        })
+        .on('err.form.fv', function(e) {
+            var $form          = $(e.target),
+                fv             = $form.data('formValidation'),
+                $invalidFields = fv.getInvalidFields();
+
+            for (var i = 0; i < $invalidFields.length; i++) {
+                var $field    = $invalidFields.eq(i),
+                    autoFocus = fv.isOptionEnabled($field.attr('data-fv-field'), 'autoFocus');
+
+                if (autoFocus) {
+                    // Activate the tab containing the field if exists
+                    var $tabPane = $field.parents('.tab-pane'), tabId;
+                    if ($tabPane && (tabId = $tabPane.attr('id'))) {
+                        $('a[href="#' + tabId + '"][data-toggle="tab"]').tab('show');
+                    }
+                    break;
+                }
+            }
+        })
+        .on('status.field.fv', function(e, data) {
+            var validator = data.fv,
+                $tabPane  = data.element.parents('.tab-pane'),
+                tabId     = $tabPane.attr('id');
+            
+            if (tabId) {
+                var $icon = $('a[href="#' + tabId + '"][data-toggle="tab"]').parent().find('i');
+
+                // Add custom class to tab containing the field
+                if (data.status == validator.STATUS_INVALID) {
+                    $icon.removeClass('glyphicon-ok').addClass('glyphicon-remove');
+                } else if (data.status == validator.STATUS_VALID) {
+                    $icon.removeClass('glyphicon-ok glyphicon-remove');
+
+                    var isValidTab = validator.isValidContainer($tabPane);
+                    if (isValidTab !== null) {
+                        $icon.addClass(isValidTab ? 'glyphicon-ok' : 'glyphicon-remove');
+                    }
+                }
+            }
+        });
+
+    $('.addButton').on('click', function() {
+        var $template = $('#emailTemplate'),
+            $row      = $template.clone().removeAttr('id').insertAfter('#emailRow').removeClass('hide'),
+            $el       = $row.find('input').eq(0);
+        $('#accountForm').formValidation('addField', $el);
+
+        $row.on('click', '.removeButton', function(e) {
+            $('#accountForm').formValidation('removeField', $el);
+            $row.remove();
+        });
+    });
+});
+</script>
+</body>
+</html>

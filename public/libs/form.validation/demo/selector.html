@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FormValidation demo</title>
+
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" />
+    <link rel="stylesheet" href="../dist/css/formValidation.css"/>
+
+    <script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/formValidation.js"></script>
+    <script type="text/javascript" src="../dist/js/framework/bootstrap.js"></script>
+
+    <style type="text/css">
+    .form-control-feedback {
+        top: 10px;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <section>
+                <div class="col-sm-8 col-sm-offset-2">
+                    <div class="page-header">
+                        <h2>Credit card information</h2>
+                    </div>
+
+                    <form id="paymentForm" method="post" class="form-horizontal" action="target.php">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Card holder</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="cardHolder" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Credit card number</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="ccNumber" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Expiration</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" placeholder="Month" data-stripe="exp-month" />
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" placeholder="Year" data-stripe="exp-year" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">CVV</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control cvvNumber" name="cvv" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <button type="submit" class="btn btn-primary">Pay</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#paymentForm')
+        .formValidation({
+            icon: {
+                valid: 'fa fa-check',
+                invalid: 'fa fa-times',
+                validating: 'fa fa-refresh'
+            },
+            fields: {
+                cardHolder: {
+                    selector: '#cardHolder',
+                    validators: {
+                        notEmpty: {
+                            message: 'The card holder is required'
+                        },
+                        stringCase: {
+                            message: 'The card holder must contain upper case characters only',
+                            case: 'upper'
+                        }
+                    }
+                },
+                ccNumber: {
+                    selector: '#ccNumber',
+                    validators: {
+                        notEmpty: {
+                            message: 'The credit card number is required'
+                        },
+                        creditCard: {
+                            message: 'The credit card number is not valid'
+                        }
+                    }
+                },
+                expMonth: {
+                    selector: '[data-stripe="exp-month"]',
+                    validators: {
+                        notEmpty: {
+                            message: 'The expiration month is required'
+                        },
+                        digits: {
+                            message: 'The expiration month can contain digits only'
+                        },
+                        callback: {
+                            message: 'Expired',
+                            callback: function(value, validator) {
+                                value = parseInt(value, 10);
+                                var year         = validator.getFieldElements('expYear').val(),
+                                    currentMonth = new Date().getMonth() + 1,
+                                    currentYear  = new Date().getFullYear();
+                                if (value < 0 || value > 12) {
+                                    return false;
+                                }
+                                if (year == '') {
+                                    return true;
+                                }
+                                year = parseInt(year, 10);
+                                if (year > currentYear || (year == currentYear && value > currentMonth)) {
+                                    validator.updateStatus('expYear', 'VALID');
+                                    return true;
+                                } else {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                },
+                expYear: {
+                    selector: '[data-stripe="exp-year"]',
+                    validators: {
+                        notEmpty: {
+                            message: 'The expiration year is required'
+                        },
+                        digits: {
+                            message: 'The expiration year can contain digits only'
+                        },
+                        callback: {
+                            message: 'Expired',
+                            callback: function(value, validator) {
+                                value = parseInt(value, 10);
+                                var month        = validator.getFieldElements('expMonth').val(),
+                                    currentMonth = new Date().getMonth() + 1,
+                                    currentYear  = new Date().getFullYear();
+                                if (value < currentYear || value > currentYear + 10) {
+                                    return false;
+                                }
+                                if (month == '') {
+                                    return false;
+                                }
+                                month = parseInt(month, 10);
+                                if (value > currentYear || (value == currentYear && month > currentMonth)) {
+                                    validator.updateStatus('expMonth', 'VALID');
+                                    return true;
+                                } else {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                },
+                cvvNumber: {
+                    selector: '.cvvNumber',
+                    validators: {
+                        notEmpty: {
+                            message: 'The CVV number is required'
+                        },
+                        cvv: {
+                            message: 'The value is not a valid CVV',
+                            creditCardField: 'ccNumber'
+                        }
+                    }
+                }
+            }
+        })
+        .on('success.validator.fv', function(e, data) {
+            if (data.field === 'ccNumber' && data.validator === 'creditCard') {
+                var $icon = data.element.data('fv.icon');
+                switch (data.result.type) {
+                    case 'AMERICAN_EXPRESS':
+                        $icon.removeClass().addClass('form-control-feedback fa fa-cc-amex');
+                        break;
+                    case 'DISCOVER':
+                        $icon.removeClass().addClass('form-control-feedback fa fa-cc-discover');
+                        break;
+                    case 'MASTERCARD':
+                        $icon.removeClass().addClass('form-control-feedback fa fa-cc-mastercard');
+                        break;
+                    case 'VISA':
+                        $icon.removeClass().addClass('form-control-feedback fa fa-cc-visa');
+                        break;
+                    default:
+                        $icon.removeClass().addClass('form-control-feedback fa fa-credit-card');
+                        break;
+                }
+            }
+        })
+        .on('err.field.fv', function(e, data) {
+            if (data.field === 'ccNumber') {
+                var $icon = data.element.data('fv.icon');
+                $icon.removeClass().addClass('form-control-feedback fa fa-times');
+            }
+        });
+});
+</script>
+</body>
+</html>

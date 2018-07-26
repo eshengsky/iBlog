@@ -1,0 +1,59 @@
+extends ../shared/layout
+block content
+    link(href='/static/sweetalert/dist/sweetalert.css', rel='stylesheet')
+    script(type='text/javascript', src='/static/sweetalert/dist/sweetalert.min.js', charset='utf-8')
+    .container-fluid.detail-container
+        .row
+            .col-sm-12.col-xs-12.col-md-8.col-md-offset-2.detail-wrap
+                #SOHUCS(sid='guestbook')
+                    script.
+                        (function () {
+                            var appid = '#{settings.ChangyanId}';
+                            var conf = '#{settings.ChangyanConf}';
+                            if (!appid || !conf) {
+                                swal({
+                                    title: '配置异常',
+                                    text: '请先在后台系统设置中配置畅言参数！',
+                                    type: "error"
+                                });
+                            }
+                            var width = window.innerWidth || document.documentElement.clientWidth;
+                            if (width < 960) {
+                                window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+                            } else {
+                                var loadJs = function (d, a) {
+                                    var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+                                    var b = document.createElement("script");
+                                    b.setAttribute("type", "text/javascript");
+                                    b.setAttribute("charset", "UTF-8");
+                                    b.setAttribute("src", d);
+                                    if (typeof a === "function") {
+                                        if (window.attachEvent) {
+                                            b.onreadystatechange = function () {
+                                                var e = b.readyState;
+                                                if (e === "loaded" || e === "complete") {
+                                                    b.onreadystatechange = null;
+                                                    a()
+                                                }
+                                            }
+                                        } else {
+                                            b.onload = a
+                                        }
+                                    }
+                                    c.appendChild(b)
+                                };
+                                loadJs("http://changyan.sohu.com/upload/changyan.js", function () {
+                                    window.changyan.api.config({
+                                        appid: appid, conf: conf
+                                    })
+                                });
+                            }
+                        })();
+        include ../shared/footer
+    include ../shared/top
+    script(type='text/javascript', src='/static/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/js/guestbook.js', charset='utf-8')
+    script.
+        var tools = [2];
+    script(type = 'text/javascript', src = '/static/js/top.js', charset = 'utf-8')

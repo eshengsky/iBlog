@@ -1,6 +1,6 @@
 ﻿UE.registerUI('insertalert', function (editor, uiName) {
     var dialog = new UE.ui.Dialog({
-        iframeUrl: '/libs//ueditor/dialogs/insertalert/insertalert.html',
+        iframeUrl: '/static/libs/ueditor/dialogs/insertalert/insertalert.html',
         editor: editor,
         name: uiName,
         title: "提示框"

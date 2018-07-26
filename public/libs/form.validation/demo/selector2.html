@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FormValidation demo</title>
+
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../dist/css/formValidation.css"/>
+
+    <script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/formValidation.js"></script>
+    <script type="text/javascript" src="../dist/js/framework/bootstrap.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <section>
+                <div class="col-xs-8 col-xs-offset-2">
+                    <div class="page-header">
+                        <h2><code>selector</code> example</h2>
+                    </div>
+
+                    <form id="sumForm" method="post" class="form-horizontal" action="target.php">
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">Percentage</label>
+                            <div class="col-xs-5">
+                                <input class="form-control percent" name="first" type="text" value="0" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-offset-3 col-xs-5">
+                                <input class="form-control percent" name="second" type="text" value="0" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-offset-3 col-xs-5">
+                                <input class="form-control percent" name="third" type="text" value="0" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-9 col-xs-offset-3">
+                                <button type="submit" class="btn btn-primary">Validate</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#sumForm')
+        .formValidation({
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                percentage: {
+                    selector: '.percent',
+                    verbose: false,
+                    validators: {
+                        notEmpty: {
+                            message: 'The percentage is required'
+                        },
+                        stringLength: {
+                            max: 3,
+                            message: 'The percentage must be less than 3 characters'
+                        },
+                        callback: {
+                            message: 'The sum must be 100',
+                            callback: function(value, validator, $field) {
+                                var percentage = validator.getFieldElements('percentage'),
+                                    length     = percentage.length,
+                                    sum        = 0;
+
+                                for (var i = 0; i < length; i++) {
+                                    sum += parseFloat($(percentage[i]).val());
+                                }
+                                if (sum == 100) {
+                                    validator.updateStatus('percentage', 'VALID', 'callback');
+                                    return true;
+                                }
+
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+        })
+        .on('success.field.fv', function(e, data) {
+            data.fv.disableSubmitButtons(false);
+        });
+});
+</script>
+</body>
+</html>

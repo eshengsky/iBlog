@@ -1,0 +1,123 @@
+extends ../shared/layout
+block content
+    link(href='/static/css/selectlist.css', rel='stylesheet')
+    link(href='/static/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css', rel='stylesheet')
+    link(href='https://cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css', rel='stylesheet')
+    link(href='/static/css/github-markdown.css', rel='stylesheet')
+    .container-fluid.render-body
+        .row
+            .col-md-2.category-block.hidden-sm.hidden-xs
+                .category-top
+                    | #{__("blog.index.category")}
+                .category-split
+                .category-list
+                    ul.nav.nav-pills.nav-stacked
+                        li(class=`${currentCate === "" ? "active" : ""}`)
+                            a(href='/blog')
+                                img(src='/static/images/全部分类.svg')
+                                span=__('Category.all')
+                        each cate in cateData
+                            li(class=`${currentCate === cate.Alias ? "active" : ""}`)
+                                if(!cate.Link)
+                                    a(href=`/blog${cate.Alias ? "/" + cate.Alias : ""}`)
+                                        img(src=cate.Img)
+                                        span=cate.CateName
+                                else
+                                    a(href=cate.Link, target='_blank')
+                                        img(src=cate.Img)
+                                        span=cate.CateName
+                        li(class=`${currentCate === "other" ? "active" : ""}`)
+                            a(href='/blog/other')
+                                img(src='/static/images/未分类.svg')
+                                span=__('Category.uncate')
+            .col-md-8.col-md-offset-2.blog-list
+                .row.data-block
+                    .col-md-12
+                        .list-wrap
+                            .row.top-bar
+                                form#filterForm(action='/blog/getPosts', method='Post')
+                                    .col-md-7.col-sm-4.hidden-xs.list-top-left
+                                        a.current(title=__("blog.index.sort_date"), sort='date')=__("blog.index.date")
+                                        = ' '
+                                        a(title='#{__("blog.index.sort_title")}',sort='title')=__("blog.index.title")
+                                        input#CateAlias.hidden(type='text', value=currentCate, name='CateAlias')
+                                        input#SortBy.hidden(type='text', value=0, name='SortBy')
+                                        input#PageIndex.hidden(type='text', value=1, name='PageIndex')
+                                        input#PageSize.hidden(type='text', value=settings.PageSize, name='PageSize')
+                                    .col-md-5.list-top-right
+                                        .input-group
+                                            .input-group-btn
+                                                .btn-group.selectlist(data-resize='auto', data-initialize='selectlist')
+                                                    button.btn.btn-white.dropdown-toggle(data-toggle='dropdown', type='button')
+                                                        span.selected-label
+                                                        span.caret
+                                                        span.sr-only Toggle Dropdown
+                                                    ul.dropdown-menu.animated-quick.fadeInDown(role='menu')
+                                                        li.active(data-value='0', data-selected='true')
+                                                            a(href='#')=__("blog.index.full")
+                                                        li(data-value='1')
+                                                            a(href='#')=__("blog.index.title")
+                                                        li(data-value='2')
+                                                            a(href='#')=__("blog.index.tag")
+                                                        li(data-value='3')
+                                                            a(href='#')=__("blog.index.date")
+                                                    input#FilterType.hidden.hidden-field(type='text', readonly="readonly", aria_hidden="true", name='FilterType')
+                                            input#Keyword.form-control(type='text', placeholder=__("blog.index.keyword"), name='Keyword')
+                                            .input-group-btn
+                                                button#btnFilter.btn.btn-white(type='button')
+                                                    i.fa.fa-search
+                                                    =' '
+                                                    span.hidden-sm.hidden-xs=__("blog.index.search")
+                            ol.list-unstyled
+                            #load-list.spinner(style='display: none;')
+                                .bounce1
+                                .bounce2
+                                .bounce3
+                            #no-more.text-muted.text-center(style='display: none;')
+                                | #{__("blog.index.reach_end")}
+                    #scrollSpy.col-md-1
+                        ul#page-nav.list-unstyled.hidden-sm.hidden-xs.affix-top
+                include ../shared/footer
+            .col-md-2.hidden-sm.hidden-xs.empty-block
+    .post-cover
+    .post-modal.col-md-7.col-sm-12.col-xs-12
+        .modal-header
+            h4
+        .modal-body
+            .sk-cube-grid(style='display:none;')
+                .sk-cube.sk-cube1
+                .sk-cube.sk-cube2
+                .sk-cube.sk-cube3
+                .sk-cube.sk-cube4
+                .sk-cube.sk-cube5
+                .sk-cube.sk-cube6
+                .sk-cube.sk-cube7
+                .sk-cube.sk-cube8
+                .sk-cube.sk-cube9
+            .post-content
+                div
+        .modal-footer
+            #label-foot.col-md-7.text-left.hidden-sm.hidden-xs(style='margin-top: 3px;')
+            .col-md-5.text-right
+                button#btnCloseModal.btn.btn-white(type='button')=__("blog.index.close")
+                a#btnFullMode.btn.btn-green(href='', target='_blank')
+                    i.fa.fa-external-link
+                    |  #{__("blog.index.full_mode")}
+    include ../shared/top
+    script(type='text/javascript', src='/static/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/js/selectlist.js', charset='utf-8')
+    script(type='text/javascript', src='/static/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js', charset='utf-8')
+    script(type='text/javascript', src='https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/js/index.js', charset='utf-8')
+    script.
+        var logoPath = "#{settings.LogoPath}";
+        var jiathis_config = {
+            data_track_clickback: true,
+            url: "http://#{settings.SiteDomain}",
+            summary: "",
+            title: "#{settings.SiteName}"
+        };
+    script(type='text/javascript', src='http://v3.jiathis.com/code/jia.js?uid=#{settings.JiaThisId}', charset='utf-8')
+    script(type='text/javascript', src='/static/jquery-qrcode/dist/jquery-qrcode.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/js/top.js', charset='utf-8')
