@@ -3,10 +3,8 @@
 **不仅仅是博客，更是 Demo**，是适合新人入门学习的完整项目。  
 (基于 ASP.NET 的版本见 [这里](https://github.com/eshengsky/iBlog/))
 
-[![Gitter chat](https://badges.gitter.im/frontend-zh/Lobby.png)](https://gitter.im/frontend-zh/Lobby)
-
 ## 在线实例
-我的博客 [http://www.skysun.name/](http://www.skysun.name/)
+我的博客 [http://139.196.22.226/](http://139.196.22.226/)
 
 ## [noginx](https://github.com/eshengsky/noginx)
 [noginx](https://github.com/eshengsky/noginx) 是基于 Node.js 的 HTTP 及反向代理服务器（类似 nginx），如果你有多台 iBlog2 服务器实例，你可以使用 [noginx](https://github.com/eshengsky/noginx) 进行代理转发和负载均衡。
