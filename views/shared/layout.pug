@@ -1,0 +1,70 @@
+doctype html
+html(lang='zh-CN')
+    head
+        meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        meta(name='keywords', content=`${keywords ? keywords : "blog,iBlog"}`)
+        meta(name='description', content=`${description ? description : "iBlog"}`)
+        link(href='/static/bootstrap/dist/css/bootstrap.min.css', rel='stylesheet')
+        link(href='/static/css/bootstrap-addon.css', rel='stylesheet')
+        link(href='/static/css/site.css', rel='stylesheet')
+        link(href='/static/@fortawesome/fontawesome-free/css/all.min.css', rel='stylesheet')
+        link(href='/static/css/share.css', rel='stylesheet')
+        link(href='/static/css/animate-custom.css', rel='stylesheet')
+        title=title
+    body.fuelux
+        if(isRoot)
+            link(href='/static/css/home-loading.css', rel='stylesheet')
+            #home-loading.home-loading
+                #loading-con.loading-con(style='display:none;')
+                    .loading-circle
+                    script.
+                        var home_loading_begin = new Date();
+                        document.body.style.overflow = "hidden";
+                        function imgLoad() {
+                            document.getElementById("home-loading").style.background = "#f3f3f4";
+                            document.getElementById("loading-con").style.display = "block";
+                        }
+                    img#loadingImg(alt='loading', src=settings.LogoPath, onload='imgLoad();')
+        .navbar.navbar-default.navbar-fixed-top
+            .container-fluid
+                .navbar-header
+                    button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.navbar-brand(href='/')
+                        img(src=settings.LogoPath)
+                        =' '
+                        span=settings.SiteName
+                .navbar-collapse.collapse
+                    ul.nav.navbar-nav.my-nav-pills.navbar-right
+                        li
+                            a(href='/blog')
+                                i.fa.fa-pen-nib.fa-fw
+                                |  #{__("layout.blog")}
+                        if(settings.ShowGuestbook === 'true')
+                            li
+                                a(href='/guestbook')
+                                    i.fa.fa-comment-dots.fa-fw
+                                    |  #{__("layout.message")}
+                        li
+                            a(href='/about')
+                                i.fa.fa-user.fa-fw
+                                |  #{__("layout.about")}
+                        li
+                            a.locale-link(href=`/locale/${__("lang-code")}`)
+                                i.fa.fa-language.fa-fw
+                                |  #{__("language")}
+        block content
+        if(settings.EnableStatistics === 'true')
+            // 百度统计代码
+            script.
+                var _hmt = _hmt || [];
+                (function () {
+                    var hm = document.createElement("script");
+                    hm.src = '//hm.baidu.com/hm.js?#{settings.StatisticsId}';
+                    var s = document.getElementsByTagName("script")[0];
+                    s.parentNode.insertBefore(hm, s);
+                })();

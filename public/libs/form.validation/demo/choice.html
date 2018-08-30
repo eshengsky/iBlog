@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FormValidation demo</title>
+
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../dist/css/formValidation.css"/>
+
+    <script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/formValidation.js"></script>
+    <script type="text/javascript" src="../dist/js/framework/bootstrap.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <section>
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="page-header">
+                        <h2>choice validator</h2>
+                    </div>
+
+                    <form id="interviewForm" method="post" class="form-horizontal" action="target.php">
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Programming Languages</label>
+                            <div class="col-lg-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="languages[]" value="net" /> .Net
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="languages[]" value="java" /> Java
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="languages[]" value="c" /> C/C++
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="languages[]" value="php" /> PHP
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="languages[]" value="perl" /> Perl
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="languages[]" value="ruby" /> Ruby
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="languages[]" value="python" /> Python
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="languages[]" value="javascript" /> Javascript
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Editors</label>
+                            <div class="col-lg-4">
+                                <select class="form-control" name="editors[]" multiple="multiple" style="height: 200px;">
+                                    <option value="" disabled>Choose 2 - 3 editors</option>
+                                    <option value="atom">Atom</option>
+                                    <option value="eclipse">Eclipse</option>
+                                    <option value="netbeen">NetBean</option>
+                                    <option value="nodepadplusplus">Nodepad++</option>
+                                    <option value="phpstorm">PHP Storm</option>
+                                    <option value="sublime">Sublime</option>
+                                    <option value="webstorm">Web Storm</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-9 col-lg-offset-3">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#interviewForm').formValidation({
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            'languages[]': {
+                validators: {
+                    choice: {
+                        min: 2,
+                        max: 4,
+                        message: 'Please choose %s - %s programming languages you are good at'
+                    }
+                }
+            },
+            'editors[]': {
+                validators: {
+                    choice: {
+                        min: 2,
+                        max: 3,
+                        message: 'Please choose %s - %s editors you know'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>

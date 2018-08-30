@@ -1,0 +1,115 @@
+extends ../shared/layoutAdmin
+block content
+    link(href='/static/fuelux/dist/css/fuelux.min.css', rel='stylesheet')
+    link(href='/static/libs/form.validation/dist/css/formValidation.min.css', rel='stylesheet')
+    link(href='/static/sweetalert/dist/sweetalert.css', rel='stylesheet')
+    link(href='https://cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css', rel='stylesheet')
+    link(href='/static/simplemde/dist/simplemde.min.css', rel='stylesheet')
+    .row.wrapper.border-bottom.white-bg.page-heading
+        .col-lg-8
+            h2=__("admin.newarticle.new")
+    .wrapper.wrapper-content.animated.fadeIn
+        .row
+            .col-lg-12
+                .ibox
+                    .ibox-content
+                        form#postForm(action='/admin/saveArticle', method='post')
+                            .row
+                                .col-md-9
+                                    .form-group
+                                        label(for='Title')=__("admin.newarticle.title")
+                                        input#Title.form-control(type='text', name='Title', placeholder=__("admin.newarticle.enter_title"))
+                                .col-md-3
+                                    .form-group
+                                        label(for='CategoryId', style='display:block;')=__("admin.newarticle.category")
+                                        #Categorylist.btn-group.selectlist(data-resize='auto', data-initialize='selectlist')
+                                            button.btn.btn-white.dropdown-toggle(data-toggle='dropdown', type='button')
+                                                span.selected-label
+                                                span.caret
+                                                span.sr-only Toggle Dropdown
+                                            ul.dropdown-menu(role='menu')
+                                            input#CategoryId.hidden.hidden-field(type='text', name='CategoryId', readonly='readonly', aria-hidden='true')
+                            .row
+                                .col-md-9
+                                    .form-group
+                                        label(for='Alias') Alias
+                                        input#Alias.form-control(type='text', name='Alias', placeholder=__("admin.newarticle.enter_alias"))
+                                .col-md-3
+                                    .form-group
+                                        button.btn.btn-sm.btn-white.btn-alias(type='button')
+                                            i.fa.fa-flash
+                                            |  #{__("admin.newarticle.auto_generate")}
+                            .form-group
+                                label(for='Summary')=__("admin.newarticle.summary")
+                                textarea#Summary.form-control(name='Summary', style='min-width: 100%;max-width: 100%;', placeholder=__("admin.newarticle.enter_summary"))
+                            .form-group
+                                label(style='display:block;')=__("admin.newarticle.source")
+                                label#soruceLocal.radio-custom.radio-inline(data-initialize='radio')
+                                    input.sr-only(data-toggle='#block-local', name='Source', type='radio', value='0', checked='checked')
+                                    |  #{__("admin.newarticle.local")}
+                                label#soruceLink.radio-custom.radio-inline(data-initialize='radio')
+                                    input.sr-only(data-toggle='#block-link', name='Source', type='radio', value='1')
+                                    |  #{__("admin.newarticle.url")}
+                            #block-local
+                                .form-group
+                                    label(for='pillbox-input')=__("admin.newarticle.tag")
+                                    #myPillbox.pillbox(data-initialize='pillbox')
+                                        ul.clearfix.pill-group
+                                            li.pillbox-input-wrap.btn-group
+                                                a.pillbox-more
+                                                    | and
+                                                    span.pillbox-more-count
+                                                    |  more...
+                                                input#pillbox-input.form-control.dropdown-toggle.pillbox-add-item(type='text', placeholder=__("admin.newarticle.enter_to_add"))
+                                                button.dropdown-toggle.sr-only(type='button')
+                                                    span.caret
+                                                    span.sr-only Toggle Dropdown
+                                                ul.suggest.dropdown-menu(role='menu', data-toggle='dropdown', data-flip='auto')
+                                    input#Labels(type='hidden', name='Labels')
+                                .form-group
+                                    label=__("admin.newarticle.article")
+                                    .form-group
+                                        label#ueRadio.radio-custom.radio-inline(data-initialize='radio')
+                                            input.sr-only(name='ContentType', type='radio', value='')
+                                            | UEditor
+                                        label#mdRadio.radio-custom.radio-inline(data-initialize='radio')
+                                            input.sr-only(name='ContentType', type='radio', value='markdown')
+                                            | Markdown
+                                    script#editor(type='text/plain')
+                                    #mdEditor
+                                        textarea
+                            #block-link
+                                .form-group
+                                    label(for='Url') Url
+                                    input#Url.form-control(type='text', name='Url', placeholder=__("admin.newarticle.enter_url"))
+                            div
+                                button#btnPublish.btn.btn-danger(type='submit')
+                                    i.fa.fa-send
+                                    |  #{__("admin.newarticle.publish")}
+                                =' '
+                                button#btnSave.btn.btn-primary(type='button')
+                                    i.fa.fa-save
+                                    |  #{__("admin.newarticle.save_draft")}
+                                input#UniqueId(type='hidden',name='UniqueId',value=uniqueId)
+                                input#IsDraft(type='hidden',name='IsDraft')
+    script(type='text/javascript', src='/static/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/libs/form.validation/dist/js/formValidation.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/libs/form.validation/dist/js/framework/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/libs/form.validation/dist/js/language/zh_CN.js', charset='utf-8')
+    script(type='text/javascript', src='/static/metisMenu/dist/metisMenu.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/js/admin.js', charset='utf-8')
+    script(type='text/javascript', src='/static/libs/ueditor/ueditor.config.js', charset='utf-8')
+    script(type='text/javascript', src='/static/libs/ueditor/ueditor.all.js', charset='utf-8')
+    script(type='text/javascript', src='/static/libs/ueditor/dialogs/insertalert/insertalert.js', charset='utf-8')
+    script(type='text/javascript', src='/static/libs/ueditor/dialogs/inserticon/inserticon.js', charset='utf-8')
+    script(type='text/javascript', src='/static/libs/ueditor/dialogs/insertlabel/insertlabel.js', charset='utf-8')
+    script(type='text/javascript', src='https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/simplemde/dist/simplemde.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/fuelux/dist/js/fuelux.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/sweetalert/dist/sweetalert.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/js-md5/build/md5.min.js', charset='utf-8')
+    script.
+        var translateKey = '#{settings.TranslateKey}';
+        var editorType = '#{settings.Editor}';
+    script(type='text/javascript', src='/static/js/newarticle.js', charset='utf-8')

@@ -1,5 +1,5 @@
 {
-	"language": "English",
+	"language": "En",
 	"lang-code": "en-US",
 	"error": {
 		"404_1": "请求的页面已失联~系统已自动记录该错误。",
@@ -54,8 +54,7 @@
 		"small_screen": "手机访问该页面"
 	},
 	"about": {
-		"wechat": "微信",
-		"qr_code": "二维码",
+		"github": "Github",
 		"email": "邮箱"
 	},
 	"blog": {
@@ -88,7 +87,7 @@
 			"line_2": "第二行文本",
 			"line_3": "第三行文本，支持用 | 分割切换显示",
 			"self_intro": "个人简介",
-			"wechat": "微信号",
+			"github": "Github地址",
 			"email": "Email地址",
 			"save": "保存修改"
 		},
@@ -204,7 +203,8 @@
 			"message_service": "友言",
 			"message_id": "友言uid",
 			"message_id_placeholder": "申请的uid",
-			"save": "保存修改"
+			"save": "保存修改",
+			"editor": "默认文章编辑器"
 		}
 	}
 }

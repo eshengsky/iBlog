@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FormValidation demo</title>
+
+     <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../dist/css/formValidation.css"/>
+
+    <script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/formValidation.js"></script>
+    <script type="text/javascript" src="../dist/js/framework/bootstrap.js"></script>
+
+    <style type="text/css">
+    .row.no-gutter {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .row.no-gutter .form-control-feedback {
+        right: 0;
+    }
+
+    .row.no-gutter [class*='col-']:not(:first-child) input {
+        border-left: none;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .row.no-gutter [class*='col-']:not(:last-child) input {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .row.no-gutter [class*='col-']:not(:first-child),
+    .row.no-gutter [class*='col-']:not(:last-child) {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+                <div class="page-header">
+                    <h1>Validating multiple inputs as one</h1>
+                </div>
+
+                <form id="profileForm" class="form-horizontal" method="post" action="target.php">
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">Birthday</label>
+                        <div class="col-xs-9">
+                            <div class="row no-gutter">
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" name="date" placeholder="Date" />
+                                </div>
+
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" name="month" placeholder="Month" />
+                                </div>
+
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" name="year" placeholder="Year" />
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="dob" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-3">
+                            <button type="submit" class="btn btn-default">Validate</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#profileForm')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                dob: {
+                    excluded: false,
+                    validators: {
+                        notEmpty: {
+                            message: 'Please fill out each field',
+                            transformer: function($field, validatorName) {
+                                var y = $('#profileForm').find('[name="year"]').val(),
+                                    m = $('#profileForm').find('[name="month"]').val(),
+                                    d = $('#profileForm').find('[name="date"]').val();
+                                return (y === '' || m === '' || d === '') ? '' : [y, m, d].join('.');
+                            }
+                        },
+                        date: {
+                            format: 'YYYY.MM.DD',
+                            separator: '.',
+                            transformer: function($field, validatorName) {
+                                var y = $('#profileForm').find('[name="year"]').val(),
+                                    m = $('#profileForm').find('[name="month"]').val(),
+                                    d = $('#profileForm').find('[name="date"]').val();
+                                return [y, m, d].join('.');
+                            },
+                            message: 'Please enter a valid date'
+                        }
+                    }
+                }
+            }
+        })
+        .on('keyup', 'input[name="date"], input[name="month"], input[name="year"]', function(e) {
+            $('#profileForm').formValidation('revalidateField', 'dob');
+        });
+});
+</script>
+</body>
+</html>

@@ -1,8 +1,13 @@
 {
-  "DbPath": "mongodb://localhost/iBlog2",
-  "Redis": {
-    "Active": false,
-    "Host": "127.0.0.1",
-    "Port": 6379
-  }
+	"ssl": {
+		"enable": false,
+		"key": "/iBlog2/ssl/iblog2.key",
+		"cert": "/iBlog2/ssl/iblog2.crt"
+	},
+	"mongoUrl": "mongodb://localhost/iBlog2",
+	"redis": {
+		"enable": false,
+		"host": "127.0.0.1",
+		"port": 6379
+	}
 }

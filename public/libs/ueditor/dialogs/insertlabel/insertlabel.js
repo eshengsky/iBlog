@@ -1,6 +1,6 @@
 ﻿UE.registerUI('insertlabel', function (editor, uiName) {
     var dialog = new UE.ui.Dialog({
-        iframeUrl: '/libs/ueditor/dialogs/insertlabel/insertlabel.html',
+        iframeUrl: '/static/libs/ueditor/dialogs/insertlabel/insertlabel.html',
         editor: editor,
         name: uiName,
         title: "标签&徽章"

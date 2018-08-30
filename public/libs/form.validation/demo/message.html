@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FormValidation demo</title>
+
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../dist/css/formValidation.css"/>
+
+    <script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/formValidation.js"></script>
+    <script type="text/javascript" src="../dist/js/framework/bootstrap.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+        <div class="page-header">
+            <h1>Use error message that is returned from remote/callback validator</h1>
+        </div>
+
+        <div class="col-lg-8 col-lg-offset-2">
+            <form id="defaultForm" method="post" class="form-horizontal" action="target.php">
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Username</label>
+                    <div class="col-lg-5">
+                        <input type="text" class="form-control" name="username" autocomplete="off" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Email address</label>
+                    <div class="col-lg-5">
+                        <input type="text" class="form-control" name="email" autocomplete="off" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Password</label>
+                    <div class="col-lg-5">
+                        <input type="password" class="form-control" name="password" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-lg-9 col-lg-offset-3">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#defaultForm').formValidation({
+        message: 'This value is not valid',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            username: {
+                message: 'The username is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required and can\'t be empty'
+                    },
+                    remote: {
+                        url: 'remote2.php'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required and can\'t be empty'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    },
+                    remote: {
+                        url: 'remote2.php'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required and can\'t be empty'
+                    },
+                    different: {
+                        field: 'username',
+                        message: 'The password can\'t be the same as username'
+                    },
+                    callback: {
+                        callback: function(value, validator) {
+                            // Check the password strength
+                            if (value.length < 6) {
+                                return {
+                                    valid: false,
+                                    message: 'The password must be more than 6 characters'
+                                }
+                            }
+
+                            if (value === value.toLowerCase()) {
+                                return {
+                                    valid: false,
+                                    message: 'The password must contain at least one upper case character'
+                                }
+                            }
+                            if (value === value.toUpperCase()) {
+                                return {
+                                    valid: false,
+                                    message: 'The password must contain at least one lower case character'
+                                }
+                            }
+                            if (value.search(/[0-9]/) < 0) {
+                                return {
+                                    valid: false,
+                                    message: 'The password must contain at least one digit'
+                                }
+                            }
+
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>

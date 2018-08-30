@@ -1,0 +1,53 @@
+extends ../shared/layoutAdmin
+block content
+    link(href='/static/blueimp-file-upload/css/jquery.fileupload.css', rel='stylesheet')
+    link(href='/static/sweetalert/dist/sweetalert.css', rel='stylesheet')
+    .row.wrapper.border-bottom.white-bg.page-heading
+        .col-lg-8
+            h2=__("admin.aboutmanage.about")
+    .wrapper.wrapper-content.animated.fadeIn
+        .row
+            .col-lg-12
+                .ibox
+                    .ibox-content
+                        .row
+                            .col-lg-4.col-lg-offset-4
+                                .about-block
+                                    form#formAbout(action='/admin/saveAbout', method='Post')
+                                        .widget-head-color-box.navy-bg.p-lg.text-center
+                                            .m-b-md
+                                                input#FirstLine.form-group.form-control.text-center(type='text', name='FirstLine', placeholder=__("admin.aboutmanage.line_1"), value=about.FirstLine)
+                                                input#SecondLine.form-control.text-center(type='text', name='SecondLine', placeholder=__("admin.aboutmanage.line_2"), value=about.SecondLine)
+                                            span.fileinput-button
+                                                img.img-circle.profile-img.m-b-md(alt='profile', src=about.PhotoPath)
+                                                input.fileupload(type='file', name='file')
+                                                input#PhotoPath(type='hidden', name='PhotoPath', value=about.PhotoPath)
+                                            h4
+                                                span#job-title
+                                                    textarea#ThirdLine.form-control(name='ThirdLine', placeholder=__("admin.aboutmanage.line_3"))
+                                                        !=about.ThirdLine
+                                        .widget-text-box
+                                            p
+                                                textarea#Profile.form-control(name='Profile', cols='3', placeholder=__("admin.aboutmanage.self_intro"))
+                                                    !=about.Profile
+                                            .row.form-inline
+                                                .col-md-6
+                                                    i.fab.fa-github
+                                                    =' '
+                                                    input#Github.form-control(type='text', name='Github', placeholder=__("admin.aboutmanage.github"), value=about.Github)
+                                                    =' '
+                                                .col-md-6
+                                                    i.fa.fa-envelope
+                                                    =' '
+                                                    input#Email.form-control(type='text', name='Email', placeholder=__("admin.aboutmanage.email"), value=about.Email)
+                                        button#btnSave.btn.btn-primary.pull-right.m-t-sm(type='button')
+                                            i.fa.fa-cloud-upload
+                                            |  #{__("admin.aboutmanage.save")}
+    script(type='text/javascript', src='/static/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/metisMenu/dist/metisMenu.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/js/admin.js', charset='utf-8')
+    script(type='text/javascript', src='/static/blueimp-file-upload/js/vendor/jquery.ui.widget.js', charset='utf-8')
+    script(type='text/javascript', src='/static/blueimp-file-upload/js/jquery.fileupload.js', charset='utf-8')
+    script(type='text/javascript', src='/static/sweetalert/dist/sweetalert.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/js/aboutmanage.js', charset='utf-8')

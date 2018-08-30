@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FormValidation &rarr; SemanticUI demo</title>
+
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/semantic-ui/1.2.0/semantic.min.css"/>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+    <link rel="stylesheet" href="../../dist/css/formValidation.css"/>
+
+    <script type="text/javascript" src="../../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cdn.jsdelivr.net/semantic-ui/1.2.0/semantic.min.js"></script>
+
+    <script type="text/javascript" src="../../dist/js/formValidation.js"></script>
+    <script type="text/javascript" src="../../dist/js/framework/semantic.js"></script>
+
+    <style type="text/css">
+    body {
+        padding: 50px 0;
+    }
+    </style>
+</head>
+<body>
+    <div class="ui grid">
+        <div class="four wide column"></div>
+
+        <div class="eight wide column">
+            <h2 class="ui dividing header">Semantic-UI Stacked Form</h2>
+
+            <form id="stackedForm" class="ui form">
+                <div class="field">
+                    <label>Username</label>
+                    <div class="ui input icon">
+                        <input name="username" type="text" placeholder="Username" />
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Email address</label>
+                    <div class="ui input icon">
+                        <input name="email" type="text" placeholder="Email address" />
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Password</label>
+                    <div class="ui input icon">
+                        <input name="password" type="password" placeholder="Password" />
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Confirm password</label>
+                    <div class="ui input icon">
+                        <input name="confirmPassword" type="password" placeholder="Password" />
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Gender</label>
+                    <div class="ui radio">
+                        <input name="gender" type="radio" value="male" /> <label>Male</label>
+                    </div>
+                    <div class="ui radio">
+                        <input name="gender" type="radio" value="female" /> <label>Female</label>
+                    </div>
+                    <div class="ui radio">
+                        <input name="gender" type="radio" value="other" /> <label>Other</label>
+                    </div>
+                </div>
+
+                <div class="inline field">
+                    <div class="ui checkbox">
+                        <input name="agree" type="checkbox" /> <label>Agree with the terms and conditions</label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <button type="submit" class="ui primary button">Submit</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="four wide column"></div>
+    </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#stackedForm').formValidation({
+        framework: 'semantic',
+        icon: {
+            valid: 'checkmark icon',
+            invalid: 'remove icon',
+            validating: 'refresh icon',
+            feedback: 'fv-control-feedback'
+        },
+        fields: {
+            username: {
+                message: 'The username is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required and cannot be empty'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_\.]+$/,
+                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required and cannot be empty'
+                    },
+                    different: {
+                        field: 'username',
+                        message: 'The password cannot be the same as username'
+                    }
+                }
+            },
+            confirmPassword: {
+                validators: {
+                    notEmpty: {
+                        message: 'The confirm password is required and cannot be empty'
+                    },
+                    identical: {
+                        field: 'password',
+                        message: 'The password and its confirm are not the same'
+                    }
+                }
+            },
+            gender: {
+                validators: {
+                    notEmpty: {
+                        message: 'The gender is required'
+                    }
+                }
+            },
+            agree: {
+                validators: {
+                    notEmpty: {
+                        message: 'You must agree with the terms and conditions'
+                    }
+                }
+            }
+        }
+    });
+
+    // Use checkbox element
+    // http://semantic-ui.com/modules/checkbox.html
+    $('.ui.checkbox').checkbox();
+});
+</script>
+</body>
+</html>

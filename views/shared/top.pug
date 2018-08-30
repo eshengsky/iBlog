@@ -1,0 +1,28 @@
+ul.fixed-tool.list-unstyled
+    if(settings.EnableShare === 'true')
+        li.share-li(style='display: none;')
+            #share-menu.jiathis_style_32x32
+                a.jiathis_button_weixin
+                    i.fab.fa-weixin
+                a.jiathis_button_qzone
+                    i.fab.fa-qq
+                a.jiathis_button_tsina
+                    i.fab.fa-weibo
+                a.jiathis_button_renren
+                    i.fab.fa-renren
+                a.menu(title=__("top.share"))
+                    #ss_toggle.share(data-rot='180')
+                        .circle
+                        .bar
+    li.qr-li.hidden-sm.hidden-xs(style='display: none;')
+        a#qrBtn(title=__("top.qr_code"))
+            i.fa.fa-qrcode
+        .qrcontain.popover.left.animated.fadeInLeft
+            .arrow
+            .popover-content.text-center
+                #qrcode
+                span=__("top.small_screen")
+    li#scrollTop.top-li(style='display: none;')
+        a(title=__("top.back_to_top"))
+            i.fa.fa-arrow-up(style="top: 2px;")
+

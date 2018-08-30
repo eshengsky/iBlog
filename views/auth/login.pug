@@ -1,0 +1,28 @@
+extends ../shared/layout
+block content
+    link(href='/static/libs/supersized/slideshow/css/supersized.css', rel='stylesheet')
+    link(href='/static/libs/supersized/slideshow/theme/supersized.shutter.css', rel='stylesheet')
+    link(href='/static/sweetalert/dist/sweetalert.css', rel='stylesheet')
+    link(href='/static/animate.css/animate.min.css', rel='stylesheet')
+    link(href='/static/css/account.css', rel='stylesheet')
+    .container.animated.fadeInDownSmall
+        .row.login-block
+            h3.col-md-4.col-md-offset-4.login-title.text-center=__("auth.title")
+            .col-md-4.col-md-offset-4.login-wrap
+                .form-group.form-group-lg
+                    input#txtUserName.form-control(type='text', placeholder=__("auth.username"))
+                .form-group.form-group-lg
+                    input#txtPwd.form-control(type='password', placeholder=__("auth.password"))
+                button#btnLogin.btn.btn-green.btn-lg.btn-block(type='button', autocomplete='off')
+                    i.fa.fa-sign-in-alt.fa-fw
+                    =`${' ' + __("auth.login")}`
+    // Time Bar
+    #progress-back.load-item
+        #progress-bar
+    script(type='text/javascript', src='/static/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/sweetalert/dist/sweetalert.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/libs/supersized/slideshow/js/supersized.3.2.7.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/libs/supersized/slideshow/theme/supersized.shutter.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/js-md5/build/md5.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/js/account.js', charset='utf-8')

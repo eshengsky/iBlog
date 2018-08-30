@@ -1,0 +1,15 @@
+extends ../shared/layoutAdmin
+block content
+    .row.wrapper.border-bottom.white-bg.page-heading
+        .col-lg-8
+            h2=__("admin.comments.comments")
+    .wrapper.wrapper-content.animated.fadeIn
+        .row
+            .col-lg-12
+                .ibox
+                    .ibox-content
+                        iframe(src='http://changyan.kuaizhan.com/audit/comments/AUDITED/1', style='width: 100%; min-height: 4000px; border: none;')
+    script(type='text/javascript', src='/static/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/metisMenu/dist/metisMenu.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/js/admin.js', charset='utf-8')

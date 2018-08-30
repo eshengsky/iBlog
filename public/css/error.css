@@ -1,0 +1,33 @@
+.toast-top-right {
+    top: 12px !important;
+}
+
+.back-img {
+    background-image: url(/static/images/ErrorBack.jpg);
+    background-position: center center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.error-block {
+    padding-top: 70px;
+    text-align: center;
+}
+
+h1 {
+    color: #eee;
+    font-size: 220px;
+    line-height: 260px;
+}
+
+.desc {
+    color: #fff;
+    display: block;
+    font-size: 25px;
+    padding-bottom: 70px;
+}
+
+.home-link {
+    color: #ffffff;
+}

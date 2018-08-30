@@ -87,9 +87,9 @@
 
         //给编辑器内部引入css文件
         ,
-        iframeCssUrl: URL + '../../libs/bootstrap/dist/css/bootstrap.min.css'
-        + '#' + URL + '../../stylesheets/Site.css'
-        + '#' + URL + '../../libs/font-awesome/css/font-awesome.min.css'
+        iframeCssUrl: '/static/bootstrap/dist/css/bootstrap.min.css'
+        + '#/static/css/site.css'
+        + '#/static/@fortawesome/fontawesome-free/css/all.min.css'
 
         //indentValue
         //首行缩进距离,默认是2em

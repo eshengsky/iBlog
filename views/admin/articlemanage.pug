@@ -1,0 +1,32 @@
+extends ../shared/layoutAdmin
+block content
+    link(href='/static/libs/bootstrap-table/dist/bootstrap-table.min.css', rel='stylesheet')
+    link(href='/static/sweetalert/dist/sweetalert.css', rel='stylesheet')
+    .row.wrapper.border-bottom.white-bg.page-heading
+        .col-lg-8
+            h2 #{__("admin.articlemanage.post")}
+    .wrapper.wrapper-content.animated.fadeIn
+        .row
+            .col-lg-12
+                .ibox
+                    .ibox-content
+                        #toolbar
+                            button#remove.btn.btn-white(disabled='')
+                                i.far.fa-trash-alt
+                                =' '
+                                span.badge
+                            =' '
+                            a.btn.btn-white(href='/admin/newarticle')
+                                i.fa.fa-plus
+                                |  #{__("admin.articlemanage.new_article")}
+                        table#articles
+    script(type='text/javascript', src='/static/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/metisMenu/dist/metisMenu.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/js/admin.js', charset='utf-8')
+    script(type='text/javascript', src='/static/libs/bootstrap-table/dist/bootstrap-table.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/libs/bootstrap-table/dist/extensions/filter-control/bootstrap-table-filter-control.js', charset='utf-8')
+    script(type='text/javascript', src='/static/libs/bootstrap-table/dist/locale/bootstrap-table-zh-CN.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/lodash/lodash.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/sweetalert/dist/sweetalert.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/js/articlemanage.js', charset='utf-8')

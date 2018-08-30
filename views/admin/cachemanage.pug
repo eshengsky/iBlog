@@ -1,0 +1,50 @@
+extends ../shared/layoutAdmin
+block content
+    link(href='/static/fuelux/dist/css/fuelux.min.css', rel='stylesheet')
+    link(href='/static/sweetalert/dist/sweetalert.css', rel='stylesheet')
+    .row.wrapper.border-bottom.white-bg.page-heading
+        .col-lg-8
+            h2=__("admin.cachemanage.cache")
+    .wrapper.wrapper-content.animated.fadeIn
+        .row
+            .col-md-6.col-md-offset-3
+                .ibox.m-t-xl
+                    .row
+                        .col-md-10
+                            #keyinput.input-group.input-append.dropdown.combobox(data-initialize='combobox')
+                                input#cacheKey.form-control(type='text', placeholder=__("admin.cachemanage.cache_key"))
+                                .input-group-btn
+                                    button.btn.btn-white.dropdown-toggle(type='button', data-toggle='dropdown')
+                                        span.caret
+                                    ul.dropdown-menu.dropdown-menu-right(style='left:auto;')
+                                        li(data-value='categories')
+                                            a(href='#')=__("admin.cachemanage.li_1")
+                                        li(data-value='categories_all')
+                                            a(href='#')=__("admin.cachemanage.li_2")
+                                        li(data-value='category_分类alias')
+                                            a(href='#')=__("admin.cachemanage.li_3")
+                                        li(data-value='posts_cateid_分类id_pageindex_页码_pagesize_每页条数_sortby_排序类型_keyword_关键字_filtertype_查询类型')
+                                            a(href='#')=__("admin.cachemanage.li_4")
+                                        li(data-value='posts_count_cateid_分类id_pageindex_页码_pagesize_每页条数_sortby_排序类型_keyword_关键字_filtertype_查询类型')
+                                            a(href='#')=__("admin.cachemanage.li_5")
+                                        li(data-value='article_文章alias')
+                                            a(href='#')=__("admin.cachemanage.li_6")
+                        .col-md-2.text-right
+                            button#btnQuery.btn.btn-white(type='button')
+                                i.fa.fa-search
+                                |  #{__("admin.cachemanage.search_cache")}
+                    .row
+                        .col-md-12
+                            textarea#cacheContent.form-control.m-t-sm(rows='20', style='max-width:100%;min-width:100%;')
+                    .row
+                        .col-md-12.text-right
+                            button#btnClear.btn.btn-primary.m-t-sm(type='button')
+                                i.fa.fa-times
+                                |  #{__("admin.cachemanage.clear_cache")}
+    script(type='text/javascript', src='/static/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/metisMenu/dist/metisMenu.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/js/admin.js', charset='utf-8')
+    script(type='text/javascript', src='/static/fuelux/dist/js/fuelux.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/sweetalert/dist/sweetalert.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/js/cachemanage.js', charset='utf-8')

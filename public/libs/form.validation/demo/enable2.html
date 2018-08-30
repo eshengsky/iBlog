@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FormValidation demo</title>
+
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../dist/css/formValidation.css"/>
+
+    <script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/formValidation.js"></script>
+    <script type="text/javascript" src="../dist/js/framework/bootstrap.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="page-header">
+                    <h2>Enable/disable validator</h2>
+                </div>
+
+                <form id="signupForm" method="post" class="form-horizontal" action="target.php">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Full name (*)</label>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" name="full_name" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Password</label>
+                        <div class="col-md-5">
+                            <input type="password" class="form-control" name="password" />
+                            <span class="help-block">Leave it blank if you don't want to change it</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Confirm password</label>
+                        <div class="col-md-5">
+                            <input type="password" class="form-control" name="confirm_password" />
+                            <span class="help-block">Required if the password above is not empty</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-9 col-lg-offset-3">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#signupForm').formValidation({
+        message: 'This value is not valid',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            full_name: {
+                validators: {
+                    notEmpty: {
+                        message: 'The full name is required and cannot be empty'
+                    }
+                }
+            },
+            password: {
+                enabled: false,
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required and cannot be empty'
+                    }
+                }
+            },
+            confirm_password: {
+                enabled: false,
+                validators: {
+                    notEmpty: {
+                        message: 'The confirm password is required and cannot be empty'
+                    },
+                    identical: {
+                        field: 'password',
+                        message: 'The password and its confirm must be the same'
+                    }
+                }
+            }
+        }
+    });
+
+    // Enable the password/confirm password validators if the password is not empty
+    $('#signupForm').find('[name="password"]').on('keyup', function() {
+        var isEmpty = $(this).val() == '';
+        $('#signupForm').formValidation('enableFieldValidators', 'password', !isEmpty)
+                        .formValidation('enableFieldValidators', 'confirm_password', !isEmpty);
+        if ($(this).val().length == 1) {
+            $('#signupForm').formValidation('validateField', 'password')
+                            .formValidation('validateField', 'confirm_password');
+        }
+    });
+});
+</script>
+</body>
+</html>

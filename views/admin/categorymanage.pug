@@ -1,0 +1,30 @@
+extends ../shared/layoutAdmin
+block content
+    link(href='/static/fuelux/dist/css/fuelux.min.css', rel='stylesheet')
+    link(href='/static/blueimp-file-upload/css/jquery.fileupload.css', rel='stylesheet')
+    link(href='/static/sweetalert/dist/sweetalert.css', rel='stylesheet')
+    .row.wrapper.border-bottom.white-bg.page-heading
+        .col-lg-8
+            h2=__("admin.categorymanage.category")
+    .wrapper.wrapper-content.animated.fadeIn
+        .row
+            .col-md-10.col-md-offset-1
+                .ibox
+                    div
+                        ul#cate-list.list-group.list-unstyled
+                        button#btnNew.btn.btn-white
+                            i.fa.fa-plus
+                            |  #{__("admin.categorymanage.new_category")}
+                        button#btnSave.btn.btn-primary.pull-right
+                            i.fa.fa-cloud-upload-alt
+                            |  #{__("admin.categorymanage.save")}
+    script(type='text/javascript', src='/static/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/metisMenu/dist/metisMenu.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/js/admin.js', charset='utf-8')
+    script(type='text/javascript', src='/static/fuelux/dist/js/fuelux.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/jquery-sortable/source/js/jquery-sortable-min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/blueimp-file-upload/js/vendor/jquery.ui.widget.js', charset='utf-8')
+    script(type='text/javascript', src='/static/blueimp-file-upload/js/jquery.fileupload.js', charset='utf-8')
+    script(type='text/javascript', src='/static/sweetalert/dist/sweetalert.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/js/categorymanage.js', charset='utf-8')

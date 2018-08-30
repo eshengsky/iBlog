@@ -1,5 +1,4 @@
-node_modules/
+node_modules
 *.log
-public/libs
-.idea/
-.gitignore
+.idea
+.vscode

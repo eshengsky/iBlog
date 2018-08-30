@@ -1,0 +1,13 @@
+{
+  "name": "form.validation",
+  "homepage": "https://github.com/formvalidation/formvalidation",
+  "_release": "a6001290fe",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "a6001290fea95a3a38a6b1f32431dca962182c3a"
+  },
+  "_source": "https://github.com/formvalidation/formvalidation.git",
+  "_target": "*",
+  "_originalSource": "form.validation"
+}

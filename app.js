@@ -1,41 +1,63 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var morgan = require('morgan');
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
-var bodyParser = require('body-parser');
-var route = require('./routes/index');
-var blog = require('./routes/blog');
-var misc = require('./routes/misc');
-var auth = require('./routes/auth');
-var admin = require('./routes/admin');
-var locale = require('./routes/locale');
-var ue = require('./routes/ue');
-var logger = require('./utility/logger');
-var passport = require('passport');
-var i18n = require('./models/i18n');
-var saker = require('saker');
-saker.config({
-    defaultLayout: './shared/layout.html',
-    partialViewDir: './views/shared/'
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const helmet = require('helmet');
+const route = require('./routes/index');
+const blog = require('./routes/blog');
+const misc = require('./routes/misc');
+const auth = require('./routes/auth');
+const admin = require('./routes/admin');
+const locale = require('./routes/locale');
+const ue = require('./routes/ue');
+const logger = require('./utility/logger');
+const passport = require('passport');
+const i18n = require('./models/i18n');
+const app = express();
+
+/**
+ * 记录未捕获异常
+ */
+process.on('uncaughtException', err => {
+    logger.errLogger(err);
 });
-var app = express();
 
-// view engine setup
-app.engine('html', saker.renderView);
+/**
+ * 记录未处理的Promise失败
+ */
+process.on('unhandledRejection', reason => {
+    logger.errLogger(err);
+});
+
+// 设置模板引擎
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'html');
+app.set('view engine', 'pug');
 
-// uncomment after placing your favicon in /public
+// 增加安全性头部
+app.use(helmet());
+
+// 记录所有请求
+app.use((req, res, next) => {
+    logger.info(`${req.method.toUpperCase()}: ${req.protocol}://${req.get('Host')}${req.originalUrl}`);
+    next();
+});
+
+// 网站 Icon
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(morgan('dev'));
+
+// parse body
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse cookie
 app.use(cookieParser());
-// i18n init parses req for language headers, cookies, etc.
+
+// 多语言
 app.use(i18n.init);
 
+// 设置 Session
 app.use(session({
     secret: 'iblog-exp-session',
     cookie: {
@@ -44,36 +66,44 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
-app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(passport.initialize());
 app.use(passport.session());
 
+// 静态文件
+app.use('/static', express.static(path.join(__dirname, 'public')));
+app.use('/static', express.static(path.join(__dirname, 'node_modules')));
+
+// 前台站点路由，无需登录
 app.use('/', route);
 app.use('/', locale);
 app.use('/', misc);
 app.use('/', auth);
 app.use('/blog', blog);
-app.use('/admin', require('connect-ensure-login').ensureLoggedIn('/login'), admin);
 app.use('/ue/controller', ue);
 
+// 后台站点路由，需要身份验证
+app.use('/admin', require('connect-ensure-login')
+    .ensureLoggedIn('/login'), admin);
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    var err = new Error();
+// 捕获 404
+app.use((req, res) => {
+    const err = new Error('Not Found!');
     err.status = 404;
-    next(err);
+    logger.errLogger(err, req);
+    res.status(404).render('./shared/error', {
+        code: 404,
+        message: res.__('error.404_1')
+    });
 });
 
-// error handlers
-app.use(function (err, req, res, next) {
-    var code = err.status || 500,
-        message = code === 404 ? res.__('error.404_1') : res.__('error.404_2');
-    res.status(code);
-    logger.errLogger(req, err);
-    res.render('./shared/error', {
-        code: code,
-        message: message
+// 捕获 500
+app.use((err, req, res) => {
+    let code = err.status || 500;
+    err.status = code;
+    logger.errLogger(err, req);
+    res.status(code).render('./shared/error', {
+        code,
+        message: res.__('error.404_2')
     });
 });
 

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FormValidation demo</title>
+
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../dist/css/formValidation.css"/>
+
+    <script type="text/javascript" src="../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/formValidation.js"></script>
+    <script type="text/javascript" src="../dist/js/framework/bootstrap.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <!-- form: -->
+        <section>
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="page-header">
+                    <h2>Sign up</h2>
+                </div>
+
+                <form id="defaultForm" method="post" class="form-horizontal" action="target.php"
+                      data-fv-message="This value is not valid"
+                      data-fv-icon-valid="glyphicon glyphicon-ok"
+                      data-fv-icon-invalid="glyphicon glyphicon-remove"
+                      data-fv-icon-validating="glyphicon glyphicon-refresh">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Full name</label>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" name="firstName" placeholder="First name" required data-fv-notempty-message="The first name is required and cannot be empty" />
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" name="lastName" placeholder="Last name" required data-fv-notempty-message="The last name is required and cannot be empty" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Username</label>
+                        <div class="col-lg-5">
+                            <input type="text" class="form-control" name="username"
+                                   data-fv-message="The username is not valid"
+                                   required data-fv-notempty-message="The username is required and cannot be empty"
+                                   pattern="^[a-zA-Z0-9]+$" data-fv-regexp-message="The username can only consist of alphabetical and digits"
+                                   data-fv-stringlength="true" data-fv-stringlength-min="6" data-fv-stringlength-max="30" data-fv-stringlength-message="The username must be more than 6 and less than 30 characters long"
+                                   data-fv-remote="true" data-fv-remote-url="remote.php" data-fv-remote-message="The username is not available" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Email address</label>
+                        <div class="col-lg-5">
+                            <input class="form-control" name="email" type="email" data-fv-emailaddress-message="The input is not a valid email address" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Password</label>
+                        <div class="col-lg-5">
+                            <input type="password" class="form-control" name="password"
+                                   required data-fv-notempty-message="The password is required and cannot be empty"
+                                   data-fv-different="true" data-fv-different-field="username" data-fv-different-message="The password cannot be the same as username" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Retype password</label>
+                        <div class="col-lg-5">
+                            <input type="password" class="form-control" name="confirmPassword"
+                                   required data-fv-notempty-message="The confirm password is required and cannot be empty"
+                                   data-fv-identical="true" data-fv-identical-field="password" data-fv-identical-message="The password and its confirm are not the same" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Gender</label>
+                        <div class="col-lg-5">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="gender" value="male" required data-fv-notempty-message="The gender is required" /> Male
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="gender" value="female" /> Female
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="gender" value="other" /> Other
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Birthday</label>
+                        <div class="col-lg-5">
+                            <input type="text" class="form-control" name="birthday" data-fv-date="false" data-fv-date-format="YYYY/MM/DD" data-fv-date-message="The birthday is not valid" /> (YYYY/MM/DD)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Country</label>
+                        <div class="col-lg-5">
+                            <select class="form-control" name="country" data-fv-notempty data-fv-notempty-message="The country is required">
+                                <option value="">-- Select a country --</option>
+                                <option value="fr">France</option>
+                                <option value="de">Germany</option>
+                                <option value="it">Italy</option>
+                                <option value="jp">Japan</option>
+                                <option value="ru">Russia</option>
+                                <option value="gb">United Kingdom</option>
+                                <option value="us">United State</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Languages</label>
+                        <div class="col-lg-5">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="languages[]" value="english" data-fv-message="Please specify at least one language you can speak" /> English
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="languages[]" value="french" /> French
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="languages[]" value="german" required /> German
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="languages[]" value="russian" /> Russian
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="languages[]" value="other" /> Other
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Programming Languages</label>
+                        <div class="col-lg-5">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="programs[]" value="net" data-fv-choice="true" data-fv-choice-min="2" data-fv-choice-max="4" data-fv-choice-message="Please choose 2 - 4 programming languages you are good at" /> .Net
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="programs[]" value="java" /> Java
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="programs[]" value="c" /> C/C++
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="programs[]" value="php" /> PHP
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="programs[]" value="perl" /> Perl
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="programs[]" value="ruby" /> Ruby
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="programs[]" value="python" /> Python
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="programs[]" value="javascript" /> Javascript
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-9 col-lg-offset-3">
+                            <button type="submit" class="btn btn-primary">Sign up</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <!-- :form -->
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#defaultForm').formValidation();
+    });
+</script>
+</body>
+</html>
