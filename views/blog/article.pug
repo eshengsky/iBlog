@@ -3,6 +3,8 @@ block content
     link(href='/static/css/animate-custom.css', rel='stylesheet')
     link(href='https://cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css', rel='stylesheet')
     link(href='/static/lightbox2/dist/css/lightbox.min.css', rel='stylesheet')
+    link(href='/static/css/posts_style_custom.css', rel='stylesheet')
+
     if (post.ContentType === 'markdown')
         link(href='/static/css/github-markdown.css', rel='stylesheet')
     .detail-container
@@ -36,6 +38,9 @@ block content
                             span='：' + post.Summary
                         div(class=`${post.ContentType === 'markdown' ? 'markdown-body' : 'normal-body'}`)
                             !=resultContent
+                    .copyright(style=`${settings.ShowArticleSign === "true" ? "display: block;" : "display: none;"}`)
+                        .clearfix
+                        include ../shared/artical_footer
                     if(settings.ShowComments === 'true')
                         hr.hr-article
                         #SOHUCS(sid=post.UniqueId)

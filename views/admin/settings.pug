@@ -93,6 +93,16 @@ block content
                                                                     button.btn.btn-white.spinbox-down.btn-xs(type='button')
                                                                         span.fa.fa-chevron-down
                                                                         span.sr-only Decrease
+                                                    li.list-group-item.clearfix
+                                                        .pull-left
+                                                            | #{__("admin.settings.author_name")}
+                                                        .pull-right
+                                                            input#AuthorName.form-control(type='text', name='AuthorName', placeholder=__("admin.settings.author_name_placeholder"), value=settings.Author)
+                                                    li.list-group-item.clearfix
+                                                        .pull-left
+                                                            | #{__("admin.settings.email_addr")}
+                                                        .pull-right
+                                                            input#EmailAddr.form-control(type='text', name='EmailAddr', placeholder=__("admin.settings.email_addr_placeholder"), value=settings.Email)
                                     .col-md-6(style='margin-bottom:10px;')
                                         .panel.panel-default
                                             #headingComponent.panel-heading(role='tab')
@@ -159,6 +169,12 @@ block content
                                                             | #{__("admin.settings.comments_conf")}
                                                         .pull-right
                                                             input#ChangyanConf.form-control(type='text', name='ChangyanConf', placeholder=__("admin.settings.comments_conf_placeholder"), value=settings.ChangyanConf)
+                                                    li.list-group-item.clearfix
+                                                        .pull-left
+                                                            | #{__("admin.settings.show_article_sign")}
+                                                        .pull-right
+                                                            input#ShowArticleSign(type='hidden', name='ShowArticleSign', value=settings.ShowArticleSign)
+                                                            input.js-switch(type='checkbox', checked=settings.ShowArticleSign === 'true')
 
                                 .row
                                     .col-lg-12

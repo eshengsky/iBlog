@@ -550,6 +550,7 @@ router.post('/saveSettings', (req, res, next) => {
         LogoPath: req.body.LogoPath,
         PageSize: req.body.PageSize,
         ExpandMenu: req.body.ExpandMenu,
+        ShowArticleSign:req.body.ShowArticleSign,
         Editor: req.body.Editor,
         CacheExpired: req.body.CacheExpired,
         TranslateKey: req.body.TranslateKey,
@@ -560,7 +561,9 @@ router.post('/saveSettings', (req, res, next) => {
         ShowComments: req.body.ShowComments,
         ShowGuestbook: req.body.ShowGuestbook,
         ChangyanId: req.body.ChangyanId,
-        ChangyanConf: req.body.ChangyanConf
+        ChangyanConf: req.body.ChangyanConf,
+        Email:req.body.EmailAddr,
+        Author:req.body.AuthorName
     });
     res.end();
 });

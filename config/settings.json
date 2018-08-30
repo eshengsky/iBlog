@@ -1,10 +1,13 @@
 {
   "SiteName": "iBlog",
+  "Author": "You Name",
+  "Email": "you_email@xxx.com",
   "SiteDomain": "www.example.com",
   "RecordNo": "浙ICP备XXX号",
   "LogoPath": "/static/images/zhr.jpg",
   "PageSize": "10",
   "ExpandMenu": "true",
+  "ShowArticleSign": "false",
   "Editor": "",
   "CacheExpired": "300",
   "TranslateKey": "y2RIaF6RifHnJeD1Szzw",

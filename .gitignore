@@ -2,3 +2,7 @@ node_modules
 *.log
 .idea
 .vscode
+.DS_Store
+*.DS_Store
+._*
+npm-debug.log
