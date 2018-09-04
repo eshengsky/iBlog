@@ -1,0 +1,33 @@
+p
+    br
+p(style="max-width: 100%; min-height: 1em; color: rgb(62, 62, 62); font-size: 16px; white-space: normal; font-family: 微软雅黑; text-align: center; line-height: 1.75em; box-sizing: border-box !important; word-wrap: break-word !important;")
+    span(style="letter-spacing: 1px;")
+        strong
+            span(style="font-size: 14px;") 【END】
+p(style="max-width: 100%; min-height: 1em; color: rgb(62, 62, 62); font-size: 16px; white-space: normal; font-family: 微软雅黑; text-align: center; line-height: 1.75em; box-sizing: border-box !important; word-wrap: break-word !important;")
+    span(style="letter-spacing: 1px;")
+        strong
+            span(style="font-size: 14px;")
+                br
+
+.post-copyright(style="max-width: 100%; min-height: 1em; color: rgb(62, 62, 62); font-size: 16px; white-space: normal; font-family: 微软雅黑; line-height: 1.75em; box-sizing: border-box !important; word-wrap: break-word !important;")
+    .post-copyright__author
+        span.post-copyright-meta Author:
+        span.post-copyright-info
+            a(href="mailto:@config.Email") #{settings.Author}
+    .post-copyright__type
+        span.post-copyright-meta 文章链接:
+        span.post-copyright-info
+            a#declaration_url
+    .post-copyright__notice
+        span
+            .class("post-copyright-meta") 版权声明: 本博客所有文章除声明转载外，均采用
+                a(href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh" target="_blank") CC BY-NC-SA 3.0
+                | 许可协议。转载请注明来自
+                a(href="http://"+settings.SiteDomain target="_blank") #{settings.SiteName} ！
+
+script.
+    url=window.location.href
+    console.log(url)
+    document.getElementById("declaration_url").innerHTML=url;
+    document.getElementById("declaration_url").href=url;

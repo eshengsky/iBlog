@@ -1,0 +1,21 @@
+.post-copyright {
+    position: relative;
+    margin-bottom: 1rem;
+    padding: .5rem .8rem;
+    border: 1px solid #eee;
+    -webkit-transition: box-shadow .3s ease-in-out;
+    -moz-transition: box-shadow .3s ease-in-out;
+    -o-transition: box-shadow .3s ease-in-out;
+    -ms-transition: box-shadow .3s ease-in-out;
+    transition: box-shadow .3s ease-in-out;
+}
+.post-copyright::before {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    width: .8rem;
+    height: .8rem;
+    border-radius: .8rem;
+    background: #49b1f5;
+    content: "";
+}

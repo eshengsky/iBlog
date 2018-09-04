@@ -179,6 +179,7 @@
 			"posts_per_page": "每页显示文章数",
 			"posts_per_page_placeholder": "每页的条数",
 			"show_summary": "默认展开文章目录",
+			"show_article_sign": "显示文尾版权申明",
 			"cache_expire_time": "缓存过期时间（秒）",
 			"cache_expire_time_placeholder": "缓存过期时间",
 			"utility": "组件设置",
@@ -204,7 +205,11 @@
 			"message_id": "友言uid",
 			"message_id_placeholder": "申请的uid",
 			"save": "保存修改",
-			"editor": "默认文章编辑器"
+			"editor": "默认文章编辑器",
+			"author_name": "网站所有者",
+			"author_name_placeholder": "网站所有者",
+			"email_addr": "邮箱",
+			"email_addr_placeholder": "邮件地址"
 		}
 	}
 }
