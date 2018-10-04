@@ -82,6 +82,21 @@ block content
                                                                 input#Editor.hidden.hidden-field(type='text', name='Editor', readonly='readonly', aria-hidden='true',value=settings.Editor)
                                                     li.list-group-item.clearfix
                                                         .pull-left
+                                                            | #{__("admin.settings.code_theme")}
+                                                        .pull-right
+                                                            #CodeThemelist.btn-group.selectlist(data-resize='auto', data-initialize='selectlist')
+                                                                button.btn.btn-white.dropdown-toggle(data-toggle='dropdown', type='button')
+                                                                    span.selected-label
+                                                                    span.caret
+                                                                    span.sr-only Toggle Dropdown
+                                                                ul.dropdown-menu(role='menu')
+                                                                    li(data-value='')
+                                                                        a(href='#') Github
+                                                                    li(data-value='Monokai')
+                                                                        a(href='#') Monokai
+                                                                input#CodeTheme.hidden.hidden-field(type='text', name='CodeTheme', readonly='readonly', aria-hidden='true',value=settings.CodeTheme)
+                                                    li.list-group-item.clearfix
+                                                        .pull-left
                                                             | #{__("admin.settings.cache_expire_time")}
                                                         .pull-right
                                                             .spinbox(data-initialize='spinbox',data-max='9999999')

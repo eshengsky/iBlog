@@ -204,7 +204,8 @@
 			"message_id": "友言uid",
 			"message_id_placeholder": "apply uid",
 			"save": "Save",
-			"editor": "Default Editor"
+			"editor": "Default Editor",
+			"code_theme":"Code Block Theme"
 		}
 	}
 }

@@ -209,7 +209,8 @@
 			"author_name": "网站所有者",
 			"author_name_placeholder": "网站所有者",
 			"email_addr": "邮箱",
-			"email_addr_placeholder": "邮件地址"
+			"email_addr_placeholder": "邮件地址",
+			"code_theme": "代码块风格"
 		}
 	}
 }

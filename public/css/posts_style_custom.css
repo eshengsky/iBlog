@@ -19,3 +19,32 @@
     background: #49b1f5;
     content: "";
 }
+.hljs {
+    border: 0;
+    font-family: "Consulas", "Courier New", Courier, mono, serif;
+    font-size: 12px;
+    background: #eee !important;
+    display: block;
+    padding: 1px;
+    margin: 0;
+    width: 100%;
+    font-weight: 200;
+    color: #333;
+    white-space: pre-wrap
+}
+.hljs ul {
+    list-style: decimal;
+    padding: 0px;
+}
+.hljs ul li {
+    list-style: decimal;
+    border-left: 3px solid #6ce26c !important;
+    padding: 5px!important;
+    margin: 0 !important;
+    line-height: 14px;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+.hljs ul li:nth-of-type(even) {
+    color: inherit;
+}
