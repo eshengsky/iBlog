@@ -23,7 +23,7 @@
     border: 0;
     font-family: "Consulas", "Courier New", Courier, mono, serif;
     font-size: 12px;
-    background: #eee !important;
+    background: transparent;
     display: block;
     padding: 1px;
     margin: 0;
@@ -47,4 +47,7 @@
 }
 .hljs ul li:nth-of-type(even) {
     color: inherit;
+}
+code.hljs{
+    background: transparent;
 }
