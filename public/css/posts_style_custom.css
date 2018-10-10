@@ -39,7 +39,10 @@
 .hljs ul li {
     list-style: decimal;
     border-left: 3px solid #6ce26c !important;
-    padding: 5px!important;
+    font-family: "Consulas", "Courier New", Courier, mono, serif;
+    font-weight: 200;
+    font-size: 12px;
+    padding-left: 5px!important;
     margin: 0 !important;
     line-height: 14px;
     word-break: break-all;
