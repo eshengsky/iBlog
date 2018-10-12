@@ -33,12 +33,12 @@
     white-space: pre-wrap
 }
 .hljs ul {
-    list-style: decimal;
+    list-style: none;
     padding: 0px;
+    padding-left: 0em!important;
 }
 .hljs ul li {
-    list-style: decimal;
-    border-left: 3px solid #6ce26c !important;
+    list-style: none;
     font-family: "Consulas", "Courier New", Courier, mono, serif;
     font-weight: 200;
     font-size: 12px;
@@ -53,4 +53,26 @@
 }
 code.hljs{
     background: transparent;
+}
+.hljs ul {
+  list-style-type: none;
+  margin-left: 0;
+}
+
+.hljs ul  li {
+  counter-increment: customlistcounter;
+}
+
+.hljs ul li:before {
+  content: counter(customlistcounter) " ";
+  /*font-weight: bold;*/
+  float: left;
+  width: 3em;
+  margin-right: 10px;
+  color: #999;
+  border-right: 3px solid #6ce26c !important;
+}
+
+.hljs ul :first-child {
+  counter-reset: customlistcounter;
 }
