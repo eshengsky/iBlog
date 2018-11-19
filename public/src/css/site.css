@@ -825,6 +825,7 @@ body.dragging, body.dragging * {
     text-align: center;
     color: #ffffff;
     cursor: pointer;
+    opacity: .8;
 }
 
 .fixed-tool a:hover {

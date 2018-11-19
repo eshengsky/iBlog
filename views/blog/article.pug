@@ -1,15 +1,15 @@
 extends ../shared/layout
 block content
-    link(href='/static/css/animate-custom.css', rel='stylesheet')
+    link(href=`${staticPrefix}/css/animate-custom.css`, rel='stylesheet')
     link(href='https://cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css', rel='stylesheet')
-    link(href='/static/lightbox2/dist/css/lightbox.min.css', rel='stylesheet')
-    link(href='/static/css/posts_style_custom.css', rel='stylesheet')
+    link(href='/nodeModules/lightbox2/dist/css/lightbox.min.css', rel='stylesheet')
+    link(href=`${staticPrefix}/css/posts_style_custom.css`, rel='stylesheet')
 
     if (post.ContentType === 'markdown')
-        link(href='/static/css/github-markdown.css', rel='stylesheet')
+        link(href=`${staticPrefix}/css/github-markdown.css', rel='stylesheet')
     if (settings.CodeTheme==='Monokai')
-        link(href='/static/css/monokai-sublime.min.css', rel='stylesheet')
-        link(href='/static/css/dark_theme_code.css', rel='stylesheet')
+        link(href=`${staticPrefix}/css/monokai-sublime.css', rel='stylesheet')
+        link(href=`${staticPrefix}/css/dark_theme_code.css', rel='stylesheet')
     .detail-container
         .container
             .row
@@ -88,13 +88,13 @@ block content
                         i.fa.fa-times
             include ../shared/footer
     include ../shared/top
-    script(type='text/javascript', src='/static/jquery/dist/jquery.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/lightbox2/dist/js/lightbox.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/scrollNav/dist/jquery.scrollNav.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/lightbox2/dist/js/lightbox.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/scrollNav/dist/jquery.scrollNav.min.js', charset='utf-8')
     script(type='text/javascript', src='https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/js/article.js', charset='utf-8')
-    script(type='text/javascript', src='/static/js/highlight_line_number.js', charset='utf-8')
+    script(type='text/javascript', src=`${staticPrefix}/js/article.js`, charset='utf-8')
+    script(type='text/javascript', src=`${staticPrefix}/js/highlight_line_number.js`, charset='utf-8')
     script.
         var expandMenu = '#{settings.ExpandMenu}';
         var logoPath = "#{settings.LogoPath}";
@@ -106,5 +106,5 @@ block content
             title: "#{post.Title}"
         };
     script(type = 'text/javascript', src = 'http://v3.jiathis.com/code/jia.js?uid=#{settings.JiaThisId}', charset = 'utf-8')
-    script(type='text/javascript', src='/static/jquery-qrcode/dist/jquery-qrcode.min.js', charset='utf-8')
-    script(type = 'text/javascript', src = '/static/js/top.js', charset = 'utf-8')
+    script(type='text/javascript', src='/nodeModules/jquery-qrcode/dist/jquery-qrcode.min.js', charset='utf-8')
+    script(type = 'text/javascript', src = `${staticPrefix}/js/top.js`, charset = 'utf-8')

@@ -35,6 +35,9 @@ process.on('unhandledRejection', reason => {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+// 在模板页面可以使用 staticPrefix 变量以区别本地开发环境和线上环境引入不同的资源文件
+app.locals.staticPrefix = app.get('env') === 'production' ? '/static/dist' : '/static/src';
+
 // 增加安全性头部
 app.use(helmet());
 
@@ -71,7 +74,7 @@ app.use(passport.session());
 
 // 静态文件
 app.use('/static', express.static(path.join(__dirname, 'public')));
-app.use('/static', express.static(path.join(__dirname, 'node_modules')));
+app.use('/nodeModules', express.static(path.join(__dirname, 'node_modules')));
 
 // 前台站点路由，无需登录
 app.use('/', route);
@@ -90,21 +93,23 @@ app.use((req, res) => {
     const err = new Error('Not Found!');
     err.status = 404;
     logger.errLogger(err, req);
-    res.status(404).render('./shared/error', {
-        code: 404,
-        message: res.__('error.404_1')
-    });
+    res.status(404)
+        .render('./shared/error', {
+            code: 404,
+            message: res.__('error.404_1')
+        });
 });
 
 // 捕获 500
 app.use((err, req, res) => {
-    let code = err.status || 500;
+    const code = err.status || 500;
     err.status = code;
     logger.errLogger(err, req);
-    res.status(code).render('./shared/error', {
-        code,
-        message: res.__('error.404_2')
-    });
+    res.status(code)
+        .render('./shared/error', {
+            code,
+            message: res.__('error.404_2')
+        });
 });
 
 module.exports = app;

@@ -1,9 +1,9 @@
 extends ../shared/layoutAdmin
 block content
-    link(href='/static/fuelux/dist/css/fuelux.min.css', rel='stylesheet')
-    link(href='/static/blueimp-file-upload/css/jquery.fileupload.css', rel='stylesheet')
-    link(href='/static/switchery/dist/switchery.min.css', rel='stylesheet')
-    link(href='/static/sweetalert/dist/sweetalert.css', rel='stylesheet')
+    link(href='/nodeModules/fuelux/dist/css/fuelux.min.css', rel='stylesheet')
+    link(href='/nodeModules/blueimp-file-upload/css/jquery.fileupload.css', rel='stylesheet')
+    link(href='/nodeModules/switchery/dist/switchery.min.css', rel='stylesheet')
+    link(href='/nodeModules/sweetalert/dist/sweetalert.css', rel='stylesheet')
     .row.wrapper.border-bottom.white-bg.page-heading
         .col-lg-8
             h2=__("admin.settings.setting")
@@ -134,7 +134,7 @@ block content
                                                             input#TranslateKey.form-control(type='text', name='TranslateKey', placeholder=__("admin.settings.key_placeholder"), value=settings.TranslateKey)
                                                     li.list-group-item.clearfix
                                                         .pull-left
-                                                            | #{__("admin.settings.analysis")}(
+                                                            | #{__("admin.settings.analysis")} (
                                                             a(href='http://tongji.baidu.com', target='_blank')=__("admin.settings.analysis_service")
                                                             | )
                                                         .pull-right
@@ -196,13 +196,13 @@ block content
                                         button#btnSave(type='button', class='btn btn-primary', role='button')
                                             i.fa.fa-cloud-upload
                                             |  #{__("admin.settings.save")}
-    script(type='text/javascript', src='/static/jquery/dist/jquery.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/metisMenu/dist/metisMenu.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/js/admin.js', charset='utf-8')
-    script(type='text/javascript', src='/static/blueimp-file-upload/js/vendor/jquery.ui.widget.js', charset='utf-8')
-    script(type='text/javascript', src='/static/blueimp-file-upload/js/jquery.fileupload.js', charset='utf-8')
-    script(type='text/javascript', src='/static/fuelux/dist/js/fuelux.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/sweetalert/dist/sweetalert.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/switchery/dist/switchery.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/js/settings.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/metisMenu/dist/metisMenu.min.js', charset='utf-8')
+    script(type='text/javascript', src=`${staticPrefix}/js/admin.js`, charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/blueimp-file-upload/js/vendor/jquery.ui.widget.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/blueimp-file-upload/js/jquery.fileupload.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/fuelux/dist/js/fuelux.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/sweetalert/dist/sweetalert.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/switchery/dist/switchery.min.js', charset='utf-8')
+    script(type='text/javascript', src=`${staticPrefix}/js/settings.js`, charset='utf-8')

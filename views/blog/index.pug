@@ -1,9 +1,9 @@
 extends ../shared/layout
 block content
-    link(href='/static/css/selectlist.css', rel='stylesheet')
-    link(href='/static/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css', rel='stylesheet')
+    link(href=`${staticPrefix}/css/selectlist.css`, rel='stylesheet')
+    link(href='/nodeModules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css', rel='stylesheet')
     link(href='https://cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css', rel='stylesheet')
-    link(href='/static/css/github-markdown.css', rel='stylesheet')
+    link(href=`${staticPrefix}/css/github-markdown.css`, rel='stylesheet')
     .container-fluid.render-body
         .row
             .col-md-2.category-block.hidden-sm.hidden-xs
@@ -104,12 +104,12 @@ block content
                     i.fa.fa-external-link
                     |  #{__("blog.index.full_mode")}
     include ../shared/top
-    script(type='text/javascript', src='/static/jquery/dist/jquery.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/js/selectlist.js', charset='utf-8')
-    script(type='text/javascript', src='/static/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src=`${staticPrefix}/js/selectlist.js`, charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js', charset='utf-8')
     script(type='text/javascript', src='https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/js/index.js', charset='utf-8')
+    script(type='text/javascript', src=`${staticPrefix}/js/index.js`, charset='utf-8')
     script.
         var logoPath = "#{settings.LogoPath}";
         var jiathis_config = {
@@ -118,6 +118,6 @@ block content
             summary: "",
             title: "#{settings.SiteName}"
         };
-    script(type='text/javascript', src='http://v3.jiathis.com/code/jia.js?uid=#{settings.JiaThisId}', charset='utf-8')
-    script(type='text/javascript', src='/static/jquery-qrcode/dist/jquery-qrcode.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/js/top.js', charset='utf-8')
+    script(type='text/javascript', src=`http://v3.jiathis.com/code/jia.js?uid=${settings.JiaThisId}`, charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/jquery-qrcode/dist/jquery-qrcode.min.js', charset='utf-8')
+    script(type='text/javascript', src=`${staticPrefix}/js/top.js`, charset='utf-8')

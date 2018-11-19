@@ -3,11 +3,16 @@
 **不仅仅是博客，更是 Demo**，是适合新人入门学习的完整项目。  
 (基于 ASP.NET 的版本见 [这里](https://github.com/eshengsky/iBlog/))
 
+## 界面预览
+
+* 前台
+![image](https://raw.githubusercontent.com/eshengsky/iBlog2/master/public/images/preview1.png)
+
+* 后台
+![image](https://raw.githubusercontent.com/eshengsky/iBlog2/master/public/images/preview2.png)
+
 ## 在线实例
 我的博客 [http://139.196.22.226/](http://139.196.22.226/)
-
-## [noginx](https://github.com/eshengsky/noginx)
-[noginx](https://github.com/eshengsky/noginx) 是基于 Node.js 的 HTTP 及反向代理服务器（类似 nginx），如果你有多台 iBlog2 服务器实例，你可以使用 [noginx](https://github.com/eshengsky/noginx) 进行代理转发和负载均衡。
 
 ## [Wiki](https://github.com/eshengsky/iBlog2/wiki)
 整理了 iBlog2 中涉及 Node.js 及部分前端技术的知识点，适合新手学习、备查。
@@ -50,6 +55,7 @@
 #### 准备条件
 安装 [Node.js](https://nodejs.org/en/download/) (v6 以上版本)、[MongoDB](https://www.mongodb.org/downloads/)、[Redis](http://redis.io/download/)（可选）。  
 （注：如果使用Windows平台，可以去[https://github.com/MSOpenTech/redis/releases](https://github.com/MSOpenTech/redis/releases)下载安装Redis）
+
 #### 安装依赖
 ```Shell
 $ npm install
@@ -58,7 +64,7 @@ $ npm install
 #### 启动站点  
 
 ```Shell
-$ node bin/www 
+$ gulp
 ```
 
 打开浏览器，访问 [http://localhost:3000/](http://localhost:3000)
@@ -114,6 +120,33 @@ String 类型，管理员账号的密码，必须是32位 md5 加密后的字符
 ### 站点配置
 
 以管理员身份登录后台 [http://localhost:3000/admin](http://localhost:3000/admin) ，在系统设置页面，支持以可视化方式配置相关参数，修改参数后不需要重启。
+
+### Gulp任务
+
+```bash
+gulp server
+```
+启动本地开发服务器。
+
+```bash
+gulp minify-js
+```
+进行Babel编译并压缩js脚本。
+
+```bash
+gulp minify-css
+```
+进行css压缩。
+
+```bash
+gulp watch
+```
+监听资源文件改动并自动执行 `minify-js` 和 `minify-css` 任务。
+
+```bash
+gulp default
+```
+默认任务，自动启动服务器，并进行一次js和css压缩，并开启文件改动监听。
 
 ## 关于缓存
 

@@ -1,7 +1,7 @@
 extends ../shared/layoutAdmin
 block content
     link(href='/static/libs/bootstrap-table/dist/bootstrap-table.min.css', rel='stylesheet')
-    link(href='/static/sweetalert/dist/sweetalert.css', rel='stylesheet')
+    link(href='/nodeModules/sweetalert/dist/sweetalert.css', rel='stylesheet')
     .row.wrapper.border-bottom.white-bg.page-heading
         .col-lg-8
             h2 #{__("admin.articlemanage.post")}
@@ -20,13 +20,13 @@ block content
                                 i.fa.fa-plus
                                 |  #{__("admin.articlemanage.new_article")}
                         table#articles
-    script(type='text/javascript', src='/static/jquery/dist/jquery.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/metisMenu/dist/metisMenu.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/js/admin.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/metisMenu/dist/metisMenu.min.js', charset='utf-8')
+    script(type='text/javascript', src=`${staticPrefix}/js/admin.js`, charset='utf-8')
     script(type='text/javascript', src='/static/libs/bootstrap-table/dist/bootstrap-table.min.js', charset='utf-8')
     script(type='text/javascript', src='/static/libs/bootstrap-table/dist/extensions/filter-control/bootstrap-table-filter-control.js', charset='utf-8')
     script(type='text/javascript', src='/static/libs/bootstrap-table/dist/locale/bootstrap-table-zh-CN.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/lodash/lodash.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/sweetalert/dist/sweetalert.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/js/articlemanage.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/lodash/lodash.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/sweetalert/dist/sweetalert.min.js', charset='utf-8')
+    script(type='text/javascript', src=`${staticPrefix}/js/articlemanage.js`, charset='utf-8')

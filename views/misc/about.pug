@@ -24,10 +24,10 @@ block content
                                 !=about.Email
         include ../shared/footer
     include ../shared/top
-    script(type='text/javascript', src='/static/jquery/dist/jquery.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/jQuery-cycleText/dist/js/jquery.cycleText.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/js/about.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/jQuery-cycleText/dist/js/jquery.cycleText.min.js', charset='utf-8')
+    script(type='text/javascript', src=`${staticPrefix}/js/about.js`, charset='utf-8')
     script.
         var logoPath = "#{settings.LogoPath}";
         var jiathis_config = {
@@ -37,5 +37,5 @@ block content
             title: "#{settings.SiteName + ' - 关于'}"
         };
     script(type='text/javascript', src='http://v3.jiathis.com/code/jia.js?uid=#{settings.JiaThisId}', charset='utf-8')
-    script(type='text/javascript', src='/static/jquery-qrcode/dist/jquery-qrcode.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/js/top.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/jquery-qrcode/dist/jquery-qrcode.min.js', charset='utf-8')
+    script(type='text/javascript', src=`${staticPrefix}/js/top.js`, charset='utf-8')

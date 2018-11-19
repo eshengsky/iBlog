@@ -1,10 +1,10 @@
 extends ../shared/layoutAdmin
 block content
-    link(href='/static/fuelux/dist/css/fuelux.min.css', rel='stylesheet')
+    link(href='/nodeModules/fuelux/dist/css/fuelux.min.css', rel='stylesheet')
     link(href='/static/libs/form.validation/dist/css/formValidation.min.css', rel='stylesheet')
-    link(href='/static/sweetalert/dist/sweetalert.css', rel='stylesheet')
+    link(href='/nodeModules/sweetalert/dist/sweetalert.css', rel='stylesheet')
     link(href='https://cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css', rel='stylesheet')
-    link(href='/static/simplemde/dist/simplemde.min.css', rel='stylesheet')
+    link(href='/nodeModules/simplemde/dist/simplemde.min.css', rel='stylesheet')
     .row.wrapper.border-bottom.white-bg.page-heading
         .col-lg-8
             h2=__("admin.editarticle.edit")
@@ -110,26 +110,26 @@ block content
                                 input#IsDraft(type='hidden',name='IsDraft',value=`${post.IsDraft ? "True" : "False"}`)
                                 input#IsActive(type='hidden',name='IsActive',value=`${post.IsActive ? "True" : "False"}`)
     #editSection
-    script(type='text/javascript', src='/static/jquery/dist/jquery.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
     script(type='text/javascript', src='/static/libs/form.validation/dist/js/formValidation.min.js', charset='utf-8')
     script(type='text/javascript', src='/static/libs/form.validation/dist/js/framework/bootstrap.min.js', charset='utf-8')
     script(type='text/javascript', src='/static/libs/form.validation/dist/js/language/zh_CN.js', charset='utf-8')
-    script(type='text/javascript', src='/static/metisMenu/dist/metisMenu.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/js/admin.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/metisMenu/dist/metisMenu.min.js', charset='utf-8')
+    script(type='text/javascript', src=`${staticPrefix}/js/admin.js`, charset='utf-8')
     script(type='text/javascript', src='/static/libs/ueditor/ueditor.config.js', charset='utf-8')
     script(type='text/javascript', src='/static/libs/ueditor/ueditor.all.js', charset='utf-8')
     script(type='text/javascript', src='/static/libs/ueditor/dialogs/insertalert/insertalert.js', charset='utf-8')
     script(type='text/javascript', src='/static/libs/ueditor/dialogs/inserticon/inserticon.js', charset='utf-8')
     script(type='text/javascript', src='/static/libs/ueditor/dialogs/insertlabel/insertlabel.js', charset='utf-8')
     script(type='text/javascript', src='https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/simplemde/dist/simplemde.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/fuelux/dist/js/fuelux.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/sweetalert/dist/sweetalert.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/js-md5/build/md5.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/simplemde/dist/simplemde.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/fuelux/dist/js/fuelux.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/sweetalert/dist/sweetalert.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/js-md5/build/md5.min.js', charset='utf-8')
     script.
         var categoryId = '#{post.CategoryId}';
         var source = '#{post.Source}';
         var editorType = '#{post.ContentType}';
         var translateKey = '#{settings.TranslateKey}';
-    script(type='text/javascript', src='/static/js/editarticle.js', charset='utf-8')
+    script(type='text/javascript', src=`${staticPrefix}/js/editarticle.js`, charset='utf-8')

@@ -1,7 +1,7 @@
 extends ../shared/layoutAdmin
 block content
-    link(href='/static/blueimp-file-upload/css/jquery.fileupload.css', rel='stylesheet')
-    link(href='/static/sweetalert/dist/sweetalert.css', rel='stylesheet')
+    link(href='/nodeModules/blueimp-file-upload/css/jquery.fileupload.css', rel='stylesheet')
+    link(href='/nodeModules/sweetalert/dist/sweetalert.css', rel='stylesheet')
     .row.wrapper.border-bottom.white-bg.page-heading
         .col-lg-8
             h2=__("admin.aboutmanage.about")
@@ -43,11 +43,11 @@ block content
                                         button#btnSave.btn.btn-primary.pull-right.m-t-sm(type='button')
                                             i.fa.fa-cloud-upload
                                             |  #{__("admin.aboutmanage.save")}
-    script(type='text/javascript', src='/static/jquery/dist/jquery.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/metisMenu/dist/metisMenu.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/js/admin.js', charset='utf-8')
-    script(type='text/javascript', src='/static/blueimp-file-upload/js/vendor/jquery.ui.widget.js', charset='utf-8')
-    script(type='text/javascript', src='/static/blueimp-file-upload/js/jquery.fileupload.js', charset='utf-8')
-    script(type='text/javascript', src='/static/sweetalert/dist/sweetalert.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/js/aboutmanage.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/metisMenu/dist/metisMenu.min.js', charset='utf-8')
+    script(type='text/javascript', src=`${staticPrefix}/js/admin.js`, charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/blueimp-file-upload/js/vendor/jquery.ui.widget.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/blueimp-file-upload/js/jquery.fileupload.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/sweetalert/dist/sweetalert.min.js', charset='utf-8')
+    script(type='text/javascript', src=`${staticPrefix}/js/aboutmanage.js`, charset='utf-8')

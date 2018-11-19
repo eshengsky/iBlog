@@ -1,7 +1,7 @@
 extends ../shared/layout
 block content
-    link(href='/static/sweetalert/dist/sweetalert.css', rel='stylesheet')
-    script(type='text/javascript', src='/static/sweetalert/dist/sweetalert.min.js', charset='utf-8')
+    link(href='/nodeModules/sweetalert/dist/sweetalert.css', rel='stylesheet')
+    script(type='text/javascript', src='/nodeModules/sweetalert/dist/sweetalert.min.js', charset='utf-8')
     .container-fluid.detail-container
         .row
             .col-sm-12.col-xs-12.col-md-8.col-md-offset-2.detail-wrap
@@ -51,9 +51,9 @@ block content
                         })();
         include ../shared/footer
     include ../shared/top
-    script(type='text/javascript', src='/static/jquery/dist/jquery.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/js/guestbook.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src=`${staticPrefix}/js/guestbook.js`, charset='utf-8')
     script.
         var tools = [2];
-    script(type = 'text/javascript', src = '/static/js/top.js', charset = 'utf-8')
+    script(type = 'text/javascript', src = `${staticPrefix}/js/top.js`, charset = 'utf-8')

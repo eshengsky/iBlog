@@ -6,16 +6,16 @@ html(lang='zh-CN')
         meta(name='viewport', content='width=device-width, initial-scale=1.0')
         meta(name='keywords', content=`${keywords ? keywords : "blog,iBlog"}`)
         meta(name='description', content=`${description ? description : "iBlog"}`)
-        link(href='/static/bootstrap/dist/css/bootstrap.min.css', rel='stylesheet')
-        link(href='/static/css/bootstrap-addon.css', rel='stylesheet')
-        link(href='/static/css/site.css', rel='stylesheet')
-        link(href='/static/@fortawesome/fontawesome-free/css/all.min.css', rel='stylesheet')
-        link(href='/static/css/share.css', rel='stylesheet')
-        link(href='/static/css/animate-custom.css', rel='stylesheet')
+        link(href='/nodeModules/bootstrap/dist/css/bootstrap.min.css', rel='stylesheet')
+        link(href=`${staticPrefix}/css/bootstrap-addon.css`, rel='stylesheet')
+        link(href=`${staticPrefix}/css/site.css`, rel='stylesheet')
+        link(href='/nodeModules/@fortawesome/fontawesome-free/css/all.min.css', rel='stylesheet')
+        link(href=`${staticPrefix}/css/share.css`, rel='stylesheet')
+        link(href=`${staticPrefix}/css/animate-custom.css`, rel='stylesheet')
         title=title
     body.fuelux
         if(isRoot)
-            link(href='/static/css/home-loading.css', rel='stylesheet')
+            link(href=`${staticPrefix}/css/home-loading.css`, rel='stylesheet')
             #home-loading.home-loading
                 #loading-con.loading-con(style='display:none;')
                     .loading-circle

@@ -1,7 +1,7 @@
 extends ../shared/layoutAdmin
 block content
-    link(href='/static/fuelux/dist/css/fuelux.min.css', rel='stylesheet')
-    link(href='/static/sweetalert/dist/sweetalert.css', rel='stylesheet')
+    link(href='/nodeModules/fuelux/dist/css/fuelux.min.css', rel='stylesheet')
+    link(href='/nodeModules/sweetalert/dist/sweetalert.css', rel='stylesheet')
     .row.wrapper.border-bottom.white-bg.page-heading
         .col-lg-8
             h2=__("admin.cachemanage.cache")
@@ -41,10 +41,10 @@ block content
                             button#btnClear.btn.btn-primary.m-t-sm(type='button')
                                 i.fa.fa-times
                                 |  #{__("admin.cachemanage.clear_cache")}
-    script(type='text/javascript', src='/static/jquery/dist/jquery.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/metisMenu/dist/metisMenu.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/js/admin.js', charset='utf-8')
-    script(type='text/javascript', src='/static/fuelux/dist/js/fuelux.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/sweetalert/dist/sweetalert.min.js', charset='utf-8')
-    script(type='text/javascript', src='/static/js/cachemanage.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/jquery/dist/jquery.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/metisMenu/dist/metisMenu.min.js', charset='utf-8')
+    script(type='text/javascript', src=`${staticPrefix}/js/admin.js`, charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/fuelux/dist/js/fuelux.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/sweetalert/dist/sweetalert.min.js', charset='utf-8')
+    script(type='text/javascript', src=`${staticPrefix}/js/cachemanage.js`, charset='utf-8')
