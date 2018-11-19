@@ -1,0 +1,13 @@
+pre{
+    background: transparent url(/static/images/code-bk.png) repeat scroll 0% 0%;
+    margin: 0;
+    padding: 15px 20px;
+    border-style: solid;
+    border-color: #eee;
+    border-width: 1px 0;
+    border-radius: 3px;
+    overflow: auto;
+    color: #f8f8f2;
+    font-size: 16px;
+    line-height: 19.2px;
+}

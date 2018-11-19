@@ -7,7 +7,7 @@
   "LogoPath": "/static/images/zhr.jpg",
   "PageSize": "10",
   "ExpandMenu": "true",
-  "ShowArticleSign": "false",
+  "ShowArticleSign": "true",
   "Editor": "",
   "CacheExpired": "300",
   "TranslateKey": "y2RIaF6RifHnJeD1Szzw",
@@ -18,5 +18,6 @@
   "ShowComments": "true",
   "ShowGuestbook": "true",
   "ChangyanId": "cyrUoGjWj",
-  "ChangyanConf": "prod_c77d5188bc137c8d9181720d02506ab6"
+  "ChangyanConf": "prod_c77d5188bc137c8d9181720d02506ab6",
+  "CodeTheme": ""
 }

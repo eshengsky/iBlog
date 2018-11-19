@@ -563,7 +563,8 @@ router.post('/saveSettings', (req, res, next) => {
         ChangyanId: req.body.ChangyanId,
         ChangyanConf: req.body.ChangyanConf,
         Email:req.body.EmailAddr,
-        Author:req.body.AuthorName
+        Author:req.body.AuthorName,
+        CodeTheme:req.body.CodeTheme
     });
     res.end();
 });
