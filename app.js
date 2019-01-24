@@ -90,7 +90,7 @@ app.use('/admin', require('connect-ensure-login')
 
 // 捕获 404
 app.use((req, res) => {
-    const err = new Error('Not Found!');
+    const err = new Error(`Not Found! URL: ${req.originalUrl}`);
     err.status = 404;
     logger.errLogger(err, req);
     res.status(404)
