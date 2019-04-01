@@ -194,9 +194,12 @@ function resetModal() {
     $("#label-foot").empty();
 }
 
+var lastKeyword = '';
 function searchPost() {
     var inputEl = $('#Keyword');
-    if (!inputEl.val()) {
+
+    // 如果上一次搜索时输入了关键字，这次搜索没有关键字，依然执行搜索，否则用户就无法清除关键字筛选了
+    if (!lastKeyword && !inputEl.val()) {
         inputEl.focus();
         return;
     }
@@ -208,6 +211,7 @@ function searchPost() {
     begin = new Date();
     $("#load-list").show();
     $("#PageIndex").val(1);
+    lastKeyword = inputEl.val();
     requestData();
 }
 

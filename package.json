@@ -55,7 +55,7 @@
   "devDependencies": {
     "@babel/core": "^7.1.6",
     "@babel/preset-env": "^7.1.6",
-    "gulp": "^4.0.0",
+    "gulp": "^3.9.1",
     "gulp-babel": "^8.0.0",
     "gulp-clean-css": "^3.10.0",
     "gulp-eslint": "^5.0.0",

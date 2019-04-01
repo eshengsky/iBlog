@@ -40,19 +40,22 @@ html(lang='zh-CN')
                         span=settings.SiteName
                 .navbar-collapse.collapse
                     ul.nav.navbar-nav.my-nav-pills.navbar-right
-                        li
+                        li.blog-nav
                             a(href='/blog')
                                 i.fa.fa-pen-nib.fa-fw
                                 |  #{__("layout.blog")}
+                            .nav-line.animated.fadeInLeft
                         if(settings.ShowGuestbook === 'true')
-                            li
+                            li.guestbook-nav
                                 a(href='/guestbook')
                                     i.fa.fa-comment-dots.fa-fw
                                     |  #{__("layout.message")}
-                        li
+                                .nav-line.animated.fadeInLeft
+                        li.about-nav
                             a(href='/about')
                                 i.fa.fa-user.fa-fw
                                 |  #{__("layout.about")}
+                            .nav-line.animated.fadeInLeft
                         li
                             a.locale-link(href=`/locale/${__("lang-code")}`)
                                 i.fa.fa-language.fa-fw
