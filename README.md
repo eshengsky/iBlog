@@ -1,5 +1,5 @@
 # iBlog2
-基于 Node.js 的开源个人开源博客系统，采用响应式布局，支持手机访问，功能全面，美观大方。  
+基于 Node.js 的开源个人博客系统，采用响应式布局，支持手机访问，功能全面，美观大方。  
 **不仅仅是博客，更是 Demo**，是适合新人入门学习的完整项目。  
 (基于 ASP.NET 的版本见 [这里](https://github.com/eshengsky/iBlog/))
 
@@ -12,7 +12,7 @@
 ![image](https://raw.githubusercontent.com/eshengsky/iBlog2/master/public/images/preview2.png)
 
 ## 在线实例
-我的博客 [http://139.196.22.226/](http://139.196.22.226/)
+我的博客 [https://skysun.name/](https://skysun.name/)
 
 ## [Wiki](https://github.com/eshengsky/iBlog2/wiki)
 整理了 iBlog2 中涉及 Node.js 及部分前端技术的知识点，适合新手学习、备查。
