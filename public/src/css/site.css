@@ -840,6 +840,10 @@ body.dragging, body.dragging * {
     border: none;
 }
 
+.post-content img {
+    max-width: 100%;
+}
+
 .hr-article {
     margin-top: 100px;
 }
