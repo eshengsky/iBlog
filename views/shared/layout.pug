@@ -8,25 +8,17 @@ html(lang='zh-CN')
         meta(name='description', content=`${description ? description : "iBlog"}`)
         link(href='/nodeModules/bootstrap/dist/css/bootstrap.min.css', rel='stylesheet')
         link(href=`${staticPrefix}/css/bootstrap-addon.css`, rel='stylesheet')
+        link(href=`${staticPrefix}/css/home-loading.css`, rel='stylesheet')
         link(href=`${staticPrefix}/css/site.css`, rel='stylesheet')
         link(href='/nodeModules/@fortawesome/fontawesome-free/css/all.min.css', rel='stylesheet')
         link(href=`${staticPrefix}/css/share.css`, rel='stylesheet')
         link(href=`${staticPrefix}/css/animate-custom.css`, rel='stylesheet')
         title=title
     body.fuelux
-        if(isRoot)
-            link(href=`${staticPrefix}/css/home-loading.css`, rel='stylesheet')
-            #home-loading.home-loading
-                #loading-con.loading-con(style='display:none;')
-                    .loading-circle
-                    script.
-                        var home_loading_begin = new Date();
-                        document.body.style.overflow = "hidden";
-                        function imgLoad() {
-                            document.getElementById("home-loading").style.background = "#f3f3f4";
-                            document.getElementById("loading-con").style.display = "block";
-                        }
-                    img#loadingImg(alt='loading', src=settings.LogoPath, onload='imgLoad();')
+        #home-loading.home-loading(style='display: none;')
+            #loading-con.loading-con
+                .loading-circle
+                img#loadingImg(alt='loading', src=settings.LogoPath)
         .navbar.navbar-default.navbar-fixed-top
             .container-fluid
                 .navbar-header
@@ -61,6 +53,7 @@ html(lang='zh-CN')
                                 i.fa.fa-language.fa-fw
                                 |  #{__("language")}
         block content
+        script(src=`${staticPrefix}/js/prehandler.js`, charset='utf-8')
         if(settings.EnableStatistics === 'true')
             // 百度统计代码
             script.

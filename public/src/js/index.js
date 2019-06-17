@@ -1,6 +1,4 @@
-﻿var home_loading_timeout = 2000;
-var isLoading = false;
-var timeout = 1000;
+﻿var timeout = 1000;
 var contentTimeout = 1500;
 var begin = new Date();
 var contentBegin = new Date();
@@ -30,7 +28,6 @@ $(function () {
             $(this).remove();
             begin = new Date();
             $("#load-list").show();
-            isLoading = true;
             $("#PageIndex").val(parseInt($("#PageIndex").val()) + 1);
             requestData();
         }
@@ -224,7 +221,7 @@ function addPage(index, data) {
             if (value.Source == "1") {
                 itemHtml = "<div uid=\""
                     + value.Alias
-                    + "\" class=\"blog-item " + ($(".home-loading").length > 0 ? "" : "animated fadeIn") + "\">"
+                    + "\" class=\"blog-item animated fadeIn" + "\">"
                     + "    <h4>"
                     + "        <a title=\""
                     + value.Title
@@ -263,7 +260,7 @@ function addPage(index, data) {
                     + "<\/div>"
                     + "<div class=\"hr-line-dashed\"></div>";
             } else {
-                itemHtml = "<div class=\"blog-item " + ($(".home-loading").length > 0 ? "" : "animated fadeIn") + "\" uid=\"" + value.Alias + "\"><a class=\"preview-link\" title=\"点击预览\"></a><h4><a href=\"/blog/"
+                itemHtml = "<div class=\"blog-item animated fadeIn" + "\" uid=\"" + value.Alias + "\"><a class=\"preview-link\" title=\"点击预览\"></a><h4><a href=\"/blog/"
                     + value.CategoryAlias + "/" + value.Alias + "\" target=\"_blank\" title=\"" + value.Title + "\">" + value.Title + "</a></h4><span title=\"文章分类\"><i class=\"fa fa-map-signs\"></i> " + "<a href=\"/blog/" + value.CategoryAlias + "\" target=\"_blank\">" + value.CateName + "</a>" + "</span> <span class=\"margin-left-20\" title=\"发布时间\"><i class=\"fa fa-clock-o\"></i> " + value.PublishDate + "</span><div class=\"clearfix\"></div><p>" + encodeHtml(value.Summary) + "</p></div><div class=\"hr-line-dashed\"></div>";
             }
             $("#page" + index).append(itemHtml);
@@ -290,21 +287,6 @@ function addPage(index, data) {
     } else {
         $(".list-wrap ol").append("<li id=\"page" + index + "\"></li>");
         $("#page" + index).append("<div class=\"text-center text-muted\" style=\"line-height: 34px;\">暂无数据</div>");
-    }
-    isLoading = false;
-    if ($(".home-loading").length > 0) {
-        var home_loading_end = new Date();
-        $("[data-toggle='tooltip']").tooltip("hide");
-        if (home_loading_end - home_loading_begin > home_loading_timeout) {
-            $(".home-loading").remove();
-            document.body.style.overflow = "auto";
-        } else {
-            var home_loading_timespan = home_loading_timeout - (home_loading_end - home_loading_begin);
-            setTimeout(function () {
-                $(".home-loading").remove();
-                document.body.style.overflow = "auto";
-            }, home_loading_timespan);
-        }
     }
 }
 

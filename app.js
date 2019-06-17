@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 const path = require('path');
 const favicon = require('serve-favicon');
 const cookieParser = require('cookie-parser');
@@ -75,6 +76,19 @@ app.use(passport.session());
 // 静态文件
 app.use('/static', express.static(path.join(__dirname, 'public')));
 app.use('/nodeModules', express.static(path.join(__dirname, 'node_modules')));
+
+// Service Worker
+app.get('/sw.js', (req, res) => {
+    fs.readFile(path.resolve(__dirname, './sw.js'), (err, data) => {
+        if (err) {
+            throw err;
+        }
+        res.writeHead(200, {
+            'Content-type': 'text/javascript'
+        });
+        res.end(data);
+    });
+});
 
 // 前台站点路由，无需登录
 app.use('/', route);
