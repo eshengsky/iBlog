@@ -65,7 +65,7 @@ $ npm install
 #### 启动站点  
 
 ```Shell
-$ gulp
+$ npm start
 ```
 
 打开浏览器，访问 [http://localhost:3000/](http://localhost:3000)
