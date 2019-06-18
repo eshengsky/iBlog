@@ -50,6 +50,7 @@
 * 日志 [winston](https://github.com/winstonjs/winston/)
 * 多语言 [i18n](https://github.com/mashpie/i18n-node)
 * 身份验证 [Passport](http://www.passportjs.org/)
+* Service Worker库 [Workbox](https://github.com/GoogleChrome/workbox/)
 
 ## 快速开始
 #### 准备条件
