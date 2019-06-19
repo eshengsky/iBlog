@@ -29,7 +29,7 @@ process.on('uncaughtException', err => {
  * 记录未处理的Promise失败
  */
 process.on('unhandledRejection', reason => {
-    logger.errLogger(err);
+    logger.errLogger(reason);
 });
 
 // 设置模板引擎

@@ -6,7 +6,6 @@ const tool = require('../utility/tool');
 /**
  * 为首页数据查询构建条件对象
  * @param params 查询参数对象
- * @returns {{}}
  */
 function getPostsQuery(params) {
     const query = {};
@@ -56,37 +55,33 @@ function getPostsQuery(params) {
 /**
  * 获取首页的文章数据
  * @param params 参数对象
- * @param callback 回调函数
  */
-exports.getPosts = function (params, callback) {
+exports.getPosts = params => {
     const cache_key = tool.generateKey('posts', params);
-    redisClient.getItem(cache_key, (err, posts) => {
-        if (err) {
-            return callback(err);
-        }
-        if (posts) {
-            return callback(null, posts);
-        }
-        let page = parseInt(params.pageIndex) || 1;
-        const size = parseInt(params.pageSize) || 10;
-        page = page > 0 ? page : 1;
-        const options = {};
-        options.skip = (page - 1) * size;
-        options.limit = size;
-        options.sort = params.sortBy === 'title' ? 'Title -CreateTime' : '-CreateTime';
-        const query = getPostsQuery(params);
-        postModel.find(query, {}, options, (err, posts) => {
-            if (err) {
-                return callback(err);
-            }
+    return new Promise((resolve, reject) => {
+        redisClient.getItem(cache_key).then(posts => {
             if (posts) {
-                redisClient.setItem(cache_key, posts, redisClient.defaultExpired, err => {
-                    if (err) {
-                        return callback(err);
-                    }
-                });
+                return resolve(posts);
             }
-            return callback(null, posts);
+            let page = parseInt(params.pageIndex) || 1;
+            const size = parseInt(params.pageSize) || 10;
+            page = page > 0 ? page : 1;
+            const options = {};
+            options.skip = (page - 1) * size;
+            options.limit = size;
+            options.sort = params.sortBy === 'title' ? 'Title -CreateTime' : '-CreateTime';
+            const query = getPostsQuery(params);
+            postModel.find(query, {}, options, (err, posts) => {
+                if (err) {
+                    return reject(err);
+                }
+                if (posts) {
+                    redisClient.setItem(cache_key, posts, redisClient.defaultExpired);
+                }
+                return resolve(posts);
+            });
+        }, err => {
+            reject(err);
         });
     });
 };
@@ -94,29 +89,25 @@ exports.getPosts = function (params, callback) {
 /**
  * 获取首页文章的页数
  * @param params 参数对象
- * @param callback 回调函数
  */
-exports.getPageCount = function (params, callback) {
+exports.getPageCount = params => {
     const cache_key = tool.generateKey('posts_count', params);
-    redisClient.getItem(cache_key, (err, pageCount) => {
-        if (err) {
-            return callback(err);
-        }
-        if (pageCount) {
-            return callback(null, pageCount);
-        }
-        const query = getPostsQuery(params);
-        postModel.count(query, (err, count) => {
-            if (err) {
-                return callback(err);
+    return new Promise((resolve, reject) => {
+        redisClient.getItem(cache_key).then(pageCount => {
+            if (pageCount) {
+                return resolve(pageCount);
             }
-            const pageCount = count % params.pageSize === 0 ? parseInt(count / params.pageSize) : parseInt(count / params.pageSize) + 1;
-            redisClient.setItem(cache_key, pageCount, redisClient.defaultExpired, err => {
+            const query = getPostsQuery(params);
+            postModel.count(query, (err, count) => {
                 if (err) {
-                    return callback(err);
+                    return reject(err);
                 }
+                const pageCount = count % params.pageSize === 0 ? parseInt(count / params.pageSize) : parseInt(count / params.pageSize) + 1;
+                redisClient.setItem(cache_key, pageCount, redisClient.defaultExpired);
+                return resolve(pageCount);
             });
-            return callback(null, pageCount);
+        }, err => {
+            reject(err);
         });
     });
 };
@@ -124,31 +115,30 @@ exports.getPageCount = function (params, callback) {
 /**
  * 根据alias获取文章
  * @param alias 文章alias
- * @param callback 回调函数
  */
-exports.getPostByAlias = function (alias, callback) {
+exports.getPostByAlias = alias => {
     const cache_key = `article_${alias}`;
+
+    // 文章浏览数+1
     postModel.update({ Alias: alias }, { $inc: { ViewCount: 1 } })
         .exec();
-    redisClient.getItem(cache_key, (err, article) => {
-        if (err) {
-            return callback(err);
-        }
-        if (article) {
-            return callback(null, article);
-        }
-        postModel.findOne({ Alias: alias }, (err, article) => {
-            if (err) {
-                return callback(err);
-            }
+
+    return new Promise((resolve, reject) => {
+        redisClient.getItem(cache_key).then(article => {
             if (article) {
-                redisClient.setItem(cache_key, article, redisClient.defaultExpired, err => {
-                    if (err) {
-                        return callback(err);
-                    }
-                });
+                return resolve(article);
             }
-            return callback(null, article);
+            postModel.findOne({ Alias: alias }, (err, article) => {
+                if (err) {
+                    return reject(err);
+                }
+                if (article) {
+                    redisClient.setItem(cache_key, article, redisClient.defaultExpired);
+                }
+                return resolve(article);
+            });
+        }, err => {
+            reject(err);
         });
     });
 };
@@ -156,7 +146,6 @@ exports.getPostByAlias = function (alias, callback) {
 /**
  * 为后台数据查询构建条件对象
  * @param params
- * @returns {{}}
  */
 function getArticlesQuery(params) {
     const query = {};
@@ -208,9 +197,8 @@ function getArticlesQuery(params) {
 /**
  * 获取管理页面的文章数据
  * @param params 参数对象
- * @param callback 回调函数
  */
-exports.getArticles = function (params, callback) {
+exports.getArticles = params => {
     let page = parseInt(params.pageIndex) || 1;
     const size = parseInt(params.pageSize) || 10;
     page = page > 0 ? page : 1;
@@ -229,26 +217,29 @@ exports.getArticles = function (params, callback) {
             break;
     }
     const query = getArticlesQuery(params);
-    postModel.find(query, {}, options, (err, posts) => {
-        if (err) {
-            return callback(err);
-        }
-        return callback(null, posts);
+    return new Promise((resolve, reject) => {
+        postModel.find(query, {}, options, (err, posts) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(posts);
+        });
     });
 };
 
 /**
  * 获取管理页面的文章数
  * @param params 参数对象
- * @param callback 回调函数
  */
-exports.getArticlesCount = function (params, callback) {
+exports.getArticlesCount = params => {
     const query = getArticlesQuery(params);
-    postModel.count(query, (err, count) => {
-        if (err) {
-            return callback(err);
-        }
-        return callback(null, count);
+    return new Promise((resolve, reject) => {
+        postModel.count(query, (err, count) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(count);
+        });
     });
 };
 
@@ -256,107 +247,103 @@ exports.getArticlesCount = function (params, callback) {
  * 判断文章Alias是否唯一
  * @param alias 文章Alias
  * @param articleId 文章Id
- * @param callback 回调函数
  */
-exports.checkAlias = function (alias, articleId, callback) {
-    postModel.findOne({ Alias: alias }, (err, article) => {
-        if (err) {
-            return callback(err);
-        }
-        if (!article) {
-            return callback(null, true);
-        }
-        if (article._id === articleId) {
-            return callback(null, true);
-        }
-        return callback(null, false);
+exports.checkAlias = (alias, articleId) => {
+    return new Promise((resolve, reject) => {
+        postModel.findOne({ Alias: alias }, (err, article) => {
+            if (err) {
+                return reject(err);
+            }
+            if (!article) {
+                return resolve(true);
+            }
+            if (article._id === articleId) {
+                return resolve(true);
+            }
+            return resolve(false);
+        });
     });
 };
 
 /**
  * 根据id获取文章
  * @param id 文章id
- * @param callback 回调函数
  */
-exports.getById = function (id, callback) {
-    postModel.findById(id, (err, article) => {
-        if (err) {
-            return callback(err);
-        }
-        return callback(null, article);
+exports.getById = id => {
+    return new Promise((resolve, reject) => {
+        postModel.findById(id, (err, article) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(article);
+        });
     });
 };
 
 /**
  * 新增或更新文章
  * @param params 参数对象
- * @param callback 回调函数
  */
-exports.save = function (params, callback) {
-    let _id = params.UniqueId,
-        entity = new postModel({
-            Title: params.Title,
-            Alias: params.Alias,
-            Summary: params.Summary,
-            Source: params.Source,
-            Content: params.Content,
-            ContentType: params.ContentType || '',
-            CategoryId: params.CategoryId,
-            Labels: params.Labels,
-            Url: params.Url,
-            IsDraft: params.IsDraft === 'True',
-            IsActive: params.IsActive === 'True',
-            ModifyTime: new Date()
+exports.save = params => {
+    const _id = params.UniqueId;
+    const entity = new postModel({
+        Title: params.Title,
+        Alias: params.Alias,
+        Summary: params.Summary,
+        Source: params.Source,
+        Content: params.Content,
+        ContentType: params.ContentType || '',
+        CategoryId: params.CategoryId,
+        Labels: params.Labels,
+        Url: params.Url,
+        IsDraft: params.IsDraft === 'True',
+        IsActive: params.IsActive === 'True',
+        ModifyTime: new Date()
+    });
+    return new Promise((resolve, reject) => {
+        postModel.findById(_id, (err, article) => {
+            if (err) {
+                return reject(err);
+            }
+            if (!article) {
+                // 新增
+                entity._id = _id;
+                entity.IsActive = true;
+                entity.ViewCount = 0;
+                entity.CreateTime = new Date();
+                entity.save(err => {
+                    if (err) {
+                        return reject(err);
+                    }
+                    return resolve();
+                });
+            } else {
+                // 更新
+                postModel.update({ _id }, entity, err => {
+                    if (err) {
+                        return reject(err);
+                    }
+                    return resolve();
+                });
+            }
         });
-    postModel.findById(_id, (err, article) => {
-        if (err) {
-            return callback(err);
-        }
-        if (!article) {
-            // 新增
-            entity._id = _id;
-            entity.IsActive = true;
-            entity.ViewCount = 0;
-            entity.CreateTime = new Date();
-            entity.save(err => {
-                if (err) {
-                    return callback(err);
-                }
-                return callback(null);
-            });
-        } else {
-            // 更新
-            postModel.update({ _id }, entity, err => {
-                if (err) {
-                    return callback(err);
-                }
-                return callback(null);
-            });
-        }
     });
 };
 
 /**
  * 软删除文章
  * @param ids 文章id，多个id以逗号分隔
- * @param callback 回调函数
  */
-exports.delete = function (ids, callback) {
-    let idArray = ids.split(','),
-        hasErr = false,
-        index = 0;
-    idArray.forEach(id => {
-        postModel.update({ _id: id }, { IsActive: false }, err => {
-            index++;
-            if (err) {
-                hasErr = true;
-            }
-            if (index === idArray.length) {
-                if (hasErr) {
-                    return callback(err);
-                }
-                return callback(null);
-            }
+exports.delete = ids => {
+    const idArray = ids.split(',');
+    const promiseArr = idArray.map(id => {
+        return postModel.update({ _id: id }, { IsActive: false }).exec()
+    });
+    return new Promise((resolve, reject) => {
+        Promise.all(promiseArr).then(() => {
+            resolve();
+        }, err => {
+            reject(err);
         });
     });
 };
@@ -364,13 +351,14 @@ exports.delete = function (ids, callback) {
 /**
  * 恢复删除的文章
  * @param id 文章id
- * @param callback 回调函数
  */
-exports.undo = function (id, callback) {
-    postModel.update({ _id: id }, { IsActive: true }, err => {
-        if (err) {
-            return callback(err);
-        }
-        return callback(null);
+exports.undo = id => {
+    return new Promise((resolve, reject) => {
+        postModel.update({ _id: id }, { IsActive: true }, err => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve();
+        });
     });
 };

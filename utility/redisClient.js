@@ -16,22 +16,24 @@ if (redisEnable) {
  * @param key 缓存key
  * @param value 缓存value
  * @param expired 缓存的有效时长，单位秒
- * @param callback 回调函数
  */
-exports.setItem = function (key, value, expired, callback) {
-    if (!redisEnable) {
-        return callback(null);
-    }
-
-    client.set(key, JSON.stringify(value), function (err) {
-        if (err) {
-            return callback(err);
+exports.setItem = (key, value, expired) => {
+    return new Promise((resolve, reject) => {
+        if (!redisEnable) {
+            return resolve();
         }
-        if (expired) {
-            client.expire(key, expired);
-        }
-        return callback(null);
+    
+        client.set(key, JSON.stringify(value), err => {
+            if (err) {
+                return reject(err);
+            }
+            if (expired) {
+                client.expire(key, expired);
+            }
+            return resolve();
+        });
     });
+    
 };
 
 /**
@@ -39,16 +41,18 @@ exports.setItem = function (key, value, expired, callback) {
  * @param key 缓存key
  * @param callback 回调函数
  */
-exports.getItem = function (key, callback) {
-    if (!redisEnable) {
-        return callback(null, null);
-    }
-
-    client.get(key, function (err, reply) {
-        if (err) {
-            return callback(err);
+exports.getItem = key => {
+    return new Promise((resolve, reject) => {
+        if (!redisEnable) {
+            return resolve(null);
         }
-        return callback(null, JSON.parse(reply));
+    
+        client.get(key, function (err, reply) {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(JSON.parse(reply));
+        });
     });
 };
 
@@ -57,16 +61,18 @@ exports.getItem = function (key, callback) {
  * @param key 缓存key
  * @param callback 回调函数
  */
-exports.removeItem = function (key, callback) {
-    if (!redisEnable) {
-        return callback(null);
-    }
-
-    client.del(key, function (err) {
-        if (err) {
-            return callback(err);
+exports.removeItem = key => {
+    return new Promise((resolve, reject) => {
+        if (!redisEnable) {
+            return resolve();
         }
-        return callback(null);
+    
+        client.del(key, err => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve();
+        });
     });
 };
 

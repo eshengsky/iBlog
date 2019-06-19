@@ -41,15 +41,13 @@ passport.deserializeUser((id, cb) => {
 
 // 后台登录页面
 router.get('/login', (req, res, next) => {
-    tool.getConfig(path.join(__dirname, '../config/settings.json'), (err, settings) => {
-        if (err) {
-            next(err);
-        } else {
-            res.render('auth/login', {
-                settings,
-                title: `${settings.SiteName} - ${res.__('auth.title')}`
-            });
-        }
+    tool.getConfig(path.join(__dirname, '../config/settings.json')).then(settings => {
+        res.render('auth/login', {
+            settings,
+            title: `${settings.SiteName} - ${res.__('auth.title')}`
+        });
+    }, err => {
+        next(err);
     });
 });
 
@@ -67,11 +65,11 @@ router.post('/login', (req, res, next) => {
         } else {
             // 登录操作
             req.logIn(user, err => {
-                let returnTo = '/admin';
                 if (err) {
                     next(err);
                 } else {
-                    // 尝试跳转之前的页面
+                    // 优先跳转之前的页面
+                    let returnTo = '/admin';
                     if (req.session.returnTo) {
                         returnTo = req.session.returnTo;
                     }

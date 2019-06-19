@@ -4,9 +4,8 @@ const logModel = require('../models/log')
 /**
  * 获取所有日志
  * @param params 参数对象
- * @param callback 回调函数
  */
-exports.getAll = function (params, callback) {
+exports.getAll = params => {
     let page = parseInt(params.pageIndex) || 1;
     const size = parseInt(params.pageSize) || 10;
     page = page > 0 ? page : 1;
@@ -21,24 +20,27 @@ exports.getAll = function (params, callback) {
             options.sort = params.sortOrder === 'desc' ? '-timestamp' : 'timestamp';
             break;
     }
-    logModel.find({}, {}, options, (err, logs) => {
-        if (err) {
-            return callback(err);
-        }
-        return callback(null, logs);
+    return new Promise((resolve, reject) => {
+        logModel.find({}, {}, options, (err, logs) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(logs);
+        });
     });
+    
 };
 
 /**
  * 获取日志数
- * @param params 参数对象
- * @param callback 回调函数
  */
-exports.getAllCount = function (params, callback) {
-    logModel.count((err, count) => {
-        if (err) {
-            return callback(err);
-        }
-        return callback(null, count);
+exports.getAllCount = () => {
+    return new Promise((resolve, reject) => {
+        logModel.count((err, count) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(count);
+        });
     });
 };
