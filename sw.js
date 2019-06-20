@@ -99,7 +99,7 @@ if (workbox) {
   },
   {
     "url": "/static/dist/js/category.js",
-    "revision": "e5eec0350406024764ab4a8d741851ac"
+    "revision": "862d4640170ee09daf40fd8d5e531435"
   },
   {
     "url": "/static/dist/js/categorymanage.js",
@@ -111,7 +111,7 @@ if (workbox) {
   },
   {
     "url": "/static/dist/js/editarticle.js",
-    "revision": "b3d6132bbb27962b98e374e0e38b9d56"
+    "revision": "0dcae8a90c481ddfb93ffef3421b19ec"
   },
   {
     "url": "/static/dist/js/exception.js",
@@ -127,11 +127,11 @@ if (workbox) {
   },
   {
     "url": "/static/dist/js/index.js",
-    "revision": "0db76d1b2676a06114ff0b958b99ccf1"
+    "revision": "535a63332e046f8c1d8dd7afc138ad91"
   },
   {
     "url": "/static/dist/js/newarticle.js",
-    "revision": "09a14fe702a49fa327e839bad1409f40"
+    "revision": "b3431aaeb6f9e0cbc049fec2867a62f1"
   },
   {
     "url": "/static/dist/js/prehandler.js",
@@ -291,7 +291,7 @@ if (workbox) {
   },
   {
     "url": "/static/src/js/category.js",
-    "revision": "cd618558a738c198fcba01ee1463d818"
+    "revision": "03f8eb2e3d603c936a5d80d05335cf90"
   },
   {
     "url": "/static/src/js/categorymanage.js",
@@ -303,7 +303,7 @@ if (workbox) {
   },
   {
     "url": "/static/src/js/editarticle.js",
-    "revision": "cce50368a57a22fa6b9eb48705ee7357"
+    "revision": "287ab0f1f9114a34d09a963aa5b0ad56"
   },
   {
     "url": "/static/src/js/exception.js",
@@ -319,11 +319,11 @@ if (workbox) {
   },
   {
     "url": "/static/src/js/index.js",
-    "revision": "f86dac258567ac544ac8f3ac7d03c4ed"
+    "revision": "94c5e685de18bbd298e0ee5fd6063c12"
   },
   {
     "url": "/static/src/js/newarticle.js",
-    "revision": "bf6d87056fd46c52b8d18697a9939e43"
+    "revision": "03c19987c40b70738c9f823ebb805a61"
   },
   {
     "url": "/static/src/js/prehandler.js",

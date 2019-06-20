@@ -23,7 +23,7 @@
   * 创新的竖向分页
 * 文章详情
   * 自动生成目录
-  * 支持评论 (基于[畅言](http://changyan.kuaizhan.com/))
+  * 支持评论 (基于[畅言](https://changyan.kuaizhan.com/))
 * 留言
 * 关于
 * 后台管理
