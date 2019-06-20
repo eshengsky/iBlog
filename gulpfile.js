@@ -95,7 +95,7 @@ gulp.task('service-worker', () => {
             'node_modules/malihu-custom-scrollbar-plugin/**/*.{min.js,css,png}',
             'node_modules/jQuery-cycleText/**/*.min.js'
         ],
-        globIgnores: ['**/*/test/**/*.js'],
+        globIgnores: ['**/*/test/**/*.js', 'public/libs/**'],
         modifyURLPrefix: {
             'public/favicon.ico': '/favicon.ico',
             'public/': '/static/',
