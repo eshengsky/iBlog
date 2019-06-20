@@ -124,8 +124,11 @@ String 类型，管理员账号的密码，必须是32位 md5 加密后的字符
 
 ### Gulp任务
 
+本地开发时会引用 `public/src` 下的资源文件，发布到线上（NODE_ENV=production）后会自动使用 `public/dist` 下的压缩后的文件。所以在发布之前需要进行js和css的压缩操作。
+
 ```bash
 gulp server
+
 ```
 启动本地开发服务器。
 
@@ -148,6 +151,11 @@ gulp watch
 gulp default
 ```
 默认任务，自动启动服务器，并进行一次js和css压缩，并开启文件改动监听。
+
+```bash
+gulp service-worker
+```
+生成预缓存文件列表，并自动替换 `/sw.js` 文件的 `workbox.precaching.precacheAndRoute([])` 参数。
 
 ## 关于缓存
 
