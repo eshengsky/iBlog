@@ -15,9 +15,7 @@
 	left: 50%;
 	top: 50%;
 	margin-left: -50px;
-	margin-top: -50px;
-	width: 96px;
-	height: 96px
+	margin-top: -60px;
 }
 
 .home-loading .loading-con img {
@@ -51,6 +49,13 @@
 	-o-animation: spin 1s infinite linear;
 	-ms-animation: spin 1s infinite linear;
 	animation: spin 1s infinite linear
+}
+
+.loading-con p {
+    position: relative;
+    left: -3px;
+    top: 5px;
+    color: #555;
 }
 
 @keyframes spin {

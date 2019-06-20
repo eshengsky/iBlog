@@ -43,7 +43,7 @@ if (workbox) {
   },
   {
     "url": "/static/dist/css/home-loading.css",
-    "revision": "729adeb18d22ec3dc7dcd370df1ec3c1"
+    "revision": "0040777e852deb1657e343e5a483a672"
   },
   {
     "url": "/static/dist/css/icon-font.css",
@@ -67,7 +67,7 @@ if (workbox) {
   },
   {
     "url": "/static/dist/css/site.css",
-    "revision": "4203ca4868780a56950b9d22c9f89a98"
+    "revision": "68283ca50b966c109182c7edb5a90af8"
   },
   {
     "url": "/static/dist/js/about.js",
@@ -235,7 +235,7 @@ if (workbox) {
   },
   {
     "url": "/static/src/css/home-loading.css",
-    "revision": "f34cf8ce3e41fd8efd410a828d5df126"
+    "revision": "f07362ac7a8e5a35108b34761c23330e"
   },
   {
     "url": "/static/src/css/icon-font.css",
@@ -352,282 +352,6 @@ if (workbox) {
   {
     "url": "/static/ZeroClipboard.swf",
     "revision": "a573941f02f4331f81046356ebb667eb"
-  },
-  {
-    "url": "/nodeModules/bootstrap/dist/css/bootstrap-theme.min.css",
-    "revision": "2010fa9fb07541adc78a1ec0a8a4fbbf"
-  },
-  {
-    "url": "/nodeModules/bootstrap/dist/css/bootstrap.min.css",
-    "revision": "7f89537eaf606bff49f5cc1a7c24dbca"
-  },
-  {
-    "url": "/nodeModules/bootstrap/dist/js/bootstrap.min.js",
-    "revision": "2f34b630ffe30ba2ff2b91e3f3c322a1"
-  },
-  {
-    "url": "/nodeModules/@fortawesome/fontawesome-free/css/all.min.css",
-    "revision": "e4c542a7f6bf6f74fdd8cdf6e8096396"
-  },
-  {
-    "url": "/nodeModules/@fortawesome/fontawesome-free/css/brands.min.css",
-    "revision": "c9fcdfd0e53dec8552f9dd3b40f75973"
-  },
-  {
-    "url": "/nodeModules/@fortawesome/fontawesome-free/css/fontawesome.min.css",
-    "revision": "f87b6becf6c4595d38a59016c2460a0b"
-  },
-  {
-    "url": "/nodeModules/@fortawesome/fontawesome-free/css/regular.min.css",
-    "revision": "b7c0350118f1465ba68e3b7c93fcc360"
-  },
-  {
-    "url": "/nodeModules/@fortawesome/fontawesome-free/css/solid.min.css",
-    "revision": "cddcd8fd12da8dd6bcad774583afd75c"
-  },
-  {
-    "url": "/nodeModules/@fortawesome/fontawesome-free/css/svg-with-js.min.css",
-    "revision": "12a9e48af01b59c9e03476b1d0189c98"
-  },
-  {
-    "url": "/nodeModules/@fortawesome/fontawesome-free/css/v4-shims.min.css",
-    "revision": "d12f3b2a85c84ec27b7d27eec733af10"
-  },
-  {
-    "url": "/nodeModules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.eot",
-    "revision": "a7b95dbdd87e0c809570affaf366a434"
-  },
-  {
-    "url": "/nodeModules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.ttf",
-    "revision": "98b6db59be947f563350d2284fc9ea36"
-  },
-  {
-    "url": "/nodeModules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff",
-    "revision": "2ef8ba3410dcc71578a880e7064acd7a"
-  },
-  {
-    "url": "/nodeModules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2",
-    "revision": "5e2f92123d241cabecf0b289b9b08d4a"
-  },
-  {
-    "url": "/nodeModules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.eot",
-    "revision": "dcce4b7fbd5e895561e18af4668265af"
-  },
-  {
-    "url": "/nodeModules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.ttf",
-    "revision": "65b9977aa23185e8964b36eddbce7a20"
-  },
-  {
-    "url": "/nodeModules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff",
-    "revision": "427d721b86fc9c68b2e85ad42b69238c"
-  },
-  {
-    "url": "/nodeModules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2",
-    "revision": "e6257a726a0cf6ec8c6fec22821c055f"
-  },
-  {
-    "url": "/nodeModules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.eot",
-    "revision": "46e7cec623d8bd790d9fdbc8de2d3ee7"
-  },
-  {
-    "url": "/nodeModules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf",
-    "revision": "ff8d9f8adb0d09f11d4816a152672f53"
-  },
-  {
-    "url": "/nodeModules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff",
-    "revision": "a7140145ebaaf5fb14e40430af5d25c4"
-  },
-  {
-    "url": "/nodeModules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2",
-    "revision": "418dad87601f9c8abd0e5798c0dc1feb"
-  },
-  {
-    "url": "/nodeModules/blueimp-file-upload/css/jquery.fileupload-noscript.css",
-    "revision": "77b97d2b03652874f0b4838f9092bbb2"
-  },
-  {
-    "url": "/nodeModules/blueimp-file-upload/css/jquery.fileupload-ui-noscript.css",
-    "revision": "f95c01176c6a8e075aebd07ee2e84689"
-  },
-  {
-    "url": "/nodeModules/blueimp-file-upload/css/jquery.fileupload-ui.css",
-    "revision": "1f4e0dd2d9441a6fc90d2a3ce0ca072f"
-  },
-  {
-    "url": "/nodeModules/blueimp-file-upload/css/jquery.fileupload.css",
-    "revision": "ec8bd4e8c3a38562e96bcb8602516822"
-  },
-  {
-    "url": "/nodeModules/blueimp-file-upload/js/cors/jquery.postmessage-transport.js",
-    "revision": "9522699d1ed0c2e95bdfb08cabd4b8e2"
-  },
-  {
-    "url": "/nodeModules/blueimp-file-upload/js/cors/jquery.xdr-transport.js",
-    "revision": "8a21ee58e9eba7e01d5dd8b3c7364cf5"
-  },
-  {
-    "url": "/nodeModules/blueimp-file-upload/js/jquery.fileupload-angular.js",
-    "revision": "398579ad6380c370efbb2918da088fd0"
-  },
-  {
-    "url": "/nodeModules/blueimp-file-upload/js/jquery.fileupload-audio.js",
-    "revision": "a7234dfb696e4248614b79f95478da89"
-  },
-  {
-    "url": "/nodeModules/blueimp-file-upload/js/jquery.fileupload-image.js",
-    "revision": "7c40367b00f74b0c7c43bff009dde942"
-  },
-  {
-    "url": "/nodeModules/blueimp-file-upload/js/jquery.fileupload-jquery-ui.js",
-    "revision": "253cd8d55b224c72333ce88337a1edb3"
-  },
-  {
-    "url": "/nodeModules/blueimp-file-upload/js/jquery.fileupload-process.js",
-    "revision": "840f65232eaf1619ea0aff1ab4f5e444"
-  },
-  {
-    "url": "/nodeModules/blueimp-file-upload/js/jquery.fileupload-ui.js",
-    "revision": "d41e8e8fa1811ff6e0ff5b8f541f3203"
-  },
-  {
-    "url": "/nodeModules/blueimp-file-upload/js/jquery.fileupload-validate.js",
-    "revision": "a144e6149c89ed27e0b2d7fcfef09101"
-  },
-  {
-    "url": "/nodeModules/blueimp-file-upload/js/jquery.fileupload-video.js",
-    "revision": "0a9ee295c77f8a09bd4aac114171ed62"
-  },
-  {
-    "url": "/nodeModules/blueimp-file-upload/js/jquery.fileupload.js",
-    "revision": "4bfd85460689a29e314ddfad50c184e0"
-  },
-  {
-    "url": "/nodeModules/blueimp-file-upload/js/jquery.iframe-transport.js",
-    "revision": "f371e8d9f57329f90114d7b52dd5c7a4"
-  },
-  {
-    "url": "/nodeModules/blueimp-file-upload/js/vendor/jquery.ui.widget.js",
-    "revision": "3d0f0f5ca5d86c5a4b4fc33cda374a17"
-  },
-  {
-    "url": "/nodeModules/sweetalert/dist/sweetalert-dev.js",
-    "revision": "800cbdcad6a26e06fc9471102d8c50c4"
-  },
-  {
-    "url": "/nodeModules/sweetalert/dist/sweetalert.css",
-    "revision": "196c08c89f0c8a9b688a16d3435ac327"
-  },
-  {
-    "url": "/nodeModules/sweetalert/dist/sweetalert.min.js",
-    "revision": "0068f44b0aa1b83fa7679860ceb26590"
-  },
-  {
-    "url": "/nodeModules/jquery/dist/jquery.js",
-    "revision": "888d4551b8db7c41cda28d95e494f998"
-  },
-  {
-    "url": "/nodeModules/jquery/dist/jquery.min.js",
-    "revision": "2f6b11a7e914718e0290410e85366fe9"
-  },
-  {
-    "url": "/nodeModules/metismenu/dist/cjs/index.js",
-    "revision": "e3a81aadc90300392b78d40ff223b5cf"
-  },
-  {
-    "url": "/nodeModules/metismenu/dist/metisMenu.css",
-    "revision": "31ffb62ccdea9a6362112e37a70a7ffc"
-  },
-  {
-    "url": "/nodeModules/metismenu/dist/metisMenu.js",
-    "revision": "f0ec5be1b3831cbda70f751151c93130"
-  },
-  {
-    "url": "/nodeModules/metismenu/dist/metisMenu.min.css",
-    "revision": "990c79a10309155c5b46ced8f6b88f57"
-  },
-  {
-    "url": "/nodeModules/metismenu/dist/metisMenu.min.js",
-    "revision": "a6b9a45de9e973ebe0079ff0ec5d1637"
-  },
-  {
-    "url": "/nodeModules/metismenu/dist/modules/index.js",
-    "revision": "38f8b096d5a1e575075a7328f2fc1f90"
-  },
-  {
-    "url": "/nodeModules/lodash/core.min.js",
-    "revision": "a6979ad394d6e0da7f690e7be5e29b8f"
-  },
-  {
-    "url": "/nodeModules/lodash/lodash.min.js",
-    "revision": "62acde2a2687c63954bee264a1a2f86d"
-  },
-  {
-    "url": "/nodeModules/fuelux/dist/css/fuelux.css",
-    "revision": "0c9709e631eb1b860cdec4bf4e9d26f0"
-  },
-  {
-    "url": "/nodeModules/fuelux/dist/css/fuelux.min.css",
-    "revision": "ea5e075186850395d225c2598a6622ce"
-  },
-  {
-    "url": "/nodeModules/fuelux/dist/js/fuelux.js",
-    "revision": "fcdd9209f24b83aea99bbbd8c3b87c96"
-  },
-  {
-    "url": "/nodeModules/fuelux/dist/js/fuelux.min.js",
-    "revision": "5135a3abcff5a71f964ed09631cbe4d6"
-  },
-  {
-    "url": "/nodeModules/simplemde/dist/simplemde.min.css",
-    "revision": "b8697c785bbf0627fb05a7d32efea0c2"
-  },
-  {
-    "url": "/nodeModules/simplemde/dist/simplemde.min.js",
-    "revision": "fd052f831c01ff10535c0ae2b538dc8b"
-  },
-  {
-    "url": "/nodeModules/js-md5/build/md5.min.js",
-    "revision": "c3a7222388987b8d12694736f6ef1595"
-  },
-  {
-    "url": "/nodeModules/animate.css/animate.min.css",
-    "revision": "c78e4003414fbf2814dc097a5e1c784a"
-  },
-  {
-    "url": "/nodeModules/lightbox2/dist/css/lightbox.min.css",
-    "revision": "767938d77eef356b1ba76c3897384948"
-  },
-  {
-    "url": "/nodeModules/lightbox2/dist/js/lightbox-plus-jquery.min.js",
-    "revision": "85b4b81c0b2d9fd16b9ea0458b56b064"
-  },
-  {
-    "url": "/nodeModules/lightbox2/dist/js/lightbox.min.js",
-    "revision": "754f3b83f87764db45e3adafea8c5720"
-  },
-  {
-    "url": "/nodeModules/scrollnav/dist/jquery.scrollNav.min.js",
-    "revision": "5a34ddb1e7f72f61f6de275201d619b1"
-  },
-  {
-    "url": "/nodeModules/jquery-qrcode/dist/jquery-qrcode.min.js",
-    "revision": "21f28eca4fb04c36d8e09b15e364950b"
-  },
-  {
-    "url": "/nodeModules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js",
-    "revision": "9df3cfdcc9b72f1aa24e2e114455ae7a"
-  },
-  {
-    "url": "/nodeModules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
-    "revision": "295351a5027c5ad6256f3389ab471cfb"
-  },
-  {
-    "url": "/nodeModules/malihu-custom-scrollbar-plugin/mCSB_buttons.png",
-    "revision": "3a8a4582fe1dbc77086eccca317c459e"
-  },
-  {
-    "url": "/nodeModules/jQuery-cycleText/dist/js/jquery.cycleText.min.js",
-    "revision": "27c6d2d12a22270de12f1e58f5f1fc23"
   }
 ]);
 
