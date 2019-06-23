@@ -192,7 +192,7 @@ $ NODE_ENV=production pm2 start bin/www -i 0
 
 * 本地开发环境，直接在终端中查看日志。
 * 使用 `pm2` 部署时，使用 `pm2 logs` 查看日志。
-* 使用 Chrome 扩展程序 [chrome-extension-server-log](https://github.com/eshengsky/ServerLog/tree/master/chrome-extension-server-log) 在开发者工具 (F12) 中查看日志。
+* 使用 Chrome 扩展程序 [chrome-extension-server-log](https://github.com/eshengsky/ServerLog/tree/master/chrome-extension-server-log) 在开发者工具 (F12) 中查看日志，Secret Key 请设置为 `iblog2_server_log_key`。
 
 ## 贡献者们
 感谢给 iBlog2 项目贡献代码的朋友，感谢他们的支持，详情 [点击这里](https://github.com/eshengsky/iBlog2/graphs/contributors)。
