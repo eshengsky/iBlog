@@ -14,11 +14,11 @@ html, body {
 body {
     font-family: -apple-system, BlinkMacSystemFont, "PingFang SC","Helvetica Neue",STHeiti,"Microsoft Yahei",Tahoma,Simsun,sans-serif;
     font-size: 14px;
-    display: none;
+    transition: opacity .3s;
 }
 
 body.shown {
-    display: block;
+    opacity: 1;
 }
 
 body.mCustomScrollbar .mCSB_scrollTools .mCSB_draggerContainer {

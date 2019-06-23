@@ -1,3 +1,4 @@
+const shortid = require('shortid');
 const logModel = require('../models/log')
     .LogModel;
 
@@ -44,3 +45,21 @@ exports.getAllCount = () => {
         });
     });
 };
+
+/**
+ * 持久化日志
+ */
+exports.store = (level, err) => {
+    const newLog = new logModel({
+        _id: shortid.generate(),
+        level,
+        message: err.message || '未知错误',
+        meta: err,
+        timestamp: new Date()
+    });
+    newLog.save(err => {
+        if (err) {
+            return console.error(err);
+        }
+    });
+}

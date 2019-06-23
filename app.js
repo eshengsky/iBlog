@@ -13,23 +13,34 @@ const auth = require('./routes/auth');
 const admin = require('./routes/admin');
 const locale = require('./routes/locale');
 const ue = require('./routes/ue');
-const logger = require('./utility/logger');
+const tool = require('./utility/tool');
 const passport = require('passport');
 const i18n = require('./models/i18n');
+const serverlog = require('serverlog-node');
+serverlog.config({
+    extension: {
+        enable: true,
+        key: 'iblog2_server_log_key'
+    }
+});
+const logger = serverlog.getLogger('app');
+const log = require('./proxy/log');
 const app = express();
 
 /**
  * 记录未捕获异常
  */
 process.on('uncaughtException', err => {
-    logger.errLogger(err);
+    log.store('Error', err);
+    logger.error(err);
 });
 
 /**
  * 记录未处理的Promise失败
  */
 process.on('unhandledRejection', reason => {
-    logger.errLogger(reason);
+    log.store('Error', reason);
+    logger.error(reason);
 });
 
 // 设置模板引擎
@@ -42,9 +53,12 @@ app.locals.staticPrefix = app.get('env') === 'production' ? '/static/dist' : '/s
 // 增加安全性头部
 app.use(helmet());
 
+// 注册 ServerLog 中间件以注入 req 对象给日志
+app.use(serverlog.middleware());
+
 // 记录所有请求
 app.use((req, res, next) => {
-    logger.info(`${req.method.toUpperCase()}: ${req.protocol}://${req.get('Host')}${req.originalUrl}`);
+    logger.info(`${req.method.toUpperCase()} ${tool.getFullUrl(req)}`);
     next();
 });
 
@@ -75,12 +89,14 @@ app.use(passport.session());
 
 // 静态文件
 app.use('/static', express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static(path.join(__dirname, 'public', 'uploads')));
 app.use('/nodeModules', express.static(path.join(__dirname, 'node_modules')));
 
 // Service Worker
 app.get('/sw.js', (req, res) => {
     fs.readFile(path.resolve(__dirname, './sw.js'), (err, data) => {
         if (err) {
+            logger.error(err);
             throw err;
         }
         res.writeHead(200, {
@@ -106,7 +122,8 @@ app.use('/admin', require('connect-ensure-login')
 app.use((req, res) => {
     const err = new Error(`Not Found! URL: ${req.originalUrl}`);
     err.status = 404;
-    logger.errLogger(err, req);
+    log.store('Warn', err);
+    logger.warn(`Not Found! URL: ${req.originalUrl}`);
     res.status(404)
         .render('./shared/error', {
             code: 404,
@@ -118,7 +135,8 @@ app.use((req, res) => {
 app.use((err, req, res) => {
     const code = err.status || 500;
     err.status = code;
-    logger.errLogger(err, req);
+    log.store('Error', err);
+    logger.error(err);
     res.status(code)
         .render('./shared/error', {
             code,

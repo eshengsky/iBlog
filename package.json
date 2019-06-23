@@ -43,6 +43,7 @@
     "scrollnav": "git+https://github.com/jimmynotjim/scrollNav.git#v2.7.3",
     "semver": "^5.5.0",
     "serve-favicon": "^2.5.0",
+    "serverlog-node": "^1.0.2",
     "shortid": "^2.2.4",
     "showdown": "^1.8.6",
     "simplemde": "^1.11.2",

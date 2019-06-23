@@ -1,6 +1,7 @@
 const app = require('../app');
 const ssl = require('../config.json').ssl;
-const logger = require('../utility/logger');
+const serverlog = require('serverlog-node');
+const logger = serverlog.getLogger('www');
 
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);

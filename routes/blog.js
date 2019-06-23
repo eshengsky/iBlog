@@ -153,7 +153,7 @@ router.get('/:category/:article', (req, res, next) => {
             res.redirect(util.format('/blog/%s/%s', trueCateAlias, alias));
         }
 
-        const labels = article.Labels;
+        let labels = article.Labels;
         const labelList = [];
         if (labels) {
             labels = JSON.parse(labels);

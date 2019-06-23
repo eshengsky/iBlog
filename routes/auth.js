@@ -5,7 +5,9 @@ const path = require('path');
 const passport = require('passport');
 const Strategy = require('passport-local')
     .Strategy;
-const logger = require('../utility/logger');
+const serverlog = require('serverlog-node');
+const logger = serverlog.getLogger('auth');
+const log = require('../proxy/log');
 
 passport.use(new Strategy({
         // 页面上的用户名字段的name属性值
@@ -57,7 +59,8 @@ router.post('/login', (req, res, next) => {
         if (err) {
             next(err);
         } else if (!user) {
-            logger.errLogger(new Error(res.__('auth.wrong_info')), req);
+            log.store('Error', new Error(res.__('auth.wrong_info')));
+            logger.error('尝试登录出错！');
             res.json({
                 valid: false,
                 message: res.__('auth.wrong_info')

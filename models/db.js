@@ -4,8 +4,7 @@ const mongoose = require('mongoose');
 const extend = require('mongoose-schema-extend');
 const i18n = require('./i18n');
 
-// use custom mongodb url or localhost
-mongoose.connect(dbPath || 'mongodb://localhost/blogrift');
+mongoose.connect(dbPath);
 const db = mongoose.connection;
 db.on('error', err => {
     console.error(i18n.__('error.db_1') + err);

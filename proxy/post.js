@@ -2,6 +2,8 @@ const postModel = require('../models/post')
     .PostModel;
 const redisClient = require('../utility/redisClient');
 const tool = require('../utility/tool');
+const serverlog = require('serverlog-node');
+const logger = serverlog.getLogger('post');
 
 /**
  * 为首页数据查询构建条件对象
@@ -78,6 +80,8 @@ exports.getPosts = params => {
                 if (posts) {
                     redisClient.setItem(cache_key, posts, redisClient.defaultExpired);
                 }
+
+                logger.infoE('构建的查询对象：', query, '数据库返回结果：', posts)
                 return resolve(posts);
             });
         }, err => {

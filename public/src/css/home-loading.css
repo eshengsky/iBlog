@@ -12,10 +12,10 @@
 
 .home-loading .loading-con {
 	position: absolute;
-	left: 50%;
-	top: 50%;
-	margin-left: -50px;
-	margin-top: -60px;
+    left: 50%;
+    top: 50%;
+    margin-left: -50px;
+    margin-top: -64px;
 }
 
 .home-loading .loading-con img {
@@ -53,9 +53,9 @@
 
 .loading-con p {
     position: relative;
-    left: -3px;
-    top: 5px;
+    top: 13px;
     color: #555;
+    font-size: 13px;
 }
 
 @keyframes spin {
