@@ -14,6 +14,12 @@
 * 管理后台
 ![image](https://raw.githubusercontent.com/eshengsky/iBlog2/master/public/images/preview3.png)
 
+## 更新计划
+- [x] 接入 Service Worker，支持离线访问
+- [ ] 使用 Vue 重构前端代码
+- [ ] 弃用畅言评论，实现自己的评论系统
+- [ ] 增加主题（皮肤）功能
+
 ## 在线实例
 我的博客 [https://skysun.name/](https://skysun.name/)
 
