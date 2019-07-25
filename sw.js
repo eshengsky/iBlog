@@ -380,7 +380,7 @@ if (workbox) {
     );
 
     workbox.routing.registerRoute(
-        'http://v3.jiathis.com/code/jia.js',
+        'https://v3.jiathis.com/code/jia.js',
         new workbox.strategies.StaleWhileRevalidate()
     );
 
