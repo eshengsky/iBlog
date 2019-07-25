@@ -2,7 +2,7 @@ extends ../shared/layout
 block content
     link(href=`${staticPrefix}/css/selectlist.css`, rel='stylesheet')
     link(href='/nodeModules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css', rel='stylesheet')
-    link(href='https://cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css', rel='stylesheet')
+    link(href='/static/src/css/github.min.css', rel='stylesheet')
     link(href=`${staticPrefix}/css/github-markdown.css`, rel='stylesheet')
     .container-fluid.render-body
         .row
@@ -108,7 +108,7 @@ block content
     script(type='text/javascript', src='/nodeModules/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
     script(type='text/javascript', src=`${staticPrefix}/js/selectlist.js`, charset='utf-8')
     script(type='text/javascript', src='/nodeModules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js', charset='utf-8')
-    script(type='text/javascript', src='https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/src/js/highlight.min.js', charset='utf-8')
     script(type='text/javascript', src=`${staticPrefix}/js/index.js`, charset='utf-8')
     script.
         var logoPath = "#{settings.LogoPath}";

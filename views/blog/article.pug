@@ -1,7 +1,7 @@
 extends ../shared/layout
 block content
     link(href=`${staticPrefix}/css/animate-custom.css`, rel='stylesheet')
-    link(href='https://cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css', rel='stylesheet')
+    link(href='/static/src/css/github.min.css', rel='stylesheet')
     link(href='/nodeModules/lightbox2/dist/css/lightbox.min.css', rel='stylesheet')
     link(href=`${staticPrefix}/css/posts_style_custom.css`, rel='stylesheet')
 
@@ -92,7 +92,7 @@ block content
     script(type='text/javascript', src='/nodeModules/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
     script(type='text/javascript', src='/nodeModules/lightbox2/dist/js/lightbox.min.js', charset='utf-8')
     script(type='text/javascript', src='/nodeModules/scrollnav/dist/jquery.scrollNav.min.js', charset='utf-8')
-    script(type='text/javascript', src='https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js', charset='utf-8')
+    script(type='text/javascript', src='/static/src/js/highlight.min.js', charset='utf-8')
     script(type='text/javascript', src=`${staticPrefix}/js/article.js`, charset='utf-8')
     script.
         var expandMenu = '#{settings.ExpandMenu}';
