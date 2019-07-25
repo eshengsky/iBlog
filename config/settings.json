@@ -1,10 +1,10 @@
 {
-  "SiteName": "iBlog",
-  "Author": "You Name",
-  "Email": "you_email@xxx.com",
-  "SiteDomain": "www.example.com",
-  "RecordNo": "浙ICP备XXX号",
-  "LogoPath": "/static/images/zhr.jpg",
+  "SiteName": "Jack'Blog",
+  "Author": "奉诗轩",
+  "Email": "varsmallrookie@gmail.com",
+  "SiteDomain": "www.varsmallrookie.com",
+  "RecordNo": "",
+  "LogoPath": "/static/images/7e72fb33-df90-46a2-90fd-e0a4ad1f28a5.jpg",
   "PageSize": "10",
   "ExpandMenu": "true",
   "ShowArticleSign": "true",
@@ -17,7 +17,7 @@
   "JiaThisId": "",
   "ShowComments": "true",
   "ShowGuestbook": "true",
-  "ChangyanId": "",
-  "ChangyanConf": "",
+  "ChangyanId": "cytJsijMp",
+  "ChangyanConf": "1823a1828bfa3b0239cf014f80a0335a",
   "CodeTheme": ""
 }

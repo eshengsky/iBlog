@@ -1,9 +1,9 @@
 {
-  "FirstLine": "第一行文本",
-  "SecondLine": "第二行文本",
-  "PhotoPath": "/static/images/zhr.jpg",
-  "ThirdLine": "第三行文本",
-  "Profile": "个人简介",
-  "Github": "http://baidu.com",
-  "Email": "Email地址"
+  "FirstLine": "奉诗轩",
+  "SecondLine": "Jack",
+  "PhotoPath": "/static/images/7e72fb33-df90-46a2-90fd-e0a4ad1f28a5 (1).jpg",
+  "ThirdLine": "varsmallrookie",
+  "Profile": "前端小菜鸟",
+  "Github": "github.com/varSmallRookie",
+  "Email": "varsmallrookie@gmail.com"
 }
