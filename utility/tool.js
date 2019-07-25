@@ -71,7 +71,11 @@ module.exports = {
                 data[key] = setters[key];
             }
             const newFile = JSON.stringify(data, null, 2);
-            fs.writeFile(filePath, newFile, 'utf8');
+            fs.writeFile(filePath, newFile, 'utf8', (err) => {
+                if (err) {
+                    console.log(`写入文件%s出错：${err}`, filePath);
+                }
+            });
         });
     },
 
