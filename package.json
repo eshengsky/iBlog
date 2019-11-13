@@ -24,7 +24,7 @@
     "highlight.js": "git+https://github.com/highlightjs/highlight.js.git",
     "i18n": "0.8.2",
     "jQuery-cycleText": "git+https://github.com/eshengsky/jQuery-cycleText.git",
-    "jquery": "^2.2.4",
+    "jquery": "^3.4.0",
     "jquery-file-upload-middleware": "^0.1.7",
     "jquery-qrcode": "git+https://github.com/lrsjng/jquery-qrcode.git",
     "jquery-sortable": "^0.9.13",
