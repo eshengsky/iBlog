@@ -49,12 +49,13 @@ exports.getAllCount = () => {
 /**
  * 持久化日志
  */
-exports.store = (level, err) => {
+exports.store = (level, err,ip) => {
     const newLog = new logModel({
         _id: shortid.generate(),
         level,
         message: err.message || '未知错误',
         meta: err,
+        ip:ip || "未知ip",
         timestamp: new Date()
     });
     newLog.save(err => {

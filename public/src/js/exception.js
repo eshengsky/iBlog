@@ -55,6 +55,12 @@ $(function () {
             width: "200px",
             sortable: true
         }, {
+            field: "ip",
+            title: "访问者ip",
+            align: "center",
+            valign: "middle",
+            width: "120px",
+        },{
             field: "level",
             title: "等级",
             align: "center",

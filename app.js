@@ -122,7 +122,7 @@ app.use('/admin', require('connect-ensure-login')
 app.use((req, res) => {
     const err = new Error(`Not Found! URL: ${req.originalUrl}`);
     err.status = 404;
-    log.store('Warn', err);
+    log.store('Warn', err,req.ip);
     logger.warn(`Not Found! URL: ${req.originalUrl}`);
     res.status(404)
         .render('./shared/error', {
@@ -135,7 +135,7 @@ app.use((req, res) => {
 app.use((err, req, res) => {
     const code = err.status || 500;
     err.status = code;
-    log.store('Error', err);
+    log.store('Error', err,req.ip);
     logger.error(err);
     res.status(code)
         .render('./shared/error', {

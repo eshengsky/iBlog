@@ -14,6 +14,9 @@ const logSchema = new mongoose.Schema({
     // 级别
     level: { type: String },
 
+    //来源ip
+    ip: {type:String},
+    
     // 详细信息
     meta: { type: mongoose.Schema.Types.Mixed }
 });

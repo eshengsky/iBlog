@@ -372,6 +372,7 @@ router.post('/getExceptions', (req, res, next) => {
                 time: moment(item.timestamp)
                     .format('YYYY-MM-DD HH:mm:ss.SSS'),
                 level: item.level,
+                ip:item.ip,
                 meta: item.meta
             });
         });

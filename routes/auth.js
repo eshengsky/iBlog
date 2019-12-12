@@ -59,7 +59,7 @@ router.post('/login', (req, res, next) => {
         if (err) {
             next(err);
         } else if (!user) {
-            log.store('Error', new Error(res.__('auth.wrong_info')));
+            log.store('Error', new Error(res.__('auth.wrong_info')),req.ip);
             logger.error('尝试登录出错！');
             res.json({
                 valid: false,
