@@ -128,14 +128,14 @@ block content
                                                 ul.list-group
                                                     li.list-group-item.clearfix
                                                         .pull-left
-                                                            a(href='http://api.fanyi.baidu.com', target='_blank')=__("admin.settings.trans")
+                                                            a(href='https://api.fanyi.baidu.com', target='_blank')=__("admin.settings.trans")
                                                             | #{__("admin.settings.key")}
                                                         .pull-right
                                                             input#TranslateKey.form-control(type='text', name='TranslateKey', placeholder=__("admin.settings.key_placeholder"), value=settings.TranslateKey)
                                                     li.list-group-item.clearfix
                                                         .pull-left
                                                             | #{__("admin.settings.analysis")} (
-                                                            a(href='http://tongji.baidu.com', target='_blank')=__("admin.settings.analysis_service")
+                                                            a(href='https://tongji.baidu.com', target='_blank')=__("admin.settings.analysis_service")
                                                             | )
                                                         .pull-right
                                                             input#EnableStatistics(type='hidden', name='EnableStatistics', value=settings.EnableStatistics)
@@ -161,7 +161,7 @@ block content
                                                     li.list-group-item.clearfix
                                                         .pull-left
                                                             | #{__("admin.settings.comments")} (
-                                                            a(href='http://changyan.kuaizhan.com', target='_blank')=__("admin.settings.comments_service")
+                                                            a(href='https://changyan.kuaizhan.com', target='_blank')=__("admin.settings.comments_service")
                                                             | )
                                                         .pull-right
                                                             input#ShowComments(type='hidden', name='ShowComments', value=settings.ShowComments)
@@ -169,7 +169,7 @@ block content
                                                     li.list-group-item.clearfix
                                                         .pull-left
                                                             | #{__("admin.settings.message")} (
-                                                            a(href='http://changyan.kuaizhan.com', target='_blank')=__("admin.settings.comments_service")
+                                                            a(href='https://changyan.kuaizhan.com', target='_blank')=__("admin.settings.comments_service")
                                                                 | )
                                                         .pull-right
                                                             input#ShowGuestbook(type='hidden', name='ShowGuestbook', value=settings.ShowGuestbook)
@@ -198,7 +198,7 @@ block content
                                             |  #{__("admin.settings.save")}
     script(type='text/javascript', src='/nodeModules/jquery/dist/jquery.min.js', charset='utf-8')
     script(type='text/javascript', src='/nodeModules/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
-    script(type='text/javascript', src='/nodeModules/metisMenu/dist/metisMenu.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/metismenu/dist/metisMenu.min.js', charset='utf-8')
     script(type='text/javascript', src=`${staticPrefix}/js/admin.js`, charset='utf-8')
     script(type='text/javascript', src='/nodeModules/blueimp-file-upload/js/vendor/jquery.ui.widget.js', charset='utf-8')
     script(type='text/javascript', src='/nodeModules/blueimp-file-upload/js/jquery.fileupload.js', charset='utf-8')

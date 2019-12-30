@@ -6,18 +6,16 @@
 	bottom: 0;
 	width: 100%;
 	height: 100%;
-	background: #fff;
+	background: #f3f3f4;
     z-index: 9999;
 }
 
 .home-loading .loading-con {
 	position: absolute;
-	left: 50%;
-	top: 50%;
-	margin-left: -50px;
-	margin-top: -50px;
-	width: 96px;
-	height: 96px
+    left: 50%;
+    top: 50%;
+    margin-left: -50px;
+    margin-top: -64px;
 }
 
 .home-loading .loading-con img {
@@ -51,6 +49,13 @@
 	-o-animation: spin 1s infinite linear;
 	-ms-animation: spin 1s infinite linear;
 	animation: spin 1s infinite linear
+}
+
+.loading-con p {
+    position: relative;
+    top: 13px;
+    color: #555;
+    font-size: 13px;
 }
 
 @keyframes spin {

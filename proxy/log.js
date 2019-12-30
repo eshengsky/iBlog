@@ -1,12 +1,12 @@
+const shortid = require('shortid');
 const logModel = require('../models/log')
     .LogModel;
 
 /**
  * 获取所有日志
  * @param params 参数对象
- * @param callback 回调函数
  */
-exports.getAll = function (params, callback) {
+exports.getAll = params => {
     let page = parseInt(params.pageIndex) || 1;
     const size = parseInt(params.pageSize) || 10;
     page = page > 0 ? page : 1;
@@ -21,24 +21,45 @@ exports.getAll = function (params, callback) {
             options.sort = params.sortOrder === 'desc' ? '-timestamp' : 'timestamp';
             break;
     }
-    logModel.find({}, {}, options, (err, logs) => {
-        if (err) {
-            return callback(err);
-        }
-        return callback(null, logs);
+    return new Promise((resolve, reject) => {
+        logModel.find({}, {}, options, (err, logs) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(logs);
+        });
     });
+    
 };
 
 /**
  * 获取日志数
- * @param params 参数对象
- * @param callback 回调函数
  */
-exports.getAllCount = function (params, callback) {
-    logModel.count((err, count) => {
-        if (err) {
-            return callback(err);
-        }
-        return callback(null, count);
+exports.getAllCount = () => {
+    return new Promise((resolve, reject) => {
+        logModel.count((err, count) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(count);
+        });
     });
 };
+
+/**
+ * 持久化日志
+ */
+exports.store = (level, err) => {
+    const newLog = new logModel({
+        _id: shortid.generate(),
+        level,
+        message: err.message || '未知错误',
+        meta: err,
+        timestamp: new Date()
+    });
+    newLog.save(err => {
+        if (err) {
+            return console.error(err);
+        }
+    });
+}

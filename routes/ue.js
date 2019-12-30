@@ -69,27 +69,24 @@ const storageFile = multer.diskStorage({
 });
 
 router.get('/', (req, res, next) => {
-    let list = [],
-        total = 0,
-        rootPath = path.join(__dirname, '../public/uploads/'),
-        rootFiles,
-        parFiles,
-        files,
-        stat;
+    const list = [];
+    let total = 0;
+    const rootPath = path.join(__dirname, '../public/uploads/');
+    let rootFiles;
+    let parFiles;
+    let files;
+    let stat;
     switch (req.query.action) {
-
         // 获取配置
         case 'config':
-            tool.getConfig(path.join(__dirname, '../config/ue.json'), (err, settings) => {
-                if (err) {
-                    next(err);
-                } else {
-                    res.json(settings);
-                }
+            tool.getConfig(path.join(__dirname, '../config/ue.json')).then(settings => {
+                res.json(settings);
+            }, err => {
+                next(err);
             });
             break;
 
-            // 图片管理
+        // 图片管理
         case 'listimage':
             rootFiles = fs.readdirSync(rootPath);
             rootFiles.forEach(rootFile => {
@@ -118,7 +115,7 @@ router.get('/', (req, res, next) => {
             });
             break;
 
-            // 附件管理
+        // 附件管理
         case 'listfile':
             rootFiles = fs.readdirSync(rootPath);
             rootFiles.forEach(rootFile => {
@@ -152,7 +149,6 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
     let uploadFile;
     switch (req.query.action) {
-
         // 上传图片
         case 'uploadimage':
             uploadFile = multer({ storage: storageImg })
@@ -172,13 +168,14 @@ router.post('/', (req, res, next) => {
             });
             break;
 
-            // 上传涂鸦
+        // 上传涂鸦
         case 'uploadscrawl':
             var dataBuffer = new Buffer(req.body.upfile, 'base64'),
                 fileName = `${shortid.generate()}.png`;
             if (req.query.uniqueId) {
-                let dirPathParent = path.join(__dirname, '../public/uploads/', req.query.uniqueId),
-                    dirPath = path.join(dirPathParent, 'img'); // 不能直接创建dirPath，因为父目录不存在会抛出异常
+                // 不能直接创建dirPath，因为父目录不存在会抛出异常
+                const dirPathParent = path.join(__dirname, '../public/uploads/', req.query.uniqueId);
+                const dirPath = path.join(dirPathParent, 'img');
                 fs.mkdir(dirPathParent, err => {
                     if (err && err.code !== 'EEXIST') {
                         next(err);
@@ -193,7 +190,9 @@ router.post('/', (req, res, next) => {
                                     } else {
                                         res.json({
                                             state: 'SUCCESS',
-                                            url: `/uploads/${req.query.uniqueId}/img/${fileName}`, // 此处不能用path.join，因为path会使用'\'分隔符，而url地址必须是'/'分隔符
+
+                                            // 此处不能用path.join，因为path会使用'\'分隔符，而url地址必须是'/'分隔符
+                                            url: `/uploads/${req.query.uniqueId}/img/${fileName}`,
                                             title: fileName,
                                             original: fileName,
                                             error: null
@@ -209,7 +208,7 @@ router.post('/', (req, res, next) => {
             }
             break;
 
-            // 上传附件
+        // 上传附件
         case 'uploadfile':
             uploadFile = multer({ storage: storageFile })
                 .single('upfile');
@@ -219,7 +218,9 @@ router.post('/', (req, res, next) => {
                 } else {
                     res.json({
                         state: 'SUCCESS',
-                        url: `/uploads/${req.query.uniqueId}/file/${req.file.filename}`, // 此处不能用path.join，因为path会使用'\'分隔符，而url地址必须是'/'分隔符
+
+                        // 此处不能用path.join，因为path会使用'\'分隔符，而url地址必须是'/'分隔符
+                        url: `/uploads/${req.query.uniqueId}/file/${req.file.filename}`,
                         title: req.file.originalname,
                         original: req.file.originalname,
                         error: null

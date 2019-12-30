@@ -12,15 +12,14 @@
     "ace-builds": "^1.3.3",
     "animate.css": "^3.6.1",
     "blueimp-file-upload": "^9.22.0",
-    "body-parser": "~1.13.2",
-    "bootstrap": "^3.3.7",
+    "body-parser": "^1.18.3",
+    "bootstrap": "^3.4.0",
     "codemirror": "^5.39.0",
     "connect-ensure-login": "^0.1.1",
     "cookie-parser": "~1.3.5",
-    "debug": "~2.2.0",
-    "express": "~4.13.1",
+    "express": "^4.16.4",
     "express-session": "^1.13.0",
-    "fuelux": "^3.16.6",
+    "fuelux": "^3.17.0",
     "helmet": "^3.12.1",
     "highlight.js": "git+https://github.com/highlightjs/highlight.js.git",
     "i18n": "0.8.2",
@@ -41,9 +40,10 @@
     "passport-local": "^1.0.0",
     "pug": "^2.0.3",
     "redis": "^2.4.2",
-    "scrollnav": "git+https://github.com/jimmynotjim/scrollNav.git",
+    "scrollnav": "git+https://github.com/jimmynotjim/scrollNav.git#v2.7.3",
     "semver": "^5.5.0",
-    "serve-favicon": "~2.3.0",
+    "serve-favicon": "^2.5.0",
+    "serverlog-node": "^1.0.2",
     "shortid": "^2.2.4",
     "showdown": "^1.8.6",
     "simplemde": "^1.11.2",
@@ -51,7 +51,8 @@
     "sweetalert": "^1.1.3",
     "switchery": "git+https://github.com/abpetkov/switchery.git",
     "winston": "^2.4.3",
-    "winston-mongodb": "^2.0.10"
+    "winston-mongodb": "^2.0.10",
+    "workbox-sw": "^4.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
@@ -63,6 +64,7 @@
     "gulp-nodemon": "^2.4.1",
     "gulp-uglify": "^3.0.1",
     "node-notifier": "^5.3.0",
-    "pump": "^3.0.0"
+    "pump": "^3.0.0",
+    "workbox-build": "^4.3.1"
   }
 }

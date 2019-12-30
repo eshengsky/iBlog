@@ -1,18 +1,27 @@
 # iBlog2
-基于 Node.js 的开源个人开源博客系统，采用响应式布局，支持手机访问，功能全面，美观大方。  
+基于 Node.js 的开源个人博客系统，现代化的 UI 和用户体验。采用响应式布局，支持手机访问，支持离线访问。  
 **不仅仅是博客，更是 Demo**，是适合新人入门学习的完整项目。  
 (基于 ASP.NET 的版本见 [这里](https://github.com/eshengsky/iBlog/))
 
 ## 界面预览
 
-* 前台
+* PC模式
 ![image](https://raw.githubusercontent.com/eshengsky/iBlog2/master/public/images/preview1.png)
 
-* 后台
+* 手机模式 + [ServerLog](https://github.com/eshengsky/ServerLog/)查看日志
 ![image](https://raw.githubusercontent.com/eshengsky/iBlog2/master/public/images/preview2.png)
 
+* 管理后台
+![image](https://raw.githubusercontent.com/eshengsky/iBlog2/master/public/images/preview3.png)
+
+## 更新计划
+- [x] 接入 Service Worker，支持离线访问
+- [ ] 使用 Vue 重构前端代码
+- [ ] 弃用畅言评论，实现自己的评论系统
+- [ ] 增加主题（皮肤）功能
+
 ## 在线实例
-我的博客 [http://139.196.22.226/](http://139.196.22.226/)
+我的博客 [https://skysun.name/](https://skysun.name/)
 
 ## [Wiki](https://github.com/eshengsky/iBlog2/wiki)
 整理了 iBlog2 中涉及 Node.js 及部分前端技术的知识点，适合新手学习、备查。
@@ -23,12 +32,12 @@
   * 创新的竖向分页
 * 文章详情
   * 自动生成目录
-  * 支持评论 (基于[畅言](http://changyan.kuaizhan.com/))
+  * 支持评论 (基于[畅言](https://changyan.kuaizhan.com/))
 * 留言
 * 关于
 * 后台管理
   * 网站统计  
-  * 博客管理 - 新的文章 (支持 UEditor 和 Markdown 编辑器)  
+  * 博客管理 - 新的文章 (支持 [UEditor](https://ueditor.baidu.com/website/index.html) 和 Markdown 编辑器)  
   * 博客管理 - 分类管理  
   * 博客管理 - 文章管理  
   * 评论管理  
@@ -47,9 +56,10 @@
 * Web字体 [Font Awesome](https://fontawesome.com/)
 * 持久化 [MongoDB](https://www.mongodb.org/)
 * 缓存(可选) [Redis](http://redis.io/)
-* 日志 [winston](https://github.com/winstonjs/winston/)
+* 日志 [ServerLog](https://github.com/eshengsky/ServerLog/)
 * 多语言 [i18n](https://github.com/mashpie/i18n-node)
 * 身份验证 [Passport](http://www.passportjs.org/)
+* Service Worker库 [Workbox](https://github.com/GoogleChrome/workbox/)
 
 ## 快速开始
 #### 准备条件
@@ -64,7 +74,7 @@ $ npm install
 #### 启动站点  
 
 ```Shell
-$ gulp
+$ npm start
 ```
 
 打开浏览器，访问 [http://localhost:3000/](http://localhost:3000)
@@ -123,8 +133,11 @@ String 类型，管理员账号的密码，必须是32位 md5 加密后的字符
 
 ### Gulp任务
 
+本地开发时会引用 `public/src` 下的资源文件，发布到线上（NODE_ENV=production）后会自动使用 `public/dist` 下的压缩后的文件。所以在发布之前需要进行js和css的压缩操作。
+
 ```bash
 gulp server
+
 ```
 启动本地开发服务器。
 
@@ -147,6 +160,11 @@ gulp watch
 gulp default
 ```
 默认任务，自动启动服务器，并进行一次js和css压缩，并开启文件改动监听。
+
+```bash
+gulp service-worker
+```
+生成预缓存文件列表，并自动替换 `/sw.js` 文件的 `workbox.precaching.precacheAndRoute([])` 参数。
 
 ## 关于缓存
 
@@ -176,13 +194,19 @@ $ NODE_ENV=production pm2 start bin/www -i 0
 #### 使用noginx
 [noginx](https://github.com/eshengsky/noginx) 是基于 Node.js 的 HTTP 及反向代理服务器（类似 nginx），如果你有多台 iBlog2 服务器实例，你可以使用 [noginx](https://github.com/eshengsky/noginx) 进行代理转发和负载均衡。
 
+## 日志查看
+
+* 本地开发环境，直接在终端中查看日志。
+* 使用 `pm2` 部署时，使用 `pm2 logs` 查看日志。
+* 使用 Chrome 扩展程序 [chrome-extension-server-log](https://github.com/eshengsky/ServerLog/tree/master/chrome-extension-server-log) 在开发者工具 (F12) 中查看日志，Secret Key 请设置为 `iblog2_server_log_key`。
+
 ## 贡献者们
 感谢给 iBlog2 项目贡献代码的朋友，感谢他们的支持，详情 [点击这里](https://github.com/eshengsky/iBlog2/graphs/contributors)。
 
 ## 许可协议
 The MIT License (MIT)
 
-Copyright (c) 2016 Sky
+Copyright (c) 2019 Sky.Sun
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -83,7 +83,7 @@
             str1 = appid + query + salt + key;
             sign = md5(str1);
             $.ajax({
-                url: 'http://api.fanyi.baidu.com/api/trans/vip/translate',
+                url: 'https://api.fanyi.baidu.com/api/trans/vip/translate',
                 type: 'get',
                 dataType: 'jsonp',
                 data: {

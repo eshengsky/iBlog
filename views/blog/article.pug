@@ -6,10 +6,10 @@ block content
     link(href=`${staticPrefix}/css/posts_style_custom.css`, rel='stylesheet')
 
     if (post.ContentType === 'markdown')
-        link(href=`${staticPrefix}/css/github-markdown.css', rel='stylesheet')
-    if (settings.CodeTheme==='Monokai')
-        link(href=`${staticPrefix}/css/monokai-sublime.css', rel='stylesheet')
-        link(href=`${staticPrefix}/css/dark_theme_code.css', rel='stylesheet')
+        link(href=`${staticPrefix}/css/github-markdown.css`, rel='stylesheet')
+    if (settings.CodeTheme === 'Monokai')
+        link(href=`${staticPrefix}/css/monokai-sublime.css`, rel='stylesheet')
+        link(href=`${staticPrefix}/css/dark_theme_code.css`, rel='stylesheet')
     .detail-container
         .container
             .row
@@ -53,7 +53,7 @@ block content
                                 var conf = '#{settings.ChangyanConf}';
                                 var width = window.innerWidth || document.documentElement.clientWidth;
                                 if (width < 960) {
-                                    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+                                    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
                                 } else {
                                     var loadJs = function (d, a) {
                                         var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
@@ -76,7 +76,7 @@ block content
                                         }
                                         c.appendChild(b)
                                     };
-                                    loadJs("http://changyan.sohu.com/upload/changyan.js", function () {
+                                    loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
                                         window.changyan.api.config({
                                             appid: appid, conf: conf
                                         })
@@ -91,10 +91,9 @@ block content
     script(type='text/javascript', src='/nodeModules/jquery/dist/jquery.min.js', charset='utf-8')
     script(type='text/javascript', src='/nodeModules/bootstrap/dist/js/bootstrap.min.js', charset='utf-8')
     script(type='text/javascript', src='/nodeModules/lightbox2/dist/js/lightbox.min.js', charset='utf-8')
-    script(type='text/javascript', src='/nodeModules/scrollNav/dist/jquery.scrollNav.min.js', charset='utf-8')
+    script(type='text/javascript', src='/nodeModules/scrollnav/dist/jquery.scrollNav.min.js', charset='utf-8')
     script(type='text/javascript', src='https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js', charset='utf-8')
     script(type='text/javascript', src=`${staticPrefix}/js/article.js`, charset='utf-8')
-    script(type='text/javascript', src=`${staticPrefix}/js/highlight_line_number.js`, charset='utf-8')
     script.
         var expandMenu = '#{settings.ExpandMenu}';
         var logoPath = "#{settings.LogoPath}";
@@ -105,6 +104,6 @@ block content
             summary: "#{post.Summary}",
             title: "#{post.Title}"
         };
-    script(type = 'text/javascript', src = 'http://v3.jiathis.com/code/jia.js?uid=#{settings.JiaThisId}', charset = 'utf-8')
+    script(type = 'text/javascript', src = `http://v3.jiathis.com/code/jia.js?uid=${settings.JiaThisId}`, charset = 'utf-8')
     script(type='text/javascript', src='/nodeModules/jquery-qrcode/dist/jquery-qrcode.min.js', charset='utf-8')
     script(type = 'text/javascript', src = `${staticPrefix}/js/top.js`, charset = 'utf-8')

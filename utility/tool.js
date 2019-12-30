@@ -40,24 +40,22 @@ module.exports = {
      * 读取配置文件
      * @param filePath - 文件路径
      * @param [key] - 要读取的配置项key
-     * @param callback - 回调函数
      */
-    getConfig(filePath, key, callback) {
-        if (typeof key === 'function') {
-            callback = key;
-            key = undefined;
-        }
-        fs.readFile(filePath, 'utf8', (err, file) => {
-            if (err) {
-                console.log(`读取文件%s出错：${err}`, filePath);
-                return callback(err);
-            }
-            let data = JSON.parse(file);
-            if (typeof key === 'string') {
-                data = data[key];
-            }
-            return callback(null, data);
+    getConfig(filePath, key) {
+        return new Promise((resolve, reject) => {
+            fs.readFile(filePath, 'utf8', (err, file) => {
+                if (err) {
+                    console.log(`读取文件%s出错：${err}`, filePath);
+                    return reject(err);
+                }
+                let data = JSON.parse(file);
+                if (key) {
+                    data = data[key];
+                }
+                return resolve(data);
+            });
         });
+        
     },
 
     /**

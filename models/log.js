@@ -3,7 +3,7 @@ const mongoose = db.mongoose;
 
 const logSchema = new mongoose.Schema({
     // 唯一键
-    _id: { type: mongoose.Schema.Types.ObjectId },
+    _id: { type: String, unique: true },
 
     // 异常信息
     message: { type: String },
