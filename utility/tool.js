@@ -71,7 +71,10 @@ module.exports = {
                 data[key] = setters[key];
             }
             const newFile = JSON.stringify(data, null, 2);
-            fs.writeFile(filePath, newFile, 'utf8');
+            fs.writeFile(filePath, newFile, 'utf8', function(err){
+                if(err) throw new Error(err);
+                console.log('Set config success!');
+            });
         });
     },
 
