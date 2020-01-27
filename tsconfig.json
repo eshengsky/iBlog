@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": ["esnext", "esnext.asynciterable", "dom"],
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./*"],
+      "@/*": ["./*"]
+    },
+    "types": ["@types/node", "@types/nuxtjs__auth", "@nuxt/types", "@nuxt/vue-app", "@nuxtjs/axios", "ant-design-vue/types", "@dicebear/avatars/typings/svgson"]
+  },
+  "exclude": ["node_modules"]
+}

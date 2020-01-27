@@ -1,0 +1,299 @@
+* {
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  word-spacing: 1px;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  color: #333;
+  text-align: left;
+  background: #f3f3f4;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.container {
+  padding-top: 70px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+[tabindex="-1"]:focus:not(:focus-visible) {
+  outline: 0 !important;
+}
+
+ol,
+ul {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+a {
+  text-decoration: none;
+  background-color: transparent;
+}
+
+a:focus {
+  text-decoration: none;
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+  max-width: 100%;
+  user-select: none;
+}
+
+pre,
+code {
+  font-family: Consolas, "Courier New", monospace;
+}
+
+pre {
+  display: block;
+}
+
+pre.hljs {
+  padding: 12px 16px 0;
+  border-radius: 8px;
+  background: #f6f8fa;
+  border: 1px solid #eee;
+}
+
+pre code {
+  font-size: 14px;
+  line-height: 19px;
+  display: block;
+  white-space: pre-wrap;
+  padding-bottom: 12px;
+}
+
+.pre-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.pre-header-left div {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+.pre-header-left div:nth-of-type(1) {
+  background: rgb(255, 95, 86);
+}
+
+.pre-header-left div:nth-of-type(2) {
+  background: rgb(255, 189, 46);
+}
+
+.pre-header-left div:nth-of-type(3) {
+  background: rgb(39, 201, 63);
+}
+
+.pre-header-right {
+  font-size: 12px;
+  color: #777;
+  padding-top: 1px;
+  user-select: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgba(120, 120, 120, 0.7);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(120, 120, 120, 0.8);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: rgba(120, 120, 120, 0.9);
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: #f5f5f5;
+}
+
+.ant-form-item {
+  margin-bottom: 15px;
+}
+
+.ant-form-item-label {
+  line-height: 30px;
+}
+
+.ant-empty-description {
+  user-select: none;
+  color: #888;
+}
+
+.ant-input-group-addon {
+  line-height: 1.5;
+}
+
+button.tui-scrollsync {
+  display: none !important;
+}
+
+.tui-editor-defaultUI {
+  border-top-left-radius: 4px !important;
+  border-top-right-radius: 4px !important;
+  overflow: auto !important;
+}
+
+.tui-editor-defaultUI .te-tab button {
+  height: 32px !important;
+}
+
+.te-markdown-tab-section .te-tab {
+  margin-left: 12px !important;
+}
+
+.te-md-container .te-preview {
+  padding: 0 15px !important;
+}
+
+.te-md-container .te-preview .tui-editor-contents {
+  padding-top: 5px !important;
+}
+
+.tui-editor-defaultUI .CodeMirror pre.CodeMirror-placeholder {
+  padding-left: 16px !important;
+}
+
+.tui-tooltip {
+  max-width: 250px !important;
+  min-height: 34px !important;
+  padding: 8px 12px !important;
+  color: #fff !important;
+  text-align: left !important;
+  text-decoration: none !important;
+  background-color: rgba(70, 76, 91, 0.9) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2) !important;
+  white-space: nowrap !important;
+  opacity: 1 !important;
+  border-radius: 4px !important;
+}
+
+.tui-editor-defaultUI .CodeMirror-lines {
+  padding-top: 15px !important;
+  padding-bottom: 15px !important;
+}
+
+.tui-editor-defaultUI .CodeMirror-line {
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+.tui-toolbar-icons:disabled {
+  display: none !important;
+}
+
+.tui-toolbar-icons:disabled + .tui-toolbar-divider {
+  display: none !important;
+}
+
+.CodeMirror pre {
+  line-height: 1.6 !important;
+}
+
+.editor-focus {
+  box-shadow: inset 0 0px 1px 1px rgb(64, 169, 255) !important;
+  border-radius: 3px !important;
+}
+
+.comments-wrap .tui-editor-contents h1,
+.comments-wrap .tui-editor-contents h2,
+.comments-wrap .tui-editor-contents h3,
+.comments-wrap .tui-editor-contents h4 {
+  font-weight: bold !important;
+  font-size: 1rem !important;
+  line-height: 17px !important;
+  margin: 10px 0 -4px !important;
+  color: #333 !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+.te-markdown-tab-section {
+  user-select: none !important;
+}
+
+.tui-editor-contents pre {
+  border-radius: 4px !important;
+}
+
+.tui-tooltip .arrow {
+  display: none !important;
+}
+
+.tui-editor-defaultUI-toolbar button:hover,
+.tui-editor-defaultUI-toolbar button:active,
+.tui-editor-defaultUI-toolbar button.active {
+  border-color: #bbb !important;
+  border-radius: 3px !important;
+}
+
+.tui-editor-popup {
+  position: fixed !important;
+  top: 50% !important;
+  transform: translate(0, -50%) !important;
+  box-shadow: 0px 0px 10px #aaa !important;
+  border-radius: 5px !important;
+}
+
+.tui-editor-contents li.task-list-item {
+  margin-left: -15px !important;
+  pointer-events: none !important;
+}
+
+.ant-calendar-picker {
+  width: 100%;
+}
+
+.link-dark {
+  color: #555;
+}
+
+.link-dark:hover {
+  color: #777;
+}
+
+::selection {
+  background: #ffbd2e;
+  color: inherit;
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
