@@ -28,7 +28,7 @@ if (ssl.enable) {
     server = http.createServer(app);
 }
 server.listen(port, () => {
-    logger.info('iBlog2 listening on port', port, 'with pid', process.pid);
+    logger.info('iBlog listening on port', port, 'with pid', process.pid);
 });
 server.on('error', onError);
 

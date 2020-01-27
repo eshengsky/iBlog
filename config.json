@@ -1,10 +1,10 @@
 {
 	"ssl": {
 		"enable": false,
-		"key": "/iBlog2/ssl/iblog2.key",
-		"cert": "/iBlog2/ssl/iblog2.crt"
+		"key": "/iBlog2/ssl/server.key",
+		"cert": "/iBlog2/ssl/server.crt"
 	},
-	"mongoUrl": "mongodb://localhost/iBlog2",
+	"mongoUrl": "mongodb://localhost/iBlog_v1",
 	"redis": {
 		"enable": false,
 		"host": "127.0.0.1",

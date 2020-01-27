@@ -1,18 +1,18 @@
-# iBlog2
+# iBlog
 基于 Node.js 的开源个人博客系统，现代化的 UI 和用户体验。采用响应式布局，支持手机访问，支持离线访问。  
 **不仅仅是博客，更是 Demo**，是适合新人入门学习的完整项目。  
-(基于 ASP.NET 的版本见 [这里](https://github.com/eshengsky/iBlog/))
+(基于 ASP.NET 的版本见 [这里](https://github.com/eshengsky/iBlog.Net/))
 
 ## 界面预览
 
 * PC模式
-![image](https://raw.githubusercontent.com/eshengsky/iBlog2/master/public/images/preview1.png)
+![image](https://raw.githubusercontent.com/eshengsky/iBlog/master/public/images/preview1.png)
 
 * 手机模式 + [ServerLog](https://github.com/eshengsky/ServerLog/)查看日志
-![image](https://raw.githubusercontent.com/eshengsky/iBlog2/master/public/images/preview2.png)
+![image](https://raw.githubusercontent.com/eshengsky/iBlog/master/public/images/preview2.png)
 
 * 管理后台
-![image](https://raw.githubusercontent.com/eshengsky/iBlog2/master/public/images/preview3.png)
+![image](https://raw.githubusercontent.com/eshengsky/iBlog/master/public/images/preview3.png)
 
 ## 更新计划
 - [x] 接入 Service Worker，支持离线访问
@@ -23,8 +23,8 @@
 ## 在线实例
 我的博客 [https://skysun.name/](https://skysun.name/)
 
-## [Wiki](https://github.com/eshengsky/iBlog2/wiki)
-整理了 iBlog2 中涉及 Node.js 及部分前端技术的知识点，适合新手学习、备查。
+## [Wiki](https://github.com/eshengsky/iBlog/wiki)
+整理了 iBlog 中涉及 Node.js 及部分前端技术的知识点，适合新手学习、备查。
 
 ## 功能模块
 * 文章列表
@@ -173,7 +173,7 @@ gulp service-worker
 ## 线上部署
 
 #### 使用守护进程
-iBlog2 自带的守护进程能够利用多核 CPU 性能，并在出现异常退出后自动重启服务。
+iBlog 自带的守护进程能够利用多核 CPU 性能，并在出现异常退出后自动重启服务。
 
 ```Shell
 $ NODE_ENV=production node daemon.js
@@ -192,7 +192,7 @@ $ NODE_ENV=production pm2 start bin/www -i 0
 ```
 
 #### 使用noginx
-[noginx](https://github.com/eshengsky/noginx) 是基于 Node.js 的 HTTP 及反向代理服务器（类似 nginx），如果你有多台 iBlog2 服务器实例，你可以使用 [noginx](https://github.com/eshengsky/noginx) 进行代理转发和负载均衡。
+[noginx](https://github.com/eshengsky/noginx) 是基于 Node.js 的 HTTP 及反向代理服务器（类似 nginx），如果你有多台 iBlog 服务器实例，你可以使用 [noginx](https://github.com/eshengsky/noginx) 进行代理转发和负载均衡。
 
 ## 日志查看
 
@@ -201,7 +201,7 @@ $ NODE_ENV=production pm2 start bin/www -i 0
 * 使用 Chrome 扩展程序 [chrome-extension-server-log](https://github.com/eshengsky/ServerLog/tree/master/chrome-extension-server-log) 在开发者工具 (F12) 中查看日志，Secret Key 请设置为 `iblog2_server_log_key`。
 
 ## 贡献者们
-感谢给 iBlog2 项目贡献代码的朋友，感谢他们的支持，详情 [点击这里](https://github.com/eshengsky/iBlog2/graphs/contributors)。
+感谢给 iBlog 项目贡献代码的朋友，感谢他们的支持，详情 [点击这里](https://github.com/eshengsky/iBlog/graphs/contributors)。
 
 ## 许可协议
 The MIT License (MIT)
