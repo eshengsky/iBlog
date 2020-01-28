@@ -4,8 +4,8 @@ import { Configuration } from '@nuxt/types/index';
 import blogConfig from './blog.config';
 
 const server: any = {
+    host: blogConfig.host,
     port: blogConfig.port,
-    host: 'localhost',
     timing: true
 };
 if (blogConfig.enableHTTPS) {
@@ -93,7 +93,7 @@ const config: Configuration = {
    ** See https://axios.nuxtjs.org/options
    */
     axios: {
-        baseURL: `${blogConfig.enableHTTPS ? 'https' : 'http'}://localhost:${blogConfig.port}`
+        baseURL: `${blogConfig.enableHTTPS ? 'https' : 'http'}://${blogConfig.host}:${blogConfig.port}`
     },
     /*
    ** Build configuration
