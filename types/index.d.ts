@@ -1,5 +1,10 @@
 export interface IBlogConfig {
     /**
+     * 端口号
+     */
+    port: number;
+
+    /**
      * 是否启用HTTPS
      */
     enableHTTPS: boolean;
