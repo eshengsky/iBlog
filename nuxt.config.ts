@@ -93,7 +93,8 @@ const config: Configuration = {
    ** See https://axios.nuxtjs.org/options
    */
     axios: {
-        baseURL: `${blogConfig.enableHTTPS ? 'https' : 'http'}://${blogConfig.host}:${blogConfig.port}`
+        baseURL: `${blogConfig.enableHTTPS ? 'https' : 'http'}://127.0.0.1:${blogConfig.port}`,
+        browserBaseURL: '/'
     },
     /*
    ** Build configuration
