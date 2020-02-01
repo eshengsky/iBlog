@@ -195,17 +195,6 @@ export default Vue.extend({
   color: #666;
 }
 
-.img-tip {
-  font-size: 12px;
-  line-height: 1;
-  margin: 2px 0 17px;
-}
-
-.img-tip i {
-  position: relative;
-  top: -1px;
-}
-
 .btn-save {
   margin-top: 15px;
 }

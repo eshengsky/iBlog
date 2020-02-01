@@ -284,7 +284,7 @@ export default Vue.extend({
 
 .img-tip i {
   position: relative;
-  top: -1px;
+  /* top: -1px; */
 }
 
 .btn-wrap {
