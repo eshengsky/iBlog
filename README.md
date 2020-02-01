@@ -77,7 +77,7 @@ $ yarn global add pm2
 ```
 #### 启动
 ```Shell
-$ NODE_ENV=production yarn run deploy
+$ pm2 start pm2.json
 ```
 
 ### 使用noginx
