@@ -57,14 +57,20 @@ $ yarn start
 根据实际情况修改 `/blog.config.ts` 配置文件，修改后需要重启服务器才能生效。  
 参数说明：
 
+#### host
+`String` 类型，主机名，配置为 `0.0.0.0` 表示监听任意主机。
+
+#### port
+`Number` 类型，端口号。
+
 #### enableHTTPS
-Boolean 类型，是否启用 HTTPS。
+`Boolean` 类型，是否启用 HTTPS。
 
 #### mongoUrl
-String 类型，MongoDB 链接。
+`String` 类型，MongoDB 链接。
 
 #### jwtSecret
-String 类型，[JWT](https://github.com/auth0/node-jsonwebtoken) 秘钥。
+`String` 类型，[JWT](https://github.com/auth0/node-jsonwebtoken) 秘钥。
 
 ## 线上部署
 
