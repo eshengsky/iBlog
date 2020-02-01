@@ -149,6 +149,25 @@ router.get('/checkArticleAlias', async (req, res) => {
     res.json(resp);
 });
 
+// 修改发布时间
+router.put('/publishTime', async (req, res) => {
+    let resp: IResp;
+    try {
+        const article = await proxy.updatePublishTime(req.query.uid, req.body);
+        resp = {
+            code: 1,
+            data: article
+        };
+    } catch (err) {
+        console.error(err);
+        resp = {
+            code: -1,
+            message: err.message
+        };
+    }
+    res.json(resp);
+});
+
 // 检查分类alias是否重复
 router.get('/checkCategoryAlias', async (req, res) => {
     let resp: IResp;

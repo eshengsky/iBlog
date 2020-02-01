@@ -269,7 +269,11 @@
             {{ row.modifyTime | toDate }}
           </template>
           <template slot="publishTime" slot-scope="text, row">
-            <span v-if="row.publishTime">{{ row.publishTime | toDate }}</span>
+            <span v-if="row.publishTime">{{ row.publishTime | toDate }} <font-awesome-icon
+              class="icon-edit-time"
+              :icon="['fas', 'pencil-alt']"
+              @click="editPublishTime(row)"
+            /></span>
             <span v-else>-</span>
           </template>
           <template slot="commentsCount" slot-scope="text, row">
@@ -316,6 +320,15 @@
           </template>
         </a-table>
       </div>
+      <a-modal
+        v-model="editingTimeObj.modal"
+        title="自定义发布时间"
+        :confirm-loading="editingTimeObj.loading"
+        :closable="false"
+        @ok="savePublishTime"
+      >
+        <a-date-picker v-model="editingTimeObj.publishTime" show-time :allow-clear="false" placeholder="选择发布时间" />
+      </a-modal>
     </div>
   </div>
 </template>
@@ -362,6 +375,12 @@ export default Vue.extend({
                 最近一年: [moment().subtract(365, 'days'), moment()]
             },
             defaultRange: [moment().subtract(30, 'days'), moment()],
+            editingTimeObj: {
+                modal: false,
+                uid: '',
+                publishTime: moment(),
+                loading: false
+            },
             tableColumns: [
                 {
                     title: '状态',
@@ -728,6 +747,33 @@ export default Vue.extend({
                     });
                 }
             });
+        },
+        editPublishTime (item) {
+            this.editingTimeObj.uid = item._id;
+            this.editingTimeObj.publishTime = moment(item.publishTime);
+            this.editingTimeObj.modal = true;
+        },
+        savePublishTime () {
+            if (this.editingTimeObj.publishTime) {
+                this.editingTimeObj.loading = true;
+                this.$axios.$put('/api/admin/publishTime', {
+                    publishTime: this.editingTimeObj.publishTime
+                }, {
+                    params: {
+                        uid: this.editingTimeObj.uid
+                    }
+                }).then(resp => {
+                    if (resp.code === 1) {
+                        this.getList();
+                        this.$message.success('保存成功！');
+                    } else {
+                        console.error(resp.message);
+                        this.$message.error('操作失败！');
+                    }
+                    this.editingTimeObj.loading = false;
+                    this.editingTimeObj.modal = false;
+                });
+            }
         }
     }
 });
@@ -776,5 +822,17 @@ export default Vue.extend({
 
 .data-wrap .ant-tag {
   margin-right: 0;
+}
+
+.icon-edit-time {
+  font-size: 12px;
+  color: #888;
+  cursor: pointer;
+  position: relative;
+  top: -1px;
+}
+
+.icon-edit-time:hover {
+  color: #555;
 }
 </style>

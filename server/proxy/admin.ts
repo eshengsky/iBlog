@@ -247,6 +247,17 @@ export async function checkArticleAlias ({ alias, excludeUid }) {
     };
 };
 
+export async function updatePublishTime (uid, params) {
+    const article = await Post.findByIdAndUpdate(uid, {
+        publishTime: new Date(params.publishTime)
+    }, {
+        new: true
+    }).exec();
+    return {
+        article
+    };
+};
+
 export async function checkCategoryAlias ({ alias, excludeUid }) {
     const filter: any = {};
     filter.alias = alias;
