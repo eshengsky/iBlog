@@ -159,12 +159,13 @@
       </a-row>
       <div class="baidu-stats">
         <a-button
+          v-if="settings.enableStatistics"
           type="primary"
           shape="round"
           href="https://tongji.baidu.com/web/homepage/index"
           target="_blank"
         >
-          <font-awesome-icon :icon="['fas', 'external-link-alt']" style="margin-right: 4px;" />前往百度统计官网查看访问数据
+          <web-font icon="external-link" style="margin-right: 4px;" />前往百度统计官网查看访问数据
         </a-button>
       </div>
     </div>
@@ -185,6 +186,7 @@ export default Vue.extend({
     },
     data () {
         return {
+            settings: this.$store.state.settings,
             commentsStats: {
                 today: 0,
                 yesterday: 0,
