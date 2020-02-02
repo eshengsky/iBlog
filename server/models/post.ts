@@ -63,7 +63,7 @@ export class Post {
             if (this.content) {
                 const md = new MarkdownIt({
                     breaks: true,
-                    linkify: true,
+                    // linkify: true,
                     highlight (str, lang) {
                         let showLang = '';
                         let code = '';
