@@ -56,6 +56,10 @@ export default Vue.extend({
   margin: 1.5rem 0 0.5rem;
 }
 
+.article-content h2:first-child {
+  margin-top: 0;
+}
+
 .article-content .anchor {
   position: absolute;
     display: flex;
@@ -86,5 +90,20 @@ export default Vue.extend({
 .article-content blockquote {
     padding-left: 1rem;
     border-left: .25rem solid #e9ecef
+}
+
+.article-content ul,
+.article-content ol {
+  position: relative;
+  padding-left: 17px;
+  margin: 6px 0 10px;
+}
+
+.article-content ol {
+  list-style-type: decimal;
+}
+
+.article-content ul {
+  list-style-type: disc;
 }
 </style>
