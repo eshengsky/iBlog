@@ -52,12 +52,14 @@
     </template>
     <div class="hr-line-dashed" />
     <a-drawer
-      :title="post.title"
       :visible="drawer"
       width="66.66%"
       :closable="false"
       @close="() => (drawer = false)"
     >
+      <div slot="title" class="drawer-title">
+        {{ post.title }}
+      </div>
       <div class="preview-article">
         <article-content :html="post.html" />
       </div>
@@ -226,6 +228,11 @@ export default Vue.extend({
   padding: 10px 16px;
   text-align: right;
   background: #fff;
+}
+
+.drawer-title {
+  font-size: 24px;
+  line-height: 36px;
 }
 
 @media (max-width: 576px) {
