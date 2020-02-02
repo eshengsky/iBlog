@@ -87,3 +87,6 @@ sw.*
 
 # Mac OSX
 .DS_Store
+
+# Upload Files
+static/upload/

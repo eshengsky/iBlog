@@ -311,7 +311,10 @@ export default Vue.extend({
                     'code',
                     'codeblock'
                 ],
-                exts: ['scrollSync']
+                exts: ['scrollSync'],
+                hooks: {
+                    addImageBlobHook: (this as any).onAddImageBlob
+                }
             },
             categoryLoading: false
         };
@@ -383,6 +386,20 @@ export default Vue.extend({
             this.categoryLoading = true;
             await this.getCategories();
             this.categoryLoading = false;
+        },
+        onAddImageBlob (blob, callback) {
+            if (process.client && blob) {
+                const formData = new FormData();
+                formData.append('file', blob);
+                this.$axios.$post('/api/admin/uploadImage', formData).then(resp => {
+                    if (resp.code === 1) {
+                        callback(resp.data.url, '');
+                    } else {
+                        console.error(resp.message);
+                        this.$message.error('上传失败！');
+                    }
+                });
+            }
         },
         checkAlias (_rule, value, callback) {
             if (value) {

@@ -44,6 +44,7 @@
     "markdown-it-github-headings": "^2.0.0",
     "moment": "^2.24.0",
     "mongoose": "^5.8.7",
+    "multer": "^1.4.2",
     "nuxt": "^2.11.0",
     "uslug": "^1.0.4",
     "v-charts": "^1.19.0"
