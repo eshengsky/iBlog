@@ -137,7 +137,11 @@ export async function getArticle (params) {
 }
 
 export async function getPostsCountByCate (category) {
-    const count = await Post.countDocuments({ category }).exec();
+    const count = await Post.countDocuments({
+        category,
+        isDraft: false,
+        isActive: true
+    }).exec();
     return count;
 }
 
