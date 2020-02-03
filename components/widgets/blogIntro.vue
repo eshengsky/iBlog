@@ -28,6 +28,6 @@ export default Vue.extend({
 
 <style scoped>
 .intro-content {
-  white-space: pre;
+  white-space: pre-wrap;
 }
 </style>
