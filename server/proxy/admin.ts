@@ -190,7 +190,7 @@ export async function newArticle (params) {
     };
 };
 
-export async function editArticle (query, params) {
+export async function editArticle (query, params: IPost) {
     const now = new Date();
     params.modifyTime = now;
 
@@ -201,7 +201,7 @@ export async function editArticle (query, params) {
 
     // 已发布->草稿状态，要移除publishTime字段
     if (query.pubtype === 'unpublish') {
-        params.publishTime = null;
+        params.publishTime = undefined;
     }
     const article = await Post.findByIdAndUpdate(query.uid, params, {
         new: true

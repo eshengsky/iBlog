@@ -1,5 +1,6 @@
 import DB from '../db';
 import BadWords from '../bad_words/index';
+import { IPost, ICache, IComment } from '~/types/schema';
 const { Post, Cache, Category, Comment, Guestbook, Setting, Profile } = DB.Models;
 const badWords = BadWords.instance;
 
@@ -128,9 +129,17 @@ export async function getPopLabels () {
     };
 }
 
-export async function getArticle (params) {
+export async function getArticle (params, user) {
     const alias = params.alias;
-    const article = await Post.findOne({ alias })
+    const conditions = {
+        alias
+    } as IPost;
+    if (!user) {
+        // 未登录，即不是管理员账号，则限制只展示已发布和未删除的文章
+        conditions.isDraft = false;
+        conditions.isActive = true;
+    }
+    const article = await Post.findOne(conditions)
         .populate('category')
         .exec();
     return article;
@@ -141,7 +150,7 @@ export async function getPostsCountByCate (category) {
         category,
         isDraft: false,
         isActive: true
-    }).exec();
+    } as IPost).exec();
     return count;
 }
 
@@ -151,7 +160,7 @@ export async function increaseViews ({ postID, clientIP }) {
         clientIP,
         ext1: postID,
         ext2: 'viewCount'
-    });
+    } as ICache);
 
     // 如果没看过
     if (!exists) {
@@ -180,7 +189,7 @@ export async function getComments (params) {
     options.sort = '-createTime';
     const query = {
         post: params.articleId
-    };
+    } as IComment;
     const data = await Promise.all([
         Comment.find(query, {}, options).exec(),
         Comment.countDocuments(query).exec()
@@ -202,7 +211,7 @@ export async function saveComment (params) {
         website: params.website,
         content: badWords.filter(params.content),
         createTime: new Date()
-    });
+    } as IComment);
     const comment = await entity.save();
     return {
         comment
@@ -238,7 +247,7 @@ export async function saveGuestbook (params) {
         website: params.website,
         content: badWords.filter(params.content),
         createTime: new Date()
-    });
+    } as IComment);
     const comment = await entity.save();
     return {
         comment

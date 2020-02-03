@@ -129,7 +129,7 @@ export interface IPost extends Document {
     /**
      *发布时间
      */
-    publishTime: Date;
+    publishTime?: Date;
 }
 
 export interface IComment extends Document {

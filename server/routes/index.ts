@@ -86,7 +86,7 @@ router.get('/popLabels', async (_req, res) => {
 router.get('/article', async (req, res) => {
     let resp: IResp;
     try {
-        const data = await proxy.getArticle(req.query);
+        const data = await proxy.getArticle(req.query, (req as any).user);
         resp = {
             code: 1,
             data
