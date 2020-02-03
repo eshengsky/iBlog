@@ -9,6 +9,7 @@
           <article-content :html="article.html" />
           <div class="article-views">
             <span>阅读 {{ article.viewCount }}</span>
+            <span class="split-line">|</span>
             <span>发布于 {{ publishDate }}</span>
           </div>
         </main>
@@ -379,6 +380,12 @@ export default Vue.extend({
 
 .article-views {
   color: #666;
+}
+
+.article-views .split-line {
+  position: relative;
+  top: -1px;
+  color: #aaa;
 }
 
 @media (max-width: 890px) {
