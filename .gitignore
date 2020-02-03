@@ -89,4 +89,4 @@ sw.*
 .DS_Store
 
 # Upload Files
-static/upload/
+static/upload/images/*
