@@ -10,9 +10,7 @@ import config from '../../blog.config';
 const router = Router();
 const upload = multer({
     storage: multer.diskStorage({
-        destination (_req, _file, callback) {
-            callback(null, path.resolve(__dirname, '../../static/upload/images/'));
-        },
+        destination: path.resolve(__dirname, '../../static/upload/images/'),
         filename (_req, file, callback) {
             callback(null, Date.now() + '_' + file.originalname);
         }
