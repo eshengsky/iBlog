@@ -67,7 +67,6 @@ pre {
 pre code {
   display: block;
   white-space: pre-wrap;
-  padding-bottom: 12px;
 }
 
 ::-webkit-scrollbar {

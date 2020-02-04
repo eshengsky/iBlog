@@ -115,9 +115,40 @@ export default Vue.extend({
   border: 1px solid #eee;
 }
 
-.article-content pre.output {
-  background: #eee;
+.article-content code {
+  background-color: #f7fafc;
+  color: #f56565;
+  padding: 4px;
+  margin: 0 1px;
+  border-radius: 4px;
+  font-size: .875em;
+}
+
+.article-content pre code {
+  background-color: inherit;
+  color: inherit;
+  padding: 0 0 12px 0;
+  margin: 0;
+  font-size: 1em;
+}
+
+.article-content pre.custom {
+  background: #fff;
   border-color: #eee;
+}
+
+.article-content pre.info {
+  background: #ebf8ff;
+  border-color: #ebf8ff;
+}
+
+.article-content pre.alert {
+  background: #fee8c8;
+  border-color: #fee8c8;
+}
+
+.article-content pre svg {
+  margin-right: 3px;
 }
 
 .article-content .pre-header {
@@ -126,7 +157,7 @@ export default Vue.extend({
   margin-bottom: 10px;
 }
 
-.article-content pre.output .pre-header {
+.article-content pre.custom .pre-header {
   color: #888;
   user-select: none;
 }
