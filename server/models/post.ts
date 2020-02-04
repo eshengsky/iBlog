@@ -84,6 +84,12 @@ export class Post {
                         if (!code) {
                             code = md.utils.escapeHtml(str);
                         }
+
+                        // 特殊：以冒号开头的，视为特殊代码块
+                        if (showLang.startsWith(':')) {
+                            const header = showLang.substring(1);
+                            return `<pre class="hljs output"><div class="pre-header">${header}</div><code>${code}</code></pre>`;
+                        }
                         return (
                             '<pre class="hljs"><div class="pre-header"><div class="pre-header-left"><div></div><div></div><div></div></div><div class="pre-header-right">' +
               showLang +

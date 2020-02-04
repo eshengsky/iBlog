@@ -75,6 +75,7 @@ export default Vue.extend({
   padding-bottom: 8px;
 }
 
+/* 预览模式下隐藏锚点 */
 .preview-article .article-content .anchor {
   display: none;
 }
@@ -107,13 +108,30 @@ export default Vue.extend({
   list-style-type: disc;
 }
 
-.pre-header {
+.article-content pre {
+  padding: 12px 16px 0;
+  border-radius: 8px;
+  background: #f6f8fa;
+  border: 1px solid #eee;
+}
+
+.article-content pre.output {
+  background: #eee;
+  border-color: #eee;
+}
+
+.article-content .pre-header {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
 }
 
-.pre-header-left div {
+.article-content pre.output .pre-header {
+  color: #888;
+  user-select: none;
+}
+
+.article-content .pre-header-left div {
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -121,19 +139,19 @@ export default Vue.extend({
   display: inline-block;
 }
 
-.pre-header-left div:nth-of-type(1) {
+.article-content .pre-header-left div:nth-of-type(1) {
   background: rgb(255, 95, 86);
 }
 
-.pre-header-left div:nth-of-type(2) {
+.article-content .pre-header-left div:nth-of-type(2) {
   background: rgb(255, 189, 46);
 }
 
-.pre-header-left div:nth-of-type(3) {
+.article-content .pre-header-left div:nth-of-type(3) {
   background: rgb(39, 201, 63);
 }
 
-.pre-header-right {
+.article-content .pre-header-right {
   font-size: 12px;
   color: #777;
   padding-top: 1px;
