@@ -178,200 +178,200 @@ import VePie from 'v-charts/lib/pie';
 import VeBar from 'v-charts/lib/histogram';
 import moment from 'moment';
 export default Vue.extend({
-    name: 'PageAdminIndex',
-    layout: 'admin',
-    components: {
-        VePie,
-        VeBar
-    },
-    data () {
-        return {
-            settings: this.$store.state.settings,
-            commentsStats: {
-                today: 0,
-                yesterday: 0,
-                oneweek: 0,
-                onemonth: 0,
-                total: 0
-            },
-            guestbookStats: {
-                today: 0,
-                yesterday: 0,
-                oneweek: 0,
-                onemonth: 0,
-                total: 0
-            },
-            postsStats: {
-                draft: 0,
-                oneweek: 0,
-                onemonth: 0,
-                totalPosts: 0,
-                totalCategories: 0
-            },
-            categoriesStats: [],
-            commentsAndGuestbookStats: {
-                commentsStats: {},
-                guestbookStats: {}
-            },
-            extend: {
-                series: {
-                    label: { show: true, position: 'top' }
-                }
-            }
-        };
-    },
-    computed: {
-        categoryChartData () {
-            const columns = ['分类', '文章数'];
-            const rows: any[] = [];
-            this.categoriesStats.forEach((item: any) => {
-                rows.push({
-                    分类: item.cateName,
-                    文章数: item.postsCount
-                });
-            });
-            return {
-                columns,
-                rows
-            };
-        },
-        commentsAndGuestbookChartData () {
-            const columns = ['日期', '评论数', '留言数'];
-            const rows: any[] = [];
-            const commentsStats = this.commentsAndGuestbookStats.commentsStats;
-            Object.keys(commentsStats).forEach(date => {
-                rows.push({
-                    日期: date,
-                    评论数: commentsStats[date]
-                });
-            });
-            const guestbookStats = this.commentsAndGuestbookStats.guestbookStats;
-            Object.keys(guestbookStats).forEach((date, index) => {
-                rows[index]['留言数'] = guestbookStats[date];
-            });
-            return {
-                columns,
-                rows
-            };
+  name: 'PageAdminIndex',
+  layout: 'admin',
+  components: {
+    VePie,
+    VeBar
+  },
+  data () {
+    return {
+      settings: this.$store.state.settings,
+      commentsStats: {
+        today: 0,
+        yesterday: 0,
+        oneweek: 0,
+        onemonth: 0,
+        total: 0
+      },
+      guestbookStats: {
+        today: 0,
+        yesterday: 0,
+        oneweek: 0,
+        onemonth: 0,
+        total: 0
+      },
+      postsStats: {
+        draft: 0,
+        oneweek: 0,
+        onemonth: 0,
+        totalPosts: 0,
+        totalCategories: 0
+      },
+      categoriesStats: [],
+      commentsAndGuestbookStats: {
+        commentsStats: {},
+        guestbookStats: {}
+      },
+      extend: {
+        series: {
+          label: { show: true, position: 'top' }
         }
+      }
+    };
+  },
+  computed: {
+    categoryChartData () {
+      const columns = ['分类', '文章数'];
+      const rows: any[] = [];
+      this.categoriesStats.forEach((item: any) => {
+        rows.push({
+          分类: item.cateName,
+          文章数: item.postsCount
+        });
+      });
+      return {
+        columns,
+        rows
+      };
     },
-    created () {
-        this.$axios.$get('/api/admin/commentsStats').then(({ code, data }) => {
-            if (code === 1) {
-                this.commentsStats = data;
-            }
+    commentsAndGuestbookChartData () {
+      const columns = ['日期', '评论数', '留言数'];
+      const rows: any[] = [];
+      const commentsStats = this.commentsAndGuestbookStats.commentsStats;
+      Object.keys(commentsStats).forEach(date => {
+        rows.push({
+          日期: date,
+          评论数: commentsStats[date]
         });
-        this.$axios.$get('/api/admin/guestbookStats').then(({ code, data }) => {
-            if (code === 1) {
-                this.guestbookStats = data;
-            }
-        });
-        this.$axios.$get('/api/admin/postsStats').then(({ code, data }) => {
-            if (code === 1) {
-                this.postsStats = data;
-            }
-        });
-        this.$axios.$get('/api/admin/categoriesStats').then(({ code, data }) => {
-            if (code === 1) {
-                this.categoriesStats = data;
-            }
-        });
-        this.$axios.$get('/api/admin/commentsAndGuestbookStats').then(({ code, data }) => {
-            if (code === 1) {
-                this.commentsAndGuestbookStats = data;
-            }
-        });
-    },
-    mounted () {
-        this.$bus.$on('changeLayout', () => {
-            this.$nextTick(() => {
-                if (this.$refs.chart1) {
-                    (this.$refs.chart1 as any).echarts.resize();
-                    (this.$refs.chart2 as any).echarts.resize();
-                }
-            });
-        });
-    },
-    methods: {
-        clickStats (type) {
-            let url = '/admin';
-            switch (type) {
-                case 'draft':
-                    url = '/admin/article-manage?isDraft=1&isDeleted=-1';
-                    break;
-                case 'posts7':
-                    url = `/admin/article-manage?isDraft=-1&isDeleted=-1&createTime=${moment()
+      });
+      const guestbookStats = this.commentsAndGuestbookStats.guestbookStats;
+      Object.keys(guestbookStats).forEach((date, index) => {
+        rows[index]['留言数'] = guestbookStats[date];
+      });
+      return {
+        columns,
+        rows
+      };
+    }
+  },
+  created () {
+    this.$axios.$get('/api/admin/commentsStats').then(({ code, data }) => {
+      if (code === 1) {
+        this.commentsStats = data;
+      }
+    });
+    this.$axios.$get('/api/admin/guestbookStats').then(({ code, data }) => {
+      if (code === 1) {
+        this.guestbookStats = data;
+      }
+    });
+    this.$axios.$get('/api/admin/postsStats').then(({ code, data }) => {
+      if (code === 1) {
+        this.postsStats = data;
+      }
+    });
+    this.$axios.$get('/api/admin/categoriesStats').then(({ code, data }) => {
+      if (code === 1) {
+        this.categoriesStats = data;
+      }
+    });
+    this.$axios.$get('/api/admin/commentsAndGuestbookStats').then(({ code, data }) => {
+      if (code === 1) {
+        this.commentsAndGuestbookStats = data;
+      }
+    });
+  },
+  mounted () {
+    this.$bus.$on('changeLayout', () => {
+      this.$nextTick(() => {
+        if (this.$refs.chart1) {
+          (this.$refs.chart1 as any).echarts.resize();
+          (this.$refs.chart2 as any).echarts.resize();
+        }
+      });
+    });
+  },
+  methods: {
+    clickStats (type) {
+      let url = '/admin';
+      switch (type) {
+        case 'draft':
+          url = '/admin/article-manage?isDraft=1&isDeleted=-1';
+          break;
+        case 'posts7':
+          url = `/admin/article-manage?isDraft=-1&isDeleted=-1&createTime=${moment()
                         .subtract(7, 'days')
                         .format('YYYY-MM-DD')}&createTime=${moment().format('YYYY-MM-DD')}`;
-                    break;
-                case 'posts30':
-                    url = `/admin/article-manage?isDraft=-1&isDeleted=-1&createTime=${moment()
+          break;
+        case 'posts30':
+          url = `/admin/article-manage?isDraft=-1&isDeleted=-1&createTime=${moment()
                         .subtract(30, 'days')
                         .format('YYYY-MM-DD')}&createTime=${moment().format('YYYY-MM-DD')}`;
-                    break;
-                case 'postsAll':
-                    url = '/admin/article-manage?isDraft=-1&isDeleted=-1';
-                    break;
-                case 'commentsToday':
-                    url = `/admin/comment-manage?createTime=${moment().format(
+          break;
+        case 'postsAll':
+          url = '/admin/article-manage?isDraft=-1&isDeleted=-1';
+          break;
+        case 'commentsToday':
+          url = `/admin/comment-manage?createTime=${moment().format(
                         'YYYY-MM-DD'
                     )}&createTime=${moment().format('YYYY-MM-DD')}`;
-                    break;
-                case 'commentsYesterday':
-                    url = `/admin/comment-manage?createTime=${moment()
+          break;
+        case 'commentsYesterday':
+          url = `/admin/comment-manage?createTime=${moment()
                         .subtract(1, 'days')
                         .format('YYYY-MM-DD')}&createTime=${moment()
                         .subtract(1, 'days')
                         .format('YYYY-MM-DD')}`;
-                    break;
-                case 'comments7':
-                    url = `/admin/comment-manage?createTime=${moment()
+          break;
+        case 'comments7':
+          url = `/admin/comment-manage?createTime=${moment()
                         .subtract(7, 'days')
                         .format('YYYY-MM-DD')}&createTime=${moment().format('YYYY-MM-DD')}`;
-                    break;
-                case 'comments30':
-                    url = `/admin/comment-manage?createTime=${moment()
+          break;
+        case 'comments30':
+          url = `/admin/comment-manage?createTime=${moment()
                         .subtract(30, 'days')
                         .format('YYYY-MM-DD')}&createTime=${moment().format('YYYY-MM-DD')}`;
-                    break;
-                case 'guestbookToday':
-                    url = `/admin/guestbook-manage?createTime=${moment().format(
+          break;
+        case 'guestbookToday':
+          url = `/admin/guestbook-manage?createTime=${moment().format(
                         'YYYY-MM-DD'
                     )}&createTime=${moment().format('YYYY-MM-DD')}`;
-                    break;
-                case 'guestbookYesterday':
-                    url = `/admin/guestbook-manage?createTime=${moment()
+          break;
+        case 'guestbookYesterday':
+          url = `/admin/guestbook-manage?createTime=${moment()
                         .subtract(1, 'days')
                         .format('YYYY-MM-DD')}&createTime=${moment()
                         .subtract(1, 'days')
                         .format('YYYY-MM-DD')}`;
-                    break;
-                case 'guestbook7':
-                    url = `/admin/guestbook-manage?createTime=${moment()
+          break;
+        case 'guestbook7':
+          url = `/admin/guestbook-manage?createTime=${moment()
                         .subtract(7, 'days')
                         .format('YYYY-MM-DD')}&createTime=${moment().format('YYYY-MM-DD')}`;
-                    break;
-                case 'guestbook30':
-                    url = `/admin/guestbook-manage?createTime=${moment()
+          break;
+        case 'guestbook30':
+          url = `/admin/guestbook-manage?createTime=${moment()
                         .subtract(30, 'days')
                         .format('YYYY-MM-DD')}&createTime=${moment().format('YYYY-MM-DD')}`;
-                    break;
-            }
-            this.$router.push(url);
-        },
+          break;
+      }
+      this.$router.push(url);
+    },
 
-        clickCategory (e) {
-            this.$router.push(`/admin/article-manage?cateName=${e.data.name}`);
-        },
+    clickCategory (e) {
+      this.$router.push(`/admin/article-manage?cateName=${e.data.name}`);
+    },
 
-        clickCommentsGuest (e) {
-            this.$router.push(
+    clickCommentsGuest (e) {
+      this.$router.push(
                 `/admin/${
                     e.seriesName === '留言数' ? 'guestbook' : 'comment'
                 }-manage?createTime=${e.name}&createTime=${e.name}`
-            );
-        }
+      );
     }
+  }
 });
 </script>
 

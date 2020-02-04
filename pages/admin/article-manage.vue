@@ -339,443 +339,443 @@ import { FieldDecoratorOptions } from 'ant-design-vue/types/form/form';
 import { IResp } from '@/types';
 import { ICategory } from '@/types/schema';
 export default Vue.extend({
-    name: 'PageArticleManage',
-    layout: 'admin',
-    async asyncData ({ $axios }) {
-        const { code, data }: IResp = await $axios.$get('/api/admin/categories');
-        if (code === 1) {
-            return {
-                categories: data
-            };
-        }
-    },
-    data () {
-        return {
-            categories: [] as Array<ICategory>,
-            form: this.$form.createForm(this),
-            pagination: {
-                current: 1,
-                pageSize: 10,
-                total: 0,
-                showSizeChanger: true,
-                pageSizeOptions: ['10', '20', '30', '50'],
-                showTotal: (total, range) =>
-                    `${range[0]}-${range[1]} 条，共 ${total} 条`
-            },
-            sortBy: 'modifyTime',
-            order: 'descend',
-            postList: [],
-            isLoading: false,
-            selectedRowKeys: [],
-            rangeDate: {
-                今天: [moment(), moment()],
-                昨天: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                最近一周: [moment().subtract(7, 'days'), moment()],
-                最近一个月: [moment().subtract(30, 'days'), moment()],
-                最近一年: [moment().subtract(365, 'days'), moment()]
-            },
-            defaultRange: [moment().subtract(30, 'days'), moment()],
-            editingTimeObj: {
-                modal: false,
-                uid: '',
-                publishTime: moment(),
-                loading: false
-            },
-            tableColumns: [
-                {
-                    title: '状态',
-                    key: 'tags',
-                    width: 90,
-                    align: 'center',
-                    scopedSlots: { customRender: 'tags' }
-                },
-                {
-                    title: '分类',
-                    dataIndex: 'category',
-                    width: 150,
-                    scopedSlots: { customRender: 'category' }
-                },
-                {
-                    title: '标题',
-                    dataIndex: 'title',
-                    sorter: true,
-                    scopedSlots: { customRender: 'title1' }
-                },
-                {
-                    title: '创建时间',
-                    dataIndex: 'createTime',
-                    width: 160,
-                    align: 'center',
-                    sorter: true,
-                    scopedSlots: { customRender: 'createTime' }
-                },
-                {
-                    title: '修改时间',
-                    dataIndex: 'modifyTime',
-                    width: 160,
-                    align: 'center',
-                    sorter: true,
-                    scopedSlots: { customRender: 'modifyTime' }
-                },
-                {
-                    title: '发布时间',
-                    dataIndex: 'publishTime',
-                    width: 160,
-                    align: 'center',
-                    sorter: true,
-                    scopedSlots: { customRender: 'publishTime' }
-                },
-                {
-                    title: '浏览数',
-                    dataIndex: 'viewCount',
-                    width: 100,
-                    align: 'center',
-                    sorter: true
-                },
-                {
-                    title: '评论数',
-                    dataIndex: 'commentsCount',
-                    width: 100,
-                    align: 'center',
-                    sorter: true,
-                    scopedSlots: { customRender: 'commentsCount' }
-                },
-                {
-                    title: '操作',
-                    key: 'action',
-                    width: 130,
-                    align: 'center',
-                    fixed: 'right',
-                    scopedSlots: { customRender: 'action' }
-                }
-            ]
-        };
-    },
-
-    computed: {
-        categoryOpts (): FieldDecoratorOptions {
-            const cateName = this.$route.query.cateName;
-            let initialValue: string | undefined;
-            if (cateName) {
-                const category = this.categories.find(t => t.cateName === cateName);
-                if (category) {
-                    initialValue = category._id;
-                }
-            }
-            return {
-                initialValue
-            };
-        },
-        createTimeOpts (): FieldDecoratorOptions {
-            let initialValue: Array<moment.Moment> = [];
-            const createTimeParam = this.$route.query.createTime as [string, string];
-            if (createTimeParam) {
-                initialValue = [moment(createTimeParam[0]), moment(createTimeParam[1])];
-            }
-            return {
-                initialValue
-            };
-        },
-        modifyTimeOpts (): FieldDecoratorOptions {
-            let initialValue: Array<moment.Moment> = [];
-            const modifyTimeParam = this.$route.query.modifyTime as [string, string];
-            if (modifyTimeParam) {
-                initialValue = [moment(modifyTimeParam[0]), moment(modifyTimeParam[1])];
-            }
-            return {
-                initialValue
-            };
-        },
-        publishTimeOpts (): FieldDecoratorOptions {
-            let initialValue: Array<moment.Moment> = [];
-            const publishTimeParam = this.$route.query.modifyTime as [string, string];
-            if (publishTimeParam) {
-                initialValue = [moment(publishTimeParam[0]), moment(publishTimeParam[1])];
-            }
-            return {
-                initialValue
-            };
-        },
-        isDraftOpts (): FieldDecoratorOptions {
-            return {
-                initialValue: this.$route.query.isDraft || undefined
-            };
-        },
-        isDeletedOpts (): FieldDecoratorOptions {
-            return {
-                initialValue: this.$route.query.isDeleted || undefined
-            };
-        },
-        rowSelection (): object {
-            return {
-                selectedRowKeys: this.selectedRowKeys,
-                onChange: selectedRowKeys => {
-                    // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-                    this.selectedRowKeys = selectedRowKeys;
-                },
-                getCheckboxProps: record => ({
-                    props: {
-                        disabled: !record.isActive,
-                        checked: false
-                    }
-                })
-            };
-        },
-        delDisabled (): boolean {
-            return this.selectedRowKeys.length === 0;
-        }
-    },
-
-    created () {
-        this.isLoading = true;
-        this.$nextTick(() => {
-            this.getList();
-        });
-    },
-
-    methods: {
-        disabledDate (date) {
-            return date && date > moment().endOf('day');
-        },
-        search () {
-            this.pagination.current = 1;
-            this.getList();
-        },
-        async getList () {
-            const values = this.form.getFieldsValue();
-            const createTimeMomentArr = values.createTime;
-            let createTime: string[] | undefined;
-            if (createTimeMomentArr && createTimeMomentArr.length === 2) {
-                createTime = [
-                    createTimeMomentArr[0].startOf('day').toString(),
-                    createTimeMomentArr[1].endOf('day').toString()
-                ];
-            }
-            const modifyTimeMomentArr = values.modifyTime;
-            let modifyTime: string[] | undefined;
-            if (modifyTimeMomentArr && modifyTimeMomentArr.length === 2) {
-                modifyTime = [
-                    modifyTimeMomentArr[0].startOf('day').toString(),
-                    modifyTimeMomentArr[1].endOf('day').toString()
-                ];
-            }
-            const publishTimeMomentArr = values.publishTime;
-            let publishTime: string[] | undefined;
-            if (publishTimeMomentArr && publishTimeMomentArr.length === 2) {
-                publishTime = [
-                    publishTimeMomentArr[0].startOf('day').toString(),
-                    publishTimeMomentArr[1].endOf('day').toString()
-                ];
-            }
-            this.selectedRowKeys = [];
-            this.isLoading = true;
-            const { code, data }: IResp = await this.$axios.$get('/api/admin/posts', {
-                params: {
-                    pageIndex: this.pagination.current,
-                    pageSize: this.pagination.pageSize,
-                    sortBy: this.sortBy,
-                    order: this.order,
-                    ...values,
-                    createTime,
-                    modifyTime,
-                    publishTime
-                }
-            });
-            if (code === 1) {
-                this.postList = data.postList;
-                this.pagination.total = data.count;
-            } else {
-                this.$message.error('请求失败！');
-            }
-            this.isLoading = false;
-        },
-
-        reset () {
-            this.form.setFieldsValue({
-                category: '',
-                alias: '',
-                title: '',
-                content: '',
-                label: '',
-                createTime: [],
-                modifyTime: [],
-                publishTime: [],
-                isLink: '',
-                isDraft: '',
-                hasComments: '',
-                isDeleted: ''
-            });
-            this.search();
-        },
-
-        onTableChange (pagination, _filters, sorter) {
-            this.pagination = pagination;
-            this.sortBy = 'modifyTime';
-            this.order = 'descend';
-            if (Object.keys(sorter).length) {
-                this.sortBy = sorter.columnKey;
-                this.order = sorter.order;
-            }
-            this.getList();
-        },
-
-        del (uid) {
-            const self = this;
-            this.$confirm({
-                title: '确定要删除吗？',
-                content: '文章将变成已删除状态，你可以随时恢复。',
-                okText: '确定',
-                cancelText: '取消',
-                onOk () {
-                    return new Promise((resolve, reject) => {
-                        self.$axios
-                            .$delete('/api/admin/article', {
-                                params: {
-                                    uids: uid
-                                }
-                            })
-                            .then(resp => {
-                                if (resp.code === 1) {
-                                    self.pagination.current = 1;
-                                    self.getList().then(resolve);
-                                    self.$message.success('删除成功！');
-                                } else {
-                                    console.error(resp.message);
-                                    reject(resp.message);
-                                    self.$message.error('操作失败！');
-                                }
-                            });
-                    });
-                }
-            });
-        },
-        delAll () {
-            const self = this;
-            this.$confirm({
-                title: `确定要删除这${self.selectedRowKeys.length}项吗？`,
-                content: '文章将变成已删除状态，你可以随时恢复。',
-                okText: '确定',
-                cancelText: '取消',
-                onOk () {
-                    return new Promise((resolve, reject) => {
-                        self.$axios
-                            .$delete('/api/admin/article', {
-                                params: {
-                                    uids: self.selectedRowKeys
-                                }
-                            })
-                            .then(resp => {
-                                if (resp.code === 1) {
-                                    self.pagination.current = 1;
-                                    self.getList().then(resolve);
-                                    self.$message.success('删除成功！');
-                                } else {
-                                    console.error(resp.message);
-                                    reject(resp.message);
-                                    self.$message.error('操作失败！');
-                                }
-                            });
-                    });
-                }
-            });
-        },
-        del2 (uid) {
-            const self = this;
-            this.$confirm({
-                title: '确定要永久删除吗？',
-                content: '文章将被永久删除，删除后不可恢复！',
-                okText: '确定',
-                cancelText: '取消',
-                class: 'del2',
-                onOk () {
-                    return new Promise((resolve, reject) => {
-                        self.$axios
-                            .$delete('/api/admin/article', {
-                                params: {
-                                    uids: uid,
-                                    force: true
-                                }
-                            })
-                            .then(resp => {
-                                if (resp.code === 1) {
-                                    self.pagination.current = 1;
-                                    self.getList().then(resolve);
-                                    self.$message.success('删除成功！');
-                                } else {
-                                    console.error(resp.message);
-                                    reject(resp.message);
-                                    self.$message.error('操作失败！');
-                                }
-                            });
-                    });
-                }
-            });
-        },
-        undo (uid) {
-            const self = this;
-            this.$confirm({
-                title: '确定要恢复文章吗？',
-                content: '文章将变成草稿状态，你需要手动进行发布。',
-                okText: '确定',
-                cancelText: '取消',
-                onOk () {
-                    return new Promise((resolve, reject) => {
-                        self.$axios
-                            .$put(
-                                '/api/admin/article',
-                                {
-                                    isActive: true,
-                                    isDraft: true
-                                },
-                                {
-                                    params: {
-                                        uid
-                                    }
-                                }
-                            )
-                            .then(resp => {
-                                if (resp.code === 1) {
-                                    self.pagination.current = 1;
-                                    self.getList().then(resolve);
-                                    self.$message.success('恢复成功！');
-                                } else {
-                                    console.error(resp.message);
-                                    reject(resp.message);
-                                    self.$message.error('操作失败！');
-                                }
-                            });
-                    });
-                }
-            });
-        },
-        editPublishTime (item) {
-            this.editingTimeObj.uid = item._id;
-            this.editingTimeObj.publishTime = moment(item.publishTime);
-            this.editingTimeObj.modal = true;
-        },
-        savePublishTime () {
-            if (this.editingTimeObj.publishTime) {
-                this.editingTimeObj.loading = true;
-                this.$axios.$put('/api/admin/publishTime', {
-                    publishTime: this.editingTimeObj.publishTime
-                }, {
-                    params: {
-                        uid: this.editingTimeObj.uid
-                    }
-                }).then(resp => {
-                    if (resp.code === 1) {
-                        this.getList();
-                        this.$message.success('保存成功！');
-                    } else {
-                        console.error(resp.message);
-                        this.$message.error('操作失败！');
-                    }
-                    this.editingTimeObj.loading = false;
-                    this.editingTimeObj.modal = false;
-                });
-            }
-        }
+  name: 'PageArticleManage',
+  layout: 'admin',
+  async asyncData ({ $axios }) {
+    const { code, data }: IResp = await $axios.$get('/api/admin/categories');
+    if (code === 1) {
+      return {
+        categories: data
+      };
     }
+  },
+  data () {
+    return {
+      categories: [] as Array<ICategory>,
+      form: this.$form.createForm(this),
+      pagination: {
+        current: 1,
+        pageSize: 10,
+        total: 0,
+        showSizeChanger: true,
+        pageSizeOptions: ['10', '20', '30', '50'],
+        showTotal: (total, range) =>
+                    `${range[0]}-${range[1]} 条，共 ${total} 条`
+      },
+      sortBy: 'modifyTime',
+      order: 'descend',
+      postList: [],
+      isLoading: false,
+      selectedRowKeys: [],
+      rangeDate: {
+        今天: [moment(), moment()],
+        昨天: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        最近一周: [moment().subtract(7, 'days'), moment()],
+        最近一个月: [moment().subtract(30, 'days'), moment()],
+        最近一年: [moment().subtract(365, 'days'), moment()]
+      },
+      defaultRange: [moment().subtract(30, 'days'), moment()],
+      editingTimeObj: {
+        modal: false,
+        uid: '',
+        publishTime: moment(),
+        loading: false
+      },
+      tableColumns: [
+        {
+          title: '状态',
+          key: 'tags',
+          width: 90,
+          align: 'center',
+          scopedSlots: { customRender: 'tags' }
+        },
+        {
+          title: '分类',
+          dataIndex: 'category',
+          width: 150,
+          scopedSlots: { customRender: 'category' }
+        },
+        {
+          title: '标题',
+          dataIndex: 'title',
+          sorter: true,
+          scopedSlots: { customRender: 'title1' }
+        },
+        {
+          title: '创建时间',
+          dataIndex: 'createTime',
+          width: 160,
+          align: 'center',
+          sorter: true,
+          scopedSlots: { customRender: 'createTime' }
+        },
+        {
+          title: '修改时间',
+          dataIndex: 'modifyTime',
+          width: 160,
+          align: 'center',
+          sorter: true,
+          scopedSlots: { customRender: 'modifyTime' }
+        },
+        {
+          title: '发布时间',
+          dataIndex: 'publishTime',
+          width: 160,
+          align: 'center',
+          sorter: true,
+          scopedSlots: { customRender: 'publishTime' }
+        },
+        {
+          title: '浏览数',
+          dataIndex: 'viewCount',
+          width: 100,
+          align: 'center',
+          sorter: true
+        },
+        {
+          title: '评论数',
+          dataIndex: 'commentsCount',
+          width: 100,
+          align: 'center',
+          sorter: true,
+          scopedSlots: { customRender: 'commentsCount' }
+        },
+        {
+          title: '操作',
+          key: 'action',
+          width: 130,
+          align: 'center',
+          fixed: 'right',
+          scopedSlots: { customRender: 'action' }
+        }
+      ]
+    };
+  },
+
+  computed: {
+    categoryOpts (): FieldDecoratorOptions {
+      const cateName = this.$route.query.cateName;
+      let initialValue: string | undefined;
+      if (cateName) {
+        const category = this.categories.find(t => t.cateName === cateName);
+        if (category) {
+          initialValue = category._id;
+        }
+      }
+      return {
+        initialValue
+      };
+    },
+    createTimeOpts (): FieldDecoratorOptions {
+      let initialValue: Array<moment.Moment> = [];
+      const createTimeParam = this.$route.query.createTime as [string, string];
+      if (createTimeParam) {
+        initialValue = [moment(createTimeParam[0]), moment(createTimeParam[1])];
+      }
+      return {
+        initialValue
+      };
+    },
+    modifyTimeOpts (): FieldDecoratorOptions {
+      let initialValue: Array<moment.Moment> = [];
+      const modifyTimeParam = this.$route.query.modifyTime as [string, string];
+      if (modifyTimeParam) {
+        initialValue = [moment(modifyTimeParam[0]), moment(modifyTimeParam[1])];
+      }
+      return {
+        initialValue
+      };
+    },
+    publishTimeOpts (): FieldDecoratorOptions {
+      let initialValue: Array<moment.Moment> = [];
+      const publishTimeParam = this.$route.query.modifyTime as [string, string];
+      if (publishTimeParam) {
+        initialValue = [moment(publishTimeParam[0]), moment(publishTimeParam[1])];
+      }
+      return {
+        initialValue
+      };
+    },
+    isDraftOpts (): FieldDecoratorOptions {
+      return {
+        initialValue: this.$route.query.isDraft || undefined
+      };
+    },
+    isDeletedOpts (): FieldDecoratorOptions {
+      return {
+        initialValue: this.$route.query.isDeleted || undefined
+      };
+    },
+    rowSelection (): object {
+      return {
+        selectedRowKeys: this.selectedRowKeys,
+        onChange: selectedRowKeys => {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.selectedRowKeys = selectedRowKeys;
+        },
+        getCheckboxProps: record => ({
+          props: {
+            disabled: !record.isActive,
+            checked: false
+          }
+        })
+      };
+    },
+    delDisabled (): boolean {
+      return this.selectedRowKeys.length === 0;
+    }
+  },
+
+  created () {
+    this.isLoading = true;
+    this.$nextTick(() => {
+      this.getList();
+    });
+  },
+
+  methods: {
+    disabledDate (date) {
+      return date && date > moment().endOf('day');
+    },
+    search () {
+      this.pagination.current = 1;
+      this.getList();
+    },
+    async getList () {
+      const values = this.form.getFieldsValue();
+      const createTimeMomentArr = values.createTime;
+      let createTime: string[] | undefined;
+      if (createTimeMomentArr && createTimeMomentArr.length === 2) {
+        createTime = [
+          createTimeMomentArr[0].startOf('day').toString(),
+          createTimeMomentArr[1].endOf('day').toString()
+        ];
+      }
+      const modifyTimeMomentArr = values.modifyTime;
+      let modifyTime: string[] | undefined;
+      if (modifyTimeMomentArr && modifyTimeMomentArr.length === 2) {
+        modifyTime = [
+          modifyTimeMomentArr[0].startOf('day').toString(),
+          modifyTimeMomentArr[1].endOf('day').toString()
+        ];
+      }
+      const publishTimeMomentArr = values.publishTime;
+      let publishTime: string[] | undefined;
+      if (publishTimeMomentArr && publishTimeMomentArr.length === 2) {
+        publishTime = [
+          publishTimeMomentArr[0].startOf('day').toString(),
+          publishTimeMomentArr[1].endOf('day').toString()
+        ];
+      }
+      this.selectedRowKeys = [];
+      this.isLoading = true;
+      const { code, data }: IResp = await this.$axios.$get('/api/admin/posts', {
+        params: {
+          pageIndex: this.pagination.current,
+          pageSize: this.pagination.pageSize,
+          sortBy: this.sortBy,
+          order: this.order,
+          ...values,
+          createTime,
+          modifyTime,
+          publishTime
+        }
+      });
+      if (code === 1) {
+        this.postList = data.postList;
+        this.pagination.total = data.count;
+      } else {
+        this.$message.error('请求失败！');
+      }
+      this.isLoading = false;
+    },
+
+    reset () {
+      this.form.setFieldsValue({
+        category: '',
+        alias: '',
+        title: '',
+        content: '',
+        label: '',
+        createTime: [],
+        modifyTime: [],
+        publishTime: [],
+        isLink: '',
+        isDraft: '',
+        hasComments: '',
+        isDeleted: ''
+      });
+      this.search();
+    },
+
+    onTableChange (pagination, _filters, sorter) {
+      this.pagination = pagination;
+      this.sortBy = 'modifyTime';
+      this.order = 'descend';
+      if (Object.keys(sorter).length) {
+        this.sortBy = sorter.columnKey;
+        this.order = sorter.order;
+      }
+      this.getList();
+    },
+
+    del (uid) {
+      const self = this;
+      this.$confirm({
+        title: '确定要删除吗？',
+        content: '文章将变成已删除状态，你可以随时恢复。',
+        okText: '确定',
+        cancelText: '取消',
+        onOk () {
+          return new Promise((resolve, reject) => {
+            self.$axios
+              .$delete('/api/admin/article', {
+                params: {
+                  uids: uid
+                }
+              })
+              .then(resp => {
+                if (resp.code === 1) {
+                  self.pagination.current = 1;
+                  self.getList().then(resolve);
+                  self.$message.success('删除成功！');
+                } else {
+                  console.error(resp.message);
+                  reject(resp.message);
+                  self.$message.error('操作失败！');
+                }
+              });
+          });
+        }
+      });
+    },
+    delAll () {
+      const self = this;
+      this.$confirm({
+        title: `确定要删除这${self.selectedRowKeys.length}项吗？`,
+        content: '文章将变成已删除状态，你可以随时恢复。',
+        okText: '确定',
+        cancelText: '取消',
+        onOk () {
+          return new Promise((resolve, reject) => {
+            self.$axios
+              .$delete('/api/admin/article', {
+                params: {
+                  uids: self.selectedRowKeys
+                }
+              })
+              .then(resp => {
+                if (resp.code === 1) {
+                  self.pagination.current = 1;
+                  self.getList().then(resolve);
+                  self.$message.success('删除成功！');
+                } else {
+                  console.error(resp.message);
+                  reject(resp.message);
+                  self.$message.error('操作失败！');
+                }
+              });
+          });
+        }
+      });
+    },
+    del2 (uid) {
+      const self = this;
+      this.$confirm({
+        title: '确定要永久删除吗？',
+        content: '文章将被永久删除，删除后不可恢复！',
+        okText: '确定',
+        cancelText: '取消',
+        class: 'del2',
+        onOk () {
+          return new Promise((resolve, reject) => {
+            self.$axios
+              .$delete('/api/admin/article', {
+                params: {
+                  uids: uid,
+                  force: true
+                }
+              })
+              .then(resp => {
+                if (resp.code === 1) {
+                  self.pagination.current = 1;
+                  self.getList().then(resolve);
+                  self.$message.success('删除成功！');
+                } else {
+                  console.error(resp.message);
+                  reject(resp.message);
+                  self.$message.error('操作失败！');
+                }
+              });
+          });
+        }
+      });
+    },
+    undo (uid) {
+      const self = this;
+      this.$confirm({
+        title: '确定要恢复文章吗？',
+        content: '文章将变成草稿状态，你需要手动进行发布。',
+        okText: '确定',
+        cancelText: '取消',
+        onOk () {
+          return new Promise((resolve, reject) => {
+            self.$axios
+              .$put(
+                '/api/admin/article',
+                {
+                  isActive: true,
+                  isDraft: true
+                },
+                {
+                  params: {
+                    uid
+                  }
+                }
+              )
+              .then(resp => {
+                if (resp.code === 1) {
+                  self.pagination.current = 1;
+                  self.getList().then(resolve);
+                  self.$message.success('恢复成功！');
+                } else {
+                  console.error(resp.message);
+                  reject(resp.message);
+                  self.$message.error('操作失败！');
+                }
+              });
+          });
+        }
+      });
+    },
+    editPublishTime (item) {
+      this.editingTimeObj.uid = item._id;
+      this.editingTimeObj.publishTime = moment(item.publishTime);
+      this.editingTimeObj.modal = true;
+    },
+    savePublishTime () {
+      if (this.editingTimeObj.publishTime) {
+        this.editingTimeObj.loading = true;
+        this.$axios.$put('/api/admin/publishTime', {
+          publishTime: this.editingTimeObj.publishTime
+        }, {
+          params: {
+            uid: this.editingTimeObj.uid
+          }
+        }).then(resp => {
+          if (resp.code === 1) {
+            this.getList();
+            this.$message.success('保存成功！');
+          } else {
+            console.error(resp.message);
+            this.$message.error('操作失败！');
+          }
+          this.editingTimeObj.loading = false;
+          this.editingTimeObj.modal = false;
+        });
+      }
+    }
+  }
 });
 </script>
 <style scoped>

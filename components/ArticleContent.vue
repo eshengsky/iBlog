@@ -6,18 +6,18 @@
 <script lang="ts">
 import Vue from 'vue';
 export default Vue.extend({
-    props: {
-        html: {
-            type: String,
-            default: ''
-        }
+  props: {
+    html: {
+      type: String,
+      default: ''
     }
+  }
 });
 </script>
 
 <style>
 .article-content h1 {
-    position: relative;
+  position: relative;
   font-size: 2rem;
   margin: 2.75rem 0 1rem;
   padding-bottom: 0.5rem;

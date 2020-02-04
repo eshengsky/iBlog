@@ -25,32 +25,32 @@
 import Vue from 'vue';
 import md5 from 'blueimp-md5';
 export default Vue.extend({
-    data () {
-        return {
-            pwd: ''
-        };
-    },
-    mounted () {
+  data () {
+    return {
+      pwd: ''
+    };
+  },
+  mounted () {
+    (this.$refs.input as any).$children[0].focus();
+  },
+  methods: {
+    login (this: any) {
+      if (!this.pwd) {
         (this.$refs.input as any).$children[0].focus();
-    },
-    methods: {
-        login (this: any) {
-            if (!this.pwd) {
-                (this.$refs.input as any).$children[0].focus();
-                return;
-            }
-            this.$auth
-                .loginWith('local', {
-                    data: {
-                        password: md5(this.pwd)
-                    }
-                })
-                .catch(err => {
-                    console.error(err);
-                    this.$message.error('密码不正确！');
-                });
-        }
+        return;
+      }
+      this.$auth
+        .loginWith('local', {
+          data: {
+            password: md5(this.pwd)
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          this.$message.error('密码不正确！');
+        });
     }
+  }
 });
 </script>
 

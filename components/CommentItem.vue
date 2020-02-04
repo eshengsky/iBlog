@@ -50,24 +50,24 @@ import Vue, { PropOptions } from 'vue';
 import moment from 'moment';
 import { IComment } from '@/types/schema';
 export default Vue.extend({
-    props: {
-        comment: {
-            type: Object,
-            default: null
-        } as PropOptions<IComment>,
-        avatar: {
-            type: String,
-            default: ''
-        } as PropOptions<string>
+  props: {
+    comment: {
+      type: Object,
+      default: null
+    } as PropOptions<IComment>,
+    avatar: {
+      type: String,
+      default: ''
+    } as PropOptions<string>
+  },
+  computed: {
+    commentTime (): string {
+      return moment(this.comment.createTime).fromNow();
     },
-    computed: {
-        commentTime (): string {
-            return moment(this.comment.createTime).fromNow();
-        },
-        commentTime2 (): string {
-            return moment(this.comment.createTime).format('YYYY-MM-DD HH:mm:ss');
-        }
+    commentTime2 (): string {
+      return moment(this.comment.createTime).format('YYYY-MM-DD HH:mm:ss');
     }
+  }
 });
 </script>
 <style scoped>

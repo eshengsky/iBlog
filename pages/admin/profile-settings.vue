@@ -111,76 +111,76 @@ import Vue from 'vue';
 import { IResp } from '@/types';
 import { IProfile } from '@/types/schema';
 export default Vue.extend({
-    name: 'PageProfileSettings',
-    layout: 'admin',
-    data () {
-        return {
-            form: this.$form.createForm(this),
-            imgLoading: false,
-            avatar: ''
-        };
-    },
-    async mounted () {
-        const { code, data }: IResp = await this.$axios.$get('/api/profile');
-        if (code === 1 && data.profile) {
-            const profile: IProfile = data.profile;
-            this.avatar = profile.avatar;
-            this.form.setFieldsValue({
-                enName: profile.enName,
-                cnName: profile.cnName,
-                introduction: profile.introduction,
-                github: profile.github,
-                email: profile.email
-            });
-        }
-    },
-    methods: {
-        beforeUpload (file) {
-            const isImg = file.type.indexOf('image/') === 0;
-            const isLt2M = file.size / 1024 / 1024 < 2;
-            if (!isImg) {
-                this.$message.error('只允许上传图片！');
-            } else if (!isLt2M) {
-                this.$message.error('图片体积不能大于2M！');
-            }
-            return isImg && isLt2M;
-        },
-
-        getBase64 (img, callback) {
-            const reader = new FileReader();
-            reader.addEventListener('load', () => callback(reader.result));
-            reader.readAsDataURL(img);
-        },
-
-        uploadChange (info) {
-            if (info.file.status === 'uploading') {
-                this.imgLoading = true;
-                return;
-            }
-            if (info.file.status === 'done') {
-                this.getBase64(info.file.originFileObj, imageUrl => {
-                    this.avatar = imageUrl;
-                    this.imgLoading = false;
-                });
-            }
-        },
-        save () {
-            this.form.validateFieldsAndScroll((error, values) => {
-                if (!error) {
-                    const data = values;
-                    data.avatar = this.avatar;
-                    this.$axios.$put('/api/admin/profile', data).then(resp => {
-                        if (resp.code === 1) {
-                            this.$message.success('保存成功！');
-                        } else {
-                            console.error(resp.message);
-                            this.$message.error('操作失败！');
-                        }
-                    });
-                }
-            });
-        }
+  name: 'PageProfileSettings',
+  layout: 'admin',
+  data () {
+    return {
+      form: this.$form.createForm(this),
+      imgLoading: false,
+      avatar: ''
+    };
+  },
+  async mounted () {
+    const { code, data }: IResp = await this.$axios.$get('/api/profile');
+    if (code === 1 && data.profile) {
+      const profile: IProfile = data.profile;
+      this.avatar = profile.avatar;
+      this.form.setFieldsValue({
+        enName: profile.enName,
+        cnName: profile.cnName,
+        introduction: profile.introduction,
+        github: profile.github,
+        email: profile.email
+      });
     }
+  },
+  methods: {
+    beforeUpload (file) {
+      const isImg = file.type.indexOf('image/') === 0;
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isImg) {
+        this.$message.error('只允许上传图片！');
+      } else if (!isLt2M) {
+        this.$message.error('图片体积不能大于2M！');
+      }
+      return isImg && isLt2M;
+    },
+
+    getBase64 (img, callback) {
+      const reader = new FileReader();
+      reader.addEventListener('load', () => callback(reader.result));
+      reader.readAsDataURL(img);
+    },
+
+    uploadChange (info) {
+      if (info.file.status === 'uploading') {
+        this.imgLoading = true;
+        return;
+      }
+      if (info.file.status === 'done') {
+        this.getBase64(info.file.originFileObj, imageUrl => {
+          this.avatar = imageUrl;
+          this.imgLoading = false;
+        });
+      }
+    },
+    save () {
+      this.form.validateFieldsAndScroll((error, values) => {
+        if (!error) {
+          const data = values;
+          data.avatar = this.avatar;
+          this.$axios.$put('/api/admin/profile', data).then(resp => {
+            if (resp.code === 1) {
+              this.$message.success('保存成功！');
+            } else {
+              console.error(resp.message);
+              this.$message.error('操作失败！');
+            }
+          });
+        }
+      });
+    }
+  }
 });
 </script>
 

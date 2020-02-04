@@ -32,28 +32,28 @@ import Vue from 'vue';
 import { IPost } from '@/types/schema';
 import { IResp } from '@/types';
 export default Vue.extend({
-    data () {
-        return {
-            list: [] as Array<IPost>,
-            spinning: false
-        };
-    },
-    async created () {
-        this.spinning = true;
-        const { code, data }: IResp = await this.$axios.$get('/api/popArticles');
-        if (code === 1) {
-            this.list = data.articles;
-        }
-        this.spinning = false;
-    },
-    methods: {
-        articleUrl (item: IPost) {
-            if (!item.isLocal) {
-                return item.url;
-            }
-            return `/blog/${item.category.alias}/${item.alias}`;
-        }
+  data () {
+    return {
+      list: [] as Array<IPost>,
+      spinning: false
+    };
+  },
+  async created () {
+    this.spinning = true;
+    const { code, data }: IResp = await this.$axios.$get('/api/popArticles');
+    if (code === 1) {
+      this.list = data.articles;
     }
+    this.spinning = false;
+  },
+  methods: {
+    articleUrl (item: IPost) {
+      if (!item.isLocal) {
+        return item.url;
+      }
+      return `/blog/${item.category.alias}/${item.alias}`;
+    }
+  }
 });
 </script>
 

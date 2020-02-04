@@ -49,104 +49,104 @@ import Vue from 'vue';
 import md5 from 'blueimp-md5';
 import { IResp } from '@/types';
 export default Vue.extend({
-    name: 'PageInitAccount',
-    layout: 'auth',
-    data () {
-        return {
-            btnLoading: false,
-            pwd0Opts: {
-                rules: [
-                    {
-                        required: true,
-                        message: '请输入原密码！'
-                    }
-                ]
-            },
-            pwd1Opts: {
-                rules: [
-                    {
-                        required: true,
-                        message: '请输入新的密码！'
-                    },
-                    {
-                        min: 6,
-                        message: '密码不能少于6位！'
-                    },
-                    {
-                        max: 20,
-                        message: '密码不能多于20位！'
-                    },
-                    {
-                        validator: (this as any).compareToOldPassword
-                    }
-                ]
-            }
-        };
-    },
-    computed: {
-        pwd2Opts () {
-            return {
-                rules: [
-                    {
-                        required: true,
-                        message: '请输入确认密码！'
-                    },
-                    {
-                        validator: (this as any).compareToFirstPassword
-                    }
-                ]
-            };
-        }
-    },
-    beforeCreate (this: any) {
-        this.form = this.$form.createForm(this);
-    },
-    mounted () {
-        (this.$refs.pwd0 as any).$children[0].focus();
-    },
-    methods: {
-        compareToOldPassword (_rule, value, callback) {
-            const form = (this as any).form;
-            if (value && value === form.getFieldValue('pwd0')) {
-                // eslint-disable-next-line standard/no-callback-literal
-                callback('新密码不能与原密码相同！');
-            } else {
-                callback();
-            }
-        },
-        compareToFirstPassword (_rule, value, callback) {
-            const form = (this as any).form;
-            if (value && value !== form.getFieldValue('pwd1')) {
-                // eslint-disable-next-line standard/no-callback-literal
-                callback('两次输入的密码不一致！');
-            } else {
-                callback();
-            }
-        },
-        save (this: any) {
-            this.form.validateFields(async (error, values) => {
-                if (!error) {
-                    this.btnLoading = true;
-                    const { code, message }: IResp = await this.$axios.$post(
-                        '/api/auth/account',
-                        {
-                            old: md5(values.pwd0),
-                            password: md5(values.pwd1)
-                        }
-                    );
-                    if (code === 1) {
-                        this.$message.loading('修改成功！正在跳转登录页...');
-                        setTimeout(() => {
-                            location.href = '/auth/login';
-                        }, 2000);
-                    } else {
-                        this.$message.error(message);
-                        this.btnLoading = false;
-                    }
-                }
-            });
-        }
+  name: 'PageInitAccount',
+  layout: 'auth',
+  data () {
+    return {
+      btnLoading: false,
+      pwd0Opts: {
+        rules: [
+          {
+            required: true,
+            message: '请输入原密码！'
+          }
+        ]
+      },
+      pwd1Opts: {
+        rules: [
+          {
+            required: true,
+            message: '请输入新的密码！'
+          },
+          {
+            min: 6,
+            message: '密码不能少于6位！'
+          },
+          {
+            max: 20,
+            message: '密码不能多于20位！'
+          },
+          {
+            validator: (this as any).compareToOldPassword
+          }
+        ]
+      }
+    };
+  },
+  computed: {
+    pwd2Opts () {
+      return {
+        rules: [
+          {
+            required: true,
+            message: '请输入确认密码！'
+          },
+          {
+            validator: (this as any).compareToFirstPassword
+          }
+        ]
+      };
     }
+  },
+  beforeCreate (this: any) {
+    this.form = this.$form.createForm(this);
+  },
+  mounted () {
+    (this.$refs.pwd0 as any).$children[0].focus();
+  },
+  methods: {
+    compareToOldPassword (_rule, value, callback) {
+      const form = (this as any).form;
+      if (value && value === form.getFieldValue('pwd0')) {
+        // eslint-disable-next-line standard/no-callback-literal
+        callback('新密码不能与原密码相同！');
+      } else {
+        callback();
+      }
+    },
+    compareToFirstPassword (_rule, value, callback) {
+      const form = (this as any).form;
+      if (value && value !== form.getFieldValue('pwd1')) {
+        // eslint-disable-next-line standard/no-callback-literal
+        callback('两次输入的密码不一致！');
+      } else {
+        callback();
+      }
+    },
+    save (this: any) {
+      this.form.validateFields(async (error, values) => {
+        if (!error) {
+          this.btnLoading = true;
+          const { code, message }: IResp = await this.$axios.$post(
+            '/api/auth/account',
+            {
+              old: md5(values.pwd0),
+              password: md5(values.pwd1)
+            }
+          );
+          if (code === 1) {
+            this.$message.loading('修改成功！正在跳转登录页...');
+            setTimeout(() => {
+              location.href = '/auth/login';
+            }, 2000);
+          } else {
+            this.$message.error(message);
+            this.btnLoading = false;
+          }
+        }
+      });
+    }
+  }
 });
 </script>
 

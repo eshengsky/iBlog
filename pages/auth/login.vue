@@ -10,35 +10,35 @@ import Vue from 'vue';
 import FirstLogin from '@/components/FirstLogin.vue';
 import LoginAccount from '@/components/LoginAccount.vue';
 export default Vue.extend({
-    name: 'PageLogin',
-    layout: 'auth',
-    components: {
-        FirstLogin,
-        LoginAccount
-    },
-    async asyncData ({ $axios }) {
-        let isFirst: boolean;
-        const { code, data } = await $axios.$get('/api/auth/exists');
-        if (code === 1 && !data.exists) {
-            // 首次登录
-            isFirst = true;
-        } else {
-            isFirst = false;
-        }
-        return {
-            isFirst
-        };
-    },
-    data () {
-        return {
-            isFirst: false
-        };
-    },
-    methods: {
-        initComplete () {
-            this.isFirst = false;
-        }
+  name: 'PageLogin',
+  layout: 'auth',
+  components: {
+    FirstLogin,
+    LoginAccount
+  },
+  async asyncData ({ $axios }) {
+    let isFirst: boolean;
+    const { code, data } = await $axios.$get('/api/auth/exists');
+    if (code === 1 && !data.exists) {
+      // 首次登录
+      isFirst = true;
+    } else {
+      isFirst = false;
     }
+    return {
+      isFirst
+    };
+  },
+  data () {
+    return {
+      isFirst: false
+    };
+  },
+  methods: {
+    initComplete () {
+      this.isFirst = false;
+    }
+  }
 });
 </script>
 

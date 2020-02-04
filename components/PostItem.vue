@@ -83,34 +83,34 @@ import Vue from 'vue';
 import moment from 'moment';
 import ArticleContent from '@/components/ArticleContent.vue';
 export default Vue.extend({
-    components: {
-        ArticleContent
-    },
-    props: {
-        post: {
-            type: Object,
-            default () {
-                return {};
-            }
-        }
-    },
-    data () {
-        return {
-            settings: this.$store.state.settings,
-            drawer: false,
-            publishDate: moment(this.post.publishTime).format('YYYY/MM/DD')
-        };
-    },
-    methods: {
-        displayUrl (link) {
-            const url = new URL(link);
-            return url.hostname;
-        },
-        redirectUrl (link) {
-            const url = new URL(link);
-            return url.origin;
-        }
+  components: {
+    ArticleContent
+  },
+  props: {
+    post: {
+      type: Object,
+      default () {
+        return {};
+      }
     }
+  },
+  data () {
+    return {
+      settings: this.$store.state.settings,
+      drawer: false,
+      publishDate: moment(this.post.publishTime).format('YYYY/MM/DD')
+    };
+  },
+  methods: {
+    displayUrl (link) {
+      const url = new URL(link);
+      return url.hostname;
+    },
+    redirectUrl (link) {
+      const url = new URL(link);
+      return url.origin;
+    }
+  }
 });
 </script>
 <style scoped>

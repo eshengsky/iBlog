@@ -143,49 +143,49 @@
 <script lang="ts">
 import Vue from 'vue';
 export default Vue.extend({
-    filters: {
-        clean (val) {
-            return val.replace(/<br>/g, '').replace(/&nbsp;/g, ' ');
-        }
-    },
-    data () {
-        return {
-            title: `# 1级标题
+  filters: {
+    clean (val) {
+      return val.replace(/<br>/g, '').replace(/&nbsp;/g, ' ');
+    }
+  },
+  data () {
+    return {
+      title: `# 1级标题
 <br>## 2级标题
 <br>### 3级标题
 <br>#### 4级标题
 <br>##### 5级标题`,
-            bold: '**加粗文本**',
-            italic: '*斜体文本*',
-            strike: '~~已删除文本~~',
-            blockquote: '> 引用内容',
-            ol: `1. 第一项
+      bold: '**加粗文本**',
+      italic: '*斜体文本*',
+      strike: '~~已删除文本~~',
+      blockquote: '> 引用内容',
+      ol: `1. 第一项
 <br>2. 第二项
 <br>3. 第三项
 <br>`,
-            ul: `* 第一项
+      ul: `* 第一项
 <br>* 第二项
 <br>* 第三项
 <br>`,
-            taskList: `* [x] 已完成
+      taskList: `* [x] 已完成
 <br>* [ ] 未完成1
 <br>* [ ] 未完成2`,
-            code: '`code`',
-            blockCode: `\`\`\`js
+      code: '`code`',
+      blockCode: `\`\`\`js
 <br>function foo() {
 <br>&nbsp;&nbsp;const name = "iBlog";
 <br>&nbsp;&nbsp;console.log(name);
 <br>}
 <br>\`\`\``,
-            hr: '---',
-            link: '[链接地址](https://skysun.name)',
-            image: '![logo](/images/iBlog-logo.png)',
-            table: `| 框架 | 类型 |
+      hr: '---',
+      link: '[链接地址](https://skysun.name)',
+      image: '![logo](/images/iBlog-logo.png)',
+      table: `| 框架 | 类型 |
 <br>| ----------- | ----------- |
 <br>| Vue.js | 前端 |
 <br>| Express.js | 后端 |`
-        };
-    }
+    };
+  }
 });
 </script>
 <style scoped>

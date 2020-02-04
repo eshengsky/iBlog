@@ -29,26 +29,26 @@
 import Vue from 'vue';
 import { IResp } from '@/types';
 export default Vue.extend({
-    data () {
-        return {
-            list: [],
-            spinning: false
-        };
-    },
-    async created () {
-        this.spinning = true;
-        const { code, data }: IResp = await this.$axios.$get('/api/popLabels');
-        if (code === 1) {
-            this.list = data.labels;
-        }
-        this.spinning = false;
-    },
-    methods: {
-        selectLabel (label) {
-            window.scrollTo(0, 0);
-            this.$emit('selectLabel', label);
-        }
+  data () {
+    return {
+      list: [],
+      spinning: false
+    };
+  },
+  async created () {
+    this.spinning = true;
+    const { code, data }: IResp = await this.$axios.$get('/api/popLabels');
+    if (code === 1) {
+      this.list = data.labels;
     }
+    this.spinning = false;
+  },
+  methods: {
+    selectLabel (label) {
+      window.scrollTo(0, 0);
+      this.$emit('selectLabel', label);
+    }
+  }
 });
 </script>
 

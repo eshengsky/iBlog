@@ -118,166 +118,166 @@ import PopArticles from '@/components/widgets/popArticles.vue';
 import PopLabels from '@/components/widgets/popLabels.vue';
 import 'highlight.js/styles/tomorrow.css';
 export default Vue.extend({
-    scrollToTop: true,
-    components: {
-        PostItem,
-        BlogIntro,
-        ArticleCalendar,
-        PopArticles,
-        PopLabels
+  scrollToTop: true,
+  components: {
+    PostItem,
+    BlogIntro,
+    ArticleCalendar,
+    PopArticles,
+    PopLabels
+  },
+  props: {
+    category: {
+      type: Object,
+      default () {
+        return null;
+      }
+    } as PropOptions<ICategory>
+  },
+  data () {
+    return {
+      settings: this.$store.state.settings,
+      posts: [] as Array<IPost>,
+      isLoading: false,
+      hasNext: false,
+      count: 0,
+      sortBy: 'date',
+      keyword: '' as Array<string> | string,
+      filterType: 'text' as ('text' | 'title' | 'tag' | 'date'),
+      inputTxt: '',
+      inputDateMoment: [] as Array<moment.Moment>,
+      page: 1,
+      pageSize: this.$store.state.settings.postPageSize,
+      alertShow: false,
+      defaultRange: [moment().subtract(30, 'days'), moment()],
+      rangeDate: {
+        今天: [moment(), moment()],
+        昨天: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        最近一周: [moment().subtract(7, 'days'), moment()],
+        最近一个月: [moment().subtract(30, 'days'), moment()],
+        最近一年: [moment().subtract(365, 'days'), moment()]
+      }
+    };
+  },
+  computed: {
+    searchPhd (): string {
+      let placeholder = '';
+      switch (this.filterType) {
+        case 'text':
+          placeholder = '全文关键字';
+          break;
+        case 'title':
+          placeholder = '标题关键字';
+          break;
+        case 'tag':
+          placeholder = '标签关键字';
+          break;
+        default:
+      }
+      return placeholder;
     },
-    props: {
-        category: {
-            type: Object,
-            default () {
-                return null;
-            }
-        } as PropOptions<ICategory>
-    },
-    data () {
-        return {
-            settings: this.$store.state.settings,
-            posts: [] as Array<IPost>,
-            isLoading: false,
-            hasNext: false,
-            count: 0,
-            sortBy: 'date',
-            keyword: '' as Array<string> | string,
-            filterType: 'text' as ('text' | 'title' | 'tag' | 'date'),
-            inputTxt: '',
-            inputDateMoment: [] as Array<moment.Moment>,
-            page: 1,
-            pageSize: this.$store.state.settings.postPageSize,
-            alertShow: false,
-            defaultRange: [moment().subtract(30, 'days'), moment()],
-            rangeDate: {
-                今天: [moment(), moment()],
-                昨天: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                最近一周: [moment().subtract(7, 'days'), moment()],
-                最近一个月: [moment().subtract(30, 'days'), moment()],
-                最近一年: [moment().subtract(365, 'days'), moment()]
-            }
-        };
-    },
-    computed: {
-        searchPhd (): string {
-            let placeholder = '';
-            switch (this.filterType) {
-                case 'text':
-                    placeholder = '全文关键字';
-                    break;
-                case 'title':
-                    placeholder = '标题关键字';
-                    break;
-                case 'tag':
-                    placeholder = '标签关键字';
-                    break;
-                default:
-            }
-            return placeholder;
-        },
-        inputDate (): Array<string> {
-            const range = this.inputDateMoment;
-            if (!range.length) {
-                return [];
-            }
-            return [
-                range[0].startOf('day').toString(),
-                range[1].endOf('day').toString()
-            ];
-        }
-    },
-    created () {
-        this.isLoading = true;
-        this.getPosts();
-    },
-    methods: {
-        disabledDate (date) {
-            return date && date > moment().endOf('day');
-        },
-        async getPosts () {
-            this.isLoading = true;
-            const { code, data }: IResp = await this.$axios.$get('/api/posts', {
-                params: {
-                    category: this.category._id,
-                    pageIndex: this.page,
-                    pageSize: this.pageSize,
-                    filterType: this.filterType,
-                    keyword: this.keyword,
-                    sortBy: this.sortBy
-                }
-            });
-
-            if (code === 1) {
-                this.posts.push(...data.postList);
-                this.hasNext = data.hasNext;
-                this.count = data.count;
-            }
-            this.isLoading = false;
-        },
-        loadNext () {
-            this.page++;
-            this.getPosts();
-        },
-        filterTypeChange () {
-            if (this.filterType !== 'date') {
-                this.$nextTick(() => {
-                    (this.$refs.inputComp as any).focus();
-                });
-            }
-        },
-        async search (checkKeyword = true) {
-            let input: Array<string> | string;
-            if (this.filterType === 'date') {
-                input = this.inputDate;
-                if (checkKeyword && !input[0] && !input[1]) {
-                    return;
-                }
-            } else {
-                input = this.inputTxt;
-                if (checkKeyword && !input) {
-                    (this.$refs.inputComp as any).focus();
-                    return;
-                }
-            }
-            this.alertShow = false;
-            this.posts = [];
-            this.page = 1;
-            this.hasNext = false;
-            this.keyword = input;
-            await this.getPosts();
-            if (input) {
-                this.alertShow = true;
-            }
-        },
-        clearSearch () {
-            this.alertShow = false;
-            this.posts = [];
-            this.page = 1;
-            this.hasNext = false;
-            this.keyword = '';
-            this.inputTxt = '';
-            this.inputDateMoment = [];
-            this.getPosts();
-        },
-        sortList (sortBy) {
-            if (this.sortBy === sortBy) {
-                return;
-            }
-            this.sortBy = sortBy;
-            this.search(false);
-        },
-        selectCalendar (inputDateMoment: [moment.Moment, moment.Moment]) {
-            this.filterType = 'date';
-            this.inputDateMoment = inputDateMoment;
-            this.search();
-        },
-        selectLabel (tag) {
-            this.filterType = 'tag';
-            this.inputTxt = tag;
-            this.search();
-        }
+    inputDate (): Array<string> {
+      const range = this.inputDateMoment;
+      if (!range.length) {
+        return [];
+      }
+      return [
+        range[0].startOf('day').toString(),
+        range[1].endOf('day').toString()
+      ];
     }
+  },
+  created () {
+    this.isLoading = true;
+    this.getPosts();
+  },
+  methods: {
+    disabledDate (date) {
+      return date && date > moment().endOf('day');
+    },
+    async getPosts () {
+      this.isLoading = true;
+      const { code, data }: IResp = await this.$axios.$get('/api/posts', {
+        params: {
+          category: this.category._id,
+          pageIndex: this.page,
+          pageSize: this.pageSize,
+          filterType: this.filterType,
+          keyword: this.keyword,
+          sortBy: this.sortBy
+        }
+      });
+
+      if (code === 1) {
+        this.posts.push(...data.postList);
+        this.hasNext = data.hasNext;
+        this.count = data.count;
+      }
+      this.isLoading = false;
+    },
+    loadNext () {
+      this.page++;
+      this.getPosts();
+    },
+    filterTypeChange () {
+      if (this.filterType !== 'date') {
+        this.$nextTick(() => {
+          (this.$refs.inputComp as any).focus();
+        });
+      }
+    },
+    async search (checkKeyword = true) {
+      let input: Array<string> | string;
+      if (this.filterType === 'date') {
+        input = this.inputDate;
+        if (checkKeyword && !input[0] && !input[1]) {
+          return;
+        }
+      } else {
+        input = this.inputTxt;
+        if (checkKeyword && !input) {
+          (this.$refs.inputComp as any).focus();
+          return;
+        }
+      }
+      this.alertShow = false;
+      this.posts = [];
+      this.page = 1;
+      this.hasNext = false;
+      this.keyword = input;
+      await this.getPosts();
+      if (input) {
+        this.alertShow = true;
+      }
+    },
+    clearSearch () {
+      this.alertShow = false;
+      this.posts = [];
+      this.page = 1;
+      this.hasNext = false;
+      this.keyword = '';
+      this.inputTxt = '';
+      this.inputDateMoment = [];
+      this.getPosts();
+    },
+    sortList (sortBy) {
+      if (this.sortBy === sortBy) {
+        return;
+      }
+      this.sortBy = sortBy;
+      this.search(false);
+    },
+    selectCalendar (inputDateMoment: [moment.Moment, moment.Moment]) {
+      this.filterType = 'date';
+      this.inputDateMoment = inputDateMoment;
+      this.search();
+    },
+    selectLabel (tag) {
+      this.filterType = 'tag';
+      this.inputTxt = tag;
+      this.search();
+    }
+  }
 });
 </script>
 <style scoped>

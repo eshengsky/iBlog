@@ -128,57 +128,57 @@ import moment from 'moment';
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN';
 import LayoutFooter from '@/components/LayoutFooter.vue';
 Vue.filter('toDate', (date: string) => {
-    return moment(date).format('YYYY-MM-DD HH:mm:ss');
+  return moment(date).format('YYYY-MM-DD HH:mm:ss');
 });
 export default Vue.extend({
-    middleware: 'auth',
-    components: {
-        LayoutFooter
-    },
-    data () {
-        return {
-            collapsed: false,
-            year: new Date().getFullYear(),
-            zhCN,
-            currentKey: ''
-        };
-    },
-    computed: {
-        marginLeft (): string {
-            return this.collapsed ? '80px' : '200px';
-        }
-    },
-    created () {
-        this.currentKey = this.getCurrentKey(this.$route.path);
-        this.$router.afterEach(to => {
-            this.currentKey = this.getCurrentKey(to.path);
-        });
-    },
-    methods: {
-        toggleCollapsed () {
-            this.collapsed = !this.collapsed;
-            this.$bus.$emit('changeLayout');
-        },
-        logout (this: any) {
-            this.$auth.logout('local');
-        },
-        getCurrentKey (originalPath) {
-            let path = originalPath.replace('/admin', '');
-            if (path.substring(0, 1) === '/') {
-                path = path.substring(1);
-            }
-            if (path.substring(path.length - 1) === '/') {
-                path = path.substring(0, path.length - 1);
-            }
-            if (!path) {
-                return 'index';
-            }
-            if (path === 'article-edit') {
-                return 'article-manage';
-            }
-            return path;
-        }
+  middleware: 'auth',
+  components: {
+    LayoutFooter
+  },
+  data () {
+    return {
+      collapsed: false,
+      year: new Date().getFullYear(),
+      zhCN,
+      currentKey: ''
+    };
+  },
+  computed: {
+    marginLeft (): string {
+      return this.collapsed ? '80px' : '200px';
     }
+  },
+  created () {
+    this.currentKey = this.getCurrentKey(this.$route.path);
+    this.$router.afterEach(to => {
+      this.currentKey = this.getCurrentKey(to.path);
+    });
+  },
+  methods: {
+    toggleCollapsed () {
+      this.collapsed = !this.collapsed;
+      this.$bus.$emit('changeLayout');
+    },
+    logout (this: any) {
+      this.$auth.logout('local');
+    },
+    getCurrentKey (originalPath) {
+      let path = originalPath.replace('/admin', '');
+      if (path.substring(0, 1) === '/') {
+        path = path.substring(1);
+      }
+      if (path.substring(path.length - 1) === '/') {
+        path = path.substring(0, path.length - 1);
+      }
+      if (!path) {
+        return 'index';
+      }
+      if (path === 'article-edit') {
+        return 'article-manage';
+      }
+      return path;
+    }
+  }
 });
 </script>
 <style scoped>

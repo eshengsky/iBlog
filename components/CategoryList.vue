@@ -14,14 +14,14 @@
 import Vue, { PropOptions } from 'vue';
 import { ICategory } from '@/types/schema';
 export default Vue.extend({
-    props: {
-        categories: {
-            type: Array,
-            default () {
-                return [];
-            }
-        } as PropOptions<Array<ICategory>>
-    }
+  props: {
+    categories: {
+      type: Array,
+      default () {
+        return [];
+      }
+    } as PropOptions<Array<ICategory>>
+  }
 });
 </script>
 <style scoped>

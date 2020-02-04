@@ -112,226 +112,226 @@ import moment from 'moment';
 import { FieldDecoratorOptions } from 'ant-design-vue/types/form/form';
 import { IResp } from '@/types';
 export default Vue.extend({
-    name: 'PageGuestbookManage',
-    layout: 'admin',
-    data () {
-        return {
-            form: this.$form.createForm(this),
-            pagination: {
-                current: 1,
-                pageSize: 10,
-                total: 0,
-                showSizeChanger: true,
-                pageSizeOptions: ['10', '20', '30', '50'],
-                showTotal: (total, range) =>
+  name: 'PageGuestbookManage',
+  layout: 'admin',
+  data () {
+    return {
+      form: this.$form.createForm(this),
+      pagination: {
+        current: 1,
+        pageSize: 10,
+        total: 0,
+        showSizeChanger: true,
+        pageSizeOptions: ['10', '20', '30', '50'],
+        showTotal: (total, range) =>
                     `${range[0]}-${range[1]} 条，共 ${total} 条`
-            },
-            sortBy: 'createTime',
-            order: 'descend',
-            comments: [],
-            isLoading: false,
-            selectedRowKeys: [],
-            rangeDate: {
-                今天: [moment(), moment()],
-                昨天: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                最近一周: [moment().subtract(7, 'days'), moment()],
-                最近一个月: [moment().subtract(30, 'days'), moment()],
-                最近一年: [moment().subtract(365, 'days'), moment()]
-            },
-            defaultRange: [moment().subtract(30, 'days'), moment()],
-            tableColumns: [
-                {
-                    title: '留言内容',
-                    key: 'content',
-                    scopedSlots: { customRender: 'content' }
-                },
-                {
-                    title: '留言用户',
-                    key: 'person',
-                    width: 180,
-                    scopedSlots: { customRender: 'person' }
-                },
-                {
-                    title: '留言时间',
-                    key: 'createTime',
-                    width: 170,
-                    align: 'center',
-                    sorter: true,
-                    scopedSlots: { customRender: 'createTime' }
-                },
-                {
-                    title: '操作',
-                    key: 'action',
-                    width: 100,
-                    align: 'center',
-                    fixed: 'right',
-                    scopedSlots: { customRender: 'action' }
-                }
-            ]
-        };
-    },
-
-    computed: {
-        createTimeOpts (): FieldDecoratorOptions {
-            let initialValue: Array<moment.Moment> = [];
-            const createTimeParam = this.$route.query.createTime as [string, string];
-            if (createTimeParam) {
-                initialValue = [moment(createTimeParam[0]), moment(createTimeParam[1])];
-            }
-            return {
-                initialValue
-            };
+      },
+      sortBy: 'createTime',
+      order: 'descend',
+      comments: [],
+      isLoading: false,
+      selectedRowKeys: [],
+      rangeDate: {
+        今天: [moment(), moment()],
+        昨天: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        最近一周: [moment().subtract(7, 'days'), moment()],
+        最近一个月: [moment().subtract(30, 'days'), moment()],
+        最近一年: [moment().subtract(365, 'days'), moment()]
+      },
+      defaultRange: [moment().subtract(30, 'days'), moment()],
+      tableColumns: [
+        {
+          title: '留言内容',
+          key: 'content',
+          scopedSlots: { customRender: 'content' }
         },
-        rowSelection (): object {
-            return {
-                selectedRowKeys: this.selectedRowKeys,
-                onChange: selectedRowKeys => {
-                    // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-                    this.selectedRowKeys = selectedRowKeys;
-                },
-                getCheckboxProps: () => ({
-                    props: {
-                        checked: false
-                    }
-                })
-            };
+        {
+          title: '留言用户',
+          key: 'person',
+          width: 180,
+          scopedSlots: { customRender: 'person' }
         },
-        delDisabled (): boolean {
-            return this.selectedRowKeys.length === 0;
+        {
+          title: '留言时间',
+          key: 'createTime',
+          width: 170,
+          align: 'center',
+          sorter: true,
+          scopedSlots: { customRender: 'createTime' }
+        },
+        {
+          title: '操作',
+          key: 'action',
+          width: 100,
+          align: 'center',
+          fixed: 'right',
+          scopedSlots: { customRender: 'action' }
         }
+      ]
+    };
+  },
+
+  computed: {
+    createTimeOpts (): FieldDecoratorOptions {
+      let initialValue: Array<moment.Moment> = [];
+      const createTimeParam = this.$route.query.createTime as [string, string];
+      if (createTimeParam) {
+        initialValue = [moment(createTimeParam[0]), moment(createTimeParam[1])];
+      }
+      return {
+        initialValue
+      };
     },
-
-    created () {
-        this.isLoading = true;
-        this.$nextTick(() => {
-            this.getGuestbook();
-        });
+    rowSelection (): object {
+      return {
+        selectedRowKeys: this.selectedRowKeys,
+        onChange: selectedRowKeys => {
+          // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+          this.selectedRowKeys = selectedRowKeys;
+        },
+        getCheckboxProps: () => ({
+          props: {
+            checked: false
+          }
+        })
+      };
     },
-
-    methods: {
-        disabledDate (date) {
-            return date && date > moment().endOf('day');
-        },
-        search () {
-            this.pagination.current = 1;
-            this.getGuestbook();
-        },
-
-        async getGuestbook () {
-            const values = this.form.getFieldsValue();
-            const createTimeMomentArr = values.createTime;
-            let createTime: string[] | undefined;
-            if (createTimeMomentArr && createTimeMomentArr.length === 2) {
-                createTime = [
-                    createTimeMomentArr[0].startOf('day').toString(),
-                    createTimeMomentArr[1].endOf('day').toString()
-                ];
-            }
-            this.selectedRowKeys = [];
-            this.isLoading = true;
-            const { code, data }: IResp = await this.$axios.$get(
-                '/api/admin/guestbook',
-                {
-                    params: {
-                        pageIndex: this.pagination.current,
-                        pageSize: this.pagination.pageSize,
-                        sortBy: this.sortBy,
-                        order: this.order,
-                        ...values,
-                        createTime
-                    }
-                }
-            );
-            if (code === 1) {
-                this.comments = data.comments;
-                this.pagination.total = data.count;
-            } else {
-                this.$message.error('请求失败！');
-            }
-            this.isLoading = false;
-        },
-
-        reset () {
-            this.form.setFieldsValue({
-                content: '',
-                username: '',
-                createTime: []
-            });
-            this.search();
-        },
-
-        onTableChange (pagination, _filters, sorter) {
-            this.pagination = pagination;
-            this.sortBy = 'createTime';
-            this.order = 'descend';
-            if (Object.keys(sorter).length) {
-                this.order = sorter.order;
-            }
-            this.getGuestbook();
-        },
-
-        del (uid) {
-            const self = this;
-            this.$confirm({
-                title: '确定要删除吗？',
-                content: '留言将被永久删除，删除后不可恢复！',
-                okText: '确定',
-                cancelText: '取消',
-                class: 'del2',
-                onOk () {
-                    return new Promise((resolve, reject) => {
-                        self.$axios
-                            .$delete('/api/admin/guestbook', {
-                                params: {
-                                    uids: uid
-                                }
-                            })
-                            .then(resp => {
-                                if (resp.code === 1) {
-                                    self.pagination.current = 1;
-                                    self.getGuestbook().then(resolve);
-                                    self.$message.success('删除成功！');
-                                } else {
-                                    console.error(resp.message);
-                                    reject(resp.message);
-                                    self.$message.error('操作失败！');
-                                }
-                            });
-                    });
-                }
-            });
-        },
-        delAll () {
-            const self = this;
-            this.$confirm({
-                title: `确定要删除这${self.selectedRowKeys.length}项吗？`,
-                content: '留言将被永久删除，删除后不可恢复！',
-                okText: '确定',
-                cancelText: '取消',
-                onOk () {
-                    return new Promise((resolve, reject) => {
-                        self.$axios
-                            .$delete('/api/admin/guestbook', {
-                                params: {
-                                    uids: self.selectedRowKeys
-                                }
-                            })
-                            .then(resp => {
-                                if (resp.code === 1) {
-                                    self.pagination.current = 1;
-                                    self.getGuestbook().then(resolve);
-                                    self.$message.success('删除成功！');
-                                } else {
-                                    console.error(resp.message);
-                                    reject(resp.message);
-                                    self.$message.error('操作失败！');
-                                }
-                            });
-                    });
-                }
-            });
-        }
+    delDisabled (): boolean {
+      return this.selectedRowKeys.length === 0;
     }
+  },
+
+  created () {
+    this.isLoading = true;
+    this.$nextTick(() => {
+      this.getGuestbook();
+    });
+  },
+
+  methods: {
+    disabledDate (date) {
+      return date && date > moment().endOf('day');
+    },
+    search () {
+      this.pagination.current = 1;
+      this.getGuestbook();
+    },
+
+    async getGuestbook () {
+      const values = this.form.getFieldsValue();
+      const createTimeMomentArr = values.createTime;
+      let createTime: string[] | undefined;
+      if (createTimeMomentArr && createTimeMomentArr.length === 2) {
+        createTime = [
+          createTimeMomentArr[0].startOf('day').toString(),
+          createTimeMomentArr[1].endOf('day').toString()
+        ];
+      }
+      this.selectedRowKeys = [];
+      this.isLoading = true;
+      const { code, data }: IResp = await this.$axios.$get(
+        '/api/admin/guestbook',
+        {
+          params: {
+            pageIndex: this.pagination.current,
+            pageSize: this.pagination.pageSize,
+            sortBy: this.sortBy,
+            order: this.order,
+            ...values,
+            createTime
+          }
+        }
+      );
+      if (code === 1) {
+        this.comments = data.comments;
+        this.pagination.total = data.count;
+      } else {
+        this.$message.error('请求失败！');
+      }
+      this.isLoading = false;
+    },
+
+    reset () {
+      this.form.setFieldsValue({
+        content: '',
+        username: '',
+        createTime: []
+      });
+      this.search();
+    },
+
+    onTableChange (pagination, _filters, sorter) {
+      this.pagination = pagination;
+      this.sortBy = 'createTime';
+      this.order = 'descend';
+      if (Object.keys(sorter).length) {
+        this.order = sorter.order;
+      }
+      this.getGuestbook();
+    },
+
+    del (uid) {
+      const self = this;
+      this.$confirm({
+        title: '确定要删除吗？',
+        content: '留言将被永久删除，删除后不可恢复！',
+        okText: '确定',
+        cancelText: '取消',
+        class: 'del2',
+        onOk () {
+          return new Promise((resolve, reject) => {
+            self.$axios
+              .$delete('/api/admin/guestbook', {
+                params: {
+                  uids: uid
+                }
+              })
+              .then(resp => {
+                if (resp.code === 1) {
+                  self.pagination.current = 1;
+                  self.getGuestbook().then(resolve);
+                  self.$message.success('删除成功！');
+                } else {
+                  console.error(resp.message);
+                  reject(resp.message);
+                  self.$message.error('操作失败！');
+                }
+              });
+          });
+        }
+      });
+    },
+    delAll () {
+      const self = this;
+      this.$confirm({
+        title: `确定要删除这${self.selectedRowKeys.length}项吗？`,
+        content: '留言将被永久删除，删除后不可恢复！',
+        okText: '确定',
+        cancelText: '取消',
+        onOk () {
+          return new Promise((resolve, reject) => {
+            self.$axios
+              .$delete('/api/admin/guestbook', {
+                params: {
+                  uids: self.selectedRowKeys
+                }
+              })
+              .then(resp => {
+                if (resp.code === 1) {
+                  self.pagination.current = 1;
+                  self.getGuestbook().then(resolve);
+                  self.$message.success('删除成功！');
+                } else {
+                  console.error(resp.message);
+                  reject(resp.message);
+                  self.$message.error('操作失败！');
+                }
+              });
+          });
+        }
+      });
+    }
+  }
 });
 </script>
 

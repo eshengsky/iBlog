@@ -63,63 +63,63 @@
 import Vue from 'vue';
 import moment from 'moment';
 export default Vue.extend({
-    name: 'PageSearch',
-    data () {
-        return {
-            filterType: 'title',
-            inputTxt: '',
-            inputDateMoment: [] as Array<moment.Moment>,
-            defaultRange: [moment().subtract(30, 'days'), moment()],
-            rangeDate: {
-                今天: [moment(), moment()],
-                昨天: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                最近一周: [moment().subtract(7, 'days'), moment()],
-                最近一个月: [moment().subtract(30, 'days'), moment()],
-                最近一年: [moment().subtract(365, 'days'), moment()]
-            }
-        };
+  name: 'PageSearch',
+  data () {
+    return {
+      filterType: 'title',
+      inputTxt: '',
+      inputDateMoment: [] as Array<moment.Moment>,
+      defaultRange: [moment().subtract(30, 'days'), moment()],
+      rangeDate: {
+        今天: [moment(), moment()],
+        昨天: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        最近一周: [moment().subtract(7, 'days'), moment()],
+        最近一个月: [moment().subtract(30, 'days'), moment()],
+        最近一年: [moment().subtract(365, 'days'), moment()]
+      }
+    };
+  },
+  computed: {
+    searchPhd (): string {
+      let placeholder = '';
+      switch (this.filterType) {
+        case 'text':
+          placeholder = '全文关键字';
+          break;
+        case 'title':
+          placeholder = '标题关键字';
+          break;
+        case 'tag':
+          placeholder = '标签关键字';
+          break;
+        default:
+      }
+      return placeholder;
     },
-    computed: {
-        searchPhd (): string {
-            let placeholder = '';
-            switch (this.filterType) {
-                case 'text':
-                    placeholder = '全文关键字';
-                    break;
-                case 'title':
-                    placeholder = '标题关键字';
-                    break;
-                case 'tag':
-                    placeholder = '标签关键字';
-                    break;
-                default:
-            }
-            return placeholder;
-        },
-        inputDate (): Array<string> {
-            const range = this.inputDateMoment;
-            if (!range.length) {
-                return [];
-            }
-            return [
-                range[0].startOf('day').toString(),
-                range[1].endOf('day').toString()
-            ];
-        }
-    },
-    methods: {
-        disabledDate (date) {
-            return date && date > moment().endOf('day');
-        },
-        filterTypeChange () {
-            if (this.filterType !== 'date') {
-                this.$nextTick(() => {
-                    (this.$refs.inputComp as any).focus();
-                });
-            }
-        },
-        async search () {}
+    inputDate (): Array<string> {
+      const range = this.inputDateMoment;
+      if (!range.length) {
+        return [];
+      }
+      return [
+        range[0].startOf('day').toString(),
+        range[1].endOf('day').toString()
+      ];
     }
+  },
+  methods: {
+    disabledDate (date) {
+      return date && date > moment().endOf('day');
+    },
+    filterTypeChange () {
+      if (this.filterType !== 'date') {
+        this.$nextTick(() => {
+          (this.$refs.inputComp as any).focus();
+        });
+      }
+    },
+    async search () {}
+  }
 });
 </script>
 

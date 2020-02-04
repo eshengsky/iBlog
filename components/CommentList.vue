@@ -113,220 +113,220 @@ import MdCheatSheet from '@/components/MdCheatSheet.vue';
 import { IComment } from '@/types/schema';
 import { IResp } from '@/types';
 export default Vue.extend({
-    components: {
-        CommentItem,
-        MdCheatSheet
+  components: {
+    CommentItem,
+    MdCheatSheet
+  },
+  props: {
+    from: {
+      type: Number,
+      default: 1
+    } as PropOptions<1 | 2>,
+    articleId: {
+      type: String,
+      default: ''
+    } as PropOptions<string>
+  },
+  data () {
+    return {
+      comments: [] as Array<IComment>,
+      page: 1,
+      pageSize: this.$store.state.settings.commentPageSize,
+      mcsShow: false,
+      editorText: '',
+      isLoading: false,
+      count: 0,
+      hasNext: false,
+      usernameOpts: {
+        rules: [
+          {
+            required: true,
+            message: '昵称不能为空！'
+          },
+          {
+            min: 3,
+            message: '昵称太短了！'
+          },
+          {
+            max: 20,
+            message: '昵称太长了！'
+          }
+        ]
+      },
+      websiteOpts: {
+        rules: [
+          {
+            pattern: /^http/,
+            message: '链接必须以http开头！'
+          }
+        ]
+      }
+    };
+  },
+  computed: {
+    form (): any {
+      return this.$form.createForm(this);
     },
-    props: {
-        from: {
-            type: Number,
-            default: 1
-        } as PropOptions<1 | 2>,
-        articleId: {
-            type: String,
-            default: ''
-        } as PropOptions<string>
+    isGuestbook (): boolean {
+      return this.from === 1;
     },
-    data () {
-        return {
-            comments: [] as Array<IComment>,
-            page: 1,
-            pageSize: this.$store.state.settings.commentPageSize,
-            mcsShow: false,
-            editorText: '',
-            isLoading: false,
-            count: 0,
-            hasNext: false,
-            usernameOpts: {
-                rules: [
-                    {
-                        required: true,
-                        message: '昵称不能为空！'
-                    },
-                    {
-                        min: 3,
-                        message: '昵称太短了！'
-                    },
-                    {
-                        max: 20,
-                        message: '昵称太长了！'
-                    }
-                ]
-            },
-            websiteOpts: {
-                rules: [
-                    {
-                        pattern: /^http/,
-                        message: '链接必须以http开头！'
-                    }
-                ]
-            }
-        };
+    commentName (): string {
+      return this.isGuestbook ? '留言' : '评论';
     },
-    computed: {
-        form (): any {
-            return this.$form.createForm(this);
-        },
-        isGuestbook (): boolean {
-            return this.from === 1;
-        },
-        commentName (): string {
-            return this.isGuestbook ? '留言' : '评论';
-        },
-        editorOptions (): object {
-            return {
-                hideModeSwitch: true,
-                language: 'zh_CN',
-                placeholder: `输入${this.commentName}内容`,
-                toolbarItems: [
-                    'bold',
-                    'italic',
-                    'strike',
-                    'divider',
-                    'hr',
-                    'quote',
-                    'divider',
-                    'ul',
-                    'ol',
-                    'task',
-                    'divider',
-                    'image',
-                    'table',
-                    'link',
-                    'divider',
-                    'code',
-                    'codeblock'
-                ]
-            };
-        }
-    },
-    created () {
-        this.getComments();
-    },
-    mounted () {
-        const userInfo = localStorage.getItem('commentUserInfo');
-        if (userInfo) {
-            try {
-                const user = JSON.parse(userInfo);
-                this.form.setFieldsValue(user);
-            } catch (err) {}
-        }
-        if (this.$auth.user) {
-            this.form.setFieldsValue({
-                username: 'Admin'
-            });
-        }
-    },
-    methods: {
-        async getComments () {
-            this.isLoading = true;
-            const { code, data }: IResp = await this.$axios.$get(
+    editorOptions (): object {
+      return {
+        hideModeSwitch: true,
+        language: 'zh_CN',
+        placeholder: `输入${this.commentName}内容`,
+        toolbarItems: [
+          'bold',
+          'italic',
+          'strike',
+          'divider',
+          'hr',
+          'quote',
+          'divider',
+          'ul',
+          'ol',
+          'task',
+          'divider',
+          'image',
+          'table',
+          'link',
+          'divider',
+          'code',
+          'codeblock'
+        ]
+      };
+    }
+  },
+  created () {
+    this.getComments();
+  },
+  mounted () {
+    const userInfo = localStorage.getItem('commentUserInfo');
+    if (userInfo) {
+      try {
+        const user = JSON.parse(userInfo);
+        this.form.setFieldsValue(user);
+      } catch (err) {}
+    }
+    if (this.$auth.user) {
+      this.form.setFieldsValue({
+        username: 'Admin'
+      });
+    }
+  },
+  methods: {
+    async getComments () {
+      this.isLoading = true;
+      const { code, data }: IResp = await this.$axios.$get(
                 `/api/${this.isGuestbook ? 'guestbook' : 'comments'}`,
                 {
-                    params: {
-                        articleId: this.articleId,
-                        pageIndex: this.page,
-                        pageSize: this.pageSize
-                    }
+                  params: {
+                    articleId: this.articleId,
+                    pageIndex: this.page,
+                    pageSize: this.pageSize
+                  }
                 }
-            );
+      );
 
-            if (code === 1) {
-                this.comments.push(...data.comments);
-                this.hasNext = data.hasNext;
-                this.count = data.count;
-            }
-            this.isLoading = false;
-        },
-        postComment () {
-            this.form.validateFieldsAndScroll(async (error, values) => {
-                if (!error) {
-                    const { code, data, message } = await this.$axios.$post(
+      if (code === 1) {
+        this.comments.push(...data.comments);
+        this.hasNext = data.hasNext;
+        this.count = data.count;
+      }
+      this.isLoading = false;
+    },
+    postComment () {
+      this.form.validateFieldsAndScroll(async (error, values) => {
+        if (!error) {
+          const { code, data, message } = await this.$axios.$post(
                         `/api/${this.isGuestbook ? 'guestbook' : 'comment'}`,
                         {
-                            articleId: this.articleId,
-                            content: this.editorText,
-                            ...values
+                          articleId: this.articleId,
+                          content: this.editorText,
+                          ...values
                         }
-                    );
-                    if (code === 1) {
-                        this.comments.unshift(data.comment);
-                        this.count++;
-                        this.editorText = '';
-                    } else {
-                        this.$message.error(message || `${this.commentName}失败`);
-                    }
-                    localStorage.setItem('commentUserInfo', JSON.stringify(values));
-                }
-            });
-        },
-
-        onEditorLoad () {
-            ((
-                document.querySelector('.gituser-wrap .comment-btn-wrap') as HTMLElement
-            )).style.display = 'flex';
-        },
-
-        onEditorFocus () {
-            ((
-                document.querySelector('.gituser-wrap .te-md-container .CodeMirror') as HTMLElement
-            )).classList.add('editor-focus');
-        },
-
-        onEditorBlur () {
-            ((
-                document.querySelector('.gituser-wrap .te-md-container .CodeMirror') as HTMLElement
-            )).classList.remove('editor-focus');
-        },
-
-        onEditorReplyLoad () {
-            ((
-                document.querySelector('.comment-list .comment-btn-wrap') as HTMLElement
-            )).style.display = 'flex';
-        },
-
-        onEditorReplyFocus () {
-            ((
-                document.querySelector('.comment-list .te-md-container .CodeMirror') as HTMLElement
-            )).classList.add('editor-focus');
-        },
-
-        onEditorReplyBlur () {
-            ((
-                document.querySelector('.comment-list .te-md-container .CodeMirror') as HTMLElement
-            )).classList.remove('editor-focus');
-        },
-
-        referenceReply ({ username, content }) {
-            let refText = content.replace(/^.*(\n+|$)/gm, text => ('> ' + text));
-            refText = `@${username}\n` + refText + '\n\n';
-            this.editorText = refText;
-            const editorComp = this.$refs.editor as any;
-            editorComp.invoke('focus');
-
-            if (this.isGuestbook) {
-                setTimeout(() => {
-                    window.scrollTo(0, 0);
-                }, 0);
-            } else {
-                editorComp.$el.scrollIntoViewIfNeeded();
-            }
-        },
-
-        loadNext () {
-            this.page++;
-            this.getComments();
-        },
-        getAvatar (username: string | undefined) {
-            if (!username) {
-                username = this.form.getFieldValue('username');
-            }
-            if (!username) {
-                return '';
-            }
-            return new Avatars(sprites).create(username);
+          );
+          if (code === 1) {
+            this.comments.unshift(data.comment);
+            this.count++;
+            this.editorText = '';
+          } else {
+            this.$message.error(message || `${this.commentName}失败`);
+          }
+          localStorage.setItem('commentUserInfo', JSON.stringify(values));
         }
+      });
+    },
+
+    onEditorLoad () {
+      ((
+                document.querySelector('.gituser-wrap .comment-btn-wrap') as HTMLElement
+      )).style.display = 'flex';
+    },
+
+    onEditorFocus () {
+      ((
+                document.querySelector('.gituser-wrap .te-md-container .CodeMirror') as HTMLElement
+      )).classList.add('editor-focus');
+    },
+
+    onEditorBlur () {
+      ((
+                document.querySelector('.gituser-wrap .te-md-container .CodeMirror') as HTMLElement
+      )).classList.remove('editor-focus');
+    },
+
+    onEditorReplyLoad () {
+      ((
+                document.querySelector('.comment-list .comment-btn-wrap') as HTMLElement
+      )).style.display = 'flex';
+    },
+
+    onEditorReplyFocus () {
+      ((
+                document.querySelector('.comment-list .te-md-container .CodeMirror') as HTMLElement
+      )).classList.add('editor-focus');
+    },
+
+    onEditorReplyBlur () {
+      ((
+                document.querySelector('.comment-list .te-md-container .CodeMirror') as HTMLElement
+      )).classList.remove('editor-focus');
+    },
+
+    referenceReply ({ username, content }) {
+      let refText = content.replace(/^.*(\n+|$)/gm, text => ('> ' + text));
+      refText = `@${username}\n` + refText + '\n\n';
+      this.editorText = refText;
+      const editorComp = this.$refs.editor as any;
+      editorComp.invoke('focus');
+
+      if (this.isGuestbook) {
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 0);
+      } else {
+        editorComp.$el.scrollIntoViewIfNeeded();
+      }
+    },
+
+    loadNext () {
+      this.page++;
+      this.getComments();
+    },
+    getAvatar (username: string | undefined) {
+      if (!username) {
+        username = this.form.getFieldValue('username');
+      }
+      if (!username) {
+        return '';
+      }
+      return new Avatars(sprites).create(username);
     }
+  }
 });
 </script>
 <style scoped>

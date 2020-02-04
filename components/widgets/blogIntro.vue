@@ -18,11 +18,11 @@
 <script lang="ts">
 import Vue from 'vue';
 export default Vue.extend({
-    data () {
-        return {
-            intro: this.$store.state.settings.blogIntro
-        };
-    }
+  data () {
+    return {
+      intro: this.$store.state.settings.blogIntro
+    };
+  }
 });
 </script>
 

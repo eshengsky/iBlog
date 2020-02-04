@@ -214,393 +214,390 @@ import { IPost } from '@/types/schema';
 import { otherCategoryItem } from '@/server/models/category';
 import 'highlight.js/styles/tomorrow.css';
 export default Vue.extend({
-    name: 'PageAdminArticle',
-    layout: 'admin',
-    components: {
-        VNodes: {
-            functional: true,
-            render: (_h, ctx) => ctx.props.vnodes
-        },
-        MdCheatSheet
+  name: 'PageAdminArticle',
+  layout: 'admin',
+  components: {
+    VNodes: {
+      functional: true,
+      render: (_h, ctx) => ctx.props.vnodes
     },
-    async asyncData ({ $axios, query, error }: any) {
-        const uid = query.uid;
-        if (uid) {
-            const { code, data } = await $axios.$get('/api/admin/article', {
-                params: {
-                    uid
-                }
-            });
-            if (code === 1) {
-                if (data && data.isActive) {
-                    return {
-                        initialData: data
-                    };
-                }
-                error({
-                    statusCode: 404,
-                    message: '未找到该页面'
-                });
-            } else {
-                error({
-                    statusCode: 500,
-                    message: '内部服务器错误'
-                });
-            }
-        } else {
-            return {
-                initialData: {
-                    isLocal: true,
-                    commentsFlag: 0
-                }
-            };
+    MdCheatSheet
+  },
+  async asyncData ({ $axios, query, error }: any) {
+    const uid = query.uid;
+    if (uid) {
+      const { code, data } = await $axios.$get('/api/admin/article', {
+        params: {
+          uid
         }
-    },
-    data () {
-        return {
-            settings: this.$store.state.settings,
-            initialData: {
-                isLocal: true,
-                commentsFlag: 0
-            } as IPost,
-            content: '',
-            mcsShow: false,
-            categories: [],
-            titleOpts: {
-                rules: [
-                    {
-                        required: true,
-                        message: '标题不能为空！'
-                    }
-                ]
-            },
-            categoryOpts: {
-                initialValue: otherCategoryItem._id.toHexString()
-            },
-            isLocalOpts: {
-                initialValue: true
-            },
-            labelsOpts: {
-                initialValue: []
-            },
-            commentsFlagOpts: {
-                initialValue: 0
-            },
-            editorOptions: {
-                hideModeSwitch: true,
-                language: 'zh_CN',
-                usageStatistics: false,
-                placeholder: '请输入文章正文',
-                toolbarItems: [
-                    'heading',
-                    'bold',
-                    'italic',
-                    'strike',
-                    'divider',
-                    'hr',
-                    'quote',
-                    'divider',
-                    'ul',
-                    'ol',
-                    'task',
-                    'divider',
-                    'image',
-                    'table',
-                    'link',
-                    'divider',
-                    'code',
-                    'codeblock'
-                ],
-                exts: ['codeblock', 'scrollSync'],
-                hooks: {
-                    addImageBlobHook: (this as any).onAddImageBlob
-                }
-            },
-            categoryLoading: false
-        };
-    },
-    computed: {
-        pageHeader (): string {
-            return this.initialData._id ? '编辑文章' : '新增文章';
-        },
-        form (): any {
-            return this.$form.createForm(this);
-        },
-        aliasOpts (): object {
-            return {
-                rules: [
-                    {
-                        required: this.initialData.isLocal,
-                        message: 'Alias不能为空！'
-                    },
-                    {
-                        validator: this.checkAlias
-                    }
-                ]
-            };
-        },
-        urlOpts (): object {
-            return {
-                rules: [
-                    {
-                        required: !this.initialData.isLocal,
-                        message: '链接地址不能为空！'
-                    },
-                    {
-                        type: 'url',
-                        message: '链接地址格式不正确！'
-                    }
-                ]
-            };
+      });
+      if (code === 1) {
+        if (data && data.isActive) {
+          return {
+            initialData: data
+          };
         }
-    },
-    created () {
-        this.getCategories();
-    },
-    mounted () {
-        if (this.initialData._id) {
-            // 编辑模式
-            this.form.setFieldsValue({
-                title: this.initialData.title,
-                alias: this.initialData.alias,
-                category: this.initialData.category,
-                isLocal: this.initialData.isLocal,
-                url: this.initialData.url || '',
-                labels: this.initialData.labels,
-                commentsFlag: this.initialData.commentsFlag
-            });
-            this.content = this.initialData.content;
-        }
-        this.$refs.titleInput.focus();
-        this.$nextTick(() => {
-            console.log(this.$refs.editor);
+        error({
+          statusCode: 404,
+          message: '未找到该页面'
         });
+      } else {
+        error({
+          statusCode: 500,
+          message: '内部服务器错误'
+        });
+      }
+    } else {
+      return {
+        initialData: {
+          isLocal: true,
+          commentsFlag: 0
+        }
+      };
+    }
+  },
+  data () {
+    return {
+      settings: this.$store.state.settings,
+      initialData: {
+        isLocal: true,
+        commentsFlag: 0
+      } as IPost,
+      content: '',
+      mcsShow: false,
+      categories: [],
+      titleOpts: {
+        rules: [
+          {
+            required: true,
+            message: '标题不能为空！'
+          }
+        ]
+      },
+      categoryOpts: {
+        initialValue: otherCategoryItem._id.toHexString()
+      },
+      isLocalOpts: {
+        initialValue: true
+      },
+      labelsOpts: {
+        initialValue: []
+      },
+      commentsFlagOpts: {
+        initialValue: 0
+      },
+      editorOptions: {
+        hideModeSwitch: true,
+        language: 'zh_CN',
+        usageStatistics: false,
+        placeholder: '请输入文章正文',
+        toolbarItems: [
+          'heading',
+          'bold',
+          'italic',
+          'strike',
+          'divider',
+          'hr',
+          'quote',
+          'divider',
+          'ul',
+          'ol',
+          'task',
+          'divider',
+          'image',
+          'table',
+          'link',
+          'divider',
+          'code',
+          'codeblock'
+        ],
+        exts: ['codeblock', 'scrollSync'],
+        hooks: {
+          addImageBlobHook: (this as any).onAddImageBlob
+        }
+      },
+      categoryLoading: false
+    };
+  },
+  computed: {
+    pageHeader (): string {
+      return this.initialData._id ? '编辑文章' : '新增文章';
     },
-    methods: {
-        async getCategories () {
-            const { code, data }: IResp = await this.$axios.$get(
-                '/api/admin/categories'
-            );
-            if (code === 1) {
-                this.categories = data;
+    form (): any {
+      return this.$form.createForm(this);
+    },
+    aliasOpts (): object {
+      return {
+        rules: [
+          {
+            required: this.initialData.isLocal,
+            message: 'Alias不能为空！'
+          },
+          {
+            validator: this.checkAlias
+          }
+        ]
+      };
+    },
+    urlOpts (): object {
+      return {
+        rules: [
+          {
+            required: !this.initialData.isLocal,
+            message: '链接地址不能为空！'
+          },
+          {
+            type: 'url',
+            message: '链接地址格式不正确！'
+          }
+        ]
+      };
+    }
+  },
+  created () {
+    this.getCategories();
+  },
+  mounted () {
+    if (this.initialData._id) {
+      // 编辑模式
+      this.form.setFieldsValue({
+        title: this.initialData.title,
+        alias: this.initialData.alias,
+        category: this.initialData.category,
+        isLocal: this.initialData.isLocal,
+        url: this.initialData.url || '',
+        labels: this.initialData.labels,
+        commentsFlag: this.initialData.commentsFlag
+      });
+      this.content = this.initialData.content;
+    }
+    this.$refs.titleInput.focus();
+  },
+  methods: {
+    async getCategories () {
+      const { code, data }: IResp = await this.$axios.$get(
+        '/api/admin/categories'
+      );
+      if (code === 1) {
+        this.categories = data;
+      }
+    },
+    async refreshCategories () {
+      this.categoryLoading = true;
+      await this.getCategories();
+      this.categoryLoading = false;
+    },
+    onAddImageBlob (blob, callback) {
+      if (process.client && blob) {
+        const formData = new FormData();
+        formData.append('file', blob);
+        this.$axios.$post('/api/admin/uploadImage', formData).then(resp => {
+          if (resp.code === 1) {
+            callback(resp.data.url, '');
+          } else {
+            console.error(resp.message);
+            this.$message.error('上传失败！');
+          }
+        });
+      }
+    },
+    checkAlias (_rule, value, callback) {
+      if (value) {
+        this.$axios
+          .$get('/api/admin/checkArticleAlias', {
+            params: {
+              alias: value,
+              excludeUid: this.initialData._id
             }
-        },
-        async refreshCategories () {
-            this.categoryLoading = true;
-            await this.getCategories();
-            this.categoryLoading = false;
-        },
-        onAddImageBlob (blob, callback) {
-            if (process.client && blob) {
-                const formData = new FormData();
-                formData.append('file', blob);
-                this.$axios.$post('/api/admin/uploadImage', formData).then(resp => {
-                    if (resp.code === 1) {
-                        callback(resp.data.url, '');
-                    } else {
-                        console.error(resp.message);
-                        this.$message.error('上传失败！');
-                    }
-                });
-            }
-        },
-        checkAlias (_rule, value, callback) {
-            if (value) {
-                this.$axios
-                    .$get('/api/admin/checkArticleAlias', {
-                        params: {
-                            alias: value,
-                            excludeUid: this.initialData._id
-                        }
-                    })
-                    .then(({ code, data }: IResp) => {
-                        if (code === 1 && !data.exists) {
-                            callback();
-                        } else {
-                            // eslint-disable-next-line standard/no-callback-literal
-                            callback('alias已存在！');
-                        }
-                    });
+          })
+          .then(({ code, data }: IResp) => {
+            if (code === 1 && !data.exists) {
+              callback();
             } else {
-                callback();
+              // eslint-disable-next-line standard/no-callback-literal
+              callback('alias已存在！');
             }
-        },
-        isLocalChange (e) {
-            this.initialData.isLocal = e.target.value;
+          });
+      } else {
+        callback();
+      }
+    },
+    isLocalChange (e) {
+      this.initialData.isLocal = e.target.value;
 
-            // 切换本地外链后，光标聚焦
-            this.$nextTick(() => {
-                if (!this.initialData.isLocal) {
-                    this.$refs.urlInputComp.focus();
-                } else {
-                    this.$refs.aliasInputComp.focus();
-                }
-            });
-        },
-        publish () {
-            this.form.validateFieldsAndScroll((error, values) => {
-                if (!error) {
-                    const self = this;
-                    const data = {
-                        content: this.content,
-                        ...values
-                    };
-                    this.$confirm({
-                        title: '确定要发布吗？',
-                        okText: '确定',
-                        cancelText: '取消',
-                        onOk () {
-                            return new Promise((resolve, reject) => {
-                                self.$axios.$post('/api/admin/article', data).then(resp => {
-                                    if (resp.code === 1) {
-                                        self.initialData = resp.data.article;
-                                        history.replaceState(
-                                            null,
-                                            '',
+      // 切换本地外链后，光标聚焦
+      this.$nextTick(() => {
+        if (!this.initialData.isLocal) {
+          this.$refs.urlInputComp.focus();
+        } else {
+          this.$refs.aliasInputComp.focus();
+        }
+      });
+    },
+    publish () {
+      this.form.validateFieldsAndScroll((error, values) => {
+        if (!error) {
+          const self = this;
+          const data = {
+            content: this.content,
+            ...values
+          };
+          this.$confirm({
+            title: '确定要发布吗？',
+            okText: '确定',
+            cancelText: '取消',
+            onOk () {
+              return new Promise((resolve, reject) => {
+                self.$axios.$post('/api/admin/article', data).then(resp => {
+                  if (resp.code === 1) {
+                    self.initialData = resp.data.article;
+                    history.replaceState(
+                      null,
+                      '',
                                             `${location.protocol}//${location.host}${location.pathname}?uid=${self.initialData._id}`
-                                        );
-                                        resolve();
-                                        self.$message.success('文章发布成功！');
-                                    } else {
-                                        console.error(resp.message);
-                                        reject(resp.message);
-                                        self.$message.error('操作失败！');
-                                    }
-                                });
-                            });
-                        }
-                    });
-                }
-            });
-        },
-        publish2 () {
-            this.form.validateFieldsAndScroll((error, values) => {
-                if (!error) {
-                    const self = this;
-                    const data = {
-                        content: this.content,
-                        isDraft: false,
-                        ...values
-                    };
-                    this.$confirm({
-                        title: '确定要发布吗？',
-                        okText: '确定',
-                        cancelText: '取消',
-                        onOk () {
-                            return new Promise((resolve, reject) => {
-                                self.$axios
-                                    .$put('/api/admin/article', data, {
-                                        params: {
-                                            uid: self.initialData._id,
-                                            pubtype: 'publish'
-                                        }
-                                    })
-                                    .then(resp => {
-                                        if (resp.code === 1) {
-                                            self.initialData = resp.data.article;
-                                            resolve();
-                                            self.$message.success('文章发布成功！');
-                                        } else {
-                                            console.error(resp.message);
-                                            reject(resp.message);
-                                            self.$message.error('操作失败！');
-                                        }
-                                    });
-                            });
-                        }
-                    });
-                }
-            });
-        },
-        saveDraft () {
-            this.form.validateFieldsAndScroll((error, values) => {
-                if (!error) {
-                    const self = this;
-                    const data = {
-                        content: this.content,
-                        isDraft: true,
-                        ...values
-                    };
-                    this.$axios.$post('/api/admin/article', data).then(resp => {
-                        if (resp.code === 1) {
-                            self.initialData = resp.data.article;
-                            history.replaceState(
-                                null,
-                                '',
+                    );
+                    resolve();
+                    self.$message.success('文章发布成功！');
+                  } else {
+                    console.error(resp.message);
+                    reject(resp.message);
+                    self.$message.error('操作失败！');
+                  }
+                });
+              });
+            }
+          });
+        }
+      });
+    },
+    publish2 () {
+      this.form.validateFieldsAndScroll((error, values) => {
+        if (!error) {
+          const self = this;
+          const data = {
+            content: this.content,
+            isDraft: false,
+            ...values
+          };
+          this.$confirm({
+            title: '确定要发布吗？',
+            okText: '确定',
+            cancelText: '取消',
+            onOk () {
+              return new Promise((resolve, reject) => {
+                self.$axios
+                  .$put('/api/admin/article', data, {
+                    params: {
+                      uid: self.initialData._id,
+                      pubtype: 'publish'
+                    }
+                  })
+                  .then(resp => {
+                    if (resp.code === 1) {
+                      self.initialData = resp.data.article;
+                      resolve();
+                      self.$message.success('文章发布成功！');
+                    } else {
+                      console.error(resp.message);
+                      reject(resp.message);
+                      self.$message.error('操作失败！');
+                    }
+                  });
+              });
+            }
+          });
+        }
+      });
+    },
+    saveDraft () {
+      this.form.validateFieldsAndScroll((error, values) => {
+        if (!error) {
+          const self = this;
+          const data = {
+            content: this.content,
+            isDraft: true,
+            ...values
+          };
+          this.$axios.$post('/api/admin/article', data).then(resp => {
+            if (resp.code === 1) {
+              self.initialData = resp.data.article;
+              history.replaceState(
+                null,
+                '',
                                 `${location.protocol}//${location.host}${location.pathname}?uid=${self.initialData._id}`
-                            );
-                            self.$message.success('新建草稿成功！');
-                        } else {
-                            console.error(resp.message);
-                            self.$message.error('操作失败！');
-                        }
-                    });
+              );
+              self.$message.success('新建草稿成功！');
+            } else {
+              console.error(resp.message);
+              self.$message.error('操作失败！');
+            }
+          });
+        }
+      });
+    },
+    unpublish () {
+      const self = this;
+      this.$confirm({
+        title: '确定要取消发布吗？',
+        content: '文章将变成草稿状态，只有你自己可见。',
+        okText: '确定',
+        cancelText: '取消',
+        onOk () {
+          return new Promise((resolve, reject) => {
+            self.$axios
+              .$put(
+                '/api/admin/article',
+                {
+                  isDraft: true
+                },
+                {
+                  params: {
+                    uid: self.initialData._id,
+                    pubtype: 'unpublish'
+                  }
                 }
-            });
-        },
-        unpublish () {
-            const self = this;
-            this.$confirm({
-                title: '确定要取消发布吗？',
-                content: '文章将变成草稿状态，只有你自己可见。',
-                okText: '确定',
-                cancelText: '取消',
-                onOk () {
-                    return new Promise((resolve, reject) => {
-                        self.$axios
-                            .$put(
-                                '/api/admin/article',
-                                {
-                                    isDraft: true
-                                },
-                                {
-                                    params: {
-                                        uid: self.initialData._id,
-                                        pubtype: 'unpublish'
-                                    }
-                                }
-                            )
-                            .then(resp => {
-                                if (resp.code === 1) {
-                                    self.initialData = resp.data.article;
-                                    resolve();
-                                    self.$message.success('取消发布成功！');
-                                } else {
-                                    console.error(resp.message);
-                                    reject(resp.message);
-                                    self.$message.error('操作失败！');
-                                }
-                            });
-                    });
+              )
+              .then(resp => {
+                if (resp.code === 1) {
+                  self.initialData = resp.data.article;
+                  resolve();
+                  self.$message.success('取消发布成功！');
+                } else {
+                  console.error(resp.message);
+                  reject(resp.message);
+                  self.$message.error('操作失败！');
                 }
-            });
-        },
-        save () {
-            this.form.validateFieldsAndScroll((error, values) => {
-                if (!error) {
-                    const self = this;
-                    const data = {
-                        content: this.content,
-                        ...values
-                    };
-                    this.$axios
-                        .$put('/api/admin/article', data, {
-                            params: {
-                                uid: this.initialData._id
-                            }
-                        })
-                        .then(resp => {
-                            if (resp.code === 1) {
-                                self.$message.success('保存成功！');
-                            } else {
-                                console.error(resp.message);
-                                self.$message.error('操作失败！');
-                            }
-                        });
-                }
+              });
+          });
+        }
+      });
+    },
+    save () {
+      this.form.validateFieldsAndScroll((error, values) => {
+        if (!error) {
+          const self = this;
+          const data = {
+            content: this.content,
+            ...values
+          };
+          this.$axios
+            .$put('/api/admin/article', data, {
+              params: {
+                uid: this.initialData._id
+              }
+            })
+            .then(resp => {
+              if (resp.code === 1) {
+                self.$message.success('保存成功！');
+              } else {
+                console.error(resp.message);
+                self.$message.error('操作失败！');
+              }
             });
         }
+      });
     }
+  }
 });
 </script>
 

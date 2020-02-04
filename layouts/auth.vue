@@ -24,15 +24,15 @@ import Vue from 'vue';
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN';
 import LayoutFooter from '@/components/LayoutFooter.vue';
 export default Vue.extend({
-    components: {
-        LayoutFooter
-    },
-    data () {
-        return {
-            settings: this.$store.state.settings,
-            zhCN
-        };
-    }
+  components: {
+    LayoutFooter
+  },
+  data () {
+    return {
+      settings: this.$store.state.settings,
+      zhCN
+    };
+  }
 });
 </script>
 <style scoped>

@@ -61,49 +61,49 @@ import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN';
 import LayoutFooter from '@/components/LayoutFooter.vue';
 import { ISetting } from '@/types/schema';
 export default Vue.extend({
-    components: {
-        LayoutFooter
-    },
-    data () {
-        return {
-            year: new Date().getFullYear(),
-            settings: this.$store.state.settings as ISetting,
-            zhCN,
-            showToTop: false,
-            showMenu: false
-        };
-    },
-    mounted () {
-        if (this.settings.enableStatistics && this.settings.statisticsKey) {
-            const hm = document.createElement('script');
-            hm.src = `https://hm.baidu.com/hm.js?${this.settings.statisticsKey}`;
-            const script = document.getElementsByTagName('script')[0];
-            if (script && script.parentNode) {
-                script.parentNode.insertBefore(hm, script);
-            }
-        }
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                this.showToTop = true;
-            } else {
-                this.showToTop = false;
-            }
-        }, {
-            passive: true
-        });
-    },
-    methods: {
-        toggleMenu () {
-            this.showMenu = !this.showMenu;
-        },
-        hideMenu () {
-            this.showMenu = false;
-        },
-        toTop () {
-            window.scrollTo(0, 0);
-        }
+  components: {
+    LayoutFooter
+  },
+  data () {
+    return {
+      year: new Date().getFullYear(),
+      settings: this.$store.state.settings as ISetting,
+      zhCN,
+      showToTop: false,
+      showMenu: false
+    };
+  },
+  mounted () {
+    if (this.settings.enableStatistics && this.settings.statisticsKey) {
+      const hm = document.createElement('script');
+      hm.src = `https://hm.baidu.com/hm.js?${this.settings.statisticsKey}`;
+      const script = document.getElementsByTagName('script')[0];
+      if (script && script.parentNode) {
+        script.parentNode.insertBefore(hm, script);
+      }
     }
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        this.showToTop = true;
+      } else {
+        this.showToTop = false;
+      }
+    }, {
+      passive: true
+    });
+  },
+  methods: {
+    toggleMenu () {
+      this.showMenu = !this.showMenu;
+    },
+    hideMenu () {
+      this.showMenu = false;
+    },
+    toTop () {
+      window.scrollTo(0, 0);
+    }
+  }
 });
 </script>
 <style scoped>

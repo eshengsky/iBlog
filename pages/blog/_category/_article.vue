@@ -89,172 +89,172 @@ interface IHeading2 extends IHeading3 {
     subs: Array<IHeading3>;
 }
 export default Vue.extend({
-    name: 'PageArticle',
-    components: {
-        CommentList,
-        PopArticles,
-        ArticleContent
-    },
-    async asyncData ({ $axios, params, error }) {
-        const alias = params.article;
-        const { code, data: article } = await $axios.$get('/api/article', {
-            params: {
-                alias
-            }
-        });
-        if (code === 1 && article) {
-            return {
-                article
-            };
-        } else {
-            error({
-                statusCode: 404,
-                message: '未找到该页面'
-            });
-        }
-    },
-    data () {
-        return {
-            settings: this.$store.state.settings as ISetting,
-            article: {} as IPost,
-            menus: [] as Array<IHeading2>,
-            menuShow: false,
-            postsCount: 0
-        };
-    },
-    computed: {
-        postLink () {
-            if (process.client) {
-                return location.protocol + '//' + location.host + location.pathname;
-            }
-            return '';
-        },
-        website () {
-            if (process.client) {
-                return location.protocol + '//' + location.host;
-            }
-            return '';
-        },
-        stickyCls () {
-            if (this.menuShow) {
-                return {
-                    position: 'sticky',
-                    top: '90px'
-                };
-            }
-            return {
-                position: 'relative'
-            };
-        },
-        publishDate (): string {
-            return moment(this.article.publishTime).format('YYYY-MM-DD');
-        },
-        showComments (): boolean {
-            if (this.article.commentsFlag === 1) {
-                return true;
-            }
-            if (this.article.commentsFlag === -1) {
-                return false;
-            }
-            return this.settings.enableComments;
-        }
-    },
-    async created () {
-        const { code, data } = await this.$axios.$get('/api/postsCountByCate', {
-            params: {
-                category: this.article.category._id
-            }
-        });
-        if (code === 1) {
-            this.postsCount = data;
-        }
-    },
-    mounted () {
-        this.scrollByHash();
-        window.addEventListener('hashchange', () => {
-            this.scrollByHash();
-        });
-        this.generateMenu();
-
-        // 文章浏览数+1
-        this.$axios.$put('/api/increaseViews', {
-            postID: this.article._id
-        });
-    },
-    methods: {
-        generateMenu () {
-            const result: Array<IHeading2> = [];
-            const content = document.querySelector('.article-content') as HTMLElement;
-            const h2All = content.querySelectorAll('h2');
-            h2All.forEach(h2 => {
-                const anchor = h2.querySelector('a');
-                if (anchor) {
-                    const h2Item: IHeading2 = {
-                        href: `#${anchor.id}`,
-                        title: h2.textContent as string,
-                        subs: []
-                    };
-                    let nextEl = h2.nextElementSibling;
-                    while (nextEl && nextEl.nodeName !== 'H2') {
-                        if (nextEl.nodeName === 'H3') {
-                            const anchor = nextEl.querySelector('a');
-                            if (anchor) {
-                                h2Item.subs.push({
-                                    href: `#${anchor.id}`,
-                                    title: nextEl.textContent as string
-                                });
-                            }
-                        }
-                        nextEl = nextEl.nextElementSibling;
-                    }
-                    result.push(h2Item);
-                }
-            });
-            if (result.length) {
-                this.menus = result;
-                this.menuShow = true;
-            }
-        },
-        scrollByHash () {
-            const prefix = 'user-content-';
-            let hash = decodeURIComponent(location.hash);
-            if (hash && hash.length > 0) {
-                hash = hash.substring(1);
-            }
-            if (hash.indexOf(prefix) === 0) {
-                history.replaceState(
-                    null,
-                    '',
-                    location.href.replace(/#.*/, '') + '#' + hash.replace(prefix, '')
-                );
-            } else {
-                const anchor = document.querySelector(`#${prefix}${hash}`);
-                if (anchor) {
-                    window.scrollTo(
-                        window.scrollX,
-                        anchor.getBoundingClientRect().top + window.scrollY - 75
-                    );
-                }
-            }
-        }
-    },
-    head (this: any) {
-        const article = this.article as IPost;
-        const content = article.html.replace(/<[^>]*>/g, '').replace(/\r?\n/g, ' ');
-        const desc = content.length > 170 ? (content.substring(0, 170) + '...') : content;
-        let keywords = article.title;
-        if (article.labels && article.labels.length) {
-            keywords += ',' + article.labels.join(',');
-        }
-        const suffix = ` - ${this.settings.blogName}`;
-        return {
-            title: article.title + suffix,
-            meta: [
-                { hid: 'description', name: 'description', content: desc },
-                { name: 'keywords', content: keywords }
-            ]
-        };
+  name: 'PageArticle',
+  components: {
+    CommentList,
+    PopArticles,
+    ArticleContent
+  },
+  async asyncData ({ $axios, params, error }) {
+    const alias = params.article;
+    const { code, data: article } = await $axios.$get('/api/article', {
+      params: {
+        alias
+      }
+    });
+    if (code === 1 && article) {
+      return {
+        article
+      };
+    } else {
+      error({
+        statusCode: 404,
+        message: '未找到该页面'
+      });
     }
+  },
+  data () {
+    return {
+      settings: this.$store.state.settings as ISetting,
+      article: {} as IPost,
+      menus: [] as Array<IHeading2>,
+      menuShow: false,
+      postsCount: 0
+    };
+  },
+  computed: {
+    postLink () {
+      if (process.client) {
+        return location.protocol + '//' + location.host + location.pathname;
+      }
+      return '';
+    },
+    website () {
+      if (process.client) {
+        return location.protocol + '//' + location.host;
+      }
+      return '';
+    },
+    stickyCls () {
+      if (this.menuShow) {
+        return {
+          position: 'sticky',
+          top: '90px'
+        };
+      }
+      return {
+        position: 'relative'
+      };
+    },
+    publishDate (): string {
+      return moment(this.article.publishTime).format('YYYY-MM-DD');
+    },
+    showComments (): boolean {
+      if (this.article.commentsFlag === 1) {
+        return true;
+      }
+      if (this.article.commentsFlag === -1) {
+        return false;
+      }
+      return this.settings.enableComments;
+    }
+  },
+  async created () {
+    const { code, data } = await this.$axios.$get('/api/postsCountByCate', {
+      params: {
+        category: this.article.category._id
+      }
+    });
+    if (code === 1) {
+      this.postsCount = data;
+    }
+  },
+  mounted () {
+    this.scrollByHash();
+    window.addEventListener('hashchange', () => {
+      this.scrollByHash();
+    });
+    this.generateMenu();
+
+    // 文章浏览数+1
+    this.$axios.$put('/api/increaseViews', {
+      postID: this.article._id
+    });
+  },
+  methods: {
+    generateMenu () {
+      const result: Array<IHeading2> = [];
+      const content = document.querySelector('.article-content') as HTMLElement;
+      const h2All = content.querySelectorAll('h2');
+      h2All.forEach(h2 => {
+        const anchor = h2.querySelector('a');
+        if (anchor) {
+          const h2Item: IHeading2 = {
+            href: `#${anchor.id}`,
+            title: h2.textContent as string,
+            subs: []
+          };
+          let nextEl = h2.nextElementSibling;
+          while (nextEl && nextEl.nodeName !== 'H2') {
+            if (nextEl.nodeName === 'H3') {
+              const anchor = nextEl.querySelector('a');
+              if (anchor) {
+                h2Item.subs.push({
+                  href: `#${anchor.id}`,
+                  title: nextEl.textContent as string
+                });
+              }
+            }
+            nextEl = nextEl.nextElementSibling;
+          }
+          result.push(h2Item);
+        }
+      });
+      if (result.length) {
+        this.menus = result;
+        this.menuShow = true;
+      }
+    },
+    scrollByHash () {
+      const prefix = 'user-content-';
+      let hash = decodeURIComponent(location.hash);
+      if (hash && hash.length > 0) {
+        hash = hash.substring(1);
+      }
+      if (hash.indexOf(prefix) === 0) {
+        history.replaceState(
+          null,
+          '',
+          location.href.replace(/#.*/, '') + '#' + hash.replace(prefix, '')
+        );
+      } else {
+        const anchor = document.querySelector(`#${prefix}${hash}`);
+        if (anchor) {
+          window.scrollTo(
+            window.scrollX,
+            anchor.getBoundingClientRect().top + window.scrollY - 75
+          );
+        }
+      }
+    }
+  },
+  head (this: any) {
+    const article = this.article as IPost;
+    const content = article.html.replace(/<[^>]*>/g, '').replace(/\r?\n/g, ' ');
+    const desc = content.length > 170 ? (content.substring(0, 170) + '...') : content;
+    let keywords = article.title;
+    if (article.labels && article.labels.length) {
+      keywords += ',' + article.labels.join(',');
+    }
+    const suffix = ` - ${this.settings.blogName}`;
+    return {
+      title: article.title + suffix,
+      meta: [
+        { hid: 'description', name: 'description', content: desc },
+        { name: 'keywords', content: keywords }
+      ]
+    };
+  }
 });
 </script>
 <style scoped>

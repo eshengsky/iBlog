@@ -16,14 +16,14 @@ app.use(indexRoute);
 
 // Error
 app.use((err, _req, res, _next) => {
-    if (err.name === 'UnauthorizedError') {
-        return res.sendStatus(401);
-    }
-    console.error('api route error', err);
-    res.sendStatus(err.statusCode || 500);
+  if (err.name === 'UnauthorizedError') {
+    return res.sendStatus(401);
+  }
+  console.error('api route error', err);
+  res.sendStatus(err.statusCode || 500);
 });
 
 module.exports = {
-    path: '/api',
-    handler: app
+  path: '/api',
+  handler: app
 };

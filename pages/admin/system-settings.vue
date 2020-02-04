@@ -152,116 +152,116 @@ import Vue from 'vue';
 import { IResp } from '@/types';
 import { defaultSetting } from '@/server/models/setting';
 export default Vue.extend({
-    name: 'PageSystemSettings',
-    layout: 'admin',
-    data () {
-        return {
-            form: this.$form.createForm(this),
-            defaultSetting,
-            blogLogo: '',
-            imgLoading: false,
-            blogNameOpts: {
-                rules: [
-                    {
-                        required: true,
-                        message: '博客名称不能为空！'
-                    }
-                ]
-            },
-            postPageSizeOpts: {
-                rules: [
-                    {
-                        required: true,
-                        message: '每页条数不能为空！'
-                    }
-                ]
-            },
-            commentPageSizeOpts: {
-                rules: [
-                    {
-                        required: true,
-                        message: '每页条数不能为空！'
-                    }
-                ]
-            }
-        };
-    },
-    async mounted () {
-        const { code, data }: IResp = await this.$axios.$get('/api/settings');
-        if (code === 1) {
-            const settings = data.settings;
-            this.blogLogo = settings.blogLogo;
-            this.setForm(settings);
-        }
-    },
-    methods: {
-        setForm (settings) {
-            this.form.setFieldsValue({
-                blogName: settings.blogName,
-                blogSlogan: settings.blogSlogan,
-                showBlogIntro: settings.showBlogIntro,
-                recordInfo: settings.recordInfo,
-                blogIntro: settings.blogIntro,
-                postPageSize: settings.postPageSize,
-                enablePreview: settings.enablePreview,
-                showLicense: settings.showLicense,
-                enableComments: settings.enableComments,
-                commentPageSize: settings.commentPageSize,
-                enableStatistics: settings.enableStatistics,
-                statisticsKey: settings.statisticsKey
-            });
-        },
-        beforeUpload (file) {
-            const isImg = file.type.indexOf('image/') === 0;
-            const isLt2M = file.size / 1024 / 1024 < 2;
-            if (!isImg) {
-                this.$message.error('只允许上传图片！');
-            } else if (!isLt2M) {
-                this.$message.error('图片体积不能大于2M！');
-            }
-            return isImg && isLt2M;
-        },
-
-        getBase64 (img, callback) {
-            const reader = new FileReader();
-            reader.addEventListener('load', () => callback(reader.result));
-            reader.readAsDataURL(img);
-        },
-
-        uploadChange (info) {
-            if (info.file.status === 'uploading') {
-                this.imgLoading = true;
-                return;
-            }
-            if (info.file.status === 'done') {
-                this.getBase64(info.file.originFileObj, imageUrl => {
-                    this.blogLogo = imageUrl;
-                    this.imgLoading = false;
-                });
-            }
-        },
-        save () {
-            this.form.validateFieldsAndScroll((error, values) => {
-                if (!error) {
-                    const data = values;
-                    data.blogLogo = this.blogLogo;
-                    this.$axios.$put('/api/admin/settings', data).then(resp => {
-                        if (resp.code === 1) {
-                            this.$message.success('保存成功！');
-                        } else {
-                            console.error(resp.message);
-                            this.$message.error('操作失败！');
-                        }
-                    });
-                }
-            });
-        },
-        reset () {
-            this.blogLogo = defaultSetting.blogLogo;
-            this.setForm(defaultSetting);
-            (document.scrollingElement as HTMLElement).scrollTop = 0;
-        }
+  name: 'PageSystemSettings',
+  layout: 'admin',
+  data () {
+    return {
+      form: this.$form.createForm(this),
+      defaultSetting,
+      blogLogo: '',
+      imgLoading: false,
+      blogNameOpts: {
+        rules: [
+          {
+            required: true,
+            message: '博客名称不能为空！'
+          }
+        ]
+      },
+      postPageSizeOpts: {
+        rules: [
+          {
+            required: true,
+            message: '每页条数不能为空！'
+          }
+        ]
+      },
+      commentPageSizeOpts: {
+        rules: [
+          {
+            required: true,
+            message: '每页条数不能为空！'
+          }
+        ]
+      }
+    };
+  },
+  async mounted () {
+    const { code, data }: IResp = await this.$axios.$get('/api/settings');
+    if (code === 1) {
+      const settings = data.settings;
+      this.blogLogo = settings.blogLogo;
+      this.setForm(settings);
     }
+  },
+  methods: {
+    setForm (settings) {
+      this.form.setFieldsValue({
+        blogName: settings.blogName,
+        blogSlogan: settings.blogSlogan,
+        showBlogIntro: settings.showBlogIntro,
+        recordInfo: settings.recordInfo,
+        blogIntro: settings.blogIntro,
+        postPageSize: settings.postPageSize,
+        enablePreview: settings.enablePreview,
+        showLicense: settings.showLicense,
+        enableComments: settings.enableComments,
+        commentPageSize: settings.commentPageSize,
+        enableStatistics: settings.enableStatistics,
+        statisticsKey: settings.statisticsKey
+      });
+    },
+    beforeUpload (file) {
+      const isImg = file.type.indexOf('image/') === 0;
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isImg) {
+        this.$message.error('只允许上传图片！');
+      } else if (!isLt2M) {
+        this.$message.error('图片体积不能大于2M！');
+      }
+      return isImg && isLt2M;
+    },
+
+    getBase64 (img, callback) {
+      const reader = new FileReader();
+      reader.addEventListener('load', () => callback(reader.result));
+      reader.readAsDataURL(img);
+    },
+
+    uploadChange (info) {
+      if (info.file.status === 'uploading') {
+        this.imgLoading = true;
+        return;
+      }
+      if (info.file.status === 'done') {
+        this.getBase64(info.file.originFileObj, imageUrl => {
+          this.blogLogo = imageUrl;
+          this.imgLoading = false;
+        });
+      }
+    },
+    save () {
+      this.form.validateFieldsAndScroll((error, values) => {
+        if (!error) {
+          const data = values;
+          data.blogLogo = this.blogLogo;
+          this.$axios.$put('/api/admin/settings', data).then(resp => {
+            if (resp.code === 1) {
+              this.$message.success('保存成功！');
+            } else {
+              console.error(resp.message);
+              this.$message.error('操作失败！');
+            }
+          });
+        }
+      });
+    },
+    reset () {
+      this.blogLogo = defaultSetting.blogLogo;
+      this.setForm(defaultSetting);
+      (document.scrollingElement as HTMLElement).scrollTop = 0;
+    }
+  }
 });
 </script>
 
