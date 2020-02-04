@@ -311,7 +311,7 @@ export default Vue.extend({
                     'code',
                     'codeblock'
                 ],
-                exts: ['scrollSync'],
+                exts: ['codeblock', 'scrollSync'],
                 hooks: {
                     addImageBlobHook: (this as any).onAddImageBlob
                 }
@@ -372,6 +372,9 @@ export default Vue.extend({
             this.content = this.initialData.content;
         }
         this.$refs.titleInput.focus();
+        this.$nextTick(() => {
+            console.log(this.$refs.editor);
+        });
     },
     methods: {
         async getCategories () {
