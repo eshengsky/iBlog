@@ -172,8 +172,9 @@ export default Vue.extend({
 .comment-body {
   width: 100%;
   padding: 12px 15px;
-  overflow: visible;
   font-size: 14px;
+  overflow: auto;
+  max-height: 300px;
 }
 
 .comment-header-actions a {
