@@ -1,4 +1,5 @@
 import { connect, connection, Connection, Model } from 'mongoose';
+import { IPost, ICategory, IComment, ICache, ISetting, IProfile, IAuth } from '@/types/schema';
 import config from '../blog.config';
 import { Post } from './models/post';
 import { Cache } from './models/cache';
@@ -8,7 +9,6 @@ import { Guestbook } from './models/guestbook';
 import { Setting } from './models/setting';
 import { Profile } from './models/profile';
 import { Auth } from './models/auth';
-import { IPost, ICategory, IComment, ICache, ISetting, IProfile, IAuth } from '@/types/schema';
 
 interface IModels {
     Post: Model<IPost>;
