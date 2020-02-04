@@ -1,6 +1,6 @@
 import { model, models, Model } from 'mongoose';
-import { schema } from './comment';
 import { IComment } from '@/types/schema';
+import { schema } from './comment';
 
 export class Guestbook {
     private _model: Model<IComment>;
