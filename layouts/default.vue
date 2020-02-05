@@ -176,7 +176,6 @@ export default Vue.extend({
 
 .navbar-collapse ul {
   display: flex;
-  background: #fff;
 }
 
 .navbar-collapse li {
@@ -311,6 +310,7 @@ export default Vue.extend({
   .navbar-collapse ul {
     flex-direction: column;
     padding: 10px 5px;
+    background: #fff;
   }
 
   .navbar-collapse a {

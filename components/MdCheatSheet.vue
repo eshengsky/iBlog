@@ -212,4 +212,8 @@ export default Vue.extend({
 .mcs-table img {
   width: 100px;
 }
+
+.mcs-table .pre-header-right {
+  display: none;
+}
 </style>
