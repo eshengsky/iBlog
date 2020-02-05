@@ -648,4 +648,8 @@ export default Vue.extend({
 .article-edit .tui-editor-defaultUI {
   line-height: 18px;
 }
+
+.article-edit .tui-editor-defaultUI-toolbar {
+  padding-left: 10px;
+}
 </style>
