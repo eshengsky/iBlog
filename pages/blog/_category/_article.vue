@@ -7,11 +7,6 @@
         </header>
         <main class="article-main">
           <article-content :html="article.html" />
-          <div class="article-views">
-            <span>阅读 {{ article.viewCount }}</span>
-            <span class="split-line">|</span>
-            <span>发布于 {{ publishDate }}</span>
-          </div>
         </main>
         <div v-if="settings.showLicense" class="license-wrap">
           <span>【END】</span>
@@ -28,6 +23,11 @@
         </div>
         <div v-else class="end-wrap">
           <span>【END】</span>
+        </div>
+        <div class="article-views">
+          <span>阅读 {{ article.viewCount }}</span>
+          <span class="split-line">|</span>
+          <span>发布于 {{ publishDate }}</span>
         </div>
       </div>
       <comment-list v-if="showComments" :from="2" :article-id="article._id" />
@@ -274,6 +274,7 @@ export default Vue.extend({
   border-radius: 5px;
   padding: 30px;
   min-height: 50vh;
+  font-size: 16px;
 }
 
 .article-title {
@@ -286,7 +287,7 @@ export default Vue.extend({
 }
 
 .article-title h1 {
-  font-size: 28px;
+  font-size: 2em;
   font-weight: 500;
 }
 
@@ -349,6 +350,7 @@ export default Vue.extend({
   border-radius: 5px;
   padding: 13px 16px 8px;
   margin: 50px 0 20px;
+  font-size: 14px;
 }
 
 .license-wrap > span,
@@ -380,6 +382,8 @@ export default Vue.extend({
 
 .article-views {
   color: #666;
+  font-size: 14px;
+  margin-top: 20px;
 }
 
 .article-views .split-line {

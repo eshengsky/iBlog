@@ -1,6 +1,7 @@
 import { Schema, model, models, Model } from 'mongoose';
 import MarkdownIt from 'markdown-it';
 import MarkdownItGithubHeadings from 'markdown-it-github-headings';
+import markdownItTaskLists from 'markdown-it-task-lists';
 import hljs from 'highlight.js';
 import { IPost } from '@/types/schema';
 
@@ -108,7 +109,8 @@ export class Post {
               '</code></pre>'
               );
             }
-          }).use(MarkdownItGithubHeadings);
+          }).use(MarkdownItGithubHeadings)
+            .use(markdownItTaskLists);
           return md.render(this.content);
         }
         return '';

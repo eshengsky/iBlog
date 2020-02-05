@@ -213,6 +213,7 @@ import { IResp } from '@/types';
 import { IPost } from '@/types/schema';
 import { otherCategoryItem } from '@/server/models/category';
 import 'highlight.js/styles/tomorrow.css';
+import '@/static/article.less';
 export default Vue.extend({
   name: 'PageAdminArticle',
   layout: 'admin',
@@ -640,6 +641,10 @@ export default Vue.extend({
 }
 </style>
 <style>
+.article-edit .te-preview {
+  padding-top: 15px !important;
+}
+
 .article-edit .tui-editor-defaultUI {
   line-height: 18px;
 }
