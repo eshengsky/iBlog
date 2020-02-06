@@ -242,3 +242,9 @@ export default Vue.extend({
   }
 }
 </style>
+<style>
+/* 预览模式下隐藏锚点 */
+.preview-article .anchor {
+  display: none;
+}
+</style>
