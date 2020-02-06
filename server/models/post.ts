@@ -15,7 +15,7 @@ export class Post {
           title: { type: String },
 
           // 文章别名
-          alias: { type: String, unique: true },
+          alias: { type: String },
 
           // 内容
           content: { type: String },
