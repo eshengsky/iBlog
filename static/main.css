@@ -109,10 +109,6 @@ pre code {
   line-height: 1.5;
 }
 
-button.tui-scrollsync {
-  display: none !important;
-}
-
 .tui-editor-defaultUI {
   border-top-left-radius: 4px !important;
   border-top-right-radius: 4px !important;
