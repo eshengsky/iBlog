@@ -96,6 +96,7 @@
                   preview-style="vertical"
                   height="70vh"
                   :options="editorOptions"
+                  @load="onEditorLoad"
                 />
               </client-only>
               <div class="editor-footer">
@@ -399,17 +400,6 @@ export default Vue.extend({
       this.content = this.initialData.content;
     }
     this.$refs.titleInput.focus();
-    this.$nextTick(() => {
-      const editor = this.$refs.editor.editor;
-      editor.eventManager.addEventType('evtInfo');
-      editor.eventManager.listen('evtInfo', () => {
-        this.editorEvent(editor, 'info');
-      });
-      editor.eventManager.addEventType('evtAlert');
-      editor.eventManager.listen('evtAlert', () => {
-        this.editorEvent(editor, 'alert');
-      });
-    });
   },
   methods: {
     async getCategories () {
@@ -424,6 +414,19 @@ export default Vue.extend({
       this.categoryLoading = true;
       await this.getCategories();
       this.categoryLoading = false;
+    },
+    onEditorLoad () {
+      setTimeout(() => {
+        const editor = this.$refs.editor.editor;
+        editor.eventManager.addEventType('evtInfo');
+        editor.eventManager.listen('evtInfo', () => {
+          this.editorEvent(editor, 'info');
+        });
+        editor.eventManager.addEventType('evtAlert');
+        editor.eventManager.listen('evtAlert', () => {
+          this.editorEvent(editor, 'alert');
+        });
+      }, 0);
     },
     editorEvent (editor, type: string) {
       const cm = editor.getCodeMirror();
