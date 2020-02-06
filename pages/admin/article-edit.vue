@@ -287,36 +287,6 @@ export default Vue.extend({
       commentsFlagOpts: {
         initialValue: 0
       },
-      editorOptions: {
-        hideModeSwitch: true,
-        language: 'zh_CN',
-        usageStatistics: false,
-        placeholder: '请输入文章正文',
-        toolbarItems: [
-          'heading',
-          'bold',
-          'italic',
-          'strike',
-          'divider',
-          'hr',
-          'quote',
-          'divider',
-          'ul',
-          'ol',
-          'task',
-          'divider',
-          'image',
-          'table',
-          'link',
-          'divider',
-          'code',
-          'codeblock'
-        ],
-        exts: ['codeblock', 'scrollSync'],
-        hooks: {
-          addImageBlobHook: (this as any).onAddImageBlob
-        }
-      },
       categoryLoading: false
     };
   },
@@ -353,6 +323,62 @@ export default Vue.extend({
           }
         ]
       };
+    },
+    editorOptions (): object {
+      if (process.server) {
+        return {};
+      }
+      const $ = require('jquery');
+      return {
+        hideModeSwitch: true,
+        language: 'zh_CN',
+        usageStatistics: false,
+        placeholder: '请输入文章正文',
+        toolbarItems: [
+          'heading',
+          'bold',
+          'italic',
+          'strike',
+          'divider',
+          'hr',
+          'quote',
+          'divider',
+          'ul',
+          'ol',
+          'task',
+          'divider',
+          'image',
+          'table',
+          'link',
+          'divider',
+          'code',
+          'codeblock',
+          {
+            type: 'button',
+            options: {
+              $el: $('<div class="custom-button"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="info-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-info-circle"><path fill="currentColor" d="M256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm-36 344h12V232h-12c-6.627 0-12-5.373-12-12v-8c0-6.627 5.373-12 12-12h48c6.627 0 12 5.373 12 12v140h12c6.627 0 12 5.373 12 12v8c0 6.627-5.373 12-12 12h-72c-6.627 0-12-5.373-12-12v-8c0-6.627 5.373-12 12-12zm36-240c-17.673 0-32 14.327-32 32s14.327 32 32 32 32-14.327 32-32-14.327-32-32-32z" class=""></path></svg></div>'),
+              name: 'info',
+              className: '',
+              event: 'evtInfo',
+              tooltip: '插入信息块'
+            }
+          },
+          {
+            type: 'button',
+            options: {
+              $el: $('<div class="custom-button"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="exclamation-triangle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="svg-inline--fa fa-exclamation-triangle"><path fill="currentColor" d="M270.2 160h35.5c3.4 0 6.1 2.8 6 6.2l-7.5 196c-.1 3.2-2.8 5.8-6 5.8h-20.5c-3.2 0-5.9-2.5-6-5.8l-7.5-196c-.1-3.4 2.6-6.2 6-6.2zM288 388c-15.5 0-28 12.5-28 28s12.5 28 28 28 28-12.5 28-28-12.5-28-28-28zm281.5 52L329.6 24c-18.4-32-64.7-32-83.2 0L6.5 440c-18.4 31.9 4.6 72 41.6 72H528c36.8 0 60-40 41.5-72zM528 480H48c-12.3 0-20-13.3-13.9-24l240-416c6.1-10.6 21.6-10.7 27.7 0l240 416c6.2 10.6-1.5 24-13.8 24z" class=""></path></svg></div>'),
+              name: 'alert',
+              className: '',
+              event: 'evtAlert',
+              tooltip: '插入提示块'
+            }
+          }
+        ],
+        exts: ['codeblock', 'scrollSync'],
+        hooks: {
+          addImageBlobHook: (this as any).onAddImageBlob
+        }
+      };
     }
   },
   created () {
@@ -373,6 +399,17 @@ export default Vue.extend({
       this.content = this.initialData.content;
     }
     this.$refs.titleInput.focus();
+    this.$nextTick(() => {
+      const editor = this.$refs.editor.editor;
+      editor.eventManager.addEventType('evtInfo');
+      editor.eventManager.listen('evtInfo', () => {
+        this.editorEvent(editor, 'info');
+      });
+      editor.eventManager.addEventType('evtAlert');
+      editor.eventManager.listen('evtAlert', () => {
+        this.editorEvent(editor, 'alert');
+      });
+    });
   },
   methods: {
     async getCategories () {
@@ -387,6 +424,30 @@ export default Vue.extend({
       this.categoryLoading = true;
       await this.getCategories();
       this.categoryLoading = false;
+    },
+    editorEvent (editor, type: string) {
+      const cm = editor.getCodeMirror();
+      const doc = cm.getDoc();
+      const range = {
+        from: cm.getCursor('from'),
+        to: cm.getCursor('to')
+      };
+      const replaceText = [
+        '```' + type,
+        doc.getSelection(),
+        '```'
+      ];
+      let cursorOffset = 1;
+      if (range.from.ch !== 0) {
+        replaceText.unshift('');
+        cursorOffset += 1;
+      }
+      if (range.to.ch !== doc.getLine(range.to.line).length) {
+        replaceText.push('');
+      }
+      doc.replaceSelection(replaceText.join('\n'));
+      cm.setCursor(range.from.line + cursorOffset, 0);
+      cm.focus();
     },
     onAddImageBlob (blob, callback) {
       if (process.client && blob) {
@@ -651,5 +712,32 @@ export default Vue.extend({
 
 .article-edit .tui-editor-defaultUI-toolbar {
   padding-left: 10px;
+}
+
+.article-edit .tui-editor-defaultUI button.tui-scrollsync.active {
+  color: #1890ff;
+}
+
+.article-edit .custom-button {
+    float: left;
+    box-sizing: border-box;
+    outline: none;
+    cursor: pointer;
+    color: #333;
+    background-color: #fff;
+    width: 22px;
+    height: 22px;
+    border-radius: 0;
+    margin: 5px 3px;
+    border: 1px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-appearance: none;
+}
+
+.article-edit .custom-button:hover {
+  border: 1px solid #bbb;
+  border-radius: 3px;
 }
 </style>
