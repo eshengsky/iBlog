@@ -196,7 +196,10 @@ export default Vue.extend({
           'divider',
           'code',
           'codeblock'
-        ]
+        ],
+        hooks: {
+          addImageBlobHook: (this as any).onAddImageBlob
+        }
       };
     }
   },
@@ -259,6 +262,21 @@ export default Vue.extend({
           localStorage.setItem('commentUserInfo', JSON.stringify(values));
         }
       });
+    },
+
+    onAddImageBlob (blob, callback) {
+      if (process.client && blob) {
+        const formData = new FormData();
+        formData.append('file', blob);
+        this.$axios.$post('/api/uploadImage', formData).then(resp => {
+          if (resp.code === 1) {
+            callback(resp.data.url, '');
+          } else {
+            console.error(resp.message);
+            this.$message.error(resp.message);
+          }
+        });
+      }
     },
 
     onEditorLoad () {

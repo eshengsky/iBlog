@@ -456,12 +456,12 @@ export default Vue.extend({
       if (process.client && blob) {
         const formData = new FormData();
         formData.append('file', blob);
-        this.$axios.$post('/api/admin/uploadImage', formData).then(resp => {
+        this.$axios.$post('/api/uploadImage', formData).then(resp => {
           if (resp.code === 1) {
             callback(resp.data.url, '');
           } else {
             console.error(resp.message);
-            this.$message.error('上传失败！');
+            this.$message.error(resp.message);
           }
         });
       }

@@ -1,8 +1,33 @@
+import path from 'path';
+import multer from 'multer';
 import { Router } from 'express';
 import jwt from 'express-jwt';
 import * as proxy from '../proxy/index';
 import { IResp } from '../../types';
 import config from '../../blog.config';
+
+const storage = multer.diskStorage({
+  destination: path.resolve(__dirname, '../../static/upload/images/'),
+  filename (_req, file, callback) {
+    callback(null, Date.now() + '_' + file.originalname);
+  }
+});
+const fileFilter = function (_req, file, cb) {
+  if (file.mimetype.startsWith('image/')) {
+    cb(null, true);
+  } else {
+    const err: any = new Error('只允许上传图片类型文件！');
+    err.code = 'CODE_INVALID_FILE_TYPE';
+    cb(err, false);
+  }
+};
+const upload = multer({
+  storage,
+  limits: {
+    fileSize: 2 * 1024 * 1024
+  },
+  fileFilter
+}).single('file');
 
 const router = Router();
 
@@ -252,6 +277,34 @@ router.get('/profile', async (_req, res) => {
     };
   }
   res.json(resp);
+});
+
+router.post('/uploadImage', (req, res) => {
+  upload(req, res, error => {
+    let resp: IResp;
+    if (error) {
+      let message = '上传失败！';
+      if (error.code === 'LIMIT_FILE_SIZE') {
+        message = '图片不允许超过2M！';
+      } else if (error.code === 'CODE_INVALID_FILE_TYPE') {
+        message = error.message;
+      }
+      resp = {
+        code: -1,
+        message
+      };
+    } else {
+      const file = (req as any).file;
+      const url = `/upload/images/${file.filename}`;
+      resp = {
+        code: 1,
+        data: {
+          url
+        }
+      };
+    }
+    res.json(resp);
+  });
 });
 
 export default router;

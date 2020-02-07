@@ -1,21 +1,11 @@
-import path from 'path';
 import { Router } from 'express';
 import jwt from 'express-jwt';
 import moment from 'moment';
-import multer from 'multer';
 import * as proxy from '../proxy/admin';
 import { IResp } from '../../types';
 import config from '../../blog.config';
 
 const router = Router();
-const upload = multer({
-  storage: multer.diskStorage({
-    destination: path.resolve(__dirname, '../../static/upload/images/'),
-    filename (_req, file, callback) {
-      callback(null, Date.now() + '_' + file.originalname);
-    }
-  })
-});
 
 // JWT middleware
 router.use(
@@ -175,18 +165,6 @@ router.put('/publishTime', async (req, res) => {
       message: err.message
     };
   }
-  res.json(resp);
-});
-
-router.post('/uploadImage', upload.single('file'), (req, res) => {
-  const fileName = (req as any).file.filename;
-  const url = `/upload/images/${fileName}`;
-  const resp: IResp = {
-    code: 1,
-    data: {
-      url
-    }
-  };
   res.json(resp);
 });
 
