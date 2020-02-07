@@ -294,8 +294,8 @@ router.post('/uploadImage', (req, res) => {
         message
       };
     } else {
-      const file = (req as any).file;
-      const url = `/upload/images/${file.filename}`;
+      const fileName = encodeURIComponent((req as any).file.filename);
+      const url = `/upload/images/${fileName}`;
       resp = {
         code: 1,
         data: {
