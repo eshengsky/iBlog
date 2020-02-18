@@ -4,11 +4,11 @@
 
 ## 界面预览
 * 博客首页
-![首页](./iBlog_preview_1.png)
+![首页](./preview_1.png)
 * 后台管理
-![后台](./iBlog_preview_2.png)
+![后台](./preview_2.png)
 * 移动端
-![移动端](./iBlog_preview_3.png)
+![移动端](./preview_3.png)
 
 ## 在线实例
 我的博客 [https://skysun.name/](https://skysun.name/)
