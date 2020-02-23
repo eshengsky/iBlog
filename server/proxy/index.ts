@@ -96,7 +96,11 @@ export async function getPosts (params) {
 }
 
 export async function getPopArticles () {
-  const articles = await Post.find({}, '-content', {
+  const conditions: any = {
+    isDraft: false,
+    isActive: true
+  };
+  const articles = await Post.find(conditions, '-content', {
     sort: '-viewCount',
     limit: 7
   })
