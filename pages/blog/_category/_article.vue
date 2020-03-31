@@ -295,6 +295,10 @@ export default Vue.extend({
   min-height: 60vh;
 }
 
+.article-content >>> code{
+  word-break: break-all;
+}
+
 .side-wrap {
   width: 260px;
   flex: none;
@@ -367,6 +371,7 @@ export default Vue.extend({
 
 .license-wrap > p {
   margin-bottom: 5px;
+  word-break: break-all;
 }
 
 .end-wrap {
