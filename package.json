@@ -9,6 +9,7 @@
     "precommit": "yarn run lint",
     "dev": "nuxt-ts",
     "build": "nuxt-ts build",
+    "build2": "nuxt-ts build --analyze",
     "start": "nuxt-ts start"
   },
   "dependencies": {
