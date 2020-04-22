@@ -254,18 +254,4 @@ export default Vue.extend({
 .preview-article .anchor {
   display: none;
 }
-
-.blog-item .item-footer2 a:hover svg {
-  animation: rotate-globe;
-}
-
-@keyframes rotate-globe {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
 </style>
