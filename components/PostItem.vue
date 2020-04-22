@@ -103,12 +103,19 @@ export default Vue.extend({
   },
   methods: {
     displayUrl (link) {
-      const url = new URL(link);
+      const url = this.parseUrl(link);
       return url.hostname;
     },
     redirectUrl (link) {
-      const url = new URL(link);
+      const url = this.parseUrl(link);
       return url.origin;
+    },
+    parseUrl (link) {
+      if (process.client) {
+        return new URL(link);
+      }
+      const url = require('url');
+      return new url.URL(link);
     }
   }
 });
@@ -246,5 +253,19 @@ export default Vue.extend({
 /* 预览模式下隐藏锚点 */
 .preview-article .anchor {
   display: none;
+}
+
+.blog-item .item-footer2 a:hover svg {
+  animation: rotate-globe;
+}
+
+@keyframes rotate-globe {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>
