@@ -26,9 +26,10 @@
 <script lang="ts">
 import Vue from 'vue';
 import { IProfile, ISetting } from '@/types/schema';
+import { Context } from '@nuxt/types/index';
 export default Vue.extend({
   name: 'PageProfile',
-  async asyncData ({ $axios, error }) {
+  async asyncData ({ $axios, error }: Context) {
     const { code, data } = await $axios.$get('/api/profile');
     if (code === 1) {
       return {

@@ -116,6 +116,7 @@ import moment from 'moment';
 import { allCategoryItem } from '@/server/models/category';
 import { IResp } from '@/types';
 import { IPost, ICategory, ISetting } from '@/types/schema';
+import { Context } from '@nuxt/types/index';
 import CategoryList from '@/components/CategoryList.vue';
 import PostItem from '@/components/PostItem.vue';
 import BlogIntro from '@/components/widgets/blogIntro.vue';
@@ -134,7 +135,7 @@ export default Vue.extend({
     PopArticles,
     PopLabels
   },
-  async asyncData ({ $axios, params, error }: any) {
+  async asyncData ({ $axios, params, error }: Context) {
     try {
       const [resp1, resp2]: Array<IResp> = await Promise.all([$axios.$get('/api/categories'), $axios.$get('/api/settings')]);
       if (resp1.code === 1 && resp2.code === 1) {

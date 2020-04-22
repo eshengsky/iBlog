@@ -81,6 +81,7 @@ import CommentList from '@/components/CommentList.vue';
 import PopArticles from '@/components/widgets/popArticles.vue';
 import ArticleContent from '@/components/ArticleContent.vue';
 import { IPost, ISetting } from '@/types/schema';
+import { Context } from '@nuxt/types/index';
 interface IHeading3 {
     href: string;
     title: string;
@@ -95,7 +96,7 @@ export default Vue.extend({
     PopArticles,
     ArticleContent
   },
-  async asyncData ({ $axios, params, error }) {
+  async asyncData ({ $axios, params, error }: Context) {
     const alias = params.article;
     const { code, data: article } = await $axios.$get('/api/article', {
       params: {

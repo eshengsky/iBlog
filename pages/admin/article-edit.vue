@@ -212,6 +212,7 @@ import Vue from 'vue';
 import MdCheatSheet from '@/components/MdCheatSheet.vue';
 import { IResp } from '@/types';
 import { IPost } from '@/types/schema';
+import { Context } from '@nuxt/types/index';
 import { otherCategoryItem } from '@/server/models/category';
 import 'highlight.js/styles/tomorrow.css';
 import '@/static/article.less';
@@ -225,7 +226,7 @@ export default Vue.extend({
     },
     MdCheatSheet
   },
-  async asyncData ({ $axios, query, error }: any) {
+  async asyncData ({ $axios, query, error }: Context) {
     const uid = query.uid;
     if (uid) {
       const { code, data } = await $axios.$get('/api/admin/article', {
