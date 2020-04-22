@@ -104,6 +104,7 @@ const config: Configuration = {
      ** You can extend webpack config here
      */
     extend () {},
+    cache: true,
     loaders: {
       less: {
         modifyVars: {
@@ -111,6 +112,11 @@ const config: Configuration = {
           'outline-width': '0'
         },
         javascriptEnabled: true
+      }
+    },
+    optimization: {
+      splitChunks: {
+        maxSize: 1000 * 2000
       }
     }
   },
