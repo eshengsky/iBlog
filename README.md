@@ -61,6 +61,17 @@ $ yarn start
 ```
 
 打开浏览器，访问 [http://localhost:9000/](http://localhost:9000)
+
+4. Debug
+* 要启动前端代码调试，请直接在 Chrome Dev Tools - Sources 面板中进行。
+
+* 要启动服务端代码调试，请以如下命令启动服务，然后点击 Chrome  Dev Tools 左上角的 Node.js 按钮，就可以像调试前端代码一样调试服务端了。
+
+```shell
+$ node --inspect node_modules/.bin/nuxt-ts
+```
+
+
 #### Enjoy it! :smile:
 
 ## 系统设置
