@@ -63,6 +63,7 @@ export class Post {
       schema.virtual('html').get(function (this: any) {
         if (this.content) {
           const md = new MarkdownIt({
+            html: true,
             breaks: true,
             // linkify: true,
             highlight (str, lang) {
