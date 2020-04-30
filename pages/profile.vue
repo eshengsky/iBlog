@@ -67,7 +67,7 @@ export default Vue.extend({
 }
 
 .profile-wrap {
-  background-image: linear-gradient(90deg,#00BCD4 0,#1890ff 100%);
+  background-image: linear-gradient(-90deg,#00BCD4 0,#1890ff 100%);
   border-radius: 10px;
   max-width: 680px;
   margin: 0 auto;
