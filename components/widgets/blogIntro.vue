@@ -5,8 +5,8 @@
     </div>
     <div class="widget-body">
       <template v-if="intro">
-        <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
-        <div class="intro-content" v-html="intro"></div>
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <div class="intro-content" v-html="intro" />
       </template>
       <a-empty v-else>
         <span slot="description">暂无内容</span>
@@ -24,7 +24,7 @@ export default Vue.extend({
       intro: ''
     };
   },
-  created() {
+  created () {
     const md = new MarkdownIt({
       html: true,
       breaks: false
