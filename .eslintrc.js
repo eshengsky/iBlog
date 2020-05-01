@@ -6,6 +6,7 @@ module.exports = {
     "semi": "off",
     "@typescript-eslint/semi": ["error", "always"],
     "arrow-parens": ["warn", "as-needed"],
-    "no-console": "off"
+    "no-console": "off",
+    "import/order": "off"
   }
 }
