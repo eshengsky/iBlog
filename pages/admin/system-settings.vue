@@ -75,7 +75,7 @@
           <a-switch v-decorator="['showBlogIntro', { valuePropName: 'checked' }]" />
         </a-form-item>
         <a-form-item :colon="false">
-          <span slot="label">博客简介内容</span>
+          <span slot="label">博客简介内容（支持Markdown）</span>
           <a-textarea
             v-decorator="['blogIntro']"
             placeholder="请输入博客简介"

@@ -52,7 +52,7 @@
         </a-form-item>
         <a-form-item :colon="false">
           <span slot="label">
-            自我介绍
+            自我介绍（支持Markdown）
           </span>
           <a-textarea
             v-decorator="['introduction', {
