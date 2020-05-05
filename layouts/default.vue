@@ -1,6 +1,25 @@
 <template>
   <a-locale-provider :locale="zhCN">
-    <div class="container">
+    <div class="container light-mode">
+      <div class="darkmode-background" />
+      <div class="darkmode-layer" />
+      <script>
+        // 系统当前是深色模式
+        let darkModeEnabled = false;
+        if (window.matchMedia) {
+          darkModeEnabled = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+        // 上一次使用的是深色模式
+        const lastIsDarkMode = !!localStorage.getItem('dark-mode');
+        const container = document.querySelector('.container');
+        if (darkModeEnabled || lastIsDarkMode) {
+        container.classList.remove('light-mode');
+        container.classList.add('dark-mode');
+        } else {
+        container.classList.remove('dark-mode');
+        container.classList.add('light-mode');
+        }
+      </script>
       <div class="navbar">
         <div class="navbar-header">
           <a class="navbar-brand" href="/">
@@ -41,6 +60,14 @@
                 <font-awesome-icon :icon="['fas', 'user']" />关于
               </nuxt-link>
               <div class="nav-line" />
+            </li>
+            <li class="dark-tools">
+              <a class="dark-mode-btn" title="深色模式" @click="toggleMode">
+                <web-font icon="moon" />
+              </a>
+              <a class="light-mode-btn" title="浅色模式" @click="toggleMode">
+                <web-font icon="sun" />
+              </a>
             </li>
           </ul>
         </div>
@@ -102,6 +129,18 @@ export default Vue.extend({
     },
     toTop () {
       window.scrollTo(0, 0);
+    },
+    toggleMode () {
+      const container = document.querySelector('.container') as HTMLElement;
+      if (container.classList.contains('dark-mode')) {
+        container.classList.remove('dark-mode');
+        container.classList.add('light-mode');
+        localStorage.removeItem('dark-mode');
+      } else {
+        container.classList.remove('light-mode');
+        container.classList.add('dark-mode');
+        localStorage.setItem('dark-mode', '1');
+      }
     }
   }
 });
@@ -290,6 +329,53 @@ export default Vue.extend({
   color: #fff;
 }
 
+.navbar-collapse .dark-tools svg {
+  height: 22px;
+  width: 22px;
+  position: relative;
+  top: 6px;
+  color: #efbb35;
+}
+
+.darkmode-background {
+  background: #f3f3f4;
+  position: fixed;
+  pointer-events: none;
+  z-index: -10;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.darkmode-layer {
+  position: static;
+  pointer-events: none;
+  background: #fff;
+  transition: all 0.3s ease;
+  mix-blend-mode: difference;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transform: scale(1);
+  z-index: 99999;
+}
+
+.dark-mode .darkmode-layer {
+  position: fixed;
+}
+
+.light-mode .dark-mode-btn,
+.dark-mode .light-mode-btn {
+  display: block;
+}
+
+.light-mode .light-mode-btn,
+.dark-mode .dark-mode-btn {
+  display: none;
+}
+
 @media (max-width: 576px) {
   .navbar-toggler {
     display: block;
@@ -348,5 +434,18 @@ export default Vue.extend({
   top: 50%;
   left: 50%;
   margin: -10px;
+}
+
+.dark-mode img,
+.dark-mode .item-footer1 a:hover,
+.dark-mode .item-footer2 a:hover,
+.dark-mode .navbar-collapse .dark-tools,
+.dark-mode .avatar svg,
+.dark-mode .comment-item-avatar,
+.dark-mode .profile-wrap,
+.dark-mode .article-content .pre-header-left div,
+.dark-mode pre.info,
+.dark-mode pre.alert {
+  mix-blend-mode: difference;
 }
 </style>
