@@ -317,6 +317,10 @@ export default Vue.extend({
   color: #fff;
 }
 
+.navbar-collapse .dark-tools {
+  user-select: none;
+}
+
 .navbar-collapse .dark-tools svg {
   height: 22px;
   width: 22px;
@@ -336,22 +340,61 @@ export default Vue.extend({
   left: 0;
 }
 
-.darkmode-layer {
-  position: static;
+/* .darkmode-layer {
+  position: fixed;
   pointer-events: none;
   background: #fff;
   transition: all 0.3s ease;
   mix-blend-mode: difference;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+  width: 22px;
+  height: 22px;
+  top: 24px;
+  right: 17px;
+  border-radius: 50%;
   transform: scale(1);
   z-index: 99999;
 }
 
 .dark-mode .darkmode-layer {
+  width: 22px;
+  height: 22px;
+  transform: scale(100);
+} */
+
+.darkmode-layer {
+  display: none;
   position: fixed;
+  pointer-events: none;
+  background: #fff;
+  mix-blend-mode: difference;
+  width: 22px;
+  height: 22px;
+  top: 24px;
+  right: 17px;
+  transform: scale(100);
+  z-index: 99999;
+  animation: expandMode .6s;
+}
+
+@keyframes expandMode {
+  0% {
+    transform: scale(1);
+    border-radius: 50%;
+  }
+
+  60% {
+    transform: scale(100);
+    border-radius: 50%;
+  }
+
+  100% {
+    transform: scale(100);
+    border-radius: 0;
+  }
+}
+
+.dark-mode .darkmode-layer {
+  display: block;
 }
 
 .light-mode .dark-mode-btn,
