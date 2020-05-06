@@ -7,7 +7,7 @@
         // 系统当前是深色模式
         let darkModeEnabled = false;
         if (window.matchMedia) {
-          darkModeEnabled = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        darkModeEnabled = window.matchMedia('(prefers-color-scheme: dark)').matches;
         }
         // 上一次使用的是深色模式
         const lastIsDarkMode = !!localStorage.getItem('dark-mode');
