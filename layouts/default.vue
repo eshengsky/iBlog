@@ -433,7 +433,11 @@ export default Vue.extend({
 .dark-mode .container .profile-wrap,
 .dark-mode .container .article-content .pre-header-left div,
 .dark-mode .container pre.info,
-.dark-mode .container pre.alert {
+.dark-mode .container pre.alert,
+.dark-mode .ant-drawer img,
+.dark-mode .ant-drawer .pre-header-left div,
+.dark-mode .ant-drawer pre.info,
+.dark-mode .ant-drawer pre.alert {
   mix-blend-mode: difference;
 }
 </style>
