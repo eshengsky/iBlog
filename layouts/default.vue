@@ -1,25 +1,8 @@
 <template>
   <a-locale-provider :locale="zhCN">
-    <div class="container light-mode">
+    <div class="container">
       <div class="darkmode-background" />
       <div class="darkmode-layer" />
-      <script>
-        // 系统当前是深色模式
-        let darkModeEnabled = false;
-        if (window.matchMedia) {
-        darkModeEnabled = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        }
-        // 上一次使用的是深色模式
-        const lastIsDarkMode = !!localStorage.getItem('dark-mode');
-        const container = document.querySelector('.container');
-        if (darkModeEnabled || lastIsDarkMode) {
-        container.classList.remove('light-mode');
-        container.classList.add('dark-mode');
-        } else {
-        container.classList.remove('dark-mode');
-        container.classList.add('light-mode');
-        }
-      </script>
       <div class="navbar">
         <div class="navbar-header">
           <a class="navbar-brand" href="/">
@@ -131,7 +114,7 @@ export default Vue.extend({
       window.scrollTo(0, 0);
     },
     toggleMode () {
-      const container = document.querySelector('.container') as HTMLElement;
+      const container = document.body;
       if (container.classList.contains('dark-mode')) {
         container.classList.remove('dark-mode');
         container.classList.add('light-mode');
@@ -142,6 +125,11 @@ export default Vue.extend({
         localStorage.setItem('dark-mode', '1');
       }
     }
+  },
+  head: {
+    script: [{
+      src: '/darkmode.js'
+    }]
   }
 });
 </script>
@@ -436,16 +424,16 @@ export default Vue.extend({
   margin: -10px;
 }
 
-.dark-mode img,
-.dark-mode .item-footer1 a:hover,
-.dark-mode .item-footer2 a:hover,
-.dark-mode .navbar-collapse .dark-tools,
-.dark-mode .avatar svg,
-.dark-mode .comment-item-avatar,
-.dark-mode .profile-wrap,
-.dark-mode .article-content .pre-header-left div,
-.dark-mode pre.info,
-.dark-mode pre.alert {
+.dark-mode .container img,
+.dark-mode .container .item-footer1 a:hover,
+.dark-mode .container .item-footer2 a:hover,
+.dark-mode .container .navbar-collapse .dark-tools,
+.dark-mode .container .avatar svg,
+.dark-mode .container .comment-item-avatar,
+.dark-mode .container .profile-wrap,
+.dark-mode .container .article-content .pre-header-left div,
+.dark-mode .container pre.info,
+.dark-mode .container pre.alert {
   mix-blend-mode: difference;
 }
 </style>
