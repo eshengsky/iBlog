@@ -116,12 +116,20 @@ export default Vue.extend({
     toggleMode () {
       const container = document.body;
       if (container.classList.contains('dark-mode')) {
-        container.classList.remove('dark-mode');
-        container.classList.add('light-mode');
+        container.classList.remove('dark-expaned');
+        setTimeout(() => {
+          container.classList.remove('dark-notransition');
+          container.classList.remove('dark-mode');
+          container.classList.add('light-mode');
+        }, 10);
         localStorage.removeItem('dark-mode');
       } else {
         container.classList.remove('light-mode');
         container.classList.add('dark-mode');
+        setTimeout(() => {
+          container.classList.add('dark-notransition');
+          container.classList.add('dark-expaned');
+        }, 300);
         localStorage.setItem('dark-mode', '1');
       }
     }
@@ -362,7 +370,7 @@ export default Vue.extend({
 } */
 
 .darkmode-layer {
-  display: none;
+  /* display: none; */
   position: fixed;
   pointer-events: none;
   background: #fff;
@@ -371,30 +379,27 @@ export default Vue.extend({
   height: 22px;
   top: 24px;
   right: 17px;
-  transform: scale(100);
+  border-radius: 50%;
+  transform: scale(0);
+  transition: all .3s ease;
   z-index: 99999;
-  animation: expandMode .6s;
-}
-
-@keyframes expandMode {
-  0% {
-    transform: scale(1);
-    border-radius: 50%;
-  }
-
-  60% {
-    transform: scale(100);
-    border-radius: 50%;
-  }
-
-  100% {
-    transform: scale(100);
-    border-radius: 0;
-  }
 }
 
 .dark-mode .darkmode-layer {
-  display: block;
+  transform: scale(200);
+  border-radius: 0;
+}
+
+.dark-mode.dark-expaned .darkmode-layer {
+  transform: scale(1);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+}
+
+.dark-mode.dark-notransition .darkmode-layer {
+  transition: none;
 }
 
 .light-mode .dark-mode-btn,

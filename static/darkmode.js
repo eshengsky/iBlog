@@ -15,6 +15,8 @@ const timer = requestAnimationFrame(() => {
     if (darkModeEnabled || lastIsDarkMode) {
       container.classList.remove('light-mode');
       container.classList.add('dark-mode');
+      container.classList.add('dark-notransition');
+      container.classList.add('dark-expaned');
     } else {
       container.classList.remove('dark-mode');
       container.classList.add('light-mode');
