@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import { Editor, Viewer } from '@toast-ui/vue-editor';
-import 'tui-editor/dist/tui-editor-extScrollSync';
-import './tui-editor-exts';
+import '@toast-ui/editor/dist/i18n/zh-cn.js';
+// import './tui-editor-exts';
 import 'codemirror/lib/codemirror.css';
-import 'tui-editor/dist/tui-editor.css';
-import 'tui-editor/dist/tui-editor-contents.css';
+import '@toast-ui/editor/dist/toastui-editor.css';
+import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 
-Vue.component(Editor.name, Editor);
-Vue.component(Viewer.name, Viewer);
+Vue.component('editor', Editor);
+Vue.component('viewer', Viewer);

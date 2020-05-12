@@ -75,7 +75,7 @@
         >
           <template slot="content" slot-scope="text, row">
             <div class="comment-body">
-              <tui-editor-viewer :value="row.content" />
+              <viewer :initial-value="row.content" />
             </div>
           </template>
           <template slot="person" slot-scope="text, row">

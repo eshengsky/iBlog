@@ -16,7 +16,7 @@
             <code v-html="title" />
           </td>
           <td>
-            <tui-editor-viewer :value="title | clean" />
+            <viewer :initial-value="title | clean" />
           </td>
         </tr>
         <tr>
@@ -25,7 +25,7 @@
             <code v-html="bold" />
           </td>
           <td>
-            <tui-editor-viewer :value="bold | clean" />
+            <viewer :initial-value="bold | clean" />
           </td>
         </tr>
         <tr>
@@ -34,7 +34,7 @@
             <code v-html="italic" />
           </td>
           <td>
-            <tui-editor-viewer :value="italic | clean" />
+            <viewer :initial-value="italic | clean" />
           </td>
         </tr>
         <tr>
@@ -43,7 +43,7 @@
             <code v-html="strike" />
           </td>
           <td>
-            <tui-editor-viewer :value="strike | clean" />
+            <viewer :initial-value="strike | clean" />
           </td>
         </tr>
         <tr>
@@ -52,7 +52,7 @@
             <code v-html="blockquote" />
           </td>
           <td>
-            <tui-editor-viewer :value="blockquote | clean" />
+            <viewer :initial-value="blockquote | clean" />
           </td>
         </tr>
         <tr>
@@ -61,7 +61,7 @@
             <code v-html="ol" />
           </td>
           <td>
-            <tui-editor-viewer :value="ol | clean" />
+            <viewer :initial-value="ol | clean" />
           </td>
         </tr>
         <tr>
@@ -70,7 +70,7 @@
             <code v-html="ul" />
           </td>
           <td>
-            <tui-editor-viewer :value="ul | clean" />
+            <viewer :initial-value="ul | clean" />
           </td>
         </tr>
         <tr>
@@ -79,7 +79,7 @@
             <code v-html="taskList" />
           </td>
           <td>
-            <tui-editor-viewer :value="taskList | clean" />
+            <viewer :initial-value="taskList | clean" />
           </td>
         </tr>
         <tr>
@@ -88,7 +88,7 @@
             <code v-html="code" />
           </td>
           <td>
-            <tui-editor-viewer :value="code | clean" />
+            <viewer :initial-value="code | clean" />
           </td>
         </tr>
         <tr>
@@ -97,7 +97,7 @@
             <code v-html="blockCode" />
           </td>
           <td>
-            <tui-editor-viewer :value="blockCode | clean" />
+            <viewer :initial-value="blockCode | clean" :options="viewerOptions" />
           </td>
         </tr>
         <tr>
@@ -106,7 +106,7 @@
             <code v-html="hr" />
           </td>
           <td>
-            <tui-editor-viewer :value="hr | clean" />
+            <viewer :initial-value="hr | clean" />
           </td>
         </tr>
         <tr>
@@ -115,7 +115,7 @@
             <code v-html="link" />
           </td>
           <td>
-            <tui-editor-viewer :value="link | clean" />
+            <viewer :initial-value="link | clean" />
           </td>
         </tr>
         <tr>
@@ -124,7 +124,7 @@
             <code v-html="image" />
           </td>
           <td>
-            <tui-editor-viewer :value="image | clean" />
+            <viewer :initial-value="image | clean" />
           </td>
         </tr>
         <tr>
@@ -133,7 +133,7 @@
             <code v-html="table" />
           </td>
           <td>
-            <tui-editor-viewer :value="table | clean" />
+            <viewer :initial-value="table | clean" />
           </td>
         </tr>
       </tbody>
@@ -142,6 +142,8 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+import hljs from 'highlight.js';
 export default Vue.extend({
   filters: {
     clean (val) {
@@ -150,6 +152,9 @@ export default Vue.extend({
   },
   data () {
     return {
+      viewerOptions: {
+        plugins: [[codeSyntaxHighlight, { hljs }]]
+      },
       title: `# 1级标题
 <br>## 2级标题
 <br>### 3级标题

@@ -104,10 +104,10 @@ export class Post {
               }
               return (
                 '<pre class="hljs"><div class="pre-header"><div class="pre-header-left"><div></div><div></div><div></div></div><div class="pre-header-right">' +
-              showLang +
-              '</div></div><code>' +
-              code +
-              '</code></pre>'
+                    showLang +
+                    '</div></div><code>' +
+                    code +
+                    '</code></pre>'
               );
             }
           }).use(MarkdownItGithubHeadings)

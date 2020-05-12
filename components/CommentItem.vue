@@ -37,7 +37,7 @@
           </div>
           <div class="comment-body">
             <client-only>
-              <tui-editor-viewer :value="comment.content" />
+              <viewer :initial-value="comment.content" :options="viewerOptions" />
             </client-only>
           </div>
         </div>
@@ -49,6 +49,8 @@
 import Vue, { PropOptions } from 'vue';
 import moment from 'moment';
 import { IComment } from '@/types/schema';
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+import hljs from 'highlight.js';
 export default Vue.extend({
   props: {
     comment: {
@@ -59,6 +61,13 @@ export default Vue.extend({
       type: String,
       default: ''
     } as PropOptions<string>
+  },
+  data () {
+    return {
+      viewerOptions: {
+        plugins: [[codeSyntaxHighlight, { hljs }]]
+      }
+    };
   },
   computed: {
     commentTime (): string {

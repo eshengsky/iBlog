@@ -48,14 +48,12 @@
             </a-form>
           </div>
           <client-only>
-            <tui-editor
+            <editor
               ref="editor"
-              v-model="editorText"
               height="150px"
+              preview-style="tab"
               :options="editorOptions"
               @load="onEditorLoad"
-              @focus="onEditorFocus"
-              @blur="onEditorBlur"
             />
           </client-only>
           <div class="comment-btn-wrap">
@@ -68,7 +66,7 @@
                 <span>支持Markdown语法</span>
               </a>
             </a-tooltip>
-            <a-button type="primary" :disabled="!editorText" @click="postComment">
+            <a-button type="primary" @click="postComment">
               <span>发表{{ commentName }}</span>
             </a-button>
           </div>
@@ -112,6 +110,8 @@ import CommentItem from '@/components/CommentItem.vue';
 import MdCheatSheet from '@/components/MdCheatSheet.vue';
 import { IComment } from '@/types/schema';
 import { IResp } from '@/types';
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+import hljs from 'highlight.js';
 export default Vue.extend({
   components: {
     CommentItem,
@@ -133,7 +133,6 @@ export default Vue.extend({
       page: 1,
       pageSize: this.$store.state.settings.commentPageSize,
       mcsShow: false,
-      editorText: '',
       isLoading: false,
       count: 0,
       hasNext: false,
@@ -176,8 +175,10 @@ export default Vue.extend({
     editorOptions (): object {
       return {
         hideModeSwitch: true,
-        language: 'zh_CN',
+        usageStatistics: false,
+        language: 'zh-CN',
         placeholder: `输入${this.commentName}内容`,
+        previewHighlight: false,
         toolbarItems: [
           'bold',
           'italic',
@@ -199,7 +200,8 @@ export default Vue.extend({
         ],
         hooks: {
           addImageBlobHook: (this as any).onAddImageBlob
-        }
+        },
+        plugins: [[codeSyntaxHighlight, { hljs }]]
       };
     }
   },
@@ -244,18 +246,23 @@ export default Vue.extend({
     postComment () {
       this.form.validateFieldsAndScroll(async (error, values) => {
         if (!error) {
+          const content = (this.$refs.editor as any).invoke('getMarkdown').trim();
+          if (!content) {
+            (this.$refs.editor as any).invoke('focus');
+            return;
+          }
           const { code, data, message } = await this.$axios.$post(
                         `/api/${this.isGuestbook ? 'guestbook' : 'comment'}`,
                         {
                           articleId: this.articleId,
-                          content: this.editorText,
+                          content,
                           ...values
                         }
           );
           if (code === 1) {
             this.comments.unshift(data.comment);
             this.count++;
-            this.editorText = '';
+            (this.$refs.editor as any).invoke('setMarkdown', '');
           } else {
             this.$message.error(message || `${this.commentName}失败`);
           }
@@ -285,40 +292,10 @@ export default Vue.extend({
       )).style.display = 'flex';
     },
 
-    onEditorFocus () {
-      ((
-                document.querySelector('.gituser-wrap .te-md-container .CodeMirror') as HTMLElement
-      )).classList.add('editor-focus');
-    },
-
-    onEditorBlur () {
-      ((
-                document.querySelector('.gituser-wrap .te-md-container .CodeMirror') as HTMLElement
-      )).classList.remove('editor-focus');
-    },
-
-    onEditorReplyLoad () {
-      ((
-                document.querySelector('.comment-list .comment-btn-wrap') as HTMLElement
-      )).style.display = 'flex';
-    },
-
-    onEditorReplyFocus () {
-      ((
-                document.querySelector('.comment-list .te-md-container .CodeMirror') as HTMLElement
-      )).classList.add('editor-focus');
-    },
-
-    onEditorReplyBlur () {
-      ((
-                document.querySelector('.comment-list .te-md-container .CodeMirror') as HTMLElement
-      )).classList.remove('editor-focus');
-    },
-
     referenceReply ({ username, content }) {
       let refText = content.replace(/^.*(\n+|$)/gm, text => ('> ' + text));
       refText = `@${username}\n` + refText + '\n\n';
-      this.editorText = refText;
+      (this.$refs.editor as any).invoke('setMarkdown', refText);
       const editorComp = this.$refs.editor as any;
       editorComp.invoke('focus');
 
