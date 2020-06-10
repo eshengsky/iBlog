@@ -21,6 +21,8 @@
   * [制作镜像](#制作镜像)
   * [创建容器](#创建容器)
   * [容器管理](#容器管理)
+- [更新日志](#更新日志)
+- [TODO](#todo)
 - [许可协议](#许可协议)
 
 ## 界面预览
@@ -163,6 +165,14 @@ $ yarn run dockerRun
 
 通过 Docker Desktop 执行启动、停止、查看日志等操作。
 ![Docker Desktop](./preview_4.png)
+
+## 更新日志
+
+请直接查看 [Commit](https://github.com/eshengsky/iBlog/commits/master) 记录。
+
+## [TODO](./TODO.md)
+
+项目的后续更新计划，欢迎提交 [PR](https://github.com/eshengsky/iBlog/pulls)。
 
 ## 许可协议
 MIT License
