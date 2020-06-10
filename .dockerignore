@@ -1,0 +1,6 @@
+.git
+node_modules
+.nuxt
+.history
+.vscode
+yarn-error.log

@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  database:
+    image: mongo:4.2.2
+    restart: always
+    volumes:
+      - ~/data/db:/data/db
+    networks:
+      - iblog-network
+  web:
+    image: iblog
+    depends_on:
+      - database
+    ports:
+      - 9000:9000
+    networks:
+      - iblog-network
+networks:
+  iblog-network:
+    driver: bridge

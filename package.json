@@ -10,7 +10,9 @@
     "dev": "nuxt-ts",
     "build": "nuxt-ts build",
     "build2": "nuxt-ts build --analyze",
-    "start": "nuxt-ts start"
+    "start": "nuxt-ts start",
+    "dockerImage": "docker image build -t iblog .",
+    "dockerRun": "docker-compose up -d"
   },
   "dependencies": {
     "@dicebear/avatars": "^4.0.2",
