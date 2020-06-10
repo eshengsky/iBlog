@@ -1,6 +1,27 @@
 # iBlog
-基于 Node.js 的开源个人博客系统，现代化的 UI 和用户体验。同时支持 PC 和移动端访问，支持深色模式。  
+基于 Node.js 的开源个人博客系统，现代化的 UI 和用户体验。支持桌面端和移动端访问，支持深色模式，支持 [Docker](https://www.docker.com/) 部署。  
 **不仅仅是博客，更是 Demo**，是适合新人入门学习的完整项目。
+
+## 目录
+- [界面预览](#界面预览)
+- [在线实例](#在线实例)
+- [分支说明](#分支说明)
+- [技术构成](#技术构成)
+- [快速开始](#快速开始)
+  * [准备条件](#准备条件)
+  * [安装依赖](#安装依赖)
+  * [启动站点](#启动站点)
+  * [Debug](#debug)
+- [系统设置](#系统设置)
+- [线上部署](#线上部署)
+  * [使用PM2](#使用pm2)
+  * [使用noginx](#使用noginx)
+- [Docker](#docker)
+  * [安装Docker](#安装docker)
+  * [制作镜像](#制作镜像)
+  * [创建容器](#创建容器)
+  * [容器管理](#容器管理)
+- [许可协议](#许可协议)
 
 ## 界面预览
 * 博客首页
@@ -110,6 +131,38 @@ $ pm2 start pm2.json
 
 ### 使用noginx
 [noginx](https://github.com/eshengsky/noginx) 是基于 Node.js 的 HTTP 及反向代理服务器（类似 nginx），如果你有多台 iBlog 服务器实例，你可以使用 [noginx](https://github.com/eshengsky/noginx) 进行代理转发和负载均衡。
+
+## Docker
+
+iBlog 支持使用 [Docker](https://www.docker.com/) 容器快速部署并启动项目。
+
+### 安装Docker
+
+在 [官方下载页面](https://www.docker.com/get-started) 选择对应平台的 Docker Desktop 下载并安装。
+
+### 制作镜像
+
+在项目根目录下执行如下命令创建镜像文件：
+```Shell
+$ yarn run dockerImage
+```
+
+如果创建成功，你可以使用如下命令查看到生成的镜像：
+```Shell
+$ docker image ls
+```
+
+### 创建容器
+
+执行如下命令创建容器：
+```Shell
+$ yarn run dockerRun
+```
+
+### 容器管理
+
+通过 Docker Desktop 执行启动、停止、查看日志等操作。
+![Docker Desktop](./preview_4.png)
 
 ## 许可协议
 MIT License
