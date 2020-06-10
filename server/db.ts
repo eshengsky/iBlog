@@ -10,6 +10,11 @@ import { Setting } from './models/setting';
 import { Profile } from './models/profile';
 import { Auth } from './models/auth';
 
+/**
+ * 重连次数
+ */
+let retryTimes = 5;
+
 interface IModels {
     Post: Model<IPost>;
     Cache: Model<ICache>;
@@ -25,26 +30,15 @@ export default class DB {
     private static instance: DB;
 
     private _db: Connection;
+
     private _models: IModels;
 
     private constructor () {
-    // 连接 MongoDB
-      connect(
-        config.mongoUrl,
-        {
-          useUnifiedTopology: true,
-          useNewUrlParser: true,
-          useCreateIndex: true,
-          useFindAndModify: false
-        },
-        () => {
-          // 设置默认数据
-          (this._models.Category as any).initData();
-          (this._models.Setting as any).initData();
-        }
-      );
+      // 连接 MongoDB
+      this.connectDB();
+
       this._db = connection;
-      this._db.once('open', this.connected);
+      this._db.on('open', this.connected);
       this._db.on('error', this.error);
 
       this._models = {
@@ -66,11 +60,38 @@ export default class DB {
       return DB.instance._models;
     }
 
-    private connected () {
-      console.log('Mongoose has connected');
+    connectDB () {
+      connect(
+        config.mongoUrl,
+        {
+          useUnifiedTopology: true,
+          useNewUrlParser: true,
+          useCreateIndex: true,
+          useFindAndModify: false
+        },
+        () => {
+          // 设置默认数据
+          (this._models.Category as any).initData();
+          (this._models.Setting as any).initData();
+        }
+      );
     }
 
-    private error (error) {
-      console.error('Mongoose has errored', error);
+    private connected () {
+      console.log('成功连接MongoDB！');
+      retryTimes = 5;
+    }
+
+    private error () {
+      if (retryTimes > 0) {
+        console.error(`连接MongoDB失败！mongoUrl: ${config.mongoUrl}. 准备尝试重新连接...`);
+        setTimeout(() => {
+          DB.instance.connectDB();
+          retryTimes--;
+        }, 1000);
+      } else {
+        console.error('重试数次后依然连接MongoDB失败，请检查MongoDB连接设置！');
+        process.exit(1);
+      }
     }
 }
