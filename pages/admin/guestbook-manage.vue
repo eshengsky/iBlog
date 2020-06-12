@@ -75,7 +75,7 @@
         >
           <template slot="content" slot-scope="text, row">
             <div class="comment-body">
-              <viewer :initial-value="row.content" />
+              <viewer :initial-value="row.content" :options="viewerOptions" />
             </div>
           </template>
           <template slot="person" slot-scope="text, row">
@@ -111,6 +111,9 @@ import Vue from 'vue';
 import moment from 'moment';
 import { FieldDecoratorOptions } from 'ant-design-vue/types/form/form';
 import { IResp } from '@/types';
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+import hljs from 'highlight.js';
+import editorEmojiPlugin from '../../static/editor-emoji-plugin';
 export default Vue.extend({
   name: 'PageGuestbookManage',
   layout: 'admin',
@@ -167,7 +170,10 @@ export default Vue.extend({
           fixed: 'right',
           scopedSlots: { customRender: 'action' }
         }
-      ]
+      ],
+      viewerOptions: {
+        plugins: [[codeSyntaxHighlight, { hljs }], editorEmojiPlugin]
+      }
     };
   },
 

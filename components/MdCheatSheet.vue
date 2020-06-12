@@ -144,6 +144,7 @@
 import Vue from 'vue';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 import hljs from 'highlight.js';
+import editorEmojiPlugin from '../static/editor-emoji-plugin';
 export default Vue.extend({
   filters: {
     clean (val) {
@@ -153,7 +154,7 @@ export default Vue.extend({
   data () {
     return {
       viewerOptions: {
-        plugins: [[codeSyntaxHighlight, { hljs }]]
+        plugins: [[codeSyntaxHighlight, { hljs }], editorEmojiPlugin]
       },
       title: `# 1级标题
 <br>## 2级标题

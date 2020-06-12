@@ -112,7 +112,12 @@ export class Post {
             }
           }).use(MarkdownItGithubHeadings)
             .use(markdownItTaskLists);
-          return md.render(this.content);
+          let html = md.render(this.content);
+          html = html.replace(
+            /:([\w-]+?):/g,
+            '<i class="icon-emoji" style="background-image: url(/images/emojis/$1.png);"></i>'
+          );
+          return html;
         }
         return '';
       });

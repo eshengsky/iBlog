@@ -37,7 +37,11 @@
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="{ span: 11, offset: 2 }">
                   <a-form-item>
-                    <a-input v-decorator="['website', websiteOpts]" placeholder="昵称链接" allow-clear>
+                    <a-input
+                      v-decorator="['website', websiteOpts]"
+                      placeholder="昵称链接"
+                      allow-clear
+                    >
                       <template slot="addonBefore">
                         <font-awesome-icon :icon="['fas', 'link']" />
                       </template>
@@ -62,7 +66,10 @@
                 打开Markdown语法速查
               </template>
               <a @click="mcsShow = true">
-                <font-awesome-icon :icon="['fab', 'markdown']" style="font-size: 14px" />
+                <font-awesome-icon
+                  :icon="['fab', 'markdown']"
+                  style="font-size: 14px"
+                />
                 <span>支持Markdown语法</span>
               </a>
             </a-tooltip>
@@ -91,7 +98,12 @@
     </div>
 
     <a-modal v-model="mcsShow" title="Markdown 语法速查" width="640px">
-      <a-alert type="warning" message="评论及留言的内容不支持1-4级标题。" show-icon style="margin-bottom: 10px;" />
+      <a-alert
+        type="warning"
+        message="评论及留言的内容不支持1-4级标题。"
+        show-icon
+        style="margin-bottom: 10px;"
+      />
       <md-cheat-sheet />
       <div slot="footer">
         <a-button type="primary" @click="mcsShow = false">
@@ -112,6 +124,7 @@ import { IComment } from '@/types/schema';
 import { IResp } from '@/types';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 import hljs from 'highlight.js';
+import editorEmojiPlugin from '../static/editor-emoji-plugin';
 export default Vue.extend({
   components: {
     CommentItem,
@@ -201,7 +214,7 @@ export default Vue.extend({
         hooks: {
           addImageBlobHook: (this as any).onAddImageBlob
         },
-        plugins: [[codeSyntaxHighlight, { hljs }]]
+        plugins: [[codeSyntaxHighlight, { hljs }], [editorEmojiPlugin, { index: 14 }]]
       };
     }
   },
@@ -226,14 +239,14 @@ export default Vue.extend({
     async getComments () {
       this.isLoading = true;
       const { code, data }: IResp = await this.$axios.$get(
-                `/api/${this.isGuestbook ? 'guestbook' : 'comments'}`,
-                {
-                  params: {
-                    articleId: this.articleId,
-                    pageIndex: this.page,
-                    pageSize: this.pageSize
-                  }
-                }
+        `/api/${this.isGuestbook ? 'guestbook' : 'comments'}`,
+        {
+          params: {
+            articleId: this.articleId,
+            pageIndex: this.page,
+            pageSize: this.pageSize
+          }
+        }
       );
 
       if (code === 1) {
@@ -246,18 +259,20 @@ export default Vue.extend({
     postComment () {
       this.form.validateFieldsAndScroll(async (error, values) => {
         if (!error) {
-          const content = (this.$refs.editor as any).invoke('getMarkdown').trim();
+          const content = (this.$refs.editor as any)
+            .invoke('getMarkdown')
+            .trim();
           if (!content) {
             (this.$refs.editor as any).invoke('focus');
             return;
           }
           const { code, data, message } = await this.$axios.$post(
-                        `/api/${this.isGuestbook ? 'guestbook' : 'comment'}`,
-                        {
-                          articleId: this.articleId,
-                          content,
-                          ...values
-                        }
+            `/api/${this.isGuestbook ? 'guestbook' : 'comment'}`,
+            {
+              articleId: this.articleId,
+              content,
+              ...values
+            }
           );
           if (code === 1) {
             this.comments.unshift(data.comment);
@@ -287,13 +302,13 @@ export default Vue.extend({
     },
 
     onEditorLoad () {
-      ((
-                document.querySelector('.gituser-wrap .comment-btn-wrap') as HTMLElement
-      )).style.display = 'flex';
+      (document.querySelector(
+        '.gituser-wrap .comment-btn-wrap'
+      ) as HTMLElement).style.display = 'flex';
     },
 
     referenceReply ({ username, content }) {
-      let refText = content.replace(/^.*(\n+|$)/gm, text => ('> ' + text));
+      let refText = content.replace(/^.*(\n+|$)/gm, text => '> ' + text);
       refText = `@${username}\n` + refText + '\n\n';
       (this.$refs.editor as any).invoke('setMarkdown', refText);
       const editorComp = this.$refs.editor as any;
