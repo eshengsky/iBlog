@@ -58,14 +58,13 @@ const config: Configuration = {
     { src: '@/plugins/baidu-stats', mode: 'client' },
     { src: '@/plugins/tui-editor', mode: 'client' }
   ],
-  buildModules: ['@nuxt/typescript-build'],
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/pwa'],
   /*
    ** Nuxt.js modules
    */
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/auth',
-    '@nuxtjs/pwa'
+    '@nuxtjs/auth'
   ],
   auth: {
     strategies: {
