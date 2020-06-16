@@ -5,6 +5,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import 'viewerjs/dist/viewer.css';
+import Viewer from 'viewerjs';
 import '@/static/article.less';
 export default Vue.extend({
   props: {
@@ -12,6 +14,15 @@ export default Vue.extend({
       type: String,
       default: ''
     }
+  },
+  mounted () {
+    this.$nextTick(() => {
+      // eslint-disable-next-line no-new
+      new Viewer(document.querySelector('.article-content') as HTMLElement, {
+        title: false,
+        zIndex: 10000
+      });
+    });
   }
 });
 </script>

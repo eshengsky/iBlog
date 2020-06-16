@@ -35,11 +35,7 @@
               </a>
             </div>
           </div>
-          <div class="comment-body">
-            <client-only>
-              <viewer :initial-value="comment.content" :options="viewerOptions" />
-            </client-only>
-          </div>
+          <comment-content :content="comment.content" />
         </div>
       </div>
     </div>
@@ -49,10 +45,11 @@
 import Vue, { PropOptions } from 'vue';
 import moment from 'moment';
 import { IComment } from '@/types/schema';
-import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
-import hljs from 'highlight.js';
-import editorEmojiPlugin from '../static/editor-emoji-plugin';
+import CommentContent from '@/components/CommentContent.vue';
 export default Vue.extend({
+  components: {
+    CommentContent
+  },
   props: {
     comment: {
       type: Object,
@@ -62,13 +59,6 @@ export default Vue.extend({
       type: String,
       default: ''
     } as PropOptions<string>
-  },
-  data () {
-    return {
-      viewerOptions: {
-        plugins: [[codeSyntaxHighlight, { hljs }], editorEmojiPlugin]
-      }
-    };
   },
   computed: {
     commentTime (): string {
@@ -210,5 +200,10 @@ export default Vue.extend({
   .timeline-comment:before {
     display: none;
   }
+}
+</style>
+<style>
+.comment-body img {
+  cursor: pointer;
 }
 </style>

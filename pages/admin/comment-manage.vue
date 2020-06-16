@@ -87,9 +87,7 @@
           @change="onTableChange"
         >
           <template slot="content" slot-scope="text, row">
-            <div class="comment-body">
-              <viewer :initial-value="row.content" :options="viewerOptions" />
-            </div>
+            <comment-content :content="row.content" />
           </template>
           <template slot="post" slot-scope="text, row">
             <a
@@ -133,12 +131,14 @@ import Vue from 'vue';
 import moment from 'moment';
 import { FieldDecoratorOptions } from 'ant-design-vue/types/form/form';
 import { IResp } from '@/types';
-import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
-import hljs from 'highlight.js';
-import editorEmojiPlugin from '../../static/editor-emoji-plugin';
+import CommentContent from '@/components/CommentContent.vue';
 export default Vue.extend({
   name: 'PageCommentManage',
   layout: 'admin',
+  components: {
+    CommentContent
+  },
+
   data () {
     return {
       form: this.$form.createForm(this),
@@ -168,13 +168,12 @@ export default Vue.extend({
         {
           title: '评论内容',
           key: 'content',
-          class: 'aaa',
           scopedSlots: { customRender: 'content' }
         },
         {
           title: '所在文章',
           dataIndex: 'post',
-          width: 400,
+          width: 300,
           scopedSlots: { customRender: 'post' }
         },
         {
@@ -199,10 +198,7 @@ export default Vue.extend({
           fixed: 'right',
           scopedSlots: { customRender: 'action' }
         }
-      ],
-      viewerOptions: {
-        plugins: [[codeSyntaxHighlight, { hljs }], editorEmojiPlugin]
-      }
+      ]
     };
   },
 
@@ -389,15 +385,21 @@ export default Vue.extend({
 .data-wrap .ant-table-body {
   overflow-x: auto !important;
 }
-
+</style>
+<style>
 .comment-body {
   width: 100%;
   padding: 12px 15px;
-  overflow: visible;
+  overflow: auto;
+  max-height: 300px;
   font-size: 14px;
   border: 1px solid #ddd;
   border-radius: 3px;
   margin: -6px;
   background: #fff;
+}
+.comment-body img {
+  max-height: 150px;
+  cursor: pointer;
 }
 </style>
