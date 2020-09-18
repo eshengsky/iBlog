@@ -5,6 +5,9 @@
     </div>
     <template v-if="!post.isLocal">
       <h4>
+        <a-tag v-if="post.isTop" color="red">
+          置顶
+        </a-tag>
         <a :title="post.title" :href="post.url" target="_blank">
           <web-font icon="external-link" style="margin-right: 5px;" />
           <span>{{ post.title }}</span>
@@ -31,6 +34,9 @@
         @click="() => (drawer = true)"
       />
       <h4>
+        <a-tag v-if="post.isTop" color="red">
+          置顶
+        </a-tag>
         <nuxt-link :to="`/blog/${post.category.alias}/${post.alias}`" :title="post.title">
           {{ post.title }}
         </nuxt-link>
@@ -145,7 +151,7 @@ export default Vue.extend({
 .blog-item h4 a {
   color: #444;
   position: relative;
-  display: -webkit-inline-box;
+  /* display: -webkit-inline-box; */
   overflow: hidden;
   text-overflow: ellipsis;
   box-orient: vertical;
@@ -240,6 +246,11 @@ export default Vue.extend({
 .drawer-title {
   font-size: 24px;
   line-height: 36px;
+}
+
+.center-title{
+  display: flex;
+  align-items: center;
 }
 
 @media (max-width: 576px) {

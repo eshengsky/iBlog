@@ -69,21 +69,53 @@ export async function getPosts (params) {
         ];
     }
   }
-  const data = await Promise.all([
-    Post.find(
-      conditions,
-      {},
-      {
-        skip: (page - 1) * pageSize,
-        limit: pageSize,
-        sort: '-publishTime'
-      }
-    )
-      .populate('category')
-      .populate('comments', '_id')
-      .exec(),
-    Post.countDocuments(conditions).exec()
-  ]);
+  /**
+   * 因为没找到按照多个排序的指令
+   * 先获取置顶的帖子，如果没有达到分页限制 就获取剩余个数的正常帖子
+   * 比较拙劣的解决办法
+   */
+  async function getPost () {
+    conditions.isTop = 1;
+    const data = await Promise.all([
+      Post.find(
+        conditions,
+        {},
+        {
+          skip: (page - 1) * pageSize,
+          limit: pageSize,
+          sort: '-publishTime'
+        }
+      )
+        .populate('category')
+        .populate('comments', '_id')
+        .exec(),
+      Post.countDocuments(conditions).exec()
+    ]);
+    if (data[0].length < pageSize) {
+      conditions.isTop = { $ne: 1 };
+      let skip:number = (page - 1) * pageSize - data[1];
+      skip = skip < 0 ? 0 : skip;
+      const data2:[Array<any>, number] = await Promise.all([
+        Post.find(
+          conditions,
+          {},
+          {
+            skip,
+            limit: pageSize - data[0].length,
+            sort: '-publishTime'
+          }
+        )
+          .populate('category')
+          .populate('comments', '_id')
+          .exec(),
+        Post.countDocuments(conditions).exec()
+      ]);
+      data[0].push(...data2[0]);
+      data[1] = data[1] + data2[1];
+      return data;
+    }
+  }
+  const data = await getPost() || [[], 0];
   const postList = data[0];
   const count = data[1];
   const pageCount = Math.ceil(count / pageSize);

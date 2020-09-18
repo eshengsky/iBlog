@@ -35,6 +35,9 @@ export class Post {
           // 是否本地文档，否则是外链
           isLocal: { type: Boolean, default: true },
 
+          // 是否置顶
+          isTop: { type: Number, default: 0 },
+
           // 是否草稿
           isDraft: { type: Boolean, default: false },
 
