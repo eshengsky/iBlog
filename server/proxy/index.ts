@@ -76,7 +76,7 @@ export async function getPosts (params) {
    */
   async function getPost () {
     conditions.isTop = 1;
-    const data = await Promise.all([
+    const data:[Array<any>, number] = await Promise.all([
       Post.find(
         conditions,
         {},
