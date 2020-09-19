@@ -27,6 +27,7 @@ export async function getPosts (params: any) {
     publishTime,
     isLink,
     isDraft,
+    isTop,
     hasComments,
     isDeleted
   } = params;
@@ -88,6 +89,10 @@ export async function getPosts (params: any) {
     matchObj.comments = {
       [hasComments === '1' ? '$gt' : '$eq']: []
     };
+  }
+
+  if (isTop === '1' || isTop === '-1') {
+    matchObj.isTop = parseInt(isTop);
   }
 
   // 排序

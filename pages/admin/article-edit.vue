@@ -60,6 +60,19 @@
             </a-radio>
           </a-radio-group>
         </a-form-item>
+        <a-form-item label="置顶" :colon="false">
+          <a-radio-group
+            v-decorator="['isTop', isTopOpts]"
+            name="isTopGroup"
+          >
+            <a-radio :value="1">
+              置顶
+            </a-radio>
+            <a-radio :value="0">
+              非置顶
+            </a-radio>
+          </a-radio-group>
+        </a-form-item>
         <div v-show="!initialData.isLocal">
           <a-form-item label="URL" :colon="false">
             <a-input
@@ -284,6 +297,9 @@ export default Vue.extend({
       isLocalOpts: {
         initialValue: true
       },
+      isTopOpts: {
+        initialValue: 0
+      },
       labelsOpts: {
         initialValue: []
       },
@@ -460,6 +476,7 @@ export default Vue.extend({
         alias: this.initialData.alias,
         category: this.initialData.category,
         isLocal: this.initialData.isLocal,
+        isTop: this.initialData.isTop,
         url: this.initialData.url || '',
         labels: this.initialData.labels,
         commentsFlag: this.initialData.commentsFlag

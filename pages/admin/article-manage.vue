@@ -182,6 +182,22 @@
                 </a-select>
               </a-form-item>
             </a-col>
+            <a-col :sm="24" :md="11" :xxl="5">
+              <a-form-item label="是否置顶" :colon="false">
+                <a-select
+                  v-decorator="['isTop']"
+                  placeholder="不限"
+                  allow-clear
+                >
+                  <a-select-option value="1">
+                    是
+                  </a-select-option>
+                  <a-select-option value="-1">
+                    否
+                  </a-select-option>
+                </a-select>
+              </a-form-item>
+            </a-col>
           </a-row>
           <a-row type="flex" justify="center">
             <a-col>
@@ -250,6 +266,13 @@
               title="已删除，所有人不可见，可恢复"
             >
               已删除
+            </a-tag>
+            <a-tag
+              v-else-if="row.isTop &&!row.isDraft"
+              color="red"
+              title="已发布，所有人可见"
+            >
+              置顶
             </a-tag>
             <a-tag
               v-else-if="!row.isDraft"

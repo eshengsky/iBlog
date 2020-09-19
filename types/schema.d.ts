@@ -102,6 +102,11 @@ export interface IPost extends Document {
     isLocal: boolean;
 
     /**
+   * 是否是置顶文章
+   */
+    isTop: number;
+
+    /**
    * 是否草稿
    */
     isDraft: boolean;
