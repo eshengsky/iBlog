@@ -298,7 +298,7 @@ export default Vue.extend({
         initialValue: true
       },
       isTopOpts: {
-        initialValue: 1
+        initialValue: 0
       },
       labelsOpts: {
         initialValue: []
