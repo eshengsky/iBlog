@@ -44,7 +44,7 @@
     "jdenticon": "^2.2.0",
     "jsonwebtoken": "^8.5.1",
     "lazysizes": "^5.2.0",
-    "markdown-it": "^10.0.0",
+    "markdown-it": "^12.3.2",
     "markdown-it-github-headings": "^2.0.0",
     "markdown-it-task-lists": "^2.1.1",
     "moment": "^2.24.0",
